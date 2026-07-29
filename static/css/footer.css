@@ -5,7 +5,7 @@
   position: relative;
   overflow: hidden;
   color: var(--foot-fg);
-  padding: clamp(28px, 4vw, 44px) 0 calc(10px + var(--safe-b));
+  padding: clamp(16px, 2.5vw, 24px) 0 calc(10px + var(--safe-b));
   margin: 0;
   background-color: var(--foot-ink);
   background-image: none;
@@ -217,7 +217,7 @@
 
 @media (max-width: 959px) {
   .site-footer {
-    padding: clamp(24px, 7vw, 40px) 0 calc(10px + var(--safe-b));
+    padding: clamp(14px, 2vw, 22px) 0 calc(10px + var(--safe-b));
   }
 
   .site-footer__skyline {

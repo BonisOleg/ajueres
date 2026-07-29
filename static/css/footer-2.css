@@ -2,7 +2,7 @@
 
 @media (min-width: 960px) {
   .site-footer {
-    padding: clamp(32px, 4vw, 48px) 0 clamp(12px, 2vw, 20px);
+    padding: clamp(16px, 2.2vw, 24px) 0 clamp(12px, 2vw, 20px);
   }
 
   .site-footer__skyline {
