@@ -2,7 +2,8 @@
 
 .home-hero {
   position: relative;
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
   background: #e9f6fc;
   display: grid;
   grid-template-columns: 1fr;

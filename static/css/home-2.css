@@ -149,6 +149,7 @@
 
 .home-brands__mask {
   overflow: hidden;
+  max-width: 100%;
   padding: 4px 0 8px;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
@@ -289,9 +290,9 @@
 }
 
 .home-cta__title {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 700;
   font-size: clamp(1.875rem, 4.6vw, 3.25rem);
   line-height: 1.08;
   letter-spacing: -0.01em;

@@ -353,7 +353,7 @@
 
   .hero-stats__orb--2 {
     --orb-size: 108px;
-    --orb-x: calc(100% - 48px);
+    --orb-x: calc(100% - 56px);
     --orb-y: 26%;
   }
 
@@ -365,7 +365,7 @@
 
   .hero-stats__orb--4 {
     --orb-size: 90px;
-    --orb-x: calc(100% - 54px);
+    --orb-x: calc(100% - 48px);
     --orb-y: 64%;
   }
 
@@ -412,7 +412,7 @@
 
   .hero-stats__orb--2 {
     --orb-size: 100px;
-    --orb-x: calc(100% - 44px);
+    --orb-x: calc(100% - 52px);
     --orb-y: 24%;
   }
 
@@ -424,7 +424,7 @@
 
   .hero-stats__orb--4 {
     --orb-size: 84px;
-    --orb-x: calc(100% - 50px);
+    --orb-x: calc(100% - 46px);
     --orb-y: 62%;
   }
 }

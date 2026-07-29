@@ -120,7 +120,7 @@
         <nav class="nav-mobile__panel" aria-label="{% trans 'Основная навигация' %}">
           <a href="{% url 'home' %}"{% if request.resolver_match.url_name == 'home' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Главная' %}</a>
           <a href="{% url 'about' %}"{% if request.resolver_match.url_name == 'about' %} class="is-active" aria-current="page"{% endif %}>{% trans 'О компании' %}</a>
-          <a href="{% url 'products' %}"{% if request.resolver_match.url_name == 'products' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Продукты' %}</a>
+          <a href="{% url 'products' %}"{% if request.resolver_match.url_name == 'products' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Каталог' %}</a>
           <a href="{% url 'contacts' %}"{% if request.resolver_match.url_name == 'contacts' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Контакты' %}</a>
         </nav>
       </section>

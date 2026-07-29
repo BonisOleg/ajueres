@@ -2,10 +2,14 @@
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .site-main {
   flex: 1;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .site-header {
@@ -94,6 +98,8 @@
   border: 0;
   background: transparent;
   cursor: pointer;
+  font-style: normal;
+  font-family: inherit;
 }
 
 .nav-desktop > a:hover,
@@ -143,10 +149,10 @@
 }
 
 .nav-desktop__mega-card {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(28px) saturate(1.2);
+  -webkit-backdrop-filter: blur(28px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 18px;
   box-shadow: 0 24px 56px -28px rgba(30, 55, 95, 0.5);
   padding: 10px;

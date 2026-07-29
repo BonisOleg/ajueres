@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 EN = {
     "Главная": "Home",
     "Продукты": "Products",
+    "Каталог": "Catalog",
     "О компании": "About",
     "Контакты": "Contacts",
     "Слишком много заявок. Попробуйте позже.": "Too many requests. Please try again later.",
@@ -69,6 +70,11 @@ EN = {
     "Телефон": "Phone",
     "Электронная почта": "Email",
     "Отправить": "Send",
+    "Например: интересует оптовый прайс на соусы и лапшу": (
+        "For example: interested in wholesale prices for sauces and noodles"
+    ),
+    "Ваше имя": "Your name",
+    "you@company.com": "you@company.com",
     "Заявка отправлена": "Request sent",
     "Мы свяжемся с вами в ближайшее время.": "We will contact you shortly.",
     "Дистрибьютор с 2018 года": "Distributor since 2018",
@@ -90,6 +96,7 @@ EN = {
 UZ = {
     "Главная": "Bosh sahifa",
     "Продукты": "Mahsulotlar",
+    "Каталог": "Katalog",
     "О компании": "Kompaniya haqida",
     "Контакты": "Aloqa",
     "Слишком много заявок. Попробуйте позже.": "So‘rovlar juda ko‘p. Keyinroq urinib ko‘ring.",
@@ -149,6 +156,11 @@ UZ = {
     "Телефон": "Telefon",
     "Электронная почта": "Elektron pochta",
     "Отправить": "Yuborish",
+    "Например: интересует оптовый прайс на соусы и лапшу": (
+        "Masalan: souslar va lag‘mon uchun ulgurji narxlar qiziqtiradi"
+    ),
+    "Ваше имя": "Ismingiz",
+    "you@company.com": "you@company.com",
     "Заявка отправлена": "So‘rov yuborildi",
     "Мы свяжемся с вами в ближайшее время.": "Tez orada siz bilan bog‘lanamiz.",
     "Дистрибьютор с 2018 года": "2018-yildan beri distribyutor",

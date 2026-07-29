@@ -82,7 +82,7 @@
         maxlength="254"
         value="{{ form_data.email }}"
         autocomplete="email"
-        placeholder="you@company.com"
+        placeholder="{% trans 'you@company.com' %}"
       >
       {% if form_errors.email %}<p class="form__error">{{ form_errors.email }}</p>{% endif %}
     </div>

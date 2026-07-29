@@ -15,6 +15,9 @@ msgstr "Bosh sahifa"
 msgid "Продукты"
 msgstr "Mahsulotlar"
 
+msgid "Каталог"
+msgstr "Katalog"
+
 msgid "О компании"
 msgstr "Kompaniya haqida"
 
@@ -173,6 +176,15 @@ msgstr "Elektron pochta"
 
 msgid "Отправить"
 msgstr "Yuborish"
+
+msgid "Например: интересует оптовый прайс на соусы и лапшу"
+msgstr "Masalan: souslar va lag‘mon uchun ulgurji narxlar qiziqtiradi"
+
+msgid "Ваше имя"
+msgstr "Ismingiz"
+
+msgid "you@company.com"
+msgstr "you@company.com"
 
 msgid "Заявка отправлена"
 msgstr "So‘rov yuborildi"

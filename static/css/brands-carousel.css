@@ -3,12 +3,12 @@
 .brands-carousel {
   --brands-gap: 12px;
   --brands-card: min(52vw, 260px);
-  --brands-pad: max(0px, calc((100vw - var(--brands-card)) / 2));
+  --brands-pad: max(0px, calc((100% - var(--brands-card)) / 2));
   position: relative;
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .brands-carousel__viewport {

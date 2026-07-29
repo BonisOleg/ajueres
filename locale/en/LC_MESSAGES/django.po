@@ -15,6 +15,9 @@ msgstr "Home"
 msgid "Продукты"
 msgstr "Products"
 
+msgid "Каталог"
+msgstr "Catalog"
+
 msgid "О компании"
 msgstr "About"
 
@@ -174,6 +177,15 @@ msgstr "Email"
 
 msgid "Отправить"
 msgstr "Send"
+
+msgid "Например: интересует оптовый прайс на соусы и лапшу"
+msgstr "For example: interested in wholesale prices for sauces and noodles"
+
+msgid "Ваше имя"
+msgstr "Your name"
+
+msgid "you@company.com"
+msgstr "you@company.com"
 
 msgid "Заявка отправлена"
 msgstr "Request sent"

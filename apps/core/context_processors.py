@@ -19,7 +19,7 @@ def site_context(request):
         ),
         'nav_items': (
             {'url_name': 'home', 'label': _('Главная'), 'tone': 'coral'},
-            {'url_name': 'products', 'label': _('Продукты'), 'tone': 'green'},
+            {'url_name': 'products', 'label': _('Каталог'), 'tone': 'green'},
             {'url_name': 'about', 'label': _('О компании'), 'tone': 'blue'},
             {'url_name': 'contacts', 'label': _('Контакты'), 'tone': 'purple'},
         ),

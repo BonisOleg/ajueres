@@ -6,6 +6,7 @@
   z-index: 80;
   display: block;
   pointer-events: none;
+  overflow: hidden;
 }
 
 .nav-mobile.is-open {
