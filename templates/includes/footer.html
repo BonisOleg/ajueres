@@ -1,0 +1,63 @@
+{% load i18n static ajeres_tags %}
+<footer class="site-footer">
+  <div class="site-footer__skyline" aria-hidden="true">
+    <img
+      class="site-footer__skyline-img"
+      src="{% static 'img/footer-samarkand-silhouette.png' %}"
+      alt=""
+      width="1774"
+      height="887"
+      decoding="async"
+    >
+  </div>
+  <div class="container">
+    <div class="site-footer__grid">
+      <div class="site-footer__col site-footer__col--brand">
+        <div class="site-footer__brand">
+          <span class="logo__dot" aria-hidden="true"></span>
+          AJERES
+        </div>
+        <p class="site-footer__text">{% trans 'Дистрибьютор азиатской и специализированной бакалеи для магазинов, HoReCa и партнёров.' %}</p>
+        <p class="site-footer__credit">
+          {% trans 'Разработано студией' %}
+          <a
+            class="site-footer__credit-link"
+            href="https://www.prometeylabs.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >PrometeyLabs</a>
+        </p>
+        <p class="site-footer__copy">© {% now "Y" %} AJERES. {% trans 'Все права защищены.' %}</p>
+      </div>
+
+      <div class="site-footer__col site-footer__col--menu">
+        <div class="site-footer__label">{% trans 'Меню' %}</div>
+        <nav class="site-footer__nav" aria-label="{% trans 'Навигация' %}">
+          {% for item in nav_items %}
+            <a
+              class="site-footer__link{% if request.resolver_match.url_name == item.url_name %} is-active{% endif %}"
+              href="{% url item.url_name %}"
+              data-tone="{{ item.tone }}"
+              {% if request.resolver_match.url_name == item.url_name %}aria-current="page"{% endif %}
+            >{{ item.label }}</a>
+          {% endfor %}
+        </nav>
+      </div>
+
+      <div class="site-footer__col site-footer__col--contacts">
+        <div class="site-footer__label">{% trans 'Контакты' %}</div>
+        <div class="site-footer__contacts">
+          {% if site_settings.phone %}
+            <a class="site-footer__contact" href="tel:{{ site_settings.phone|cut:' '|cut:'('|cut:')'|cut:'-' }}">{{ site_settings.phone }}</a>
+          {% endif %}
+          {% if site_settings.email %}
+            <a class="site-footer__contact" href="mailto:{{ site_settings.email }}">{{ site_settings.email }}</a>
+          {% endif %}
+          {% if site_settings.address %}
+            <span class="site-footer__contact--static">{{ site_settings.address|break_before_street }}</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

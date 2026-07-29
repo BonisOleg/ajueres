@@ -1,0 +1,106 @@
+/* Catalog brands marquee — same motion as home-brands */
+
+.catalog-brands {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(28px, 4vw, 56px) clamp(18px, 4vw, 42px) clamp(36px, 5vw, 64px);
+  background: transparent;
+}
+
+.catalog-brands__head {
+  max-width: 40rem;
+  margin-bottom: clamp(20px, 3vw, 36px);
+}
+
+.catalog-brands__sub {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.catalog-brands__mask {
+  overflow: hidden;
+  padding: 4px 0 8px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.catalog-brands__track {
+  display: flex;
+  gap: 22px;
+  width: max-content;
+  animation: aj-marquee 28s linear infinite;
+  padding-block: 6px;
+}
+
+.catalog-brands__mask:hover .catalog-brands__track {
+  animation-play-state: paused;
+}
+
+.catalog-brands__card {
+  flex: none;
+  width: clamp(200px, 26vw, 280px);
+  aspect-ratio: 1 / 1;
+  border: 1px solid transparent;
+  border-radius: 24px;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 26px;
+  color: var(--ink);
+  text-decoration: none;
+  transition:
+    border-color 0.32s ease,
+    transform 0.32s ease,
+    background 0.32s ease;
+}
+
+.catalog-brands__card:nth-child(6n + 1) { --bc: var(--c-coral); }
+.catalog-brands__card:nth-child(6n + 2) { --bc: var(--c-amber); }
+.catalog-brands__card:nth-child(6n + 3) { --bc: var(--c-green); }
+.catalog-brands__card:nth-child(6n + 4) { --bc: var(--c-blue); }
+.catalog-brands__card:nth-child(6n + 5) { --bc: var(--c-purple); }
+.catalog-brands__card:nth-child(6n + 6) { --bc: var(--c-pink); }
+
+.catalog-brands__card:hover {
+  border-color: color-mix(in srgb, var(--bc) 45%, transparent);
+  transform: translateY(-3px);
+}
+
+.catalog-brands__card img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.catalog-brands__card span {
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 639px) {
+  .catalog-brands__card {
+    width: clamp(172px, 48vw, 210px);
+    padding: 20px;
+  }
+
+  .catalog-brands__track {
+    gap: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-brands__track {
+    animation: none;
+  }
+
+  .catalog-brands__card:hover {
+    transform: none;
+  }
+}

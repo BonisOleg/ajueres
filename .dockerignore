@@ -1,0 +1,22 @@
+.git
+.gitignore
+.venv
+venv
+env
+__pycache__
+*.pyc
+*.pyo
+*.sqlite3
+db.sqlite3
+media/*
+staticfiles/*
+.env
+.cursor
+.DS_Store
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+AJERES Homepage Redesign/
+node_modules
+*.md
+!README.md

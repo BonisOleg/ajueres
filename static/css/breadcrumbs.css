@@ -1,0 +1,92 @@
+/* Breadcrumbs — v1. Mobile / tablet / iOS Safari */
+
+.breadcrumbs {
+  margin: 0;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+}
+
+.breadcrumbs__link {
+  color: var(--c-accent);
+  opacity: 0.72;
+  transition: opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.breadcrumbs__link:hover,
+.breadcrumbs__link:focus-visible {
+  opacity: 1;
+  outline: none;
+}
+
+.breadcrumbs__sep {
+  flex-shrink: 0;
+  margin: 0 0.45em;
+  opacity: 0.5;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.breadcrumbs__current {
+  color: var(--c-accent);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Home only: container without .page-hero */
+.site-main > .container:not(.page-hero) > .breadcrumbs {
+  margin-top: 20px;
+}
+
+.site-main > .container:not(.page-hero) + .hero {
+  padding-top: 16px;
+}
+
+@media (min-width: 768px) {
+  .breadcrumbs__item {
+    font-size: 12px;
+  }
+
+  .site-main > .container:not(.page-hero) > .breadcrumbs {
+    margin-top: 32px;
+  }
+
+  .site-main > .container:not(.page-hero) + .hero {
+    padding-top: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .breadcrumbs__item {
+    font-size: 12px;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .breadcrumbs__link {
+    padding: 2px 0;
+  }
+}

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  body { font-family: 'Golos Text', sans-serif; }
+  a { text-decoration: none; }
+  @keyframes ajFadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes ajFadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes ajMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="background:#FFFFFF;min-height:100vh;width:100%;position:relative;color:#26201B">
+
+  <header style="position:sticky;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(214,32,46,0.14)">
+    <div style="max-width:1280px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <a href="/" style="font-family:'Golos Text',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.02em;color:#26201B;flex:none">AJERES</a>
+
+      <nav style="display:{{ desktopNavDisplay }};align-items:center;gap:clamp(16px,2.5vw,36px);flex:1;justify-content:center">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="4">
+          <a href="{{ item.href }}" style="font-size:15px;font-weight:600;color:{{ item.color }};padding:8px 2px;border-bottom:2px solid {{ item.underline }};white-space:nowrap" style-hover="color:#D6202E;border-bottom:2px solid #D6202E">{{ item.label }}</a>
+        </sc-for>
+      </nav>
+
+      <div style="display:{{ desktopNavDisplay }};align-items:center;gap:6px;flex:none;background:#DBF0D9;border-radius:100px;padding:3px">
+        <sc-for list="{{ langs }}" as="l" hint-placeholder-count="3">
+          <button onClick="{{ setLang(l.code) }}" style="border:none;background:{{ l.bg }};color:{{ l.color }};font-family:'Golos Text',sans-serif;font-weight:700;font-size:11.5px;padding:5px 11px;border-radius:100px;cursor:pointer;letter-spacing:0.02em">{{ l.label }}</button>
+        </sc-for>
+      </div>
+
+      <button onClick="{{ toggleMobileMenu }}" aria-label="Меню" style="display:{{ mobileNavDisplay }};flex:none;border:none;background:transparent;padding:8px;cursor:pointer;flex-direction:column;gap:5px;width:40px;height:40px;align-items:center;justify-content:center">
+        <span style="width:22px;height:2px;background:#26201B;display:block;transition:transform .2s;transform:{{ burgerLine1 }}"></span>
+        <span style="width:22px;height:2px;background:#26201B;display:block;transition:opacity .2s;opacity:{{ burgerLine2Opacity }}"></span>
+        <span style="width:22px;height:2px;background:#26201B;display:block;transition:transform .2s;transform:{{ burgerLine3 }}"></span>
+      </button>
+    </div>
+
+    <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#FFFFFF;border-top:1px solid rgba(214,32,46,0.14);padding:20px 24px 28px;display:flex;flex-direction:column;gap:4px;animation:ajFadeIn .2s ease">
+        <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="4">
+          <a href="{{ item.href }}" style="font-size:19px;font-weight:700;color:#26201B;padding:12px 4px;border-bottom:1px solid rgba(214,32,46,0.14)">{{ item.label }}</a>
+        </sc-for>
+        <div style="display:flex;gap:8px;margin-top:16px;background:#DBF0D9;border-radius:100px;padding:3px;width:fit-content">
+          <sc-for list="{{ langs }}" as="l" hint-placeholder-count="3">
+            <button onClick="{{ setLang(l.code) }}" style="border:none;background:{{ l.bg }};color:{{ l.color }};font-family:'Golos Text',sans-serif;font-weight:700;font-size:13px;padding:8px 16px;border-radius:100px;cursor:pointer">{{ l.label }}</button>
+          </sc-for>
+        </div>
+        <a href="/контакты" style="margin-top:20px;background:#D6202E;color:#FFFFFF;font-weight:700;font-size:16px;text-align:center;padding:15px 20px;border-radius:12px">Связаться с нами</a>
+      </div>
+    </sc-if>
+  </header>
+
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,72px) 24px clamp(56px,8vw,96px);display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,56px);align-items:center">
+    <div style="flex:1 1 340px;border:1px solid #D6202E;border-radius:20px;overflow:hidden;aspect-ratio:4/3;min-width:280px">
+      <image-slot id="hero-photo" shape="rect" fit="cover" placeholder="Фото продукта" style="width:100%;height:100%"></image-slot>
+    </div>
+    <div style="flex:1 1 340px;animation:ajFadeUp .7s ease both;min-width:280px">
+      <div style="font-family:'Golos Text',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;color:#D6202E;margin-bottom:16px">Дистрибьютор с 2018 года</div>
+      <h1 style="font-family:'Golos Text',sans-serif;font-weight:700;font-size:clamp(32px,5vw,52px);line-height:1.08;letter-spacing:-0.02em;color:#26201B;margin:0 0 18px">Азиатские вкусы для вашего бизнеса</h1>
+      <p style="font-size:clamp(15px,1.6vw,18px);line-height:1.55;color:rgba(96,54,48,0.85);margin:0 0 32px;max-width:460px">Соусы, маринады, лапша, нори, сиропы и чай — оптовые поставки для магазинов и HoReCa по всей стране.</p>
+      <a href="/контакты" style="display:inline-flex;align-items:center;gap:10px;background:#D6202E;color:#FFFFFF;font-weight:700;font-size:17px;padding:17px 32px;border-radius:12px" style-hover="background:#A81522">Связаться с нами →</a>
+    </div>
+  </section>
+
+  <section style="background:#F7F7F7;border-top:1px solid rgba(214,32,46,0.25);border-bottom:1px solid rgba(214,32,46,0.25);padding:26px 0;overflow:hidden">
+    <div style="display:flex;width:max-content;animation:ajMarquee 22s linear infinite">
+      <sc-for list="{{ marqueeStats }}" as="s" hint-placeholder-count="8">
+        <div style="display:flex;align-items:center;gap:10px;padding:0 40px;white-space:nowrap">
+          <span style="width:10px;height:10px;border-radius:50%;background:#D6202E;flex:none"></span>
+          <span style="font-size:14.5px;color:#26201B;letter-spacing:0.01em">{{ s.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="position:relative;background:#FFFFFF;overflow:hidden;padding:clamp(64px,8vw,96px) 24px">
+    <div style="position:relative;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:40px 24px;text-align:center">
+      <sc-for list="{{ advantages }}" as="a" hint-placeholder-count="5">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+          <div style="width:64px;height:64px" dangerouslySetInnerHTML="{{ a.iconHtml }}"></div>
+          <div style="font-family:'Golos Text',sans-serif;font-weight:700;font-size:17px;color:#26201B">{{ a.title }}</div>
+          <div style="font-size:14px;line-height:1.5;color:rgba(38,32,27,0.6);max-width:200px">{{ a.desc }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(88px,12vw,150px) 24px clamp(96px,13vw,160px)">
+    <div style="text-align:center;margin-bottom:56px">
+      <h2 style="font-family:'Golos Text',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,40px);letter-spacing:-0.02em;color:#26201B;margin:0 0 10px">Наши бренды</h2>
+      <p style="font-size:16px;color:rgba(96,54,48,0.7);margin:0">Работаем напрямую с производителями, которым доверяют профессионалы</p>
+    </div>
+    <div style="position:relative;width:100%;max-width:1020px;margin:0 auto">
+      <div style="overflow:hidden">
+        <div style="display:flex;gap:14px;transition:transform .5s cubic-bezier(.22,.9,.32,1);transform:{{ brandTrackTransform }}">
+          <sc-for list="{{ brands }}" as="b" hint-placeholder-count="7">
+            <div style="flex:none;width:{{ b.cardWidth }};background:#FFFFFF;border:1px solid rgba(38,32,27,0.1);border-radius:20px;overflow:hidden;opacity:{{ b.cardOpacity }};filter:{{ b.cardBlur }};transition:opacity .5s,width .5s,filter .5s">
+              <image-slot id="{{ b.id }}" shape="rect" fit="cover" placeholder="{{ b.placeholder }}" style="width:100%;height:{{ b.imgHeight }}"></image-slot>
+              <div style="padding:14px 18px 16px;line-height:1">
+                <div style="font-family:'Golos Text',sans-serif;font-weight:700;font-size:19px;color:#26201B;margin:0 0 6px">{{ b.name }}</div>
+                <div style="font-size:12.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#D6202E">Смотреть товары</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <button onClick="{{ brandPrev }}" aria-label="Назад" style="position:absolute;top:110px;left:calc(50% - 182px);width:32px;height:32px;border-radius:50%;border:none;background:#F1EDE1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;transition:background .2s" style-hover="background:#D6202E">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#26201B" style-hover="stroke:#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg>
+      </button>
+      <button onClick="{{ brandNext }}" aria-label="Далее" style="position:absolute;top:110px;right:calc(50% - 182px);width:32px;height:32px;border-radius:50%;border:none;background:#F1EDE1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;transition:background .2s" style-hover="background:#D6202E">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#26201B" style-hover="stroke:#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg>
+      </button>
+    </div>
+  </section>
+
+  <footer style="background:#FFFFFF;color:#26201B;padding:clamp(56px,7vw,84px) 24px 32px;border-top:2px solid #D6202E">
+    <div style="max-width:1280px;margin:0 auto">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(214,32,46,0.3)">
+        <div style="display:flex;flex-direction:column;gap:14px;max-width:320px">
+          <div style="font-family:'Golos Text',sans-serif;font-weight:700;font-size:22px;color:#D6202E">AJERES</div>
+          <p style="font-size:14.5px;line-height:1.6;color:rgba(96,54,48,0.75);margin:0">Дистрибьютор азиатской и специализированной бакалеи для магазинов, HoReCa и партнёров.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#D6202E;margin-bottom:4px">Навигация</div>
+          <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="4">
+            <a href="{{ item.href }}" style="font-size:15px;color:#26201B;text-decoration:underline;text-decoration-color:rgba(214,32,46,0.4)" style-hover="color:#D6202E">{{ item.label }}</a>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#D6202E;margin-bottom:4px">Контакты</div>
+          <a href="tel:+998000000000" style="font-size:15px;color:#26201B;text-decoration:underline;text-decoration-color:rgba(214,32,46,0.4)" style-hover="color:#D6202E">+998 (00) 000-00-00</a>
+          <a href="mailto:info@ajeres.uz" style="font-size:15px;color:#26201B;text-decoration:underline;text-decoration-color:rgba(214,32,46,0.4)" style-hover="color:#D6202E">info@ajeres.uz</a>
+          <span style="font-size:14px;color:rgba(96,54,48,0.65)">г. Ташкент, Узбекистан</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#D6202E;margin-bottom:4px">Язык</div>
+          <div style="display:flex;gap:8px">
+            <sc-for list="{{ langs }}" as="l" hint-placeholder-count="3">
+              <button onClick="{{ setLang(l.code) }}" style="border:1px solid #D6202E;background:{{ l.footerBg }};color:{{ l.footerColor }};font-weight:700;font-size:12.5px;padding:7px 13px;border-radius:100px;cursor:pointer">{{ l.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:24px">
+        <span style="font-size:13.5px;color:rgba(96,54,48,0.6)">© 2026 AJERES. Все права защищены.</span>
+        <a href="/политика-приватности" style="font-size:13.5px;color:rgba(96,54,48,0.75);text-decoration:underline;text-decoration-color:rgba(214,32,46,0.4)" style-hover="color:#D6202E">Политика приватности</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { mobileMenuOpen: false, isMobile: false, lang: 'ru', brandIndex: 0 };
+
+  componentDidMount() {
+    this.mq = window.matchMedia('(max-width: 880px)');
+    this.updateMq = () => this.setState({ isMobile: this.mq.matches, mobileMenuOpen: this.mq.matches ? this.state.mobileMenuOpen : false });
+    this.updateMq();
+    this.mq.addEventListener('change', this.updateMq);
+  }
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.updateMq);
+  }
+
+  renderVals() {
+    const isMobile = this.state.isMobile;
+    const navItems = [
+      { label: 'Главная', href: '/', color: '#26201B', underline: 'transparent' },
+      { label: 'О компании', href: '/про-компанию', color: '#26201B', underline: 'transparent' },
+      { label: 'Продукты', href: '/продукты', color: '#26201B', underline: 'transparent' },
+      { label: 'Контакты', href: '/контакты', color: '#26201B', underline: 'transparent' },
+    ];
+    const langs = [
+      { code: 'ru', label: 'RU' },
+      { code: 'uz', label: 'UZ' },
+      { code: 'en', label: 'EN' },
+    ].map(l => ({
+      ...l,
+      bg: this.state.lang === l.code ? '#D6202E' : 'transparent',
+      color: this.state.lang === l.code ? '#FFFFFF' : '#26201B',
+      footerBg: this.state.lang === l.code ? '#D6202E' : 'transparent',
+      footerColor: this.state.lang === l.code ? '#FFFFFF' : '#26201B',
+    }));
+
+    const icon = (path) => ({ __html: `<svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#D6202E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${path}</svg>` });
+
+    const advantages = [
+      { title: 'Широкий ассортимент', desc: '80+ товаров азиатской и специализированной бакалеи в одном каталоге.', iconHtml: icon('<rect x="10" y="24" width="44" height="30" rx="3"></rect><path d="M22 24V18a10 10 0 0 1 20 0v6"></path><path d="M10 34h44"></path>') },
+      { title: 'Проверенные бренды', desc: 'Прямые контракты с производителями и контроль качества на каждом этапе.', iconHtml: icon('<path d="M32 6l8 16 18 2.5-13 12.5 3 18-16-8.5-16 8.5 3-18-13-12.5 18-2.5z"></path>') },
+      { title: 'Быстрая логистика', desc: 'Стабильные поставки и предсказуемые сроки для магазинов и HoReCa.', iconHtml: icon('<rect x="4" y="22" width="34" height="22" rx="2"></rect><path d="M38 28h10l10 8v8H38z"></path><circle cx="17" cy="50" r="5"></circle><circle cx="47" cy="50" r="5"></circle>') },
+      { title: 'Гибкие условия', desc: 'Индивидуальные условия сотрудничества для партнёров и дистрибьюторов.', iconHtml: icon('<path d="M24 32l6 6 12-14"></path><circle cx="32" cy="32" r="24"></circle>') },
+      { title: '7+ лет на рынке', desc: 'Опыт работы с розницей и HoReCa с 2018 года.', iconHtml: icon('<circle cx="32" cy="32" r="24"></circle><path d="M32 18v14l10 8"></path>') },
+    ];
+
+    const stats = [
+      { value: '200+', label: 'партнёров' },
+      { value: '80+', label: 'товаров в каталоге' },
+      { value: '7+', label: 'лет на рынке' },
+    ];
+    const marqueeBase = [
+      { value: '•', label: '200+ партнёров' },
+      { value: '•', label: '80+ видов товаров' },
+      { value: '•', label: 'Более 7 лет опыта' },
+    ];
+    const marqueeStats = [...marqueeBase, ...marqueeBase, ...marqueeBase, ...marqueeBase];
+
+    const brandsBase = [
+      { id: 'brand-sensoy', name: 'Sen Soy', placeholder: 'Фото продукции Sen Soy' },
+      { id: 'brand-poc', name: 'Prince of Chester', placeholder: 'Фото продукции Prince of Chester' },
+      { id: 'brand-3', name: 'Бренд 3', placeholder: 'Фото продукции' },
+      { id: 'brand-4', name: 'Бренд 4', placeholder: 'Фото продукции' },
+      { id: 'brand-5', name: 'Бренд 5', placeholder: 'Фото продукции' },
+      { id: 'brand-6', name: 'Бренд 6', placeholder: 'Фото продукции' },
+      { id: 'brand-7', name: 'Бренд 7', placeholder: 'Фото продукции' },
+    ];
+    const bi = this.state.brandIndex;
+    const n = brandsBase.length;
+    const extended = [-2, -1, 0, 1, 2].map(off => brandsBase[(bi + off + n * 2) % n]);
+    const ACTIVE_W = 300, SIDE_W = 260, GAP = 14, WRAP_HALF = 510;
+    const activeExtIdx = 2;
+    const brands = extended.map((b, i) => {
+      const isActive = i === activeExtIdx;
+      const w = isActive ? ACTIVE_W : SIDE_W;
+      const isPeek = i === 0 || i === 4;
+      return { ...b, id: b.id + '-x' + i, isActive, cardOpacity: isActive ? 1 : 0.7, cardWidth: w + 'px', imgHeight: (isActive ? 260 : 210) + 'px', cardBlur: isPeek ? 'blur(2px)' : 'none' };
+    });
+    const widthBefore = activeExtIdx * (SIDE_W + GAP);
+    const brandTrackTransform = `translateX(${WRAP_HALF - widthBefore - ACTIVE_W / 2}px)`;
+
+    return {
+      desktopNavDisplay: isMobile ? 'none' : 'flex',
+      mobileNavDisplay: isMobile ? 'flex' : 'none',
+      mobileMenuOpen: this.state.mobileMenuOpen,
+      burgerLine1: this.state.mobileMenuOpen ? 'translateY(7px) rotate(45deg)' : 'none',
+      burgerLine2Opacity: this.state.mobileMenuOpen ? 0 : 1,
+      burgerLine3: this.state.mobileMenuOpen ? 'translateY(-7px) rotate(-45deg)' : 'none',
+      toggleMobileMenu: () => this.setState(s => ({ mobileMenuOpen: !s.mobileMenuOpen })),
+      setLang: (code) => (() => this.setState({ lang: code, mobileMenuOpen: false })),
+      navItems, langs, advantages, stats, marqueeStats, brands, brandTrackTransform,
+      brandPrev: () => this.setState(s => ({ brandIndex: (s.brandIndex - 1 + brandsBase.length) % brandsBase.length })),
+      brandNext: () => this.setState(s => ({ brandIndex: (s.brandIndex + 1) % brandsBase.length })),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

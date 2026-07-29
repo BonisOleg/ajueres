@@ -1,0 +1,211 @@
+# AJERES English translations
+msgid ""
+msgstr ""
+"Project-Id-Version: AJERES 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Главная"
+msgstr "Home"
+
+msgid "Продукты"
+msgstr "Products"
+
+msgid "О компании"
+msgstr "About"
+
+msgid "Контакты"
+msgstr "Contacts"
+
+msgid "Слишком много заявок. Попробуйте позже."
+msgstr "Too many requests. Please try again later."
+
+msgid "Заявка отправлена. Мы свяжемся с вами."
+msgstr "Request sent. We will contact you."
+
+msgid "Русский"
+msgstr "Russian"
+
+msgid "O'zbekcha"
+msgstr "Oʻzbekcha"
+
+msgid "English"
+msgstr "English"
+
+msgid "Дистрибьютор продуктов питания в Узбекистане"
+msgstr "Food distributor in Uzbekistan"
+
+msgid "Назад"
+msgstr "Back"
+
+msgid "Далее"
+msgstr "Next"
+
+msgid "Хлебные крошки"
+msgstr "Breadcrumbs"
+
+msgid "Политика приватности"
+msgstr "Privacy policy"
+
+msgid "Закрыть"
+msgstr "Close"
+
+msgid "Связаться с нами"
+msgstr "Contact us"
+
+msgid "Оставьте заявку — мы ответим и подготовим коммерческое предложение."
+msgstr "Leave a request — we will reply and prepare a commercial offer."
+
+msgid ""
+"Дистрибьютор азиатской и специализированной бакалеи для магазинов, HoReCa и "
+"партнёров."
+msgstr ""
+"Distributor of Asian and specialty groceries for stores, HoReCa and "
+"partners."
+
+msgid "Меню"
+msgstr "Menu"
+
+msgid "Навигация"
+msgstr "Navigation"
+
+msgid "Все права защищены."
+msgstr "All rights reserved."
+
+msgid "Политика конфиденциальности"
+msgstr "Privacy policy"
+
+msgid "Основная навигация"
+msgstr "Main navigation"
+
+msgid "Категории продуктов"
+msgstr "Product categories"
+
+msgid "Смотреть весь каталог"
+msgstr "View full catalog"
+
+msgid "Связаться"
+msgstr "Contact"
+
+msgid "Закрыть меню"
+msgstr "Close menu"
+
+msgid "Контент скоро появится."
+msgstr "Content coming soon."
+
+msgid "Дистрибьютор продуктов питания"
+msgstr "Food distributor"
+
+msgid "Каталог AJERES"
+msgstr "AJERES Catalog"
+
+msgid "Все товары"
+msgstr "All products"
+
+msgid "Истории партнёров"
+msgstr "Partner stories"
+
+msgid "Начнём сотрудничество?"
+msgstr "Shall we start working together?"
+
+msgid "Пришлём актуальный прайс и подберём ассортимент под ваш формат бизнеса."
+msgstr "We’ll send an up-to-date price list and tailor the assortment to your business."
+
+msgid "Написать на почту"
+msgstr "Email us"
+
+msgid "Наш каталог"
+msgstr "Our catalog"
+
+msgid ""
+"Фильтруйте по категориям или ищите по названию. Под каталогом — бренды-"
+"производители."
+msgstr ""
+"Filter by category or search by name. Brands are listed below the catalog."
+
+msgid "Категории"
+msgstr "Categories"
+
+msgid "Все"
+msgstr "All"
+
+msgid "Поиск"
+msgstr "Search"
+
+msgid "Поиск товаров…"
+msgstr "Search products…"
+
+msgid "Наши бренды"
+msgstr "Our brands"
+
+msgid "Производители, которые мы представляем"
+msgstr "Producers we represent"
+
+msgid "Смотреть товары"
+msgstr "View products"
+
+msgid "Ничего не найдено"
+msgstr "Nothing found"
+
+msgid "Сбросить"
+msgstr "Reset"
+
+msgid "Показано %(start)s–%(end)s из %(total)s"
+msgstr "Showing %(start)s–%(end)s of %(total)s"
+
+msgid "Страницы"
+msgstr "Pages"
+
+msgid "С какой целью обращаетесь"
+msgstr "What is the purpose of your request"
+
+msgid "Имя"
+msgstr "Name"
+
+msgid "Телефон"
+msgstr "Phone"
+
+msgid "Электронная почта"
+msgstr "Email"
+
+msgid "Отправить"
+msgstr "Send"
+
+msgid "Заявка отправлена"
+msgstr "Request sent"
+
+msgid "Мы свяжемся с вами в ближайшее время."
+msgstr "We will contact you shortly."
+
+msgid "Дистрибьютор с 2018 года"
+msgstr "Distributor since 2018"
+
+msgid "Мы выводим лучшие бренды на рынок Узбекистана"
+msgstr "We bring the best brands to the Uzbekistan market"
+
+msgid ""
+"ООО «AJERES» — современная дистрибьюторская компания: импорт, логистика, "
+"продажи, маркетинг и развитие брендов."
+msgstr ""
+"AJERES LLC is a modern distribution company: import, logistics, sales, "
+"marketing and brand development."
+
+msgid "Наши услуги"
+msgstr "Our services"
+
+msgid "Наши преимущества"
+msgstr "Our advantages"
+
+msgid ""
+"Мы гордимся сотрудничеством с международными производителями, которые "
+"доверили нам развитие своих брендов на рынке Узбекистана."
+msgstr ""
+"We are proud to partner with international producers who entrusted us with "
+"developing their brands in Uzbekistan."
+
+msgid "Язык"
+msgstr "Language"

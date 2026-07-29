@@ -1,0 +1,146 @@
+"""Публічні селектори каталогу: бренди, категорії, товари, пагінація."""
+
+from __future__ import annotations
+
+import re
+from collections import OrderedDict
+from typing import Iterable
+
+from django.core.cache import cache
+from django.core.paginator import EmptyPage, Page, PageNotAnInteger, Paginator
+from django.db.models import Q, QuerySet
+
+from .models import Brand, Category, Product
+
+CATALOG_PER_PAGE = 24
+_SEARCH_MIN_LEN = 2
+_SEARCH_MAX_LEN = 100
+_WHITESPACE_RE = re.compile(r'\s+')
+
+_CACHE_BRANDS_ALL = 'brands_public:all'
+_CACHE_BRANDS_FEATURED = 'brands_public:featured'
+_CACHE_TTL = 60 * 10
+
+
+def normalize_search_query(q: str | None) -> str:
+    """Strip, схлопнути пробіли, min 2 / max 100. Інакше — порожній рядок."""
+    if not q:
+        return ''
+    normalized = _WHITESPACE_RE.sub(' ', q.strip())
+    if len(normalized) < _SEARCH_MIN_LEN:
+        return ''
+    return normalized[:_SEARCH_MAX_LEN]
+
+
+def parse_page_number(raw) -> int:
+    """Невалідний page → 1."""
+    try:
+        page = int(raw)
+    except (TypeError, ValueError):
+        return 1
+    return page if page >= 1 else 1
+
+
+def get_brands_for_showcase(*, featured_only: bool = False) -> list[Brand]:
+    """
+    Виробники для блоку під каталогом на /products.
+    featured_only=True — лише is_featured (типовий showcase).
+    """
+    cache_key = _CACHE_BRANDS_FEATURED if featured_only else _CACHE_BRANDS_ALL
+    cached_ids = cache.get(cache_key)
+    base = Brand.objects.filter(is_active=True).order_by('order', 'name')
+
+    if cached_ids is not None:
+        by_id = {b.pk: b for b in base.filter(pk__in=cached_ids)}
+        return [by_id[pk] for pk in cached_ids if pk in by_id]
+
+    if featured_only:
+        featured = list(base.filter(is_featured=True))
+        brands = featured if featured else list(base)
+    else:
+        brands = list(base)
+
+    cache.set(cache_key, [b.pk for b in brands], timeout=_CACHE_TTL)
+    return brands
+
+
+def get_categories() -> QuerySet[Category]:
+    return Category.objects.filter(is_active=True).order_by('order', 'name')
+
+
+def get_products(
+    *,
+    category_slug: str | None = None,
+    brand_slug: str | None = None,
+    q: str | None = None,
+) -> QuerySet[Product]:
+    qs = (
+        Product.objects.filter(
+            is_active=True,
+            brand__is_active=True,
+            category__is_active=True,
+        )
+        .select_related('brand', 'category')
+        .order_by('brand__order', 'order', 'name')
+    )
+
+    if category_slug:
+        qs = qs.filter(category__slug=category_slug)
+    if brand_slug:
+        qs = qs.filter(brand__slug=brand_slug)
+
+    query = normalize_search_query(q)
+    if query:
+        qs = qs.filter(_product_search_q(query))
+
+    return qs
+
+
+def _product_search_q(query: str) -> Q:
+    """
+    Пошук по всіх мовах name/package/description + brand.name.
+    На PostgreSQL icontains коректно ігнорує регістр (у т.ч. кирилиця).
+    """
+    return (
+        Q(name_ru__icontains=query)
+        | Q(name_uz__icontains=query)
+        | Q(name_en__icontains=query)
+        | Q(package_ru__icontains=query)
+        | Q(package_uz__icontains=query)
+        | Q(package_en__icontains=query)
+        | Q(description_ru__icontains=query)
+        | Q(description_uz__icontains=query)
+        | Q(description_en__icontains=query)
+        | Q(brand__name__icontains=query)
+    )
+
+
+def paginate_products(
+    qs: QuerySet[Product],
+    *,
+    page: int | str | None = 1,
+    per_page: int = CATALOG_PER_PAGE,
+) -> Page:
+    paginator = Paginator(qs, per_page)
+    page_number = parse_page_number(page)
+    try:
+        return paginator.page(page_number)
+    except PageNotAnInteger:
+        return paginator.page(1)
+    except EmptyPage:
+        return paginator.page(paginator.num_pages or 1)
+
+
+def group_by_brand(products: Iterable[Product]) -> OrderedDict[Brand, list[Product]]:
+    """Групує товари поточної сторінки по бренду (порядок збереження)."""
+    grouped: OrderedDict[Brand, list[Product]] = OrderedDict()
+    for product in products:
+        grouped.setdefault(product.brand, []).append(product)
+    return grouped
+
+
+def invalidate_catalog_list_cache() -> None:
+    cache.delete_many([
+        _CACHE_BRANDS_ALL,
+        _CACHE_BRANDS_FEATURED,
+    ])

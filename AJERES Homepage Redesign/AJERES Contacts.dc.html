@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;600;700;800;900&family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{margin:0;background:#fff;font-family:'Manrope',system-ui,sans-serif;}
+  img{max-width:100%;display:block;}
+  ::selection{background:#FF5A36;color:#fff;}
+  a{color:#DB3F1C;text-decoration:none;}
+  a:hover{color:#c23214;}
+  input,textarea{font-family:'Manrope',system-ui,sans-serif;}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+  @keyframes floaty2{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(14px) rotate(3deg)}}
+  @keyframes floaty3{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,-12px)}}
+  @keyframes dropIn{from{opacity:0;transform:translateX(-50%) translateY(-14px) scale(.97)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+  @keyframes popIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</helmet>
+<div ref="{{ setRoot }}" style="--ink:#1B1712;--muted:#6E655B;--line:#EDE7DE;--accent:#FF5A36;--accent-ink:#DB3F1C;--peach:#FFE6DA;--accent-soft:#FFF0EA;--cream:#FBF6EF;--glow:rgba(255,90,54,.5);--c-coral:#FF5A36;--c-amber:#F79315;--c-green:#1FA968;--c-blue:#3E7BFA;--c-purple:#7C5CFC;--c-pink:#FF4F97;--t-coral:#FFE7DF;--t-amber:#FFEFCF;--t-green:#D8F2E5;--t-blue:#E2EAFF;--t-purple:#ECE6FF;--t-pink:#FFE1EE;--foot-bg:#141210;--foot-fg:#EFE9E0;--foot-mut:#A79E92;--foot-line:rgba(255,255,255,.1);background:#fff;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;padding-top:env(safe-area-inset-top);">
+
+  <header style="position:fixed;top:0;left:0;right:0;z-index:60;padding:clamp(12px,1.8vw,20px) clamp(12px,3vw,24px);">
+    <div style="max-width:1160px;margin:0 auto;position:relative;">
+    <div style="display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.72);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);border:1px solid rgba(255,255,255,.6);border-radius:999px;box-shadow:0 18px 44px -22px rgba(30,55,95,.45);padding:10px 12px 10px 24px;">
+      <a href="/" style="display:flex;align-items:center;gap:11px;font-family:'Golos Text',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.02em;color:var(--ink);">
+        <span style="width:13px;height:13px;border-radius:50%;background:linear-gradient(135deg,var(--c-coral),var(--c-pink));box-shadow:0 0 0 4px var(--accent-soft);"></span>AJERES
+      </a>
+      <sc-if value="{{ showDesktopNav }}" hint-placeholder-val="{{ true }}">
+        <nav style="margin-left:auto;display:flex;align-items:center;gap:4px;">
+          <a href="/" style="padding:8px 14px;border-radius:999px;font-weight:600;font-size:15px;color:var(--ink);transition:background .2s,color .2s;" style-hover="background:rgba(20,30,50,.06);color:var(--c-coral);">Главная</a>
+          <div onMouseEnter="{{ openMega }}" onMouseLeave="{{ scheduleClose }}" style="display:flex;align-items:center;">
+            <a href="/products/" style="display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:999px;font-weight:600;font-size:15px;color:var(--ink);transition:background .2s,color .2s;" style-hover="background:rgba(20,30,50,.06);color:var(--c-green);">Продукты<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M6 9l6 6 6-6"/></svg></a>
+          </div>
+          <a href="/about/" style="padding:8px 14px;border-radius:999px;font-weight:600;font-size:15px;color:var(--ink);transition:background .2s,color .2s;" style-hover="background:rgba(20,30,50,.06);color:var(--c-blue);">О компании</a>
+          <a href="/contacts/" style="padding:8px 14px;border-radius:999px;font-weight:700;font-size:15px;color:var(--c-purple);background:var(--t-purple);">Контакты</a>
+        </nav>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="position:relative;">
+            <button onClick="{{ toggleLang }}" style="display:inline-flex;align-items:center;gap:7px;font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;color:var(--ink);background:#fff;border:1px solid var(--line);padding:9px 13px;border-radius:999px;cursor:pointer;transition:border-color .2s,background .2s;" style-hover="border-color:var(--c-coral);background:var(--accent-soft);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>
+              {{ lang }}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:calc(100% + 12px);right:0;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 50px -20px rgba(27,23,18,.28);padding:7px;min-width:150px;z-index:70;">
+                <button onClick="{{ setRU }}" style="display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;font-family:'Manrope',sans-serif;font-weight:600;font-size:14px;color:var(--ink);background:none;border:0;padding:11px 12px;border-radius:10px;cursor:pointer;transition:background .18s;" style-hover="background:var(--t-coral);"><span>Русский</span><span style="color:var(--muted);font-size:12px;">RU</span></button>
+                <button onClick="{{ setUZ }}" style="display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;font-family:'Manrope',sans-serif;font-weight:600;font-size:14px;color:var(--ink);background:none;border:0;padding:11px 12px;border-radius:10px;cursor:pointer;transition:background .18s;" style-hover="background:var(--t-blue);"><span>Oʻzbekcha</span><span style="color:var(--muted);font-size:12px;">UZ</span></button>
+                <button onClick="{{ setEN }}" style="display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;font-family:'Manrope',sans-serif;font-weight:600;font-size:14px;color:var(--ink);background:none;border:0;padding:11px 12px;border-radius:10px;cursor:pointer;transition:background .18s;" style-hover="background:var(--t-green);"><span>English</span><span style="color:var(--muted);font-size:12px;">EN</span></button>
+              </div>
+            </sc-if>
+          </div>
+          <a href="#request" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-weight:700;font-size:15px;padding:12px 22px;border-radius:999px;box-shadow:0 14px 26px -12px var(--glow);transition:transform .25s,box-shadow .25s,filter .25s;" style-hover="transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 20px 34px -14px var(--glow);">Написать запрос</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isNarrow }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-label="Меню" style="margin-left:auto;display:inline-flex;flex-direction:column;gap:5px;width:46px;height:46px;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);border-radius:14px;cursor:pointer;">
+          <span style="width:20px;height:2px;background:var(--ink);border-radius:2px;"></span>
+          <span style="width:20px;height:2px;background:var(--ink);border-radius:2px;"></span>
+          <span style="width:20px;height:2px;background:var(--ink);border-radius:2px;"></span>
+        </button>
+      </sc-if>
+    </div>
+    <sc-if value="{{ megaOpen }}" hint-placeholder-val="{{ false }}">
+      <div onMouseEnter="{{ openMega }}" onMouseLeave="{{ scheduleClose }}" style="position:absolute;left:50%;top:100%;transform:translateX(-50%);width:min(720px,94vw);padding-top:14px;z-index:65;">
+        <div style="background:rgba(255,255,255,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.7);border-radius:28px;box-shadow:0 34px 80px -30px rgba(30,55,95,.55);padding:16px;animation:dropIn .3s cubic-bezier(.22,.61,.36,1);transform:translateX(-50%);">
+          <div style="font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:4px 10px 12px;">Категории продуктов</div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px;">
+            <a href="/products/" style="display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:16px;transition:background .2s;color:var(--ink);" style-hover="background:var(--t-coral);"><span style="width:36px;height:36px;flex:none;border-radius:11px;background:var(--c-coral);display:flex;align-items:center;justify-content:center;color:#fff;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 3h6v3l1 2v10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V8l1-2z"/></svg></span><span style="display:flex;flex-direction:column;gap:2px;"><span style="font-weight:700;font-size:15px;">Соусы</span><span style="font-size:12.5px;color:var(--muted);line-height:1.35;">Соевые, устричные, чили</span></span></a>
+            <a href="/products/" style="display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:16px;transition:background .2s;color:var(--ink);" style-hover="background:var(--t-amber);"><span style="width:36px;height:36px;flex:none;border-radius:11px;background:var(--c-amber);display:flex;align-items:center;justify-content:center;color:#fff;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 12h16a8 8 0 0 1-16 0z M9 12c0-3 1-5 2-6 M13 12c0-3 0-5 1-6"/></svg></span><span style="display:flex;flex-direction:column;gap:2px;"><span style="font-weight:700;font-size:15px;">Лапша</span><span style="font-size:12.5px;color:var(--muted);line-height:1.35;">Рамен, удон, соба</span></span></a>
+            <a href="/products/" style="display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:16px;transition:background .2s;color:var(--ink);" style-hover="background:var(--t-green);"><span style="width:36px;height:36px;flex:none;border-radius:11px;background:var(--c-green);display:flex;align-items:center;justify-content:center;color:#fff;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 5h14v14H5z M12 5v14 M5 12h14"/></svg></span><span style="display:flex;flex-direction:column;gap:2px;"><span style="font-weight:700;font-size:15px;">Нори</span><span style="font-size:12.5px;color:var(--muted);line-height:1.35;">Листы и снеки</span></span></a>
+            <a href="/products/" style="display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:16px;transition:background .2s;color:var(--ink);" style-hover="background:var(--t-blue);"><span style="width:36px;height:36px;flex:none;border-radius:11px;background:var(--c-blue);display:flex;align-items:center;justify-content:center;color:#fff;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/></svg></span><span style="display:flex;flex-direction:column;gap:2px;"><span style="font-weight:700;font-size:15px;">Сиропы</span><span style="font-size:12.5px;color:var(--muted);line-height:1.35;">Для напитков и десертов</span></span></a>
+            <a href="/products/" style="display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:16px;transition:background .2s;color:var(--ink);" style-hover="background:var(--t-purple);"><span style="width:36px;height:36px;flex:none;border-radius:11px;background:var(--c-purple);display:flex;align-items:center;justify-content:center;color:#fff;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h12v5a5 5 0 0 1-10 0z M16 9h2a2 2 0 0 1 0 4h-1"/></svg></span><span style="display:flex;flex-direction:column;gap:2px;"><span style="font-weight:700;font-size:15px;">Чай</span><span style="font-size:12.5px;color:var(--muted);line-height:1.35;">Зелёный, улун, матча</span></span></a>
+            <a href="/products/" style="display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:16px;transition:background .2s;color:var(--ink);" style-hover="background:var(--t-pink);"><span style="width:36px;height:36px;flex:none;border-radius:11px;background:var(--c-pink);display:flex;align-items:center;justify-content:center;color:#fff;"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 8h10v11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2z M8 8V5h8v3"/></svg></span><span style="display:flex;flex-direction:column;gap:2px;"><span style="font-weight:700;font-size:15px;">Маринады</span><span style="font-size:12.5px;color:var(--muted);line-height:1.35;">Пасты и заправки</span></span></a>
+          </div>
+          <a href="/products/" style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding:15px 18px;border-radius:18px;background:linear-gradient(120deg,var(--t-coral),var(--t-amber) 50%,var(--t-pink));font-weight:700;font-size:15px;color:var(--ink);transition:filter .2s;" style-hover="filter:brightness(.98);">Смотреть весь каталог <span style="color:var(--c-coral);">→</span></a>
+        </div>
+      </div>
+    </sc-if>
+    </div>
+  </header>
+
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:80;background:#fff;display:flex;flex-direction:column;padding:16px clamp(20px,6vw,32px) calc(28px + env(safe-area-inset-bottom));overflow-y:auto;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0 8px;">
+        <span style="font-family:'Golos Text',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.02em;">AJERES</span>
+        <button onClick="{{ closeMenu }}" aria-label="Закрыть" style="width:46px;height:46px;display:inline-flex;align-items:center;justify-content:center;background:var(--cream);border:1px solid var(--line);border-radius:14px;cursor:pointer;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <nav style="display:flex;flex-direction:column;gap:4px;margin-top:18px;">
+        <a onClick="{{ closeMenu }}" href="/" style="font-family:'Golos Text',sans-serif;font-weight:600;font-size:30px;letter-spacing:-.02em;color:var(--ink);padding:12px 0;border-bottom:1px solid var(--line);" style-hover="color:var(--c-coral);">Главная</a>
+        <a onClick="{{ closeMenu }}" href="/about/" style="font-family:'Golos Text',sans-serif;font-weight:600;font-size:30px;letter-spacing:-.02em;color:var(--ink);padding:12px 0;border-bottom:1px solid var(--line);" style-hover="color:var(--c-blue);">О компании</a>
+        <a onClick="{{ closeMenu }}" href="/products/" style="font-family:'Golos Text',sans-serif;font-weight:600;font-size:30px;letter-spacing:-.02em;color:var(--ink);padding:12px 0;border-bottom:1px solid var(--line);" style-hover="color:var(--c-green);">Продукты</a>
+        <a onClick="{{ closeMenu }}" href="/contacts/" style="font-family:'Golos Text',sans-serif;font-weight:700;font-size:30px;letter-spacing:-.02em;color:var(--c-purple);padding:12px 0;border-bottom:1px solid var(--line);">Контакты</a>
+      </nav>
+      <div style="margin-top:auto;padding-top:28px;">
+        <div style="display:flex;gap:10px;margin-bottom:18px;">
+          <button onClick="{{ setRU }}" style="flex:1;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;color:var(--ink);background:var(--t-coral);border:0;padding:14px;border-radius:12px;cursor:pointer;">RU</button>
+          <button onClick="{{ setUZ }}" style="flex:1;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;color:var(--ink);background:var(--t-blue);border:0;padding:14px;border-radius:12px;cursor:pointer;">UZ</button>
+          <button onClick="{{ setEN }}" style="flex:1;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;color:var(--ink);background:var(--t-green);border:0;padding:14px;border-radius:12px;cursor:pointer;">EN</button>
+        </div>
+        <a onClick="{{ closeMenu }}" href="#request" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:#fff;font-weight:700;font-size:18px;padding:18px;border-radius:16px;box-shadow:0 16px 30px -12px var(--glow);">Отправить запрос →</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <main>
+    <!-- HERO -->
+    <section style="position:relative;overflow:hidden;background:#fff;">
+      <div style="position:absolute;inset:0;background:url(./contacts-hero-v2.png) center bottom / cover no-repeat;z-index:0;"></div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:38%;background:linear-gradient(180deg,rgba(255,255,255,0),#fff 92%);z-index:1;pointer-events:none;"></div>
+      <div data-reveal style="position:relative;z-index:2;max-width:820px;margin:0 auto;text-align:center;padding:clamp(140px,20vh,210px) clamp(20px,4vw,32px) clamp(96px,14vw,200px);">
+        <div style="font-weight:700;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--c-purple);margin-bottom:16px;">Контакты</div>
+        <h1 style="font-family:'Lora',Georgia,serif;font-weight:600;font-size:clamp(40px,6.4vw,80px);line-height:1.03;letter-spacing:-.015em;color:#1B2430;margin:0;text-wrap:balance;">Свяжитесь <span style="color:var(--c-coral);font-style:italic;">с нами</span></h1>
+        <p style="font-size:clamp(17px,1.7vw,21px);line-height:1.5;color:#3d4757;max-width:44ch;margin:22px auto 0;text-wrap:pretty;">Ответим на вопросы, пришлём прайс и подберём ассортимент под ваш формат бизнеса. Работаем с магазинами, HoReCa и дистрибьюторами.</p>
+      </div>
+    </section>
+
+    <!-- CONTENT: info + form -->
+    <section style="max-width:1160px;margin:0 auto;padding:clamp(30px,4vw,56px) clamp(18px,4vw,42px) clamp(20px,3vw,40px);">
+      <div style="display:grid;grid-template-columns:{{ contentCols }};gap:clamp(22px,3vw,40px);align-items:stretch;">
+
+        <!-- INFO -->
+        <div data-reveal style="display:flex;flex-direction:column;gap:14px;height:100%;">
+          <a href="https://maps.google.com/?q=Паркентская 327 Ташкент" target="_blank" rel="noopener" style="display:flex;gap:16px;align-items:flex-start;background:var(--t-coral);border-radius:22px;padding:22px 24px;color:var(--ink);flex:1;transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-4px);box-shadow:0 24px 44px -26px rgba(255,90,54,.6);">
+            <span style="width:50px;height:50px;flex:none;border-radius:14px;background:var(--c-coral);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 12px 22px -10px var(--c-coral);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+            <span style="display:flex;flex-direction:column;gap:4px;">
+              <span style="font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#a24127;">Адрес</span>
+              <span style="font-size:16.5px;font-weight:600;line-height:1.4;">Ташкент, Мирзо-Улугбекский район,<br>ул. Паркентская, 327</span>
+              <span style="font-size:14px;font-weight:600;color:var(--c-coral);margin-top:2px;">Открыть на карте →</span>
+            </span>
+          </a>
+          <a href="tel:+998935418886" style="display:flex;gap:16px;align-items:flex-start;background:var(--t-green);border-radius:22px;padding:22px 24px;color:var(--ink);flex:1;transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-4px);box-shadow:0 24px 44px -26px rgba(31,169,104,.6);">
+            <span style="width:50px;height:50px;flex:none;border-radius:14px;background:var(--c-green);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 12px 22px -10px var(--c-green);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L20 13l-1 4-4 2A16 16 0 0 1 3 8z"/></svg></span>
+            <span style="display:flex;flex-direction:column;gap:4px;">
+              <span style="font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#166b45;">Телефон</span>
+              <span style="font-size:19px;font-weight:700;line-height:1.3;">+(998) 93-541-88-86</span>
+              <span style="font-size:14px;color:var(--muted);">Пн–Сб, 9:00–18:00</span>
+            </span>
+          </a>
+          <a href="mailto:info@ajeres.uz" style="display:flex;gap:16px;align-items:flex-start;background:var(--t-blue);border-radius:22px;padding:22px 24px;color:var(--ink);flex:1;transition:transform .3s,box-shadow .3s;" style-hover="transform:translateY(-4px);box-shadow:0 24px 44px -26px rgba(62,123,250,.6);">
+            <span style="width:50px;height:50px;flex:none;border-radius:14px;background:var(--c-blue);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 12px 22px -10px var(--c-blue);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg></span>
+            <span style="display:flex;flex-direction:column;gap:4px;">
+              <span style="font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#2b56b0;">Почта</span>
+              <span style="font-size:19px;font-weight:700;line-height:1.3;">info@ajeres.uz</span>
+              <span style="font-size:14px;color:var(--muted);">Отвечаем в течение дня</span>
+            </span>
+          </a>
+          <div style="display:flex;gap:16px;align-items:flex-start;background:var(--cream);border:1px solid var(--line);border-radius:22px;padding:22px 24px;flex:1;">
+            <span style="width:50px;height:50px;flex:none;border-radius:14px;background:var(--c-purple);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 12px 22px -10px var(--c-purple);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 8l9-5 9 5-9 5-9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg></span>
+            <span style="display:flex;flex-direction:column;gap:4px;">
+              <span style="font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#5a41c9;">Оптовые поставки</span>
+              <span style="font-size:16px;font-weight:600;line-height:1.45;">Отгрузка со склада в Ташкенте и доставка по региону.</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- FORM -->
+        <div id="request" data-reveal data-reveal-delay="120" style="scroll-margin-top:110px;background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:0 40px 90px -46px rgba(30,55,95,.5);padding:clamp(26px,3vw,40px);position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--c-coral),var(--c-amber),var(--c-green),var(--c-blue),var(--c-purple),var(--c-pink));"></div>
+          <h2 style="font-family:'Golos Text',sans-serif;font-weight:700;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.02em;margin:6px 0 6px;">Отправить нам запрос</h2>
+          <p style="font-size:15px;line-height:1.5;color:var(--muted);margin:0 0 24px;">Заполните форму — свяжемся с вами и пришлём предложение.</p>
+
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:34px 10px;animation:popIn .4s cubic-bezier(.22,.61,.36,1);">
+              <span style="width:66px;height:66px;border-radius:50%;background:var(--t-green);display:flex;align-items:center;justify-content:center;color:var(--c-green);"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 7L9.5 17.5 4 12"/></svg></span>
+              <div style="font-family:'Golos Text',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;">Запрос отправлен!</div>
+              <p style="font-size:15px;line-height:1.5;color:var(--muted);margin:0;max-width:34ch;">Спасибо за обращение. Наш менеджер свяжется с вами в ближайшее время.</p>
+              <button onClick="{{ resetForm }}" style="margin-top:6px;font-family:'Manrope',sans-serif;font-weight:700;font-size:15px;color:var(--c-coral);background:var(--accent-soft);border:0;padding:12px 22px;border-radius:999px;cursor:pointer;transition:filter .2s;" style-hover="filter:brightness(.97);">Отправить ещё один</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ submitForm }}" style="display:flex;flex-direction:column;gap:16px;">
+            <div style="position:absolute;left:-9999px;" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+            <label style="display:flex;flex-direction:column;gap:7px;">
+              <span style="font-weight:600;font-size:14px;color:var(--ink);">С какой целью обращаетесь <span style="color:var(--c-coral);">*</span></span>
+              <textarea name="purpose" required rows="3" maxlength="2000" placeholder="Например: интересует оптовый прайс на соусы и лапшу" style="resize:vertical;font-size:15.5px;color:var(--ink);background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;outline:none;transition:border-color .2s,background .2s;" style-focus="border-color:var(--c-coral);background:#fff;"></textarea>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px;">
+              <span style="font-weight:600;font-size:14px;color:var(--ink);">Имя <span style="color:var(--c-coral);">*</span></span>
+              <input name="name" required type="text" maxlength="255" placeholder="Ваше имя" style="font-size:15.5px;color:var(--ink);background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;outline:none;transition:border-color .2s,background .2s;" style-focus="border-color:var(--c-green);background:#fff;">
+            </label>
+            <div style="display:grid;grid-template-columns:{{ fieldCols }};gap:16px;">
+              <label style="display:flex;flex-direction:column;gap:7px;">
+                <span style="font-weight:600;font-size:14px;color:var(--ink);">Телефон <span style="color:var(--c-coral);">*</span></span>
+                <input name="phone" required type="tel" maxlength="64" inputmode="tel" autocomplete="tel" placeholder="+998 __ ___ __ __" style="font-size:15.5px;color:var(--ink);background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;outline:none;transition:border-color .2s,background .2s;" style-focus="border-color:var(--c-blue);background:#fff;">
+              </label>
+              <label style="display:flex;flex-direction:column;gap:7px;">
+                <span style="font-weight:600;font-size:14px;color:var(--ink);">Электронная почта <span style="color:var(--c-coral);">*</span></span>
+                <input name="email" required type="email" maxlength="254" autocomplete="email" placeholder="you@company.com" style="font-size:15.5px;color:var(--ink);background:var(--cream);border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;outline:none;transition:border-color .2s,background .2s;" style-focus="border-color:var(--c-purple);background:#fff;">
+              </label>
+            </div>
+            <button type="submit" style="margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:#fff;font-family:'Manrope',sans-serif;font-weight:700;font-size:17px;padding:17px 28px;border:0;border-radius:999px;cursor:pointer;box-shadow:0 18px 34px -14px var(--glow);transition:transform .25s,box-shadow .25s,filter .25s;" style-hover="transform:translateY(-3px);filter:brightness(1.05);box-shadow:0 26px 46px -16px var(--glow);">Отправить <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <p style="font-size:12.5px;line-height:1.5;color:var(--muted);margin:2px 0 0;text-align:center;">Отправляя форму, вы соглашаетесь с <a href="/privacy/" style="color:var(--c-purple);">политикой конфиденциальности</a>.</p>
+          </form>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section style="max-width:1160px;margin:0 auto;padding:clamp(14px,2vw,24px) clamp(18px,4vw,42px) clamp(44px,6vw,84px);">
+      <div data-reveal style="border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:0 34px 80px -48px rgba(30,55,95,.5);background:var(--cream);">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:18px 24px;border-bottom:1px solid var(--line);background:#fff;">
+          <div style="display:flex;align-items:center;gap:11px;font-family:'Golos Text',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.01em;"><span style="width:11px;height:11px;border-radius:50%;background:var(--c-coral);"></span>Наш склад в Ташкенте</div>
+          <a href="https://maps.google.com/?q=Паркентская 327 Ташкент" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:14px;color:var(--c-coral);">Построить маршрут <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <iframe title="Карта AJERES" src="https://maps.google.com/maps?q=%D0%9F%D0%B0%D1%80%D0%BA%D0%B5%D0%BD%D1%82%D1%81%D0%BA%D0%B0%D1%8F%20327%20%D0%A2%D0%B0%D1%88%D0%BA%D0%B5%D0%BD%D1%82&hl=ru&z=15&output=embed" style="display:block;width:100%;height:clamp(320px,42vw,460px);border:0;filter:saturate(1.05);" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background:var(--foot-bg);color:var(--foot-fg);position:relative;padding:clamp(48px,6vw,84px) clamp(18px,4vw,42px) calc(28px + env(safe-area-inset-bottom));">
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--c-coral),var(--c-amber),var(--c-green),var(--c-blue),var(--c-purple),var(--c-pink));"></div>
+    <div style="max-width:1260px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:clamp(30px,4vw,56px);">
+        <div>
+          <div style="display:flex;align-items:center;gap:11px;font-family:'Golos Text',sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em;margin-bottom:16px;"><span style="width:13px;height:13px;border-radius:50%;background:linear-gradient(135deg,var(--c-coral),var(--c-pink));"></span>AJERES</div>
+          <p style="font-size:15px;line-height:1.6;color:var(--foot-mut);margin:0 0 20px;max-width:32ch;">Дистрибьютор азиатской и специализированной бакалеи для магазинов, HoReCa и партнёров.</p>
+          <div style="display:flex;gap:8px;">
+            <button onClick="{{ setRU }}" style="font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;color:var(--foot-fg);background:transparent;border:1px solid var(--foot-line);padding:8px 14px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s;" style-hover="border-color:var(--c-coral);color:var(--c-coral);">RU</button>
+            <button onClick="{{ setUZ }}" style="font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;color:var(--foot-fg);background:transparent;border:1px solid var(--foot-line);padding:8px 14px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s;" style-hover="border-color:var(--c-blue);color:var(--c-blue);">UZ</button>
+            <button onClick="{{ setEN }}" style="font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;color:var(--foot-fg);background:transparent;border:1px solid var(--foot-line);padding:8px 14px;border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s;" style-hover="border-color:var(--c-green);color:var(--c-green);">EN</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--foot-mut);margin-bottom:18px;">Меню</div>
+          <div style="display:flex;flex-direction:column;gap:13px;">
+            <a href="/" style="font-size:16px;color:var(--foot-fg);transition:color .2s;" style-hover="color:var(--c-coral);">Главная</a>
+            <a href="/about/" style="font-size:16px;color:var(--foot-fg);transition:color .2s;" style-hover="color:var(--c-blue);">О компании</a>
+            <a href="/products/" style="font-size:16px;color:var(--foot-fg);transition:color .2s;" style-hover="color:var(--c-green);">Продукты</a>
+            <a href="/contacts/" style="font-size:16px;color:var(--foot-fg);transition:color .2s;" style-hover="color:var(--c-purple);">Контакты</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--foot-mut);margin-bottom:18px;">Контакты</div>
+          <div style="display:flex;flex-direction:column;gap:13px;font-size:16px;">
+            <a href="tel:+998935418886" style="color:var(--foot-fg);transition:color .2s;" style-hover="color:var(--c-coral);">+(998) 93-541-88-86</a>
+            <a href="mailto:info@ajeres.uz" style="color:var(--foot-fg);transition:color .2s;" style-hover="color:var(--c-amber);">info@ajeres.uz</a>
+            <span style="color:var(--foot-mut);line-height:1.5;">Ташкент, ул. Паркентская, 327</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:clamp(36px,5vw,56px);padding-top:24px;border-top:1px solid var(--foot-line);">
+        <span style="font-size:14px;color:var(--foot-mut);">© 2026 AJERES. Все права защищены.</span>
+        <a href="/privacy/" style="font-size:14px;color:var(--foot-mut);transition:color .2s;" style-hover="color:var(--c-pink);">Политика конфиденциальности</a>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#FF5A36&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#FF5A36&quot;,&quot;#F79315&quot;,&quot;#1FA968&quot;,&quot;#3E7BFA&quot;,&quot;#7C5CFC&quot;,&quot;#FF4F97&quot;],&quot;section&quot;:&quot;Тема&quot;},&quot;footerDark&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Тема&quot;}}">
+class Component extends DCLogic {
+  state = { w: (typeof window !== 'undefined' ? window.innerWidth : 1280), menuOpen: false, langOpen: false, megaOpen: false, lang: 'RU', sent: false };
+
+  componentDidMount() {
+    this._onR = () => {
+      const nw = window.innerWidth;
+      if (nw >= 960 && this.state.menuOpen) { this._lock(false); this.setState({ w: nw, menuOpen: false }); }
+      else this.setState({ w: nw });
+    };
+    window.addEventListener('resize', this._onR, { passive: true });
+    this._reveal();
+  }
+  componentDidUpdate() { this._applyTheme(); }
+  componentWillUnmount() { window.removeEventListener('resize', this._onR); clearTimeout(this._mt); this._lock(false); }
+
+  _openMega() { clearTimeout(this._mt); if (!this.state.megaOpen) this.setState({ megaOpen: true, langOpen: false }); }
+  _scheduleClose() { clearTimeout(this._mt); this._mt = setTimeout(() => this.setState({ megaOpen: false }), 170); }
+  _lock(on) { if (typeof document !== 'undefined' && document.body) document.body.style.overflow = on ? 'hidden' : ''; }
+
+  _reveal() {
+    requestAnimationFrame(() => {
+      if (typeof IntersectionObserver === 'undefined') return;
+      const els = document.querySelectorAll('[data-reveal]');
+      const io = new IntersectionObserver((ents) => {
+        ents.forEach((e) => {
+          if (e.isIntersecting) {
+            const el = e.target;
+            const d = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
+            setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'none'; }, d);
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+      els.forEach((el) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(28px)';
+        el.style.transition = 'opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1)';
+        io.observe(el);
+      });
+    });
+  }
+
+  _parse(hex) {
+    let h = (hex || '').replace('#', '');
+    if (h.length === 3) h = h.split('').map((c) => c + c).join('');
+    return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+  }
+  _mix(hex, target, t) {
+    const a = this._parse(hex), b = this._parse(target);
+    const r = a.map((v, i) => Math.round(v + (b[i] - v) * t));
+    return '#' + r.map((v) => v.toString(16).padStart(2, '0')).join('');
+  }
+  _rgba(hex, alpha) { const [r, g, b] = this._parse(hex); return `rgba(${r},${g},${b},${alpha})`; }
+
+  _applyTheme() {
+    const el = this._root; if (!el) return;
+    const a = this.props.accent || '#FF5A36';
+    el.style.setProperty('--accent', a);
+    el.style.setProperty('--accent-ink', this._mix(a, '#000000', 0.2));
+    el.style.setProperty('--accent-soft', this._mix(a, '#ffffff', 0.9));
+    el.style.setProperty('--glow', this._rgba(a, 0.5));
+    const dark = this.props.footerDark ?? true;
+    el.style.setProperty('--foot-bg', dark ? '#141210' : '#FBF6EF');
+    el.style.setProperty('--foot-fg', dark ? '#EFE9E0' : '#1B1712');
+    el.style.setProperty('--foot-mut', dark ? '#A79E92' : '#6E655B');
+    el.style.setProperty('--foot-line', dark ? 'rgba(255,255,255,.1)' : '#EDE7DE');
+  }
+
+  renderVals() {
+    const isNarrow = this.state.w < 960;
+    const narrowForm = this.state.w < 620;
+    return {
+      isNarrow,
+      showDesktopNav: !isNarrow,
+      contentCols: isNarrow ? '1fr' : '1fr 1.15fr',
+      fieldCols: narrowForm ? '1fr' : '1fr 1fr',
+      menuOpen: this.state.menuOpen,
+      langOpen: this.state.langOpen,
+      megaOpen: this.state.megaOpen,
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      openMega: () => this._openMega(),
+      scheduleClose: () => this._scheduleClose(),
+      lang: this.state.lang,
+      setRoot: (el) => { if (el) { this._root = el; this._applyTheme(); } },
+      toggleMenu: () => { const o = !this.state.menuOpen; this._lock(o); this.setState({ menuOpen: o, langOpen: false }); },
+      closeMenu: () => { this._lock(false); this.setState({ menuOpen: false }); },
+      toggleLang: () => this.setState((s) => ({ langOpen: !s.langOpen })),
+      setRU: () => { this._lock(false); this.setState({ lang: 'RU', langOpen: false, menuOpen: false }); },
+      setUZ: () => { this._lock(false); this.setState({ lang: 'UZ', langOpen: false, menuOpen: false }); },
+      setEN: () => { this._lock(false); this.setState({ lang: 'EN', langOpen: false, menuOpen: false }); },
+      submitForm: (e) => { if (e && e.preventDefault) e.preventDefault(); const f = e && e.target; if (f && f.website && f.website.value) return; this.setState({ sent: true }); },
+      resetForm: () => this.setState({ sent: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

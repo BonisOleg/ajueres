@@ -1,0 +1,155 @@
+{% load i18n ajeres_tags %}
+<header class="site-header">
+  <div class="site-header__wrap">
+    <div class="site-header__capsule">
+      <a class="logo" href="{% url 'home' %}">
+        <span class="logo__dot" aria-hidden="true"></span>
+        AJERES
+      </a>
+
+      <nav class="nav-desktop" aria-label="{% trans 'Основная навигация' %}">
+        <a href="{% url 'home' %}" data-tone="coral"{% if request.resolver_match.url_name == 'home' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Главная' %}</a>
+
+        <div class="nav-desktop__mega" data-mega>
+          <a
+            class="nav-desktop__mega-trigger{% if request.resolver_match.url_name == 'products' %} is-active{% endif %} "
+            href="{% url 'products' %}"
+            data-mega-trigger
+          >
+            {% trans 'Каталог' %}
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+          {% if nav_categories %}
+          <div class="nav-desktop__mega-panel" data-mega-panel>
+            <div class="nav-desktop__mega-card">
+              <div class="nav-desktop__mega-label">{% trans 'Категории продуктов' %}</div>
+              <div class="nav-desktop__mega-grid">
+                {% for cat in nav_categories %}
+                  <a class="nav-desktop__mega-item" href="{% url 'products' %}?category={{ cat.slug }}">
+                    <span class="nav-desktop__mega-icon" aria-hidden="true">
+                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>
+                    </span>
+                    <span class="nav-desktop__mega-text">
+                      <span class="nav-desktop__mega-name">{% firstof cat.name cat.slug %}</span>
+                    </span>
+                  </a>
+                {% endfor %}
+              </div>
+              <a class="nav-desktop__mega-all" href="{% url 'products' %}">
+                {% trans 'Смотреть весь каталог' %}
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+
+        <a href="{% url 'about' %}" data-tone="blue"{% if request.resolver_match.url_name == 'about' %} class="is-active" aria-current="page"{% endif %}>{% trans 'О компании' %}</a>
+        <a href="{% url 'contacts' %}" data-tone="purple"{% if request.resolver_match.url_name == 'contacts' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Контакты' %}</a>
+      </nav>
+
+      <div class="site-header__tools">
+        <div class="lang-switch" data-lang-switch>
+          <button type="button" class="lang-switch__toggle" data-lang-toggle aria-expanded="false" aria-haspopup="true" aria-label="{% trans 'Язык' %}">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>
+            {{ current_language|upper }}
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="lang-switch__menu" role="menu">
+            {% for lang in ui_languages %}
+              <a
+                href="{% change_language_url lang.code %}"
+                role="menuitem"
+                class="{% if current_language == lang.code %}is-active{% endif %}"
+                hreflang="{{ lang.code }}"
+                {% if current_language == lang.code %}aria-current="true"{% endif %}
+              >
+                <span>{% if lang.code == 'ru' %}Русский{% elif lang.code == 'uz' %}Oʻzbekcha{% else %}English{% endif %}</span>
+                <span class="lang-switch__code">{{ lang.label }}</span>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <button type="button" class="header-cta" data-open-contact-modal>{% trans 'Связаться' %}</button>
+
+        <button type="button" class="burger" id="burger" aria-label="{% trans 'Меню' %}" aria-expanded="false" aria-controls="mobile-nav">
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="nav-mobile" id="mobile-nav" hidden>
+  <button
+    type="button"
+    class="nav-mobile__backdrop"
+    id="nav-mobile-backdrop"
+    tabindex="-1"
+    aria-label="{% trans 'Закрыть меню' %}"
+  ></button>
+
+  <div
+    class="nav-mobile__sheet"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{% trans 'Меню' %}"
+  >
+    <div class="nav-mobile__scene" aria-hidden="true">
+      <div class="nav-mobile__sky"></div>
+      <div class="nav-mobile__land"></div>
+      <div class="nav-mobile__mist"></div>
+    </div>
+
+    <div class="nav-mobile__top">
+      <span class="nav-mobile__brand">
+        <span class="logo__dot" aria-hidden="true"></span>
+        AJERES
+      </span>
+      <button type="button" class="nav-mobile__close" id="nav-mobile-close" aria-label="{% trans 'Закрыть меню' %}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="nav-mobile__body">
+      <section class="nav-mobile__block">
+        <h2 class="nav-mobile__label">{% trans 'Меню' %}</h2>
+        <nav class="nav-mobile__panel" aria-label="{% trans 'Основная навигация' %}">
+          <a href="{% url 'home' %}"{% if request.resolver_match.url_name == 'home' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Главная' %}</a>
+          <a href="{% url 'about' %}"{% if request.resolver_match.url_name == 'about' %} class="is-active" aria-current="page"{% endif %}>{% trans 'О компании' %}</a>
+          <a href="{% url 'products' %}"{% if request.resolver_match.url_name == 'products' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Продукты' %}</a>
+          <a href="{% url 'contacts' %}"{% if request.resolver_match.url_name == 'contacts' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Контакты' %}</a>
+        </nav>
+      </section>
+
+      <section class="nav-mobile__block nav-mobile__block--contact">
+        <h2 class="nav-mobile__label">{% trans 'Контакты' %}</h2>
+        {% if site_settings.phone or site_settings.address %}
+        <div class="nav-mobile__contacts">
+          {% if site_settings.phone %}
+            <a
+              class="nav-mobile__contact nav-mobile__contact--phone"
+              href="tel:{{ site_settings.phone|cut:' '|cut:'('|cut:')'|cut:'-' }}"
+            >{{ site_settings.phone }}</a>
+          {% endif %}
+          {% if site_settings.address %}
+            <a
+              class="nav-mobile__contact nav-mobile__contact--address"
+              href="https://maps.google.com/?q={{ site_settings.address|urlencode }}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >{{ site_settings.address }}</a>
+          {% endif %}
+        </div>
+        {% endif %}
+        <button type="button" class="nav-mobile__cta" data-open-contact-modal>
+          {% trans 'Связаться с нами' %}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </section>
+    </div>
+  </div>
+</div>

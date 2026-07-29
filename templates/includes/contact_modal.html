@@ -1,0 +1,37 @@
+{% load i18n %}
+<div class="contact-modal" id="contact-modal" hidden aria-hidden="true">
+  <div class="contact-modal__backdrop" data-close-contact-modal></div>
+  <div class="contact-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+    <button type="button" class="contact-modal__close" data-close-contact-modal aria-label="{% trans 'Закрыть' %}">
+      <svg class="contact-modal__close-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <div class="contact-modal__head">
+      <h2 class="contact-modal__title" id="contact-modal-title">{% trans 'Связаться с нами' %}</h2>
+      <p class="contact-modal__lead">{% trans 'Оставьте заявку — мы ответим и подготовим коммерческое предложение.' %}</p>
+
+      {% if site_settings.phone or site_settings.email %}
+      <div class="contact-modal__quick">
+        {% if site_settings.phone %}
+          <a class="contact-modal__chip" href="tel:{{ site_settings.phone|cut:' '|cut:'('|cut:')'|cut:'-' }}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h2a2 2 0 0 1 2 1.7c.1.9.3 1.8.7 2.6a2 2 0 0 1-.5 2.1L7.1 9.9a16 16 0 0 0 6 6l1.5-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.7A2 2 0 0 1 22 16.9z"/></svg>
+            {{ site_settings.phone }}
+          </a>
+        {% endif %}
+        {% if site_settings.email %}
+          <a class="contact-modal__chip" href="mailto:{{ site_settings.email }}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+            {{ site_settings.email }}
+          </a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="contact-modal__body" id="contact-modal-form-root">
+      {% include "partials/contact_form.html" with form_prefix="modal" form_root_id="contact-modal-form-root" %}
+    </div>
+  </div>
+</div>

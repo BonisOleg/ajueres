@@ -1,0 +1,192 @@
+/* About — static paper cards, no scroll stack animation. */
+
+.about-main {
+  padding-bottom: clamp(40px, 5vw, 72px);
+}
+
+.about-stack {
+  --about-stack-max: min(720px, 100%);
+  --paper: #fcfcfa;
+  position: relative;
+  width: 100%;
+  max-width: var(--about-stack-max);
+  margin: 0 auto;
+  padding: 4px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.about-sheet {
+  position: relative;
+  margin: 0;
+}
+
+.about-sheet__paper {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 22px;
+  background-color: var(--paper);
+  border: 1px solid rgba(30, 36, 48, 0.08);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.92) inset,
+    0 18px 40px -28px rgba(20, 36, 64, 0.28),
+    0 2px 10px rgba(20, 36, 64, 0.05);
+}
+
+.about-sheet__paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.26;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.92 0 0 0 0 0.92 0 0 0 0 0.9 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: multiply;
+}
+
+.about-sheet__paper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.14) 30%,
+    transparent 58%
+  );
+}
+
+.about-sheet__body {
+  position: relative;
+  z-index: 1;
+  padding: clamp(22px, 3.4vw, 40px) clamp(18px, 3.2vw, 36px);
+}
+
+.about-sheet__title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 14px;
+  text-wrap: balance;
+}
+
+.about-sheet__text {
+  font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
+  line-height: 1.65;
+  color: #3d4757;
+}
+
+.about-sheet__text p {
+  margin: 0 0 0.9em;
+}
+
+.about-sheet__text p:last-child {
+  margin-bottom: 0;
+}
+
+.about-sheet__text ul,
+.about-sheet__text ol {
+  margin: 0.4em 0 1em;
+  padding-left: 1.2em;
+}
+
+.about-sheet__text li + li {
+  margin-top: 0.35em;
+}
+
+.about-sheet--history .about-sheet__title,
+.about-sheet--about .about-sheet__title {
+  color: color-mix(in srgb, var(--c-coral) 72%, var(--ink));
+}
+
+.about-sheet--market .about-sheet__title {
+  color: color-mix(in srgb, var(--c-purple) 65%, var(--ink));
+}
+
+.about-sheet--mission .about-sheet__title {
+  color: color-mix(in srgb, var(--c-green) 55%, var(--ink));
+}
+
+.about-sheet--vision .about-sheet__title {
+  color: color-mix(in srgb, var(--c-blue) 55%, var(--ink));
+}
+
+.about-cta {
+  display: flex;
+  justify-content: center;
+  margin: clamp(8px, 2vw, 20px) auto clamp(28px, 4vw, 48px);
+  max-width: var(--about-stack-max, 720px);
+}
+
+.about-cta__btn {
+  min-width: min(280px, 100%);
+}
+
+.contacts-chip--amber {
+  background: var(--t-amber);
+}
+
+.contacts-chip--amber:hover,
+.contacts-chip--amber:focus-visible {
+  box-shadow: 0 14px 28px -18px rgba(247, 147, 21, 0.55);
+}
+
+.contacts-chip--amber .contacts-chip__icon {
+  background: var(--c-amber);
+}
+
+.contacts-chip--amber .contacts-chip__label {
+  color: #9a5a0a;
+}
+
+.about-main .contacts-chip [data-counter],
+.about-main .contacts-chip__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.about-main .contacts-chip .contacts-chip__label {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+@media (min-width: 720px) {
+  .about-main .contacts-chips {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .about-main .contacts-chips {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .about-stack {
+    --about-stack-max: 760px;
+  }
+
+  .about-sheet__paper {
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 899px) {
+  .about-sheet__paper {
+    border-radius: 18px;
+  }
+}

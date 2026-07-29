@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load i18n static ajeres_tags %}
+
+{% block title %}{% trans 'Контакты' %} — AJERES{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/contacts.css' %}">
+<link rel="stylesheet" href="{% static 'css/contacts-2.css' %}">
+{% endblock %}
+
+{% block content %}
+{% block_text blocks "title" "Свяжитесь с нами" as contacts_title %}
+
+<section class="contacts-hero" aria-labelledby="contacts-hero-title">
+  <div class="contacts-hero__bg" aria-hidden="true"></div>
+  <div class="contacts-hero__fade" aria-hidden="true"></div>
+  <div class="contacts-hero__inner reveal">
+    {% include "includes/breadcrumbs.html" with page="contacts" %}
+    <h1 class="contacts-hero__title" id="contacts-hero-title">
+      {% if contacts_title == "Свяжитесь с нами" %}
+        {% trans "Свяжитесь" %} <em>{% trans "с нами" %}</em>
+      {% else %}
+        {{ contacts_title }}
+      {% endif %}
+    </h1>
+    <p class="contacts-hero__lead">
+      {% block_text blocks "intro" "Ответим на вопросы, пришлём прайс и подберём ассортимент под ваш формат бизнеса. Работаем с магазинами, HoReCa и дистрибьюторами." %}
+    </p>
+  </div>
+</section>
+
+<section class="contacts-main">
+  <div class="contacts-split">
+    <aside class="contacts-coop reveal" aria-labelledby="contacts-coop-title">
+      <p class="contacts-coop__eyebrow">{% block_text blocks "partners_title" "Сотрудничество" %}</p>
+      {% if offers %}
+        {% for offer in offers %}
+          <h2 class="contacts-coop__title" {% if forloop.first %}id="contacts-coop-title"{% endif %}>{{ offer.title }}</h2>
+          <div class="contacts-coop__text">{{ offer.text|linebreaks }}</div>
+        {% endfor %}
+      {% else %}
+        <h2 class="contacts-coop__title" id="contacts-coop-title">
+          {% trans 'Для торговых сетей, дистрибьюторов и HoReCa' %}
+        </h2>
+        <p class="contacts-coop__text">
+          {% trans 'Компания ООО «AJERES» предлагает широкий ассортимент качественных продуктов питания от международных производителей.' %}
+        </p>
+      {% endif %}
+    </aside>
+
+    <div class="contacts-request contacts-request--compact reveal" id="request">
+      <h2 class="contacts-request__title">{% block_text blocks "form_title" "Форма заявки" %}</h2>
+      <p class="contacts-request__lead">{% block_text blocks "form_lead" "Заполните форму — свяжемся с вами." %}</p>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="form-success">
+            <span class="form-success__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 7L9.5 17.5 4 12"/></svg>
+            </span>
+            <h3>{% trans 'Запрос отправлен!' %}</h3>
+            <p>{{ message }}</p>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div id="contact-form-root">
+          {% include "partials/contact_form.html" with form_compact=True %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="contacts-chips reveal" role="list">
+    {% if site_settings.address %}
+      <a
+        class="contacts-chip contacts-chip--coral"
+        href="https://maps.google.com/?q={{ site_settings.address|urlencode }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        role="listitem"
+      >
+        <span class="contacts-chip__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+        </span>
+        <span class="contacts-chip__body">
+          <span class="contacts-chip__label">{% trans 'Адрес' %}</span>
+          <span class="contacts-chip__value">{{ site_settings.address }}</span>
+        </span>
+      </a>
+    {% endif %}
+
+    {% if site_settings.phone %}
+      <a
+        class="contacts-chip contacts-chip--green"
+        href="tel:{{ site_settings.phone|cut:' '|cut:'('|cut:')'|cut:'-' }}"
+        role="listitem"
+      >
+        <span class="contacts-chip__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L20 13l-1 4-4 2A16 16 0 0 1 3 8z"/></svg>
+        </span>
+        <span class="contacts-chip__body">
+          <span class="contacts-chip__label">{% trans 'Телефон' %}</span>
+          <span class="contacts-chip__value">{{ site_settings.phone }}</span>
+        </span>
+      </a>
+    {% endif %}
+
+    {% if site_settings.email %}
+      <a
+        class="contacts-chip contacts-chip--blue"
+        href="mailto:{{ site_settings.email }}"
+        role="listitem"
+      >
+        <span class="contacts-chip__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
+        </span>
+        <span class="contacts-chip__body">
+          <span class="contacts-chip__label">{% trans 'Почта' %}</span>
+          <span class="contacts-chip__value">{{ site_settings.email }}</span>
+        </span>
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% if site_settings.address %}
+<section class="contacts-map reveal" aria-labelledby="contacts-map-title">
+  <div class="contacts-map__frame">
+    <div class="contacts-map__head">
+      <h2 class="contacts-map__title" id="contacts-map-title">
+        <span class="contacts-map__dot" aria-hidden="true"></span>
+        {% block_text blocks "map_title" "Наш склад в Ташкенте" %}
+      </h2>
+      <a
+        class="contacts-map__link"
+        href="https://maps.google.com/?q={{ site_settings.address|urlencode }}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {% trans 'Построить маршрут' %}
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <iframe
+      class="contacts-map__iframe"
+      title="{% trans 'Карта AJERES' %}"
+      src="https://maps.google.com/maps?q={{ site_settings.address|urlencode }}&hl={{ LANGUAGE_CODE|default:'ru' }}&z=15&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+    ></iframe>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

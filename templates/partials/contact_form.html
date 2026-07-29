@@ -1,0 +1,95 @@
+{% load i18n %}
+<form class="form"
+      method="post"
+      action="{% url 'contacts' %}"
+      hx-post="{% url 'contacts' %}"
+      hx-target="#{{ form_root_id|default:'contact-form-root' }}"
+      hx-swap="innerHTML">
+  {% csrf_token %}
+
+  {% if form_errors.non_field %}
+    <p class="form__error">{{ form_errors.non_field }}</p>
+  {% endif %}
+
+  <div class="form__honeypot" aria-hidden="true">
+    <label for="{% if form_prefix %}id_{{ form_prefix }}_website{% else %}id_website{% endif %}">Website</label>
+    <input type="text" name="website" id="{% if form_prefix %}id_{{ form_prefix }}_website{% else %}id_website{% endif %}" tabindex="-1" autocomplete="off">
+  </div>
+
+  <div class="form__field">
+    <label class="form__label" for="{% if form_prefix %}id_{{ form_prefix }}_purpose{% else %}id_purpose{% endif %}">
+      {% trans 'С какой целью обращаетесь' %} <span class="req" aria-hidden="true">*</span>
+    </label>
+    <textarea
+      class="form__textarea"
+      name="purpose"
+      id="{% if form_prefix %}id_{{ form_prefix }}_purpose{% else %}id_purpose{% endif %}"
+      required
+      maxlength="2000"
+      rows="{% if form_compact %}2{% else %}3{% endif %}"
+      placeholder="{% trans 'Например: интересует оптовый прайс на соусы и лапшу' %}"
+    >{{ form_data.purpose }}</textarea>
+    {% if form_errors.purpose %}<p class="form__error">{{ form_errors.purpose }}</p>{% endif %}
+  </div>
+
+  <div class="form__field">
+    <label class="form__label" for="{% if form_prefix %}id_{{ form_prefix }}_name{% else %}id_name{% endif %}">
+      {% trans 'Имя' %} <span class="req" aria-hidden="true">*</span>
+    </label>
+    <input
+      class="form__input"
+      type="text"
+      name="name"
+      id="{% if form_prefix %}id_{{ form_prefix }}_name{% else %}id_name{% endif %}"
+      required
+      maxlength="255"
+      placeholder="{% trans 'Ваше имя' %}"
+      value="{{ form_data.name }}"
+    >
+    {% if form_errors.name %}<p class="form__error">{{ form_errors.name }}</p>{% endif %}
+  </div>
+
+  <div class="form__row">
+    <div class="form__field">
+      <label class="form__label" for="{% if form_prefix %}id_{{ form_prefix }}_phone{% else %}id_phone{% endif %}">
+        {% trans 'Телефон' %} <span class="req" aria-hidden="true">*</span>
+      </label>
+      <input
+        class="form__input"
+        type="tel"
+        name="phone"
+        id="{% if form_prefix %}id_{{ form_prefix }}_phone{% else %}id_phone{% endif %}"
+        required
+        maxlength="64"
+        value="{{ form_data.phone }}"
+        inputmode="tel"
+        autocomplete="tel"
+        placeholder="+998 __ ___ __ __"
+      >
+      {% if form_errors.phone %}<p class="form__error">{{ form_errors.phone }}</p>{% endif %}
+    </div>
+
+    <div class="form__field">
+      <label class="form__label" for="{% if form_prefix %}id_{{ form_prefix }}_email{% else %}id_email{% endif %}">
+        {% trans 'Электронная почта' %} <span class="req" aria-hidden="true">*</span>
+      </label>
+      <input
+        class="form__input"
+        type="email"
+        name="email"
+        id="{% if form_prefix %}id_{{ form_prefix }}_email{% else %}id_email{% endif %}"
+        required
+        maxlength="254"
+        value="{{ form_data.email }}"
+        autocomplete="email"
+        placeholder="you@company.com"
+      >
+      {% if form_errors.email %}<p class="form__error">{{ form_errors.email }}</p>{% endif %}
+    </div>
+  </div>
+
+  <button class="btn btn--primary btn--block form__submit" type="submit">
+    {% trans 'Отправить' %}
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </button>
+</form>

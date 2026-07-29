@@ -1,0 +1,345 @@
+/* Mobile burger — A compact sheet + B right card + C hero atmosphere + D two blocks */
+
+.nav-mobile {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: block;
+  pointer-events: none;
+}
+
+.nav-mobile.is-open {
+  pointer-events: auto;
+}
+
+.nav-mobile__backdrop {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(8, 14, 28, 0.52);
+  opacity: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.32s ease;
+}
+
+.nav-mobile.is-open .nav-mobile__backdrop {
+  opacity: 1;
+}
+
+.nav-mobile__sheet {
+  position: absolute;
+  top: max(10px, env(safe-area-inset-top, 0px));
+  right: max(10px, env(safe-area-inset-right, 0px));
+  bottom: max(10px, env(safe-area-inset-bottom, 0px));
+  left: auto;
+  width: min(86vw, 380px);
+  max-width: calc(100% - 20px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 28px 18px 18px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: linear-gradient(
+    180deg,
+    rgba(206, 232, 246, 0.96) 0%,
+    rgba(220, 236, 242, 0.94) 28%,
+    rgba(228, 232, 224, 0.94) 55%,
+    rgba(220, 216, 196, 0.96) 78%,
+    rgba(212, 206, 184, 0.97) 100%
+  );
+  -webkit-backdrop-filter: blur(18px) saturate(1.1);
+  backdrop-filter: blur(18px) saturate(1.1);
+  box-shadow:
+    0 28px 64px -28px rgba(8, 14, 28, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  transform: translate3d(110%, 0, 0);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-mobile.is-open .nav-mobile__sheet {
+  transform: translate3d(0, 0, 0);
+}
+
+.nav-mobile__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.nav-mobile__sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    #cfe8f6 0%,
+    #d7edf7 18%,
+    #e0f0f5 34%,
+    #e4ece8 50%,
+    #e2e4d6 66%,
+    #d9d4c0 82%,
+    #d0cbb6 100%
+  );
+}
+
+.nav-mobile__land {
+  position: absolute;
+  inset: 0;
+  /* Менший zoom ніж cover — купол + портал + більше фасаду */
+  background: url("../img/hero-samarkand.png") 94% 48% / auto 58% no-repeat;
+  opacity: 0.28;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 22%,
+    #000 72%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 22%,
+    #000 72%,
+    transparent 100%
+  );
+}
+
+.nav-mobile__mist {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(190, 224, 242, 0.88) 0%,
+    rgba(206, 230, 242, 0.72) 18%,
+    rgba(220, 234, 238, 0.62) 36%,
+    rgba(226, 230, 220, 0.58) 52%,
+    rgba(220, 216, 196, 0.7) 70%,
+    rgba(210, 204, 182, 0.84) 86%,
+    rgba(204, 198, 174, 0.92) 100%
+  );
+}
+
+.nav-mobile__top,
+.nav-mobile__body {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-mobile__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 0 0 auto;
+  padding: 16px 16px 10px;
+}
+
+.nav-mobile__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.nav-mobile__close {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(27, 23, 18, 0.1);
+  border-radius: 14px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-mobile__close:active {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(27, 23, 18, 0.18);
+}
+
+.nav-mobile__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 4px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-mobile__block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-mobile__block--contact {
+  margin-top: auto;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(224, 220, 200, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  -webkit-backdrop-filter: blur(10px) saturate(1.05);
+  backdrop-filter: blur(10px) saturate(1.05);
+}
+
+.nav-mobile__label {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5a6575;
+}
+
+.nav-mobile__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-mobile__panel>a {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(27, 23, 18, 0.06);
+  background: rgba(228, 240, 248, 0.55);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  color: var(--ink);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-mobile__panel>a:active {
+  transform: scale(0.98);
+}
+
+.nav-mobile__panel>a.is-active,
+.nav-mobile__panel>a:hover {
+  color: var(--c-coral);
+  border-color: color-mix(in srgb, var(--c-coral) 35%, transparent);
+  background: color-mix(in srgb, var(--c-coral) 10%, #fff);
+}
+
+.nav-mobile__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.nav-mobile__contact {
+  display: block;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1.35;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-mobile__contact--phone {
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+}
+
+.nav-mobile__contact--address {
+  font-weight: 500;
+  font-size: 0.8125rem;
+  color: #3d4757;
+  max-width: none;
+}
+
+.nav-mobile__cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 8px;
+  padding: 14px 18px;
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: var(--radius-btn);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, transparent 45%),
+    linear-gradient(145deg, #2a4f8f 0%, #163a72 48%, #0e1b33 100%);
+  box-shadow:
+    0 14px 32px rgba(8, 14, 28, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.nav-mobile__cta:active {
+  transform: translateY(1px);
+}
+
+.nav-mobile__cta:hover {
+  color: #fff;
+}
+
+body.is-nav-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+@media (max-width: 379px) {
+  .nav-mobile__sheet {
+    width: calc(100% - 16px);
+    right: 8px;
+    top: max(8px, env(safe-area-inset-top, 0px));
+    bottom: max(8px, env(safe-area-inset-bottom, 0px));
+    border-radius: 22px 14px 14px 22px;
+  }
+
+  .nav-mobile__panel>a {
+    min-height: 48px;
+    padding: 10px 12px;
+    font-size: 0.875rem;
+  }
+
+  .nav-mobile__contact--phone {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .nav-mobile__backdrop,
+  .nav-mobile__sheet {
+    transition: none;
+  }
+}

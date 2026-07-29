@@ -1,0 +1,69 @@
+{% load i18n %}
+
+{% if page_obj.paginator.count == 0 %}
+  <div class="empty-state">
+    <p>{% trans 'Ничего не найдено' %}</p>
+    <p><a class="btn btn--ghost" href="{% url 'products' %}">{% trans 'Сбросить' %}</a></p>
+  </div>
+{% else %}
+  {% if page_obj.paginator.num_pages > 1 %}
+    <p class="pagination__meta">
+      {% blocktrans with start=page_obj.start_index end=page_obj.end_index total=page_obj.paginator.count %}Показано {{ start }}–{{ end }} из {{ total }}{% endblocktrans %}
+    </p>
+  {% endif %}
+
+  {% for brand, products in grouped_products.items %}
+    <section class="product-group">
+      <h2 class="product-group__title">{{ brand.name }}</h2>
+      <div class="product-grid">
+        {% for product in products %}
+          <article class="product-card">
+            <div class="product-card__media">
+              {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy" width="300" height="300">
+              {% endif %}
+            </div>
+            <div class="product-card__body">
+              <div class="product-card__brand">{{ brand.name }}</div>
+              <h3 class="product-card__name">{{ product.name }}</h3>
+              <div class="product-card__package">{{ product.package }}</div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+
+  {% if page_obj.paginator.num_pages > 1 %}
+    <nav class="pagination" aria-label="{% trans 'Страницы' %}">
+      {% if page_obj.has_previous %}
+        <a href="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}"
+           hx-get="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}"
+           hx-target="#catalog-results"
+           hx-push-url="true">‹</a>
+      {% else %}
+        <span class="is-disabled">‹</span>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if num == page_obj.number %}
+          <span class="is-current">{{ num }}</span>
+        {% elif num >= page_obj.number|add:'-2' and num <= page_obj.number|add:'2' %}
+          <a href="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ num }}"
+             hx-get="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ num }}"
+             hx-target="#catalog-results"
+             hx-push-url="true">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a href="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ page_obj.next_page_number }}"
+           hx-get="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ page_obj.next_page_number }}"
+           hx-target="#catalog-results"
+           hx-push-url="true">›</a>
+      {% else %}
+        <span class="is-disabled">›</span>
+      {% endif %}
+    </nav>
+  {% endif %}
+{% endif %}

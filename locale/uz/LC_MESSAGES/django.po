@@ -1,0 +1,210 @@
+# AJERES Uzbek translations
+msgid ""
+msgstr ""
+"Project-Id-Version: AJERES 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Главная"
+msgstr "Bosh sahifa"
+
+msgid "Продукты"
+msgstr "Mahsulotlar"
+
+msgid "О компании"
+msgstr "Kompaniya haqida"
+
+msgid "Контакты"
+msgstr "Aloqa"
+
+msgid "Слишком много заявок. Попробуйте позже."
+msgstr "So‘rovlar juda ko‘p. Keyinroq urinib ko‘ring."
+
+msgid "Заявка отправлена. Мы свяжемся с вами."
+msgstr "So‘rov yuborildi. Tez orada bog‘lanamiz."
+
+msgid "Русский"
+msgstr "Ruscha"
+
+msgid "O'zbekcha"
+msgstr "Oʻzbekcha"
+
+msgid "English"
+msgstr "Inglizcha"
+
+msgid "Дистрибьютор продуктов питания в Узбекистане"
+msgstr "O‘zbekistonda oziq-ovqat distribyutori"
+
+msgid "Назад"
+msgstr "Orqaga"
+
+msgid "Далее"
+msgstr "Keyingi"
+
+msgid "Хлебные крошки"
+msgstr "Navigatsiya izi"
+
+msgid "Политика приватности"
+msgstr "Maxfiylik siyosati"
+
+msgid "Закрыть"
+msgstr "Yopish"
+
+msgid "Связаться с нами"
+msgstr "Biz bilan bog‘laning"
+
+msgid "Оставьте заявку — мы ответим и подготовим коммерческое предложение."
+msgstr "So‘rov qoldiring — javob beramiz va tijorat taklifini tayyorlaymiz."
+
+msgid ""
+"Дистрибьютор азиатской и специализированной бакалеи для магазинов, HoReCa и "
+"партнёров."
+msgstr ""
+"Do‘konlar, HoReCa va hamkorlar uchun Osiyo va maxsus bakalya distribyutori."
+
+msgid "Меню"
+msgstr "Menyu"
+
+msgid "Навигация"
+msgstr "Navigatsiya"
+
+msgid "Все права защищены."
+msgstr "Barcha huquqlar himoyalangan."
+
+msgid "Политика конфиденциальности"
+msgstr "Maxfiylik siyosati"
+
+msgid "Основная навигация"
+msgstr "Asosiy navigatsiya"
+
+msgid "Категории продуктов"
+msgstr "Mahsulot kategoriyalari"
+
+msgid "Смотреть весь каталог"
+msgstr "Butun katalogni ko‘rish"
+
+msgid "Связаться"
+msgstr "Bog‘lanish"
+
+msgid "Закрыть меню"
+msgstr "Menyuni yopish"
+
+msgid "Контент скоро появится."
+msgstr "Kontent tez orada paydo bo‘ladi."
+
+msgid "Дистрибьютор продуктов питания"
+msgstr "Oziq-ovqat distribyutori"
+
+msgid "Каталог AJERES"
+msgstr "AJERES katalogi"
+
+msgid "Все товары"
+msgstr "Barcha mahsulotlar"
+
+msgid "Истории партнёров"
+msgstr "Hamkorlar hikoyalari"
+
+msgid "Начнём сотрудничество?"
+msgstr "Hamkorlikni boshlaymizmi?"
+
+msgid "Пришлём актуальный прайс и подберём ассортимент под ваш формат бизнеса."
+msgstr "Aktual narxlar ro‘yxatini yuboramiz va assortimentni biznesingizga moslaymiz."
+
+msgid "Написать на почту"
+msgstr "Email yozish"
+
+msgid "Наш каталог"
+msgstr "Bizning katalog"
+
+msgid ""
+"Фильтруйте по категориям или ищите по названию. Под каталогом — бренды-"
+"производители."
+msgstr ""
+"Kategoriya bo‘yicha filtrlang yoki nom bo‘yicha qidiring. Katalog ostida — brendlar."
+
+msgid "Категории"
+msgstr "Kategoriyalar"
+
+msgid "Все"
+msgstr "Hammasi"
+
+msgid "Поиск"
+msgstr "Qidiruv"
+
+msgid "Поиск товаров…"
+msgstr "Mahsulotlarni qidirish…"
+
+msgid "Наши бренды"
+msgstr "Bizning brendlar"
+
+msgid "Производители, которые мы представляем"
+msgstr "Biz vakili bo‘lgan ishlab chiqaruvchilar"
+
+msgid "Смотреть товары"
+msgstr "Mahsulotlarni ko‘rish"
+
+msgid "Ничего не найдено"
+msgstr "Hech narsa topilmadi"
+
+msgid "Сбросить"
+msgstr "Tozalash"
+
+msgid "Показано %(start)s–%(end)s из %(total)s"
+msgstr "%(total)s dan %(start)s–%(end)s ko‘rsatilmoqda"
+
+msgid "Страницы"
+msgstr "Sahifalar"
+
+msgid "С какой целью обращаетесь"
+msgstr "Murojaat maqsadi"
+
+msgid "Имя"
+msgstr "Ism"
+
+msgid "Телефон"
+msgstr "Telefon"
+
+msgid "Электронная почта"
+msgstr "Elektron pochta"
+
+msgid "Отправить"
+msgstr "Yuborish"
+
+msgid "Заявка отправлена"
+msgstr "So‘rov yuborildi"
+
+msgid "Мы свяжемся с вами в ближайшее время."
+msgstr "Tez orada siz bilan bog‘lanamiz."
+
+msgid "Дистрибьютор с 2018 года"
+msgstr "2018-yildan beri distribyutor"
+
+msgid "Мы выводим лучшие бренды на рынок Узбекистана"
+msgstr "Eng yaxshi brendlarni O‘zbekiston bozoriga olib chiqamiz"
+
+msgid ""
+"ООО «AJERES» — современная дистрибьюторская компания: импорт, логистика, "
+"продажи, маркетинг и развитие брендов."
+msgstr ""
+"«AJERES» MChJ — zamonaviy distribyutor kompaniya: import, logistika, savdo, "
+"marketing va brend rivojlantirish."
+
+msgid "Наши услуги"
+msgstr "Bizning xizmatlar"
+
+msgid "Наши преимущества"
+msgstr "Afzalliklarimiz"
+
+msgid ""
+"Мы гордимся сотрудничеством с международными производителями, которые "
+"доверили нам развитие своих брендов на рынке Узбекистана."
+msgstr ""
+"O‘zbekiston bozorida brendlarini rivojlantirishni ishonib topshirgan xalqaro "
+"ishlab chiqaruvchilar bilan hamkorlikdan faxrlanamiz."
+
+msgid "Язык"
+msgstr "Til"

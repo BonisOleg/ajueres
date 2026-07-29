@@ -1,0 +1,281 @@
+/* Contacts page — hero, split, chips. Mobile-first, iOS Safari safe. */
+
+.contacts-hero {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+
+.contacts-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("../img/contacts-hero.png") center 42% / cover no-repeat;
+}
+
+.contacts-hero__fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  height: 48%;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0), #fff 90%);
+}
+
+.contacts-hero__inner {
+  position: relative;
+  z-index: 2;
+  /* Match .site-header__wrap so crumbs sit under capsule / logo */
+  max-width: 1160px;
+  margin: 0 auto;
+  text-align: center;
+  padding:
+    calc(var(--header-h) + var(--safe-t) + clamp(16px, 2.5vh, 28px))
+    max(clamp(12px, 3vw, 24px), env(safe-area-inset-right, 0px))
+    clamp(28px, 4vh, 48px)
+    max(clamp(12px, 3vw, 24px), env(safe-area-inset-left, 0px));
+}
+
+/* Breadcrumbs: under header logo (capsule pad-left 20px) */
+.contacts-hero__inner > .breadcrumbs {
+  width: 100%;
+  margin: 0 0 14px;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.contacts-hero__inner > .breadcrumbs .breadcrumbs__list {
+  justify-content: flex-start;
+}
+
+.contacts-hero__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: #1b2430;
+  text-wrap: balance;
+}
+
+.contacts-hero__title em {
+  font-style: italic;
+  color: var(--c-coral);
+}
+
+.contacts-hero__lead {
+  margin: 12px auto 0;
+  max-width: min(72ch, 920px);
+  width: 100%;
+  font-size: clamp(0.875rem, 1.2vw, 1rem);
+  line-height: 1.45;
+  color: #3d4757;
+  text-wrap: pretty;
+}
+
+.contacts-main {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding:
+    clamp(8px, 1.5vw, 20px)
+    max(clamp(18px, 4vw, 42px), env(safe-area-inset-left, 0px))
+    clamp(16px, 2.5vw, 28px)
+    max(clamp(18px, 4vw, 42px), env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vw, 28px);
+}
+
+.contacts-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(18px, 2.5vw, 28px);
+  align-items: start;
+}
+
+.contacts-coop {
+  min-width: 0;
+  padding: clamp(18px, 2.2vw, 28px);
+  border-radius: 22px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+}
+
+.contacts-coop__eyebrow {
+  margin: 0 0 10px;
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-purple);
+}
+
+.contacts-coop__title {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.contacts-coop__text {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.contacts-coop__text + .contacts-coop__title {
+  margin-top: 22px;
+}
+
+.contacts-coop__text p {
+  margin: 0 0 0.75em;
+}
+
+.contacts-coop__text p:last-child {
+  margin-bottom: 0;
+}
+
+.contacts-chips {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.contacts-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.contacts-chip:hover,
+.contacts-chip:focus-visible {
+  color: var(--ink);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.contacts-chip--coral {
+  background: var(--t-coral);
+}
+
+.contacts-chip--coral:hover,
+.contacts-chip--coral:focus-visible {
+  box-shadow: 0 14px 28px -18px rgba(255, 90, 54, 0.55);
+}
+
+.contacts-chip--green {
+  background: var(--t-green);
+}
+
+.contacts-chip--green:hover,
+.contacts-chip--green:focus-visible {
+  box-shadow: 0 14px 28px -18px rgba(31, 169, 104, 0.55);
+}
+
+.contacts-chip--blue {
+  background: var(--t-blue);
+}
+
+.contacts-chip--blue:hover,
+.contacts-chip--blue:focus-visible {
+  box-shadow: 0 14px 28px -18px rgba(62, 123, 250, 0.55);
+}
+
+.contacts-chip__icon {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.contacts-chip--coral .contacts-chip__icon {
+  background: var(--c-coral);
+}
+
+.contacts-chip--green .contacts-chip__icon {
+  background: var(--c-green);
+}
+
+.contacts-chip--blue .contacts-chip__icon {
+  background: var(--c-blue);
+}
+
+.contacts-chip__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.contacts-chip__label {
+  font-weight: 700;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contacts-chip--coral .contacts-chip__label {
+  color: #a24127;
+}
+
+.contacts-chip--green .contacts-chip__label {
+  color: #166b45;
+}
+
+.contacts-chip--blue .contacts-chip__label {
+  color: #2b56b0;
+}
+
+.contacts-chip__value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+@media (min-width: 720px) {
+  .contacts-chips {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (min-width: 960px) {
+  .contacts-split {
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: stretch;
+  }
+
+  .contacts-coop {
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contacts-chip {
+    transition: none;
+  }
+
+  .contacts-chip:hover,
+  .contacts-chip:focus-visible {
+    transform: none;
+  }
+}

@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Продукты' %} — AJERES{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/contacts.css' %}">
+<link rel="stylesheet" href="{% static 'css/products.css' %}">
+<link rel="stylesheet" href="{% static 'css/products-2.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/catalog-filters.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+<section class="contacts-hero catalog-hero" aria-labelledby="catalog-hero-title">
+  <div class="contacts-hero__bg catalog-hero__bg" aria-hidden="true"></div>
+  <div class="contacts-hero__fade" aria-hidden="true"></div>
+  <div class="contacts-hero__inner">
+    {% include "includes/breadcrumbs.html" with page="products" %}
+    <h1 class="sr-only" id="catalog-hero-title">{% trans 'Каталог' %}</h1>
+  </div>
+</section>
+
+<section class="catalog-stage">
+  <div class="catalog-stage__glow" aria-hidden="true"></div>
+  <div class="container catalog-stage__wrap">
+    <div class="catalog-panel">
+      <div class="catalog-panel__tools">
+        <div class="catalog-filters" data-catalog-filters>
+          <button
+            type="button"
+            class="catalog-filter-btn"
+            data-catalog-filters-open
+            aria-expanded="false"
+            aria-controls="catalog-filters-panel"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M4 6h16M7 12h10M10 18h4"/>
+            </svg>
+            {% trans 'Фильтр' %}
+          </button>
+
+          <div class="catalog-filters__backdrop" data-catalog-filters-close hidden></div>
+
+          <div
+            class="catalog-filters__panel"
+            id="catalog-filters-panel"
+            role="dialog"
+            aria-labelledby="catalog-filters-title"
+          >
+            <div class="catalog-filters__head">
+              <h2 class="catalog-filters__title" id="catalog-filters-title">{% trans 'Категории' %}</h2>
+              <button
+                type="button"
+                class="catalog-filters__close"
+                data-catalog-filters-close
+                aria-label="{% trans 'Закрыть' %}"
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6L6 18"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="chips catalog-chips" role="tablist" aria-label="{% trans 'Категории' %}">
+              <a class="chip{% if not active_category %} is-active{% endif %}"
+                 href="{% url 'products' %}"
+                 hx-get="{% url 'products' %}"
+                 hx-target="#catalog-results"
+                 hx-push-url="true"
+                 hx-indicator="#catalog-results"
+                 data-catalog-filters-close>{% trans 'Все' %}</a>
+              {% for cat in categories %}
+                <a class="chip{% if active_category == cat.slug %} is-active{% endif %}"
+                   href="{% url 'products' %}?category={{ cat.slug }}"
+                   hx-get="{% url 'products' %}?category={{ cat.slug }}"
+                   hx-target="#catalog-results"
+                   hx-push-url="true"
+                   data-catalog-filters-close>{% firstof cat.name cat.slug %}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <form class="catalog-search"
+              method="get"
+              action="{% url 'products' %}"
+              hx-get="{% url 'products' %}"
+              hx-trigger="keyup changed delay:300ms from:input[name=q], search"
+              hx-target="#catalog-results"
+              hx-push-url="true"
+              hx-include="[name='category'],[name='brand']">
+          {% if active_category %}<input type="hidden" name="category" value="{{ active_category }}">{% endif %}
+          {% if active_brand %}<input type="hidden" name="brand" value="{{ active_brand }}">{% endif %}
+          <span class="catalog-search__icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          </span>
+          <label class="sr-only" for="catalog-q">{% trans 'Поиск' %}</label>
+          <input id="catalog-q" type="search" name="q" value="{{ search_q }}" placeholder="{% trans 'Поиск товаров…' %}" autocomplete="off">
+        </form>
+      </div>
+
+      <div id="catalog-results" class="catalog-panel__results">
+        {% include "partials/catalog_results.html" %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if brands_showcase %}
+<section class="catalog-brands">
+  <div class="catalog-brands__head">
+    <h2 class="heading heading--lg">{% trans 'Наши бренды' %}</h2>
+    <p class="catalog-brands__sub">{% trans 'Производители, которые мы представляем' %}</p>
+  </div>
+  <div class="catalog-brands__mask">
+    <div class="catalog-brands__track">
+      {% for brand in brands_showcase %}
+        <a class="catalog-brands__card" href="{% url 'products' %}?brand={{ brand.slug }}">
+          {% if brand.logo %}
+            <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" loading="lazy" width="180" height="100">
+          {% else %}
+            <span>{{ brand.name }}</span>
+          {% endif %}
+        </a>
+      {% endfor %}
+      {% for brand in brands_showcase %}
+        <a class="catalog-brands__card" href="{% url 'products' %}?brand={{ brand.slug }}" aria-hidden="true" tabindex="-1">
+          {% if brand.logo %}
+            <img src="{{ brand.logo.url }}" alt="" loading="lazy" width="180" height="100">
+          {% else %}
+            <span>{{ brand.name }}</span>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
