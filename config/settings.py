@@ -8,7 +8,6 @@ from pathlib import Path
 
 from csp.constants import NONE, SELF, UNSAFE_INLINE
 from django.core.management.utils import get_random_secret_key
-from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -20,7 +19,10 @@ DEBUG = os.environ.get('DEBUG', 'True').lower() in ('1', 'true', 'yes')
 
 ALLOWED_HOSTS = [
     h.strip()
-    for h in os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,testserver').split(',')
+    for h in os.environ.get(
+        'ALLOWED_HOSTS',
+        'localhost,127.0.0.1,testserver,.vercel.app',
+    ).split(',')
     if h.strip()
 ]
 
@@ -130,10 +132,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru'
 
+# Plain strings (not gettext_lazy): Vercel imports settings before django.setup().
 LANGUAGES = [
-    ('ru', _('Русский')),
-    ('uz', _("O'zbekcha")),
-    ('en', _('English')),
+    ('ru', 'Русский'),
+    ('uz', "O'zbekcha"),
+    ('en', 'English'),
 ]
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
