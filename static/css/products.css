@@ -360,6 +360,8 @@
   padding-bottom: 0;
   border-bottom: none;
   color: #1b2430;
+  font-style: normal;
+  font-synthesis: none;
 }
 
 .catalog-stage .product-grid {

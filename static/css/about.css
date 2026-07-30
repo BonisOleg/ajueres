@@ -78,6 +78,8 @@
   color: var(--ink);
   margin: 0 0 14px;
   text-wrap: balance;
+  font-style: normal;
+  font-synthesis: none;
 }
 
 .about-sheet__text {

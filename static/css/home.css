@@ -2,8 +2,7 @@
 
 .home-hero {
   position: relative;
-  overflow-x: clip;
-  overflow-y: visible;
+  overflow: visible;
   background: #e9f6fc;
   display: grid;
   grid-template-columns: 1fr;
@@ -134,11 +133,14 @@
   text-wrap: balance;
   max-width: 34ch;
   margin: 0;
+  font-style: normal;
+  font-synthesis: none;
 }
 
 .home-hero__title em {
   color: var(--c-coral);
-  font-style: italic;
+  font-style: normal;
+  font-synthesis: none;
 }
 
 .home-hero__lead {

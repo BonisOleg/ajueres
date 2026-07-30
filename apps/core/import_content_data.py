@@ -421,6 +421,7 @@ PRIVACY_DEFAULTS = {
 # Local files live in <project>/content/logos/ (supplier pack).
 BRAND_LOGOS_DIR = Path(__file__).resolve().parents[2] / 'content' / 'logos'
 RETAIL_LOGOS_DIR = BRAND_LOGOS_DIR / 'buyers'
+PRODUCT_IMAGES_DIR = Path(__file__).resolve().parents[2] / 'content' / 'products'
 
 BRANDS_SPEC = [
     ('sen-soy', 'Sen Soy', 'sensoy.jpg', 0, True),

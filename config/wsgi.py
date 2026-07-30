@@ -27,18 +27,22 @@ def _bootstrap_vercel_sqlite() -> None:
     if db_url.startswith('postgres'):
         return
 
-    db_path = Path('/tmp/ajeres.sqlite3')
-    marker = Path('/tmp/ajeres.bootstrapped')
-    if marker.exists() and db_path.exists() and db_path.stat().st_size > 0:
-        return
-
     from django.core.management import call_command
 
+    db_path = Path('/tmp/ajeres.sqlite3')
+    marker = Path('/tmp/ajeres.bootstrapped')
     media = Path('/tmp/ajeres-media')
     media.mkdir(parents=True, exist_ok=True)
-    call_command('migrate', interactive=False, verbosity=0)
+
+    needs_migrate = not (
+        marker.exists() and db_path.exists() and db_path.stat().st_size > 0
+    )
+    if needs_migrate:
+        call_command('migrate', interactive=False, verbosity=0)
+        marker.write_text('ok', encoding='utf-8')
+
+    # Always re-seed: idempotent, fills missing stats (e.g. 4th orb).
     call_command('seed_site', verbosity=0)
-    marker.write_text('ok', encoding='utf-8')
 
 
 try:

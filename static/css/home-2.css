@@ -71,23 +71,23 @@
 }
 
 .home-advantage__icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: var(--adv-color);
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
-  box-shadow: 0 8px 16px -8px var(--adv-color);
+  margin-bottom: 12px;
+  box-shadow: 0 8px 16px -10px var(--adv-shadow);
   overflow: hidden;
 }
 
 .home-advantage__icon img {
-  width: 22px;
-  height: 22px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  padding: 6px;
 }
 
 .home-advantage__title {
@@ -97,6 +97,8 @@
   letter-spacing: -0.02em;
   margin: 0 0 6px;
   line-height: 1.2;
+  font-style: normal;
+  font-synthesis: none;
 }
 
 .home-advantage__text {

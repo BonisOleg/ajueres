@@ -62,7 +62,8 @@
 }
 
 .contacts-hero__title em {
-  font-style: italic;
+  font-style: normal;
+  font-synthesis: none;
   color: var(--c-coral);
 }
 
@@ -230,6 +231,8 @@
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-style: normal;
+  font-synthesis: none;
 }
 
 .contacts-chip--coral .contacts-chip__label {

@@ -161,6 +161,17 @@ p {
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.06;
+  font-style: normal;
+  font-synthesis: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+em {
+  font-style: normal;
+  font-synthesis: none;
 }
 
 .heading--xl {

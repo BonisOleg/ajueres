@@ -204,6 +204,8 @@
   line-height: 1.2;
   color: #3d4757;
   max-width: 11ch;
+  font-style: normal;
+  font-synthesis: none;
 }
 
 .hero-stats__orb--1 {

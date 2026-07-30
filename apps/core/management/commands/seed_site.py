@@ -1,15 +1,20 @@
 """Idempotent seed: settings, CMS blocks, categories, brands, sample products."""
 
+from pathlib import Path
+
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 
 from apps.catalog.models import Brand, Category, Product
 from apps.catalog.selectors import invalidate_catalog_list_cache
 from apps.core.import_content_data import (
+    ADVANTAGE_ROWS,
     BRAND_LOGOS_DIR,
     BRANDS_SPEC,
+    PRODUCT_IMAGES_DIR,
     RETAIL_LOGOS_DIR,
     RETAIL_PARTNERS_SPEC,
+    STAT_ROWS,
 )
 from apps.core.models import (
     AboutSection,
@@ -23,13 +28,24 @@ from apps.core.models import (
 )
 from apps.core.selectors import invalidate_retail_partners_cache, invalidate_site_blocks_cache
 
-# Minimal 1x1 PNG
+# Minimal 1x1 PNG fallback only when no content file exists.
 _PNG = (
     b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01'
     b'\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00'
     b'\x00\x0cIDATx\x9cc\xf8\x0f\x00\x00\x01\x01\x00\x05\x18'
     b'\xd8N\x00\x00\x00\x00IEND\xaeB`\x82'
 )
+
+# Seed sample slug → content/products file slug (Cyrillic catalog names).
+_PRODUCT_IMAGE_ALIASES = {
+    'sous-chili-sladkiy-235': 'sen-soy-соус-сладкий-чили-235-гр',
+    'sous-chili-zhguchiy-235': 'sen-soy-соус-жгучий-чили-235-гр',
+    'sous-sriracha-310': 'sen-soy-соус-шрирача-310-гр',
+    'lapsha-somen-300': 'sen-soy-лапша-somen-300-гр',
+    'lapsha-udon-300': 'sen-soy-пшеничная-лапша-udon-300-гр',
+    'sushi-nori-28': 'sen-soy-суши-нори-28-гр',
+    'chips-nori-original': 'sen-soy-чипсы-нори-original-45-гр',
+}
 
 
 class Command(BaseCommand):
@@ -131,53 +147,65 @@ class Command(BaseCommand):
             self._set_block(page, key, text)
 
     def _advantages(self):
-        if Advantage.objects.exists():
-            return
-        data = [
-            (
-                'assortment',
-                'Широкий ассортимент',
-                '80+ товаров азиатской и специализированной бакалеи в одном каталоге.',
-            ),
-            (
-                'brands',
-                'Проверенные бренды',
-                'Прямые контракты с производителями и контроль качества.',
-            ),
-            (
-                'logistics',
-                'Быстрая логистика',
-                'Стабильные поставки и предсказуемые сроки для магазинов и HoReCa.',
-            ),
-            (
-                'terms',
-                'Гибкие условия',
-                'Индивидуальные условия сотрудничества для партнёров.',
-            ),
-            (
-                'experience',
-                '7+ лет на рынке',
-                'Опыт работы с розницей и HoReCa с 2018 года.',
-            ),
-        ]
-        for i, (icon, title, text) in enumerate(data):
-            Advantage.objects.create(
-                icon_key=icon, title=title, text=text, order=i, is_active=True
+        keep_keys = set()
+        for i, row in enumerate(ADVANTAGE_ROWS):
+            icon, title_ru, text_ru, title_uz, text_uz, title_en, text_en = row
+            keep_keys.add(icon)
+            obj, _ = Advantage.objects.get_or_create(
+                icon_key=icon,
+                defaults={
+                    'title': title_ru,
+                    'text': text_ru,
+                    'order': i,
+                    'is_active': True,
+                },
             )
+            obj.title = title_ru
+            obj.text = text_ru
+            obj.order = i
+            obj.is_active = True
+            update_fields = ['title', 'text', 'order', 'is_active']
+            for field, value in (
+                ('title_ru', title_ru),
+                ('text_ru', text_ru),
+                ('title_uz', title_uz),
+                ('text_uz', text_uz),
+                ('title_en', title_en),
+                ('text_en', text_en),
+            ):
+                if hasattr(obj, field):
+                    setattr(obj, field, value)
+                    update_fields.append(field)
+            obj.save(update_fields=list(dict.fromkeys(update_fields)))
+        Advantage.objects.exclude(icon_key__in=keep_keys).update(is_active=False)
 
     def _stats(self):
-        if CompanyStat.objects.exists():
-            return
-        for i, (value, label) in enumerate(
-            [
-                ('200+', 'партнёров'),
-                ('80+', 'товаров в каталоге'),
-                ('7+', 'лет на рынке'),
-            ]
-        ):
-            CompanyStat.objects.create(
-                value=value, label=label, order=i, is_active=True
+        keep_values = set()
+        for order, (value, label_ru, label_uz, label_en) in enumerate(STAT_ROWS):
+            keep_values.add(value)
+            obj, _ = CompanyStat.objects.get_or_create(
+                value=value,
+                defaults={
+                    'label': label_ru,
+                    'order': order,
+                    'is_active': True,
+                },
             )
+            obj.label = label_ru
+            obj.order = order
+            obj.is_active = True
+            update_fields = ['label', 'order', 'is_active']
+            for field, text in (
+                ('label_ru', label_ru),
+                ('label_uz', label_uz),
+                ('label_en', label_en),
+            ):
+                if hasattr(obj, field):
+                    setattr(obj, field, text)
+                    update_fields.append(field)
+            obj.save(update_fields=list(dict.fromkeys(update_fields)))
+        CompanyStat.objects.exclude(value__in=keep_values).update(is_active=False)
+
 
     def _about(self):
         if AboutSection.objects.exists():
@@ -281,6 +309,32 @@ class Command(BaseCommand):
             return
         field_file.save(filename, ContentFile(_PNG), save=False)
 
+    def _product_image_path(self, slug: str) -> Path | None:
+        keys = [slug, _PRODUCT_IMAGE_ALIASES.get(slug, '')]
+        for key in keys:
+            if not key:
+                continue
+            for path in PRODUCT_IMAGES_DIR.glob(f'{key}.*'):
+                if path.is_file() and path.stat().st_size > 2000:
+                    return path
+        return None
+
+    def _ensure_product_image(self, product: Product, force: bool = False):
+        path = self._product_image_path(product.slug)
+        if path is None:
+            if force or not product.image:
+                self._ensure_image(product.image, f'{product.slug}.png')
+            return
+        current = getattr(product.image, 'path', None)
+        current_size = 0
+        try:
+            if current and Path(current).is_file():
+                current_size = Path(current).stat().st_size
+        except (OSError, ValueError):
+            current_size = 0
+        if force or not product.image or current_size < 2000:
+            product.image.save(path.name, ContentFile(path.read_bytes()), save=False)
+
     def _ensure_brand_logo(self, brand: Brand, logo_file: str | None, force: bool = False):
         if not logo_file:
             return
@@ -350,6 +404,11 @@ class Command(BaseCommand):
                     'is_active': True,
                 },
             )
-            if created or not product.image:
-                self._ensure_image(product.image, f'{slug}.png')
+            self._ensure_product_image(product, force=True)
+            product.save()
+
+        # Attach tracked content images to any existing products by slug.
+        for product in Product.objects.filter(is_active=True):
+            if self._product_image_path(product.slug):
+                self._ensure_product_image(product, force=False)
                 product.save()
