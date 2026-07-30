@@ -99,7 +99,7 @@
   <div class="home-advantages__grid">
     {% for a in advantages %}
       <article class="home-advantage reveal" style="--delay: {{ forloop.counter0 }}">
-        <div class="home-advantage__icon">{% advantage_icon a.icon_key %}</div>
+        <div class="home-advantage__icon" aria-hidden="true"></div>
         <h3 class="home-advantage__title">{{ a.title }}</h3>
         <p class="home-advantage__text">{{ a.text }}</p>
       </article>

@@ -71,23 +71,22 @@
 }
 
 .home-advantage__icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 16px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 12px;
-  box-shadow: 0 8px 16px -10px var(--adv-shadow);
-  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--adv-color);
+  display: grid;
+  place-items: center;
+  margin-bottom: 10px;
+  box-shadow: 0 8px 16px -8px var(--adv-color);
 }
 
-.home-advantage__icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 6px;
+.home-advantage__icon::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  background: #fff;
 }
 
 .home-advantage__title {

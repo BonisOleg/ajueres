@@ -1,0 +1,452 @@
+[
+  {
+    "slug": "huligan-pretzel-crush-cheese-65",
+    "name": "Pretzel Crush «Cheese Sauce»",
+    "package": "65 гр.",
+    "brand": "huligan",
+    "category": "chips",
+    "order": 12,
+    "image": "huligan-pretzel-crush-cheese-65.png",
+    "static_image": "huligan-84a1583f70.png"
+  },
+  {
+    "slug": "huligan-pretzel-crush-honey-mustard-65",
+    "name": "Pretzel Crush «Honey Mustard Sauce»",
+    "package": "65 гр.",
+    "brand": "huligan",
+    "category": "chips",
+    "order": 13,
+    "image": "huligan-pretzel-crush-honey-mustard-65.png",
+    "static_image": "huligan-0366387586.png"
+  },
+  {
+    "slug": "huligan-pretzel-crush-jalapeno-65",
+    "name": "Pretzel Crush «Jalapeno Sauce»",
+    "package": "65 гр.",
+    "brand": "huligan",
+    "category": "chips",
+    "order": 14,
+    "image": "huligan-pretzel-crush-jalapeno-65.png",
+    "static_image": "huligan-76dce634a5.png"
+  },
+  {
+    "slug": "huligan-pretzel-crush-siracha-65",
+    "name": "Pretzel Crush «Siracha Chilli Sauce»",
+    "package": "65 гр.",
+    "brand": "huligan",
+    "category": "chips",
+    "order": 15,
+    "image": "huligan-pretzel-crush-siracha-65.png",
+    "static_image": "huligan-c6f72b14c3.png"
+  },
+  {
+    "slug": "krambals-bruschetta-tomato-mozzarella",
+    "name": "Брускетта «Tomato & Mozzarella»",
+    "package": "70 гр.",
+    "brand": "krambals",
+    "category": "chips",
+    "order": 16,
+    "image": "krambals-bruschetta-tomato-mozzarella.png",
+    "static_image": "krambals-6bb92b92d7.png"
+  },
+  {
+    "slug": "krambals-bruschetta-green-olives",
+    "name": "Брускетта «Green Olives & Sea Salt»",
+    "package": "70 гр.",
+    "brand": "krambals",
+    "category": "chips",
+    "order": 17,
+    "image": "krambals-bruschetta-green-olives.png",
+    "static_image": "krambals-7c4a2bf29a.png"
+  },
+  {
+    "slug": "krambals-bruschetta-creamy-cheese",
+    "name": "Брускетта «Creamy Cheese»",
+    "package": "70 гр.",
+    "brand": "krambals",
+    "category": "chips",
+    "order": 18,
+    "image": "krambals-bruschetta-creamy-cheese.png",
+    "static_image": "krambals-de61dbf854.png"
+  },
+  {
+    "slug": "krambals-bruschetta-garden-grill",
+    "name": "Брускетта «Garden Grill»",
+    "package": "70 гр.",
+    "brand": "krambals",
+    "category": "chips",
+    "order": 19,
+    "image": "krambals-bruschetta-garden-grill.png",
+    "static_image": "krambals-87243afd35.png"
+  },
+  {
+    "slug": "krambals-bruschetta-forest-mushrooms",
+    "name": "Брускетта «Forest Mushrooms & Butter»",
+    "package": "70 гр.",
+    "brand": "krambals",
+    "category": "chips",
+    "order": 20,
+    "image": "krambals-bruschetta-forest-mushrooms.png",
+    "static_image": "krambals-f7e54b822c.png"
+  },
+  {
+    "slug": "riceup-rice-chips-barbecue-60",
+    "name": "Рисовые чипсы «Barbecue»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 0,
+    "image": "riceup-rice-chips-barbecue-60.png",
+    "static_image": "riceup-55753201e2.png"
+  },
+  {
+    "slug": "riceup-rice-chips-cheese-60",
+    "name": "Рисовые чипсы «Cheese»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 1,
+    "image": "riceup-rice-chips-cheese-60.png",
+    "static_image": "riceup-eddd1e8b74.png"
+  },
+  {
+    "slug": "riceup-rice-chips-hot-chili-60",
+    "name": "Рисовые чипсы «Hot Chili Pepper»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 2,
+    "image": "riceup-rice-chips-hot-chili-60.png",
+    "static_image": "riceup-41f585345e.png"
+  },
+  {
+    "slug": "riceup-rice-chips-ketchup-60",
+    "name": "Рисовые чипсы «Ketchup»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 3,
+    "image": "riceup-rice-chips-ketchup-60.png",
+    "static_image": "riceup-eebefec3d8.png"
+  },
+  {
+    "slug": "riceup-rice-chips-sea-salt-60",
+    "name": "Рисовые чипсы «Sea Salt»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 4,
+    "image": "riceup-rice-chips-sea-salt-60.png",
+    "static_image": "riceup-5bebd2c88b.png"
+  },
+  {
+    "slug": "riceup-rice-chips-sour-cream-onion-60",
+    "name": "Рисовые чипсы «Sour Cream & Onion»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 5,
+    "image": "riceup-rice-chips-sour-cream-onion-60.png",
+    "static_image": "riceup-346d7816dc.png"
+  },
+  {
+    "slug": "riceup-tortilla-black-olives-60",
+    "name": "Тортилья-чипсы «Black Olives & Sundried Tomatoes»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 6,
+    "image": "riceup-tortilla-black-olives-60.jpg",
+    "static_image": "riceup-bcdb91ae55.jpg"
+  },
+  {
+    "slug": "riceup-tortilla-nacho-cheese-60",
+    "name": "Тортилья-чипсы «Nacho Cheese & Jalapeño»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 7,
+    "image": "riceup-tortilla-nacho-cheese-60.jpg",
+    "static_image": "riceup-2121a54405.jpg"
+  },
+  {
+    "slug": "riceup-tortilla-salt-60",
+    "name": "Тортилья-чипсы «Salt»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 8,
+    "image": "riceup-tortilla-salt-60.jpg",
+    "static_image": "riceup-05c095a754.jpg"
+  },
+  {
+    "slug": "riceup-tortilla-sour-cream-onion-60",
+    "name": "Тортилья-чипсы «Sour Cream & Green Onion»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 9,
+    "image": "riceup-tortilla-sour-cream-onion-60.jpg",
+    "static_image": "riceup-0b51843b6c.jpg"
+  },
+  {
+    "slug": "riceup-tortilla-texas-bbq-60",
+    "name": "Тортилья-чипсы «Texas Style BBQ»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 10,
+    "image": "riceup-tortilla-texas-bbq-60.jpg",
+    "static_image": "riceup-e2d0bd3783.jpg"
+  },
+  {
+    "slug": "riceup-tortilla-yellow-cheddar-60",
+    "name": "Тортилья-чипсы «Yellow Cheddar»",
+    "package": "60 гр.",
+    "brand": "riceup",
+    "category": "chips",
+    "order": 11,
+    "image": "riceup-tortilla-yellow-cheddar-60.jpg",
+    "static_image": "riceup-65c84c7d68.jpg"
+  },
+  {
+    "slug": "lapsha-somen-300",
+    "name": "Лапша «Somen»",
+    "package": "300 гр.",
+    "brand": "sen-soy",
+    "category": "noodles",
+    "order": 0,
+    "image": "sen-soy-лапша-somen-300-гр.png",
+    "static_image": "sen-soy-0ce9a674a7.png"
+  },
+  {
+    "slug": "sen-soy-соус-сладкий-чили-235-гр",
+    "name": "Соус «Сладкий Чили»",
+    "package": "235 гр.",
+    "brand": "sen-soy",
+    "category": "sauces",
+    "order": 0,
+    "image": "sen-soy-соус-сладкий-чили-235-гр.png",
+    "static_image": "sen-soy-7e17cb1c9c.png"
+  },
+  {
+    "slug": "sous-sriracha-310",
+    "name": "Соус «Шрирача»",
+    "package": "310 гр.",
+    "brand": "sen-soy",
+    "category": "sauces",
+    "order": 0,
+    "image": "sen-soy-соус-шрирача-310-гр.png",
+    "static_image": "sen-soy-cb449d64ec.png"
+  },
+  {
+    "slug": "sushi-nori-28",
+    "name": "Суши Нори",
+    "package": "28 гр.",
+    "brand": "sen-soy",
+    "category": "seaweed",
+    "order": 0,
+    "image": "sen-soy-суши-нори-28-гр.png",
+    "static_image": "sen-soy-0c2ba9e0b7.png"
+  },
+  {
+    "slug": "chips-nori-original",
+    "name": "Чипсы нори «Original»",
+    "package": "4,5 гр.",
+    "brand": "sen-soy",
+    "category": "seaweed",
+    "order": 0,
+    "image": "sen-soy-чипсы-нори-original-45-гр.png",
+    "static_image": "sen-soy-2b6be6b0a1.png"
+  },
+  {
+    "slug": "sen-soy-соус-жгучий-чили-235-гр",
+    "name": "Соус «Жгучий Чили»",
+    "package": "235 гр.",
+    "brand": "sen-soy",
+    "category": "sauces",
+    "order": 1,
+    "image": "sen-soy-соус-жгучий-чили-235-гр.png",
+    "static_image": "sen-soy-b745267b30.png"
+  },
+  {
+    "slug": "sen-soy-соус-шрирача-310-гр",
+    "name": "соус «Шрирача»",
+    "package": "310 гр.",
+    "brand": "sen-soy",
+    "category": "sauces",
+    "order": 2,
+    "image": "sen-soy-соус-шрирача-310-гр.png",
+    "static_image": "sen-soy-5e9fa95fed.png"
+  },
+  {
+    "slug": "sen-soy-соевый-соус-классический-250-гр",
+    "name": "соевый соус «Классический»",
+    "package": "250 гр.",
+    "brand": "sen-soy",
+    "category": "sauces",
+    "order": 3,
+    "image": "sen-soy-соевый-соус-классический-250-гр.png",
+    "static_image": "sen-soy-9690a331c6.png"
+  },
+  {
+    "slug": "sen-soy-соевый-соус-темный-220-гр",
+    "name": "соевый соус «Темный»",
+    "package": "220 гр.",
+    "brand": "sen-soy",
+    "category": "sauces",
+    "order": 4,
+    "image": "sen-soy-соевый-соус-темный-220-гр.png",
+    "static_image": "sen-soy-6476760b47.png"
+  },
+  {
+    "slug": "sen-soy-соус-сладкий-чили-манго-320-гр",
+    "name": "соус «Сладкий Чили Манго»",
+    "package": "320 гр.",
+    "brand": "sen-soy",
+    "category": "sauces",
+    "order": 5,
+    "image": "sen-soy-соус-сладкий-чили-манго-320-гр.png",
+    "static_image": "sen-soy-fd97839ced.png"
+  },
+  {
+    "slug": "sen-soy-соус-терияки-сладкий-320-гр",
+    "name": "соус «Терияки Сладкий»",
+    "package": "320 гр.",
+    "brand": "sen-soy",
+    "category": "sauces",
+    "order": 6,
+    "image": "sen-soy-соус-терияки-сладкий-320-гр.png",
+    "static_image": "sen-soy-ea1d482ffb.png"
+  },
+  {
+    "slug": "sen-soy-соус-unagi-320-гр",
+    "name": "соус «Unagi»",
+    "package": "320 гр.",
+    "brand": "sen-soy",
+    "category": "sauces",
+    "order": 7,
+    "image": "sen-soy-соус-unagi-320-гр.png",
+    "static_image": "sen-soy-f27cc033e3.png"
+  },
+  {
+    "slug": "sen-soy-соевый-соус-классический-1-л",
+    "name": "соевый соус «Классический»",
+    "package": "1 л.",
+    "brand": "sen-soy",
+    "category": "sauces",
+    "order": 8,
+    "image": "sen-soy-соевый-соус-классический-1-л.png",
+    "static_image": "sen-soy-31022b9dcb.png"
+  },
+  {
+    "slug": "sen-soy-лапша-somen-300-гр",
+    "name": "лапша «Somen»",
+    "package": "300 гр.",
+    "brand": "sen-soy",
+    "category": "noodles",
+    "order": 9,
+    "image": "sen-soy-лапша-somen-300-гр.png",
+    "static_image": "sen-soy-fa0cf8c2d3.png"
+  },
+  {
+    "slug": "sen-soy-пшеничная-лапша-udon-300-гр",
+    "name": "Пшеничная лапша «Udon»",
+    "package": "300 гр.",
+    "brand": "sen-soy",
+    "category": "noodles",
+    "order": 10,
+    "image": "sen-soy-пшеничная-лапша-udon-300-гр.png",
+    "static_image": "sen-soy-60180dc8b7.png"
+  },
+  {
+    "slug": "sen-soy-яичная-лапша-egg-noodles-300-гр",
+    "name": "Яичная лапша «Egg Noodles»",
+    "package": "300 гр.",
+    "brand": "sen-soy",
+    "category": "noodles",
+    "order": 11,
+    "image": "sen-soy-яичная-лапша-egg-noodles-300-гр.png",
+    "static_image": "sen-soy-0e57205d00.png"
+  },
+  {
+    "slug": "sen-soy-рисовая-лапша-rice-vermicelli-300-гр",
+    "name": "Рисовая лапша «Rice Vermicelli»",
+    "package": "300 гр.",
+    "brand": "sen-soy",
+    "category": "noodles",
+    "order": 12,
+    "image": "sen-soy-рисовая-лапша-rice-vermicelli-300-гр.png",
+    "static_image": "sen-soy-6bcf867653.png"
+  },
+  {
+    "slug": "sen-soy-рисовая-лапша-fo-kho-200-гр",
+    "name": "Рисовая лапша «Fo - Kho»",
+    "package": "200 гр.",
+    "brand": "sen-soy",
+    "category": "noodles",
+    "order": 13,
+    "image": "sen-soy-рисовая-лапша-fo-kho-200-гр.png",
+    "static_image": "sen-soy-91f7009e6e.png"
+  },
+  {
+    "slug": "sen-soy-основа-для-супа-том-ям-80-гр",
+    "name": "основа для супа «Том Ям»",
+    "package": "80 гр.",
+    "brand": "sen-soy",
+    "category": "sauces",
+    "order": 14,
+    "image": "sen-soy-основа-для-супа-том-ям-80-гр.png",
+    "static_image": "sen-soy-74c07b0d90.png"
+  },
+  {
+    "slug": "sen-soy-рисова-бумага-100-гр",
+    "name": "«Рисова бумага»",
+    "package": "100 гр.",
+    "brand": "sen-soy",
+    "category": "noodles",
+    "order": 15,
+    "image": "sen-soy-рисова-бумага-100-гр.png",
+    "static_image": "sen-soy-4163f3c637.png"
+  },
+  {
+    "slug": "sen-soy-суши-нори-28-гр",
+    "name": "«Суши Нори»",
+    "package": "28 гр.",
+    "brand": "sen-soy",
+    "category": "seaweed",
+    "order": 16,
+    "image": "sen-soy-суши-нори-28-гр.png",
+    "static_image": "sen-soy-3554559a90.png"
+  },
+  {
+    "slug": "sen-soy-чипсы-нори-kimchi-45-гр",
+    "name": "чипсы нори «Kimchi»",
+    "package": "4,5 гр.",
+    "brand": "sen-soy",
+    "category": "seaweed",
+    "order": 17,
+    "image": "sen-soy-чипсы-нори-kimchi-45-гр.png",
+    "static_image": "sen-soy-5b96b8b437.png"
+  },
+  {
+    "slug": "sen-soy-чипсы-нори-original-45-гр",
+    "name": "чипсы нори «Original»",
+    "package": "4,5 гр.",
+    "brand": "sen-soy",
+    "category": "seaweed",
+    "order": 18,
+    "image": "sen-soy-чипсы-нори-original-45-гр.png",
+    "static_image": "sen-soy-6a3aae92b4.png"
+  },
+  {
+    "slug": "sen-soy-чипсы-нори-olive-45-гр",
+    "name": "чипсы нори «Olive»",
+    "package": "4,5 гр.",
+    "brand": "sen-soy",
+    "category": "seaweed",
+    "order": 19,
+    "image": "sen-soy-чипсы-нори-olive-45-гр.png",
+    "static_image": "sen-soy-aff1c0dfeb.png"
+  }
+]

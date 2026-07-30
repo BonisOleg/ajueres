@@ -1,7 +1,9 @@
 """Idempotent seed: settings, CMS blocks, categories, brands, sample products."""
 
+import json
 from pathlib import Path
 
+from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 
@@ -36,16 +38,7 @@ _PNG = (
     b'\xd8N\x00\x00\x00\x00IEND\xaeB`\x82'
 )
 
-# Seed sample slug → content/products file slug (Cyrillic catalog names).
-_PRODUCT_IMAGE_ALIASES = {
-    'sous-chili-sladkiy-235': 'sen-soy-соус-сладкий-чили-235-гр',
-    'sous-chili-zhguchiy-235': 'sen-soy-соус-жгучий-чили-235-гр',
-    'sous-sriracha-310': 'sen-soy-соус-шрирача-310-гр',
-    'lapsha-somen-300': 'sen-soy-лапша-somen-300-гр',
-    'lapsha-udon-300': 'sen-soy-пшеничная-лапша-udon-300-гр',
-    'sushi-nori-28': 'sen-soy-суши-нори-28-гр',
-    'chips-nori-original': 'sen-soy-чипсы-нори-original-45-гр',
-}
+_CATALOG_JSON = Path(__file__).resolve().parents[4] / 'content' / 'catalog_products.json'
 
 
 class Command(BaseCommand):
@@ -309,31 +302,38 @@ class Command(BaseCommand):
             return
         field_file.save(filename, ContentFile(_PNG), save=False)
 
-    def _product_image_path(self, slug: str) -> Path | None:
-        keys = [slug, _PRODUCT_IMAGE_ALIASES.get(slug, '')]
-        for key in keys:
-            if not key:
-                continue
-            for path in PRODUCT_IMAGES_DIR.glob(f'{key}.*'):
-                if path.is_file() and path.stat().st_size > 2000:
-                    return path
+    def _product_image_path(self, slug: str, image_name: str | None = None) -> Path | None:
+        if image_name:
+            path = PRODUCT_IMAGES_DIR / image_name
+            if path.is_file() and path.stat().st_size > 2000:
+                return path
+        for path in PRODUCT_IMAGES_DIR.glob(f'{slug}.*'):
+            if path.is_file() and path.stat().st_size > 2000:
+                return path
         return None
 
-    def _ensure_product_image(self, product: Product, force: bool = False):
-        path = self._product_image_path(product.slug)
+    def _ensure_product_image(
+        self,
+        product: Product,
+        *,
+        image_name: str | None = None,
+        force: bool = False,
+    ):
+        path = self._product_image_path(product.slug, image_name)
         if path is None:
-            if force or not product.image:
-                self._ensure_image(product.image, f'{product.slug}.png')
             return
-        current = getattr(product.image, 'path', None)
         current_size = 0
         try:
+            current = getattr(product.image, 'path', None)
             if current and Path(current).is_file():
                 current_size = Path(current).stat().st_size
         except (OSError, ValueError):
             current_size = 0
         if force or not product.image or current_size < 2000:
-            product.image.save(path.name, ContentFile(path.read_bytes()), save=False)
+            # ASCII-safe media filename for serverless FS.
+            safe_name = f'{product.brand.slug}-{product.pk or product.slug[:24]}.png'
+            safe_name = ''.join(ch if ch.isascii() and (ch.isalnum() or ch in '-_.') else '-' for ch in safe_name)
+            product.image.save(safe_name, ContentFile(path.read_bytes()), save=False)
 
     def _ensure_brand_logo(self, brand: Brand, logo_file: str | None, force: bool = False):
         if not logo_file:
@@ -345,6 +345,17 @@ class Command(BaseCommand):
             return
         if force or not brand.logo:
             brand.logo.save(logo_file, ContentFile(path.read_bytes()), save=False)
+
+    def _load_catalog_rows(self) -> list[dict]:
+        if not _CATALOG_JSON.is_file():
+            self.stderr.write(f'Catalog JSON missing: {_CATALOG_JSON}')
+            return []
+        try:
+            rows = json.loads(_CATALOG_JSON.read_text(encoding='utf-8'))
+        except (OSError, json.JSONDecodeError) as exc:
+            self.stderr.write(f'Catalog JSON read error: {exc}')
+            return []
+        return [row for row in rows if isinstance(row, dict) and row.get('slug')]
 
     def _catalog(self):
         categories = [
@@ -360,11 +371,15 @@ class Command(BaseCommand):
                 slug=slug,
                 defaults={'name': name, 'order': order, 'is_active': True},
             )
+            cat.is_active = True
+            cat.name = name
+            cat.order = order
+            cat.save()
             cat_map[slug] = cat
 
         brand_map = {}
         for slug, name, logo_file, order, featured in BRANDS_SPEC:
-            brand, created = Brand.objects.get_or_create(
+            brand, _ = Brand.objects.get_or_create(
                 slug=slug,
                 defaults={
                     'name': name,
@@ -377,38 +392,48 @@ class Command(BaseCommand):
             brand.order = order
             brand.is_featured = featured
             brand.is_active = True
-            self._ensure_brand_logo(brand, logo_file, force=True)
+            self._ensure_brand_logo(brand, logo_file, force=False)
             brand.save()
             brand_map[slug] = brand
 
-        samples = [
-            ('sen-soy', 'sauces', 'sous-chili-sladkiy-235', 'Соус «Сладкий Чили»', '235 гр.'),
-            ('sen-soy', 'sauces', 'sous-chili-zhguchiy-235', 'Соус «Жгучий Чили»', '235 гр.'),
-            ('sen-soy', 'sauces', 'sous-sriracha-310', 'Соус «Шрирача»', '310 гр.'),
-            ('sen-soy', 'noodles', 'lapsha-somen-300', 'Лапша «Somen»', '300 гр.'),
-            ('sen-soy', 'noodles', 'lapsha-udon-300', 'Пшеничная лапша «Udon»', '300 гр.'),
-            ('sen-soy', 'seaweed', 'sushi-nori-28', 'Суши Нори', '28 гр.'),
-            ('sen-soy', 'seaweed', 'chips-nori-original', 'Чипсы нори «Original»', '4,5 гр.'),
-            ('riceup', 'chips', 'riceup-rice-chips-barbecue-60', 'Рисовые чипсы «Barbecue»', '60 гр.'),
-            ('huligan', 'chips', 'huligan-pretzel-crush-cheese-65', 'Pretzel Crush «Cheese Sauce»', '65 гр.'),
-            ('krambals', 'chips', 'krambals-bruschetta-tomato-mozzarella', 'Брускетта «Tomato & Mozzarella»', '70 гр.'),
-        ]
-        for brand_slug, cat_slug, slug, name, package in samples:
-            product, created = Product.objects.get_or_create(
-                slug=slug,
-                defaults={
-                    'brand': brand_map[brand_slug],
-                    'category': cat_map[cat_slug],
-                    'name': name,
-                    'package': package,
-                    'is_active': True,
-                },
-            )
-            self._ensure_product_image(product, force=True)
-            product.save()
-
-        # Attach tracked content images to any existing products by slug.
-        for product in Product.objects.filter(is_active=True):
-            if self._product_image_path(product.slug):
-                self._ensure_product_image(product, force=False)
+        rows = self._load_catalog_rows()
+        keep_slugs: set[str] = set()
+        for row in rows:
+            slug = row['slug']
+            brand = brand_map.get(row.get('brand') or '')
+            category = cat_map.get(row.get('category') or '')
+            if not brand or not category:
+                self.stderr.write(f'Skip product {slug}: unknown brand/category')
+                continue
+            keep_slugs.add(slug)
+            try:
+                product, created = Product.objects.get_or_create(
+                    slug=slug,
+                    defaults={
+                        'brand': brand,
+                        'category': category,
+                        'name': row.get('name') or slug,
+                        'package': row.get('package') or '',
+                        'order': int(row.get('order') or 0),
+                        'is_active': True,
+                    },
+                )
+                product.brand = brand
+                product.category = category
+                product.name = row.get('name') or product.name
+                product.package = row.get('package') or ''
+                product.order = int(row.get('order') or 0)
+                product.is_active = True
+                # On Vercel UI serves static/img/catalog; skip heavy media copies.
+                if not getattr(settings, 'IS_VERCEL', False):
+                    self._ensure_product_image(
+                        product,
+                        image_name=row.get('image'),
+                        force=False,
+                    )
                 product.save()
+            except Exception as exc:  # noqa: BLE001 — keep seeding other rows
+                self.stderr.write(f'Skip product {slug}: {exc}')
+
+        if keep_slugs:
+            Product.objects.exclude(slug__in=keep_slugs).update(is_active=False)

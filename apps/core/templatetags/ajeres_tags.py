@@ -1,3 +1,7 @@
+from pathlib import Path
+
+import json
+
 from django import template
 from django.template.defaultfilters import linebreaks
 from django.templatetags.static import static
@@ -18,6 +22,41 @@ ADVANTAGE_IMAGES = {
     'experience': 'img/advantages/experience.png',
     'analytics': 'img/advantages/analytics.png',
 }
+
+_CATALOG_STATIC_MAP: dict[str, str] | None = None
+_CATALOG_JSON = (
+    Path(__file__).resolve().parents[3] / 'content' / 'catalog_products.json'
+)
+
+
+def _catalog_static_map() -> dict[str, str]:
+    global _CATALOG_STATIC_MAP
+    if _CATALOG_STATIC_MAP is None:
+        try:
+            rows = json.loads(_CATALOG_JSON.read_text(encoding='utf-8'))
+            _CATALOG_STATIC_MAP = {
+                row['slug']: row['static_image']
+                for row in rows
+                if row.get('slug') and row.get('static_image')
+            }
+        except (OSError, json.JSONDecodeError, TypeError, KeyError):
+            _CATALOG_STATIC_MAP = {}
+    return _CATALOG_STATIC_MAP
+
+
+@register.simple_tag
+def product_image_url(product):
+    """Prefer shipped static catalog images (Vercel-safe), else media."""
+    static_name = _catalog_static_map().get(getattr(product, 'slug', '') or '')
+    if static_name:
+        return static(f'img/catalog/{static_name}')
+    image = getattr(product, 'image', None)
+    if image:
+        try:
+            return image.url
+        except ValueError:
+            return ''
+    return ''
 
 
 @register.simple_tag(takes_context=True)

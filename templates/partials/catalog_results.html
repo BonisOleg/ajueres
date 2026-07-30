@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n static ajeres_tags %}
 
 {% if page_obj.paginator.count == 0 %}
   <div class="empty-state">
@@ -19,8 +19,9 @@
         {% for product in products %}
           <article class="product-card">
             <div class="product-card__media">
-              {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy" width="300" height="300">
+              {% product_image_url product as img_url %}
+              {% if img_url %}
+                <img src="{{ img_url }}" alt="{{ product.name }}" loading="lazy" width="300" height="300">
               {% endif %}
             </div>
             <div class="product-card__body">
