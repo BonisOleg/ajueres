@@ -98,9 +98,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+IS_VERCEL = os.environ.get('VERCEL') == '1'
+
 DATABASE_URL = os.environ.get('DATABASE_URL', '').strip()
 if DATABASE_URL.startswith('postgres'):
-    # DigitalOcean managed Postgres / DO App Platform
+    # Managed Postgres (Neon / Vercel / DigitalOcean)
     import urllib.parse as urlparse
 
     url = urlparse.urlparse(DATABASE_URL)
@@ -113,6 +115,14 @@ if DATABASE_URL.startswith('postgres'):
             'HOST': url.hostname,
             'PORT': url.port or 5432,
             'OPTIONS': {'sslmode': os.environ.get('DB_SSLMODE', 'require')},
+        }
+    }
+elif IS_VERCEL:
+    # Serverless FS is read-only except /tmp — demo SQLite (ephemeral).
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': Path('/tmp') / 'ajeres.sqlite3',
         }
     }
 else:
@@ -166,7 +176,7 @@ STORAGES = {
 }
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = (Path('/tmp') / 'ajeres-media') if IS_VERCEL else (BASE_DIR / 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
