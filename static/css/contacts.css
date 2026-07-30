@@ -99,44 +99,46 @@
 
 .contacts-coop {
   min-width: 0;
-  padding: clamp(18px, 2.2vw, 28px);
-  border-radius: 22px;
+  padding: clamp(14px, 1.8vw, 20px);
+  border-radius: 20px;
   background: var(--cream);
   border: 1px solid var(--line);
 }
 
 .contacts-coop__eyebrow {
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   font-weight: 700;
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--c-purple);
 }
 
 .contacts-coop__title {
-  margin: 0 0 12px;
+  margin: 0 0 6px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
   letter-spacing: -0.02em;
-  line-height: 1.25;
+  line-height: 1.2;
   color: var(--ink);
+  font-style: normal;
+  font-synthesis: none;
 }
 
 .contacts-coop__text {
   margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.55;
+  font-size: 0.8125rem;
+  line-height: 1.4;
   color: var(--muted);
 }
 
 .contacts-coop__text + .contacts-coop__title {
-  margin-top: 22px;
+  margin-top: 14px;
 }
 
 .contacts-coop__text p {
-  margin: 0 0 0.75em;
+  margin: 0 0 0.45em;
 }
 
 .contacts-coop__text p:last-child {

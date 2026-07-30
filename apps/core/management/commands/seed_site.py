@@ -64,9 +64,21 @@ class Command(BaseCommand):
         s.company_name = s.company_name or 'AJERES'
         s.phone = s.phone or '+(998) 93-541-88-86'
         s.email = s.email or 'info@ajeres.uz'
-        s.address = s.address or (
-            'Ташкент, Мирзо-Улугбекский район, ул. Паркентская 327'
-        )
+        address = 'Ташкент, Мирзо-Улугбекский район, ул. Паркентская 327'
+        s.address = address
+        for field, value in (
+            ('address_ru', address),
+            (
+                'address_uz',
+                'Toshkent shahri, Mirzo Ulug‘bek tumani, Parkent ko‘chasi, 327',
+            ),
+            (
+                'address_en',
+                'Tashkent, Mirzo Ulugbek district, Parkentskaya st. 327',
+            ),
+        ):
+            if hasattr(s, field):
+                setattr(s, field, value)
         s.save()
 
     def _set_block(self, page, key, text='', image=None):

@@ -70,6 +70,8 @@ CONTENT_SECURITY_POLICY = {
         'font-src': [SELF, 'https://fonts.gstatic.com', 'data:'],
         'img-src': [SELF, 'data:', 'blob:'],
         'connect-src': [SELF],
+        # Google Maps embed on contacts page.
+        'frame-src': [SELF, 'https://www.google.com', 'https://maps.google.com'],
         'frame-ancestors': [NONE],
         'base-uri': [SELF],
         'form-action': [SELF],
