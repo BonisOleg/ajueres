@@ -306,3 +306,69 @@
     transform: none;
   }
 }
+
+/* Symmetric request card and full-width map */
+.contacts-request {
+  height: 100%;
+  padding: 32px;
+  text-align: left;
+  overflow: visible;
+}
+
+.contacts-request__title {
+  margin: 0 0 18px;
+}
+
+.contacts-request--compact .form {
+  width: 100%;
+  gap: 16px;
+}
+
+.contacts-request .form__field {
+  width: 100%;
+  min-width: 0;
+  gap: 7px;
+}
+
+.contacts-request .form__row {
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.contacts-request .form__input,
+.contacts-request .form__textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.contacts-request--compact .form__textarea {
+  min-height: 96px;
+}
+
+.contacts-map {
+  margin-bottom: 40px;
+  padding-bottom: 0;
+}
+
+.contacts-map__frame {
+  border-radius: 12px;
+}
+
+.contacts-map__iframe {
+  height: 400px;
+}
+
+@media (max-width: 719px) {
+  .contacts-request {
+    padding: 24px 20px;
+  }
+
+  .contacts-map {
+    margin-bottom: 32px;
+  }
+
+  .contacts-map__iframe {
+    height: 320px;
+  }
+}

@@ -10,6 +10,34 @@ from apps.core import selectors as core_selectors
 from .services import RateLimitExceeded, submit_contact_inquiry
 
 
+def _prepare_partner_offers(offers):
+    """Structure exact CMS copy for visual lists without rewriting it."""
+    for offer in offers:
+        intro = []
+        label = ''
+        points = []
+        outro = []
+        points_started = False
+        for line in (offer.text or '').splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            if line.startswith('•'):
+                points_started = True
+                points.append(line.removeprefix('•').strip())
+            elif not points_started and line.endswith(':'):
+                label = line
+            elif points_started:
+                outro.append(line)
+            else:
+                intro.append(line)
+        offer.presentation_intro = intro
+        offer.presentation_label = label
+        offer.presentation_points = points
+        offer.presentation_outro = outro
+    return offers
+
+
 def _client_ip(request) -> str | None:
     forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
     if forwarded:
@@ -20,7 +48,7 @@ def _client_ip(request) -> str | None:
 @require_http_methods(['GET', 'POST'])
 def contacts(request):
     blocks = core_selectors.get_blocks('contacts')
-    offers = list(core_selectors.get_partner_offers())
+    offers = _prepare_partner_offers(list(core_selectors.get_partner_offers()))
     context = {
         'blocks': blocks,
         'offers': offers,

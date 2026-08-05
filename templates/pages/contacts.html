@@ -29,6 +29,58 @@
   </div>
 </section>
 
+<section class="contacts-quick reveal" aria-label="{% trans 'Контакты' %}">
+  <div class="contacts-chips" role="list">
+    {% if site_settings.address %}
+      <a
+        class="contacts-chip contacts-chip--coral"
+        href="https://www.google.com/maps/search/?api=1&query={{ site_settings.address|urlencode }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        role="listitem"
+      >
+        <span class="contacts-chip__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+        </span>
+        <span class="contacts-chip__body">
+          <span class="contacts-chip__label">{% trans 'Адрес' %}</span>
+          <span class="contacts-chip__value">{{ site_settings.address }}</span>
+        </span>
+      </a>
+    {% endif %}
+    {% if site_settings.phone %}
+      <a
+        class="contacts-chip contacts-chip--green"
+        href="tel:{{ site_settings.phone|cut:' '|cut:'('|cut:')'|cut:'-' }}"
+        role="listitem"
+      >
+        <span class="contacts-chip__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L20 13l-1 4-4 2A16 16 0 0 1 3 8z"/></svg>
+        </span>
+        <span class="contacts-chip__body">
+          <span class="contacts-chip__label">{% trans 'Телефон' %}</span>
+          <span class="contacts-chip__value">{{ site_settings.phone }}</span>
+        </span>
+      </a>
+    {% endif %}
+    {% if site_settings.email %}
+      <a
+        class="contacts-chip contacts-chip--blue"
+        href="mailto:{{ site_settings.email }}"
+        role="listitem"
+      >
+        <span class="contacts-chip__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
+        </span>
+        <span class="contacts-chip__body">
+          <span class="contacts-chip__label">{% trans 'Почта' %}</span>
+          <span class="contacts-chip__value">{{ site_settings.email }}</span>
+        </span>
+      </a>
+    {% endif %}
+  </div>
+</section>
+
 <section class="contacts-main">
   <div class="contacts-split">
     <aside class="contacts-coop reveal" aria-labelledby="contacts-coop-title">
@@ -36,7 +88,27 @@
       {% if offers %}
         {% for offer in offers %}
           <h2 class="contacts-coop__title" {% if forloop.first %}id="contacts-coop-title"{% endif %}>{{ offer.title }}</h2>
-          <div class="contacts-coop__text">{{ offer.text|linebreaks }}</div>
+          <div class="contacts-coop__content">
+            {% for paragraph in offer.presentation_intro %}
+              <p>{{ paragraph }}</p>
+            {% endfor %}
+            {% if offer.presentation_label %}<h3>{{ offer.presentation_label }}</h3>{% endif %}
+            {% if offer.presentation_points %}
+              <ul class="contacts-coop__list">
+                {% for point in offer.presentation_points %}
+                  <li>
+                    <span class="contacts-coop__check" aria-hidden="true">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
+                    <span>{{ point }}</span>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% for paragraph in offer.presentation_outro %}
+              <p class="contacts-coop__outro">{{ paragraph }}</p>
+            {% endfor %}
+          </div>
         {% endfor %}
       {% else %}
         <h2 class="contacts-coop__title" id="contacts-coop-title">
@@ -50,7 +122,6 @@
 
     <div class="contacts-request contacts-request--compact reveal" id="request">
       <h2 class="contacts-request__title">{% block_text blocks "form_title" "Форма заявки" %}</h2>
-      <div class="contacts-request__lead">{% block_text_br blocks "form_lead" %}</div>
 
       {% if messages %}
         {% for message in messages %}
@@ -68,58 +139,6 @@
         </div>
       {% endif %}
     </div>
-  </div>
-
-  <div class="contacts-chips reveal" role="list">
-    {% if site_settings.address %}
-      <a
-        class="contacts-chip contacts-chip--coral"
-        href="https://www.google.com/maps/search/?api=1&query={{ site_settings.address|urlencode }}"
-        target="_blank"
-        rel="noopener noreferrer"
-        role="listitem"
-      >
-        <span class="contacts-chip__icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
-        </span>
-        <span class="contacts-chip__body">
-          <span class="contacts-chip__label">{% trans 'Адрес' %}</span>
-          <span class="contacts-chip__value">{{ site_settings.address }}</span>
-        </span>
-      </a>
-    {% endif %}
-
-    {% if site_settings.phone %}
-      <a
-        class="contacts-chip contacts-chip--green"
-        href="tel:{{ site_settings.phone|cut:' '|cut:'('|cut:')'|cut:'-' }}"
-        role="listitem"
-      >
-        <span class="contacts-chip__icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L20 13l-1 4-4 2A16 16 0 0 1 3 8z"/></svg>
-        </span>
-        <span class="contacts-chip__body">
-          <span class="contacts-chip__label">{% trans 'Телефон' %}</span>
-          <span class="contacts-chip__value">{{ site_settings.phone }}</span>
-        </span>
-      </a>
-    {% endif %}
-
-    {% if site_settings.email %}
-      <a
-        class="contacts-chip contacts-chip--blue"
-        href="mailto:{{ site_settings.email }}"
-        role="listitem"
-      >
-        <span class="contacts-chip__icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
-        </span>
-        <span class="contacts-chip__body">
-          <span class="contacts-chip__label">{% trans 'Почта' %}</span>
-          <span class="contacts-chip__value">{{ site_settings.email }}</span>
-        </span>
-      </a>
-    {% endif %}
   </div>
 </section>
 
