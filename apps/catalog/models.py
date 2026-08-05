@@ -1,4 +1,25 @@
+from django.conf import settings
 from django.db import models
+
+from .search import build_search_text
+
+_SEARCH_TRANSLATED_FIELDS = ('name', 'package', 'description')
+
+
+def _search_languages() -> tuple[str, ...]:
+    codes = getattr(settings, 'MODELTRANSLATION_LANGUAGES', None)
+    if not codes:
+        codes = [code for code, _ in getattr(settings, 'LANGUAGES', [])]
+    return tuple(code.replace('-', '_') for code in codes)
+
+
+def _translated_values(obj, base_fields: tuple[str, ...]):
+    """Значення всіх мовних варіантів полів (name_ru, name_uz, …)."""
+    if obj is None:
+        return
+    for base in base_fields:
+        for lang in _search_languages():
+            yield getattr(obj, f'{base}_{lang}', '') or ''
 
 
 class TimeStampedModel(models.Model):
@@ -39,6 +60,10 @@ class Category(TimeStampedModel):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        refresh_products_search_text(self.products.all())
+
 
 class Brand(TimeStampedModel):
     """Бренд = виробник. Блок під каталогом на /products."""
@@ -73,6 +98,7 @@ class Brand(TimeStampedModel):
         from .selectors import invalidate_catalog_list_cache
 
         invalidate_catalog_list_cache()
+        refresh_products_search_text(self.products.all())
 
     def delete(self, *args, **kwargs):
         result = super().delete(*args, **kwargs)
@@ -120,6 +146,12 @@ class Product(TimeStampedModel):
     )
     order = models.PositiveIntegerField('Порядок', default=0, db_index=True)
     is_active = models.BooleanField('Активно', default=True)
+    search_text = models.TextField(
+        'Пошуковий текст',
+        blank=True,
+        editable=False,
+        help_text='Заповнюється автоматично при збереженні товару.',
+    )
 
     class Meta:
         verbose_name = 'Товар'
@@ -132,3 +164,35 @@ class Product(TimeStampedModel):
 
     def __str__(self):
         return f'{self.brand.name} — {self.name} ({self.package})'
+
+    def build_search_text(self) -> str:
+        """Назва/фасування/опис усіх мов + бренд + категорія, нормалізовані."""
+        brand = self.brand if self.brand_id else None
+        category = self.category if self.category_id else None
+        parts = [
+            *_translated_values(self, _SEARCH_TRANSLATED_FIELDS),
+            brand.name if brand else '',
+            *_translated_values(category, ('name',)),
+        ]
+        return build_search_text(parts)
+
+    def save(self, *args, **kwargs):
+        self.search_text = self.build_search_text()
+        update_fields = kwargs.get('update_fields')
+        if update_fields is not None:
+            kwargs['update_fields'] = {*update_fields, 'search_text'}
+        super().save(*args, **kwargs)
+
+
+def refresh_products_search_text(queryset) -> int:
+    """Перебудова search_text для набору товарів (після зміни бренду/категорії)."""
+    products = list(queryset.select_related('brand', 'category'))
+    changed = []
+    for product in products:
+        value = product.build_search_text()
+        if value != product.search_text:
+            product.search_text = value
+            changed.append(product)
+    if changed:
+        Product.objects.bulk_update(changed, ['search_text'], batch_size=500)
+    return len(changed)

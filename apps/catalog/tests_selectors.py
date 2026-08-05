@@ -75,6 +75,42 @@ class CatalogSelectorsTests(TestCase):
         self.assertEqual(get_products(category_slug='chips').count(), 0)
         self.assertEqual(get_products(q='Sen').count(), 3)
 
+    def test_search_is_case_insensitive_for_cyrillic(self):
+        self.assertEqual(get_products(q='чили').count(), 3)
+        self.assertEqual(get_products(q='ЧИЛИ').count(), 3)
+
+    def test_search_ignores_quotes_and_word_order(self):
+        product = Product.objects.create(
+            brand=self.brand,
+            category=self.cat,
+            slug='rice-paper-1',
+            name='«Рисова бумага»',
+            name_ru='«Рисова бумага»',
+            package='100 гр.',
+            package_ru='100 гр.',
+            image=_tiny_png(),
+        )
+        for query in (
+            'рисова бумага',
+            '"Рисова бумага"',
+            'бумага рисова',
+            'рисова 100',
+            'sen soy бумага',
+        ):
+            with self.subTest(query=query):
+                self.assertIn(product, get_products(q=query))
+
+    def test_search_requires_all_tokens(self):
+        self.assertEqual(get_products(q='чили нори').count(), 0)
+
+    def test_search_matches_category_name(self):
+        self.assertEqual(get_products(q='соусы').count(), 3)
+
+    def test_search_text_updates_on_brand_rename(self):
+        self.brand.name = 'Сэн Сой'
+        self.brand.save()
+        self.assertEqual(get_products(q='сэн сой').count(), 3)
+
     def test_paginate_and_group(self):
         page = paginate_products(get_products(), page=1, per_page=2)
         self.assertEqual(len(page.object_list), 2)

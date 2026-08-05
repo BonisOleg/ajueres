@@ -34,6 +34,6 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'brand', 'category', 'package', 'order', 'is_active')
     list_filter = ('brand', 'category', 'is_active')
     list_editable = ('order', 'is_active')
-    search_fields = ('name', 'package', 'brand__name')
+    search_fields = ('name', 'package', 'brand__name', 'search_text')
     prepopulated_fields = {'slug': ('name', 'package')}
     autocomplete_fields = ('brand', 'category')

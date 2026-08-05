@@ -11,10 +11,9 @@ from django.core.paginator import EmptyPage, Page, PageNotAnInteger, Paginator
 from django.db.models import Prefetch, Q, QuerySet
 
 from .models import Brand, Category, Product
+from .search import SEARCH_MAX_LEN, SEARCH_MIN_LEN, tokenize
 
 CATALOG_PER_PAGE = 24
-_SEARCH_MIN_LEN = 2
-_SEARCH_MAX_LEN = 100
 _WHITESPACE_RE = re.compile(r'\s+')
 
 _CACHE_BRANDS_ALL = 'brands_public:all'
@@ -27,9 +26,9 @@ def normalize_search_query(q: str | None) -> str:
     if not q:
         return ''
     normalized = _WHITESPACE_RE.sub(' ', q.strip())
-    if len(normalized) < _SEARCH_MIN_LEN:
+    if len(normalized) < SEARCH_MIN_LEN:
         return ''
-    return normalized[:_SEARCH_MAX_LEN]
+    return normalized[:SEARCH_MAX_LEN]
 
 
 def parse_page_number(raw) -> int:
@@ -126,30 +125,27 @@ def get_products(
     if brand_slug:
         qs = qs.filter(brand__slug=brand_slug)
 
-    query = normalize_search_query(q)
-    if query:
-        qs = qs.filter(_product_search_q(query))
+    search_q = build_product_search_q(normalize_search_query(q))
+    if search_q is not None:
+        qs = qs.filter(search_q)
 
     return qs
 
 
-def _product_search_q(query: str) -> Q:
+def build_product_search_q(query: str) -> Q | None:
     """
-    Пошук по всіх мовах name/package/description + brand.name.
-    На PostgreSQL icontains коректно ігнорує регістр (у т.ч. кирилиця).
+    Кожне слово запиту має входити в `Product.search_text` (AND).
+
+    search_text уже нормалізований (нижній регістр, без лапок і пунктуації),
+    тому `contains` працює однаково на SQLite і PostgreSQL, у т.ч. для кирилиці.
     """
-    return (
-        Q(name_ru__icontains=query)
-        | Q(name_uz__icontains=query)
-        | Q(name_en__icontains=query)
-        | Q(package_ru__icontains=query)
-        | Q(package_uz__icontains=query)
-        | Q(package_en__icontains=query)
-        | Q(description_ru__icontains=query)
-        | Q(description_uz__icontains=query)
-        | Q(description_en__icontains=query)
-        | Q(brand__name__icontains=query)
-    )
+    tokens = tokenize(query)
+    if not tokens:
+        return None
+    condition = Q()
+    for token in tokens:
+        condition &= Q(search_text__contains=token)
+    return condition
 
 
 def paginate_products(
