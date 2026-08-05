@@ -311,18 +311,21 @@ ABOUT_SECTIONS = [
         'Responsibility',
         (
             'Успех производителя напрямую зависит от профессионализма и качества '
-            'локального партнера. Именно поэтому мы берем на себя ответственность '
+            'локального партнера.\n\n'
+            'Именно поэтому мы берем на себя ответственность '
             'не только за продажи, но и за построение сильной позиции бренда на рынке.'
         ),
         (
             'Ishlab chiqaruvchining muvaffaqiyati ko‘p jihatdan mahalliy hamkorning '
-            'professionalligi va ishonchliligiga bog‘liq. Shu sababli biz nafaqat '
+            'professionalligi va ishonchliligiga bog‘liq.\n\n'
+            'Shu sababli biz nafaqat '
             'savdo natijalari, balki brendning bozordagi kuchli mavqeini '
             'shakllantirish uchun ham mas’uliyatni o‘z zimmamizga olamiz.'
         ),
         (
             'A producer’s success depends directly on the professionalism and quality '
-            'of the local partner. That is why we take responsibility not only for '
+            'of the local partner.\n\n'
+            'That is why we take responsibility not only for '
             'sales, but also for building a strong brand position in the market.'
         ),
     ),

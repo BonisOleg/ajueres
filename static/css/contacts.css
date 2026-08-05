@@ -326,10 +326,12 @@
   justify-content: flex-start;
   padding: 32px;
   text-align: left;
+  box-shadow: 0 20px 48px -40px rgba(30, 55, 95, 0.42);
 }
 
 .contacts-coop__eyebrow {
   margin-bottom: 12px;
+  font-family: var(--font);
 }
 
 .contacts-coop__title {
@@ -360,6 +362,7 @@
 
 .contacts-coop__list {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   margin: 14px 0 0;
   padding: 0;
@@ -371,6 +374,18 @@
   grid-template-columns: 26px minmax(0, 1fr);
   align-items: start;
   gap: 10px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid rgba(31, 169, 104, 0.15);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.68);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.contacts-coop__list li:hover {
+  transform: translateY(-3px);
+  border-color: rgba(31, 169, 104, 0.3);
+  box-shadow: 0 12px 24px -20px rgba(22, 107, 69, 0.48);
 }
 
 .contacts-coop__check {
@@ -386,6 +401,85 @@
 
 .contacts-coop__outro {
   margin-top: 20px;
+}
+
+.contacts-coop__service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.contacts-coop__service {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid rgba(73, 85, 107, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.contacts-coop__service:hover {
+  transform: translateY(-4px);
+  border-color: rgba(124, 92, 255, 0.22);
+  box-shadow: 0 16px 28px -22px rgba(30, 55, 95, 0.5);
+}
+
+.contacts-coop__service-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 12px;
+  border-radius: 11px;
+  color: var(--c-purple);
+  background: rgba(124, 92, 255, 0.12);
+}
+
+.contacts-coop__service-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.contacts-coop__service-icon--2 {
+  color: var(--c-blue);
+  background: var(--t-blue);
+}
+
+.contacts-coop__service-icon--3 {
+  color: var(--c-coral);
+  background: var(--t-coral);
+}
+
+.contacts-coop__service-icon--4 {
+  color: var(--c-green);
+  background: var(--t-green);
+}
+
+.contacts-coop__service h3 {
+  margin: 0 0 7px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(0.9375rem, 1.3vw, 1.0625rem);
+  line-height: 1.25;
+  overflow-wrap: break-word;
+}
+
+.contacts-coop__service-text {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.contacts-coop__service-text p {
+  margin: 0;
+}
+
+.contacts-coop__cta {
+  align-self: flex-start;
+  justify-content: center;
+  min-width: 190px;
+  margin-top: 24px;
 }
 
 .contacts-chip {
@@ -414,5 +508,26 @@
 
   .contacts-coop {
     padding: 24px 20px;
+  }
+
+  .contacts-coop__list,
+  .contacts-coop__service-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contacts-coop__cta {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contacts-coop__list li,
+  .contacts-coop__service {
+    transition: none;
+  }
+
+  .contacts-coop__list li:hover,
+  .contacts-coop__service:hover {
+    transform: none;
   }
 }

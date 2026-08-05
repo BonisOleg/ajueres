@@ -84,40 +84,66 @@
 <section class="contacts-main">
   <div class="contacts-split">
     <aside class="contacts-coop reveal" aria-labelledby="contacts-coop-title">
-      <p class="contacts-coop__eyebrow">{% block_text blocks "partners_title" "Сотрудничество" %}</p>
+      <h2 class="contacts-coop__eyebrow" id="contacts-coop-title">{% block_text blocks "partners_title" "Сотрудничество" %}</h2>
       {% if offers %}
-        {% for offer in offers %}
-          <h2 class="contacts-coop__title" {% if forloop.first %}id="contacts-coop-title"{% endif %}>{{ offer.title }}</h2>
-          <div class="contacts-coop__content">
-            {% for paragraph in offer.presentation_intro %}
-              <p>{{ paragraph }}</p>
-            {% endfor %}
-            {% if offer.presentation_label %}<h3>{{ offer.presentation_label }}</h3>{% endif %}
-            {% if offer.presentation_points %}
-              <ul class="contacts-coop__list">
-                {% for point in offer.presentation_points %}
-                  <li>
-                    <span class="contacts-coop__check" aria-hidden="true">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </span>
-                    <span>{{ point }}</span>
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-            {% for paragraph in offer.presentation_outro %}
-              <p class="contacts-coop__outro">{{ paragraph }}</p>
+        {% if offers|length > 1 %}
+          <div class="contacts-coop__service-grid">
+            {% for offer in offers %}
+              <article class="contacts-coop__service">
+                <span class="contacts-coop__service-icon contacts-coop__service-icon--{{ forloop.counter }}" aria-hidden="true">
+                  {% if forloop.counter == 1 %}
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V9m8 10V5m8 14V2M2 19h20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  {% elif forloop.counter == 2 %}
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                  {% elif forloop.counter == 3 %}
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M4 14l3-3 3 2 6-7 4 3M4 19h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {% else %}
+                    <svg viewBox="0 0 24 24" fill="none"><path d="M5 5h14v10H9l-4 4V5zm4 4h6m-6 3h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {% endif %}
+                </span>
+                <h3>{{ offer.title }}</h3>
+                <div class="contacts-coop__service-text">{{ offer.text|linebreaks }}</div>
+              </article>
             {% endfor %}
           </div>
-        {% endfor %}
+        {% else %}
+          {% for offer in offers %}
+            <h3 class="contacts-coop__title">{{ offer.title }}</h3>
+            <div class="contacts-coop__content">
+              {% for paragraph in offer.presentation_intro %}
+                <p>{{ paragraph }}</p>
+              {% endfor %}
+              {% if offer.presentation_label %}<h3>{{ offer.presentation_label }}</h3>{% endif %}
+              {% if offer.presentation_points %}
+                <ul class="contacts-coop__list">
+                  {% for point in offer.presentation_points %}
+                    <li>
+                      <span class="contacts-coop__check" aria-hidden="true">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      </span>
+                      <span>{{ point }}</span>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              {% for paragraph in offer.presentation_outro %}
+                <p class="contacts-coop__outro">{{ paragraph }}</p>
+              {% endfor %}
+            </div>
+          {% endfor %}
+        {% endif %}
       {% else %}
-        <h2 class="contacts-coop__title" id="contacts-coop-title">
+        <h3 class="contacts-coop__title">
           {% trans 'Для торговых сетей, дистрибьюторов и HoReCa' %}
-        </h2>
+        </h3>
         <p class="contacts-coop__text">
           {% trans 'Компания ООО «AJERES» предлагает широкий ассортимент качественных продуктов питания от международных производителей.' %}
         </p>
       {% endif %}
+      <button type="button" class="btn btn--primary contacts-coop__cta" data-open-contact-modal>
+        {% trans 'Стать партнером' %}
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
     </aside>
 
     <div class="contacts-request contacts-request--compact reveal" id="request">
