@@ -66,7 +66,7 @@ def _home_context():
             blocks, 'advantages_visible', bool(advantages)
         ),
         'show_brands': _section_enabled(
-            blocks, 'brands_visible', bool(brand_showcase)
+            blocks, 'brands_visible', bool(retail_partners)
         ),
         'show_cases': _section_enabled(blocks, 'cases_visible', bool(cases)),
         'advantages': advantages,

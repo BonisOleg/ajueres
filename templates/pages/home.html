@@ -111,26 +111,74 @@
 
 <section class="home-coop" aria-labelledby="home-coop-title">
   <div class="home-coop__inner reveal">
-    <header class="home-coop__head">
-      <h2 class="heading heading--lg" id="home-coop-title">{% trans 'Сотрудничество' %}</h2>
-      <p class="home-coop__eyebrow">{% trans 'Для торговых сетей, дистрибьюторов и HoReCa' %}</p>
-    </header>
-    <p class="home-coop__lead">
-      {% trans 'Компания ООО «AJERES» предлагает широкий ассортимент качественных продуктов питания от международных производителей.' %}
-    </p>
-    <p class="home-coop__list-title">{% trans 'Нашим партнерам мы гарантируем:' %}</p>
-    <ul class="home-coop__list">
-      <li>{% trans 'Стабильные поставки' %}</li>
-      <li>{% trans 'Конкурентные цены' %}</li>
-      <li>{% trans 'Широкий ассортимент' %}</li>
-      <li>{% trans 'Маркетинговую поддержку' %}</li>
-      <li>{% trans 'Оперативную логистику' %}</li>
-      <li>{% trans 'Персональное сопровождение' %}</li>
-      <li>{% trans 'Профессиональную работу торговой команды' %}</li>
-    </ul>
-    <p class="home-coop__outro">
-      {% trans 'Мы стремимся строить долгосрочные отношения, основанные на доверии, прозрачности и взаимной выгоде.' %}
-    </p>
+    <div class="home-coop__grid">
+      <div class="home-coop__info">
+        <header class="home-coop__head">
+          <h2 class="heading heading--lg" id="home-coop-title">{% trans 'Сотрудничество' %}</h2>
+          <p class="home-coop__eyebrow">{% trans 'Для торговых сетей, дистрибьюторов и HoReCa' %}</p>
+        </header>
+        <div class="home-coop__copy">
+          <p class="home-coop__lead">
+            {% trans 'Компания ООО «AJERES» предлагает широкий ассортимент качественных продуктов питания от международных производителей.' %}
+          </p>
+          <blockquote class="home-coop__quote">
+            {% trans 'Мы стремимся строить долгосрочные отношения, основанные на доверии, прозрачности и взаимной выгоде.' %}
+          </blockquote>
+        </div>
+        <button type="button" class="btn btn--dark home-coop__cta" data-open-contact-modal>
+          {% trans 'Стать партнером' %}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+
+      <div class="home-coop__guarantees">
+        <p class="home-coop__list-title">{% trans 'Нашим партнерам мы гарантируем:' %}</p>
+        <ul class="home-coop__list">
+          <li class="home-coop__item" style="--i: 0">
+            <span class="home-coop__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>{% trans 'Стабильные поставки' %}</span>
+          </li>
+          <li class="home-coop__item" style="--i: 1">
+            <span class="home-coop__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>{% trans 'Конкурентные цены' %}</span>
+          </li>
+          <li class="home-coop__item" style="--i: 2">
+            <span class="home-coop__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>{% trans 'Широкий ассортимент' %}</span>
+          </li>
+          <li class="home-coop__item" style="--i: 3">
+            <span class="home-coop__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>{% trans 'Маркетинговую поддержку' %}</span>
+          </li>
+          <li class="home-coop__item" style="--i: 4">
+            <span class="home-coop__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>{% trans 'Оперативную логистику' %}</span>
+          </li>
+          <li class="home-coop__item" style="--i: 5">
+            <span class="home-coop__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>{% trans 'Персональное сопровождение' %}</span>
+          </li>
+          <li class="home-coop__item home-coop__item--wide" style="--i: 6">
+            <span class="home-coop__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>{% trans 'Профессиональную работу торговой команды' %}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -142,21 +190,21 @@
   </div>
   <div class="home-brands__mask reveal">
     <div class="home-brands__track">
-      {% for brand in brand_showcase %}
+      {% for partner in retail_partners %}
         <div class="home-brands__card">
-          {% if brand.logo %}
-            <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" loading="lazy" width="180" height="100">
+          {% if partner.logo %}
+            <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" loading="lazy" width="180" height="100">
           {% else %}
-            <span>{{ brand.name }}</span>
+            <span>{{ partner.name }}</span>
           {% endif %}
         </div>
       {% endfor %}
-      {% for brand in brand_showcase %}
+      {% for partner in retail_partners %}
         <div class="home-brands__card" aria-hidden="true">
-          {% if brand.logo %}
-            <img src="{{ brand.logo.url }}" alt="" loading="lazy" width="180" height="100">
+          {% if partner.logo %}
+            <img src="{{ partner.logo.url }}" alt="" loading="lazy" width="180" height="100">
           {% else %}
-            <span>{{ brand.name }}</span>
+            <span>{{ partner.name }}</span>
           {% endif %}
         </div>
       {% endfor %}

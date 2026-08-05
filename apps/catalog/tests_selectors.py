@@ -82,7 +82,7 @@ class CatalogSelectorsTests(TestCase):
         self.assertIn(self.brand, grouped)
 
     def test_parent_category_includes_children(self):
-        snacks = Category.objects.create(slug='snacks', name='СНЕКИ', order=10)
+        snacks = Category.objects.create(slug='snacks', name='Снеки', order=10)
         chips = Category.objects.create(
             slug='chips', name='Чипсы', parent=snacks, order=0
         )

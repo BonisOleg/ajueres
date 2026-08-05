@@ -197,12 +197,12 @@
 
   /* Ширший коридор по центру — місце під більші орби 7+ / 80+ */
   .home-hero__copy {
-    padding-inline: clamp(48px, 14vw, 72px);
+    padding-inline: clamp(20px, 6vw, 32px);
   }
 
   .home-hero__title {
-    max-width: 22ch;
-    font-size: clamp(1.45rem, 4.6vw + 0.5vh, 1.9rem);
+    max-width: none;
+    font-size: clamp(1.25rem, 5.2vw, 1.75rem);
     letter-spacing: 0.015em;
   }
 

@@ -119,6 +119,16 @@ p {
   margin: 0;
 }
 
+h1,
+h2,
+h3,
+.heading {
+  max-width: 100%;
+  text-wrap: balance;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -179,7 +189,14 @@ em {
 }
 
 .heading--lg {
-  font-size: clamp(1.75rem, 4vw, 3.125rem);
+  width: 100%;
+  font-size: clamp(1.65rem, 3.4vw, 3.125rem);
+}
+
+@media (min-width: 768px) {
+  .heading--lg {
+    white-space: nowrap;
+  }
 }
 
 .heading--serif {

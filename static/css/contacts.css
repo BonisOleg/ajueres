@@ -72,9 +72,17 @@
   max-width: min(72ch, 920px);
   width: 100%;
   font-size: clamp(0.875rem, 1.2vw, 1rem);
-  line-height: 1.45;
+  line-height: 1.55;
   color: #3d4757;
   text-wrap: pretty;
+}
+
+.contacts-hero__lead p {
+  margin: 0 0 0.75em;
+}
+
+.contacts-hero__lead p:last-child {
+  margin-bottom: 0;
 }
 
 .contacts-main {

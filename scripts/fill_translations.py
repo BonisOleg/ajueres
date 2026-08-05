@@ -57,6 +57,7 @@ EN = {
         "all questions and discuss mutually beneficial cooperation"
     ),
     "Сотрудничество": "Partnership",
+    "Стать партнером": "Become a partner",
     "Для торговых сетей, дистрибьюторов и HoReCa": (
         "For retail chains, distributors and HoReCa"
     ),
@@ -138,6 +139,14 @@ EN = {
     "Почта": "Email",
     "Построить маршрут": "Get directions",
     "Фильтр": "Filter",
+    "Команда ООО «AJERES» всегда открыта для новых партнерств и готова обсудить возможности сотрудничества.\n\nЕсли вы являетесь производителем продуктов питания, представителем торговой сети или заинтересованы в развитии вашего бренда на рынке Узбекистана, свяжитесь с нами.\n\nМы ответим на все вопросы, подготовим коммерческое предложение и предложим оптимальную стратегию выхода на рынок.": (
+        "The AJERES LLC team is always open to new partnerships and ready to discuss "
+        "cooperation opportunities.\n\n"
+        "If you are a food producer, a retail chain representative, or interested in "
+        "growing your brand on the Uzbekistan market, get in touch with us.\n\n"
+        "We will answer all questions, prepare a commercial proposal, and suggest the "
+        "best market-entry strategy."
+    ),
 }
 
 UZ = {
@@ -190,6 +199,7 @@ UZ = {
         "savollaringizga javob berishga va o‘zaro manfaatli hamkorlikni muhokama qilishga tayyor"
     ),
     "Сотрудничество": "Hamkorlik",
+    "Стать партнером": "Hamkor bo‘lish",
     "Для торговых сетей, дистрибьюторов и HoReCa": (
         "Savdo tarmoqlari, distribyutorlar va HoReCa uchun"
     ),
@@ -276,6 +286,15 @@ UZ = {
     "Почта": "Pochta",
     "Построить маршрут": "Marshrut qurish",
     "Фильтр": "Filtr",
+    "Команда ООО «AJERES» всегда открыта для новых партнерств и готова обсудить возможности сотрудничества.\n\nЕсли вы являетесь производителем продуктов питания, представителем торговой сети или заинтересованы в развитии вашего бренда на рынке Узбекистана, свяжитесь с нами.\n\nМы ответим на все вопросы, подготовим коммерческое предложение и предложим оптимальную стратегию выхода на рынок.": (
+        "«AJERES» MChJ jamoasi har doim yangi hamkorliklar uchun ochiq va siz bilan "
+        "hamkorlik imkoniyatlarini muhokama qilishga tayyor.\n\n"
+        "Agar siz oziq-ovqat mahsulotlari ishlab chiqaruvchisi, savdo tarmog‘i vakili "
+        "yoki brendingizni O‘zbekiston bozorida rivojlantirishni rejalashtirayotgan "
+        "bo‘lsangiz, biz bilan bog‘laning.\n\n"
+        "Biz barcha savollaringizga javob beramiz, tijorat taklifini tayyorlaymiz va "
+        "O‘zbekiston bozoriga kirishning eng maqbul strategiyasini taklif etamiz."
+    ),
 }
 
 
@@ -297,12 +316,7 @@ def _escape_po(s: str) -> str:
 def fill_po(path: Path, mapping: dict[str, str], lang: str) -> None:
     text = path.read_text(encoding="utf-8")
     text = text.replace("#, fuzzy\n", "")
-    text = re.sub(
-        r'"Language:.*\\n"',
-        f'"Language: {lang}\\n"',
-        text,
-        count=1,
-    )
+    # Do not rewrite the Language header — makemessages already sets it.
 
     pattern = re.compile(
         r'(msgid (?:"(?:\\.|[^"\\])*"\s*)+)\s*'

@@ -23,9 +23,9 @@
         {{ contacts_title }}
       {% endif %}
     </h1>
-    <p class="contacts-hero__lead">
-      {% block_text blocks "intro" "Команда ООО «AJERES» всегда открыта для новых партнерств и готова обсудить возможности сотрудничества. Если вы являетесь производителем продуктов питания, представителем торговой сети или заинтересованы в развитии вашего бренда на рынке Узбекистана, свяжитесь с нами. Мы ответим на все вопросы, подготовим коммерческое предложение и предложим оптимальную стратегию выхода на рынок." %}
-    </p>
+    <div class="contacts-hero__lead">
+      {% block_text_br blocks "intro" %}
+    </div>
   </div>
 </section>
 
@@ -50,7 +50,7 @@
 
     <div class="contacts-request contacts-request--compact reveal" id="request">
       <h2 class="contacts-request__title">{% block_text blocks "form_title" "Форма заявки" %}</h2>
-      <p class="contacts-request__lead">{% block_text blocks "form_lead" "Заполните форму — свяжемся с вами." %}</p>
+      <div class="contacts-request__lead">{% block_text_br blocks "form_lead" %}</div>
 
       {% if messages %}
         {% for message in messages %}

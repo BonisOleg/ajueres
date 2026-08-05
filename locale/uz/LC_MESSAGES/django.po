@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AJERES 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-05 13:08+0500\n"
+"POT-Creation-Date: 2026-08-05 14:34+0500\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +35,6 @@ msgstr "Aloqa"
 msgid "Дистрибьютор с 2018 года"
 msgstr "2018-yildan beri distribyutor"
 #: apps/core/i18n_content.py:7
-#| msgid "Мы выводим лучшие бренды на рынок Узбекистана"
 msgid "Лучшие бренды в своем сегменте на рынке Узбекистана"
 msgstr "O‘zbekiston bozorida o‘z segmentidagi eng yaxshi brendlar"
 #: apps/core/i18n_content.py:9
@@ -58,52 +57,67 @@ msgid ""
 "Эксклюзивно представляем производителей сильных брендов, которые доверяют "
 "нам свое развитие"
 msgstr "Rivojlanishini bizga ishonib topshirgan kuchli brend ishlab chiqaruvchilarini eksklyuziv ravishda taqdim etamiz"
-#: apps/core/i18n_content.py:21 templates/pages/home.html:115
+#: apps/core/i18n_content.py:21 templates/pages/home.html:117
 msgid "Сотрудничество"
 msgstr "Hamkorlik"
 #: apps/core/i18n_content.py:22 templates/pages/contacts.html:43
-#: templates/pages/home.html:116
+#: templates/pages/home.html:118
 msgid "Для торговых сетей, дистрибьюторов и HoReCa"
 msgstr "Savdo tarmoqlari, distribyutorlar va HoReCa uchun"
-#: apps/core/i18n_content.py:24 templates/pages/contacts.html:46
-#: templates/pages/home.html:119
+#: apps/core/i18n_content.py:23 templates/pages/home.html:129
+#| msgid "Истории партнёров"
+msgid "Стать партнером"
+msgstr "Hamkor bo‘lish"
+#: apps/core/i18n_content.py:25 templates/pages/contacts.html:46
+#: templates/pages/home.html:122
 msgid ""
 "Компания ООО «AJERES» предлагает широкий ассортимент качественных продуктов "
 "питания от международных производителей."
 msgstr "\"AJERES\" MChJ xalqaro ishlab chiqaruvchilarning keng assortimentdagi sifatli oziq-ovqat mahsulotlarini taklif etadi."
-#: apps/core/i18n_content.py:27 templates/pages/home.html:121
+#: apps/core/i18n_content.py:28 templates/pages/home.html:135
 msgid "Нашим партнерам мы гарантируем:"
 msgstr "Hamkorlarimizga quyidagilarni kafolatlaymiz:"
-#: apps/core/i18n_content.py:28 templates/pages/home.html:123
+#: apps/core/i18n_content.py:29 templates/pages/home.html:141
 msgid "Стабильные поставки"
 msgstr "Barqaror yetkazib berish"
-#: apps/core/i18n_content.py:29 templates/pages/home.html:124
+#: apps/core/i18n_content.py:30 templates/pages/home.html:147
 msgid "Конкурентные цены"
 msgstr "Raqobatbardosh narxlar"
-#: apps/core/i18n_content.py:30 templates/pages/home.html:125
+#: apps/core/i18n_content.py:31 templates/pages/home.html:153
 msgid "Широкий ассортимент"
 msgstr "Keng assortiment"
-#: apps/core/i18n_content.py:31 templates/pages/home.html:126
+#: apps/core/i18n_content.py:32 templates/pages/home.html:159
 msgid "Маркетинговую поддержку"
 msgstr "Marketing qo‘llab-quvvatlovi"
-#: apps/core/i18n_content.py:32 templates/pages/home.html:127
+#: apps/core/i18n_content.py:33 templates/pages/home.html:165
 msgid "Оперативную логистику"
 msgstr "Tezkor logistika"
-#: apps/core/i18n_content.py:33 templates/pages/home.html:128
+#: apps/core/i18n_content.py:34 templates/pages/home.html:171
 msgid "Персональное сопровождение"
 msgstr "Shaxsiy yondashuv"
-#: apps/core/i18n_content.py:34 templates/pages/home.html:129
+#: apps/core/i18n_content.py:35 templates/pages/home.html:177
 msgid "Профессиональную работу торговой команды"
 msgstr "Professional savdo jamoasi"
-#: apps/core/i18n_content.py:36 templates/pages/home.html:132
+#: apps/core/i18n_content.py:37 templates/pages/home.html:125
 msgid ""
 "Мы стремимся строить долгосрочные отношения, основанные на доверии, "
 "прозрачности и взаимной выгоде."
 msgstr "Biz ishonch, ochiqlik va o‘zaro manfaat tamoyillariga asoslangan uzoq muddatli hamkorlikni yo‘lga qo‘yishga intilamiz."
-#: apps/core/i18n_content.py:41 templates/includes/footer.html:20
-#| msgid "Дистрибьютор продуктов питания в Узбекистане"
+#: apps/core/i18n_content.py:42 templates/includes/footer.html:20
 msgid "Дистрибьютор продуктов питания в Республике Узбекистан"
 msgstr "O‘zbekiston Respublikasida oziq-ovqat mahsulotlari distribyutori"
+#: apps/core/i18n_content.py:46
+msgid ""
+"Команда ООО «AJERES» всегда открыта для новых партнерств и готова обсудить "
+"возможности сотрудничества.\n"
+"\n"
+"Если вы являетесь производителем продуктов питания, представителем торговой "
+"сети или заинтересованы в развитии вашего бренда на рынке Узбекистана, "
+"свяжитесь с нами.\n"
+"\n"
+"Мы ответим на все вопросы, подготовим коммерческое предложение и предложим "
+"оптимальную стратегию выхода на рынок."
+msgstr "«AJERES» MChJ jamoasi har doim yangi hamkorliklar uchun ochiq va siz bilan hamkorlik imkoniyatlarini muhokama qilishga tayyor.\n\nAgar siz oziq-ovqat mahsulotlari ishlab chiqaruvchisi, savdo tarmog‘i vakili yoki brendingizni O‘zbekiston bozorida rivojlantirishni rejalashtirayotgan bo‘lsangiz, biz bilan bog‘laning.\n\nBiz barcha savollaringizga javob beramiz, tijorat taklifini tayyorlaymiz va O‘zbekiston bozoriga kirishning eng maqbul strategiyasini taklif etamiz."
 #: apps/leads/views.py:74
 msgid "Слишком много заявок. Попробуйте позже."
 msgstr "So‘rovlar juda ko‘p. Keyinroq urinib ko‘ring."
@@ -176,7 +190,6 @@ msgstr "Bog‘laning"
 msgid "с нами"
 msgstr "biz bilan"
 #: templates/pages/contacts.html:61 templates/partials/contact_success.html:6
-#| msgid "Заявка отправлена"
 msgid "Запрос отправлен!"
 msgstr "So‘rov yuborildi"
 
@@ -193,7 +206,6 @@ msgstr "Pochta"
 msgid "Построить маршрут"
 msgstr "Marshrut qurish"
 #: templates/pages/contacts.html:146
-#| msgid "Каталог AJERES"
 msgid "Карта AJERES"
 msgstr "AJERES katalogi"
 
@@ -204,19 +216,19 @@ msgstr "Oziq-ovqat distribyutori"
 msgid "Наши преимущества"
 msgstr "Afzalliklarimiz"
 
-#: templates/pages/home.html:171
+#: templates/pages/home.html:219
 msgid "Истории партнёров"
 msgstr "Hamkorlar hikoyalari"
-#: templates/pages/home.html:188
+#: templates/pages/home.html:236
 msgid "Начнём сотрудничество?"
 msgstr "Hamkorlikni boshlaymizmi?"
-#: templates/pages/home.html:189
+#: templates/pages/home.html:237
 msgid ""
 "Свяжитесь с нами в любое удобное время, профессиональная команда "
 "специалистов готова ответить на все вопросы и обсудить взаимовыгодное "
 "сотрудничество"
 msgstr "Biz bilan qulay vaqtda bog‘laning — professional mutaxassislar jamoasi barcha savollaringizga javob berishga va o‘zaro manfaatli hamkorlikni muhokama qilishga tayyor"
-#: templates/pages/home.html:193
+#: templates/pages/home.html:241
 msgid "Написать на почту"
 msgstr "Email yozish"
 #: templates/pages/products.html:42
@@ -235,7 +247,6 @@ msgstr "Qidiruv"
 msgid "Поиск товаров…"
 msgstr "Mahsulotlarni qidirish…"
 #: templates/pages/products.html:115
-#| msgid "Производители, которые мы представляем"
 msgid "Производители, которых мы представляем"
 msgstr "Biz vakili bo‘lgan ishlab chiqaruvchilar"
 #: templates/partials/catalog_results.html:21
@@ -273,7 +284,6 @@ msgstr "you@company.com"
 msgid "Отправить"
 msgstr "Yuborish"
 #: templates/partials/contact_success.html:7
-#| msgid "Мы свяжемся с вами в ближайшее время."
 msgid "Спасибо за обращение. Наш менеджер свяжется с вами в ближайшее время."
 msgstr "Tez orada siz bilan bog‘lanamiz."
 

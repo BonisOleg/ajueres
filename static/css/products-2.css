@@ -8,7 +8,8 @@
 }
 
 .catalog-brands__head {
-  max-width: 40rem;
+  width: 100%;
+  max-width: none;
   margin-bottom: clamp(20px, 3vw, 36px);
 }
 

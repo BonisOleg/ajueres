@@ -140,12 +140,14 @@
 }
 
 .home-brands__head {
-  max-width: 560px;
+  width: 100%;
+  max-width: none;
   margin-bottom: clamp(28px, 4vw, 48px);
 }
 
 .home-brands__sub {
   margin-top: 12px;
+  max-width: 62ch;
   color: var(--muted);
   font-size: 1rem;
   line-height: 1.55;

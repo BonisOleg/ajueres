@@ -24,8 +24,16 @@
 .contacts-request__lead {
   margin: 0 0 14px;
   font-size: 0.8125rem;
-  line-height: 1.4;
+  line-height: 1.45;
   color: var(--muted);
+}
+
+.contacts-request__lead p {
+  margin: 0 0 0.65em;
+}
+
+.contacts-request__lead p:last-child {
+  margin-bottom: 0;
 }
 
 .contacts-request--compact .form {
