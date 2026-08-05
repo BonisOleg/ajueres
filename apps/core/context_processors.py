@@ -13,9 +13,9 @@ def site_context(request):
         'form_data': {},
         'form_errors': {},
         'ui_languages': (
-            {'code': 'ru', 'label': 'RU'},
             {'code': 'uz', 'label': 'UZ'},
             {'code': 'en', 'label': 'EN'},
+            {'code': 'ru', 'label': 'RU'},
         ),
         'nav_items': (
             {'url_name': 'home', 'label': _('Главная'), 'tone': 'coral'},

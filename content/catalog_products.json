@@ -4,7 +4,7 @@
     "name": "Pretzel Crush «Cheese Sauce»",
     "package": "65 гр.",
     "brand": "huligan",
-    "category": "chips",
+    "category": "crush",
     "order": 12,
     "image": "huligan-pretzel-crush-cheese-65.png",
     "static_image": "huligan-84a1583f70.png"
@@ -14,7 +14,7 @@
     "name": "Pretzel Crush «Honey Mustard Sauce»",
     "package": "65 гр.",
     "brand": "huligan",
-    "category": "chips",
+    "category": "crush",
     "order": 13,
     "image": "huligan-pretzel-crush-honey-mustard-65.png",
     "static_image": "huligan-0366387586.png"
@@ -24,7 +24,7 @@
     "name": "Pretzel Crush «Jalapeno Sauce»",
     "package": "65 гр.",
     "brand": "huligan",
-    "category": "chips",
+    "category": "crush",
     "order": 14,
     "image": "huligan-pretzel-crush-jalapeno-65.png",
     "static_image": "huligan-76dce634a5.png"
@@ -34,7 +34,7 @@
     "name": "Pretzel Crush «Siracha Chilli Sauce»",
     "package": "65 гр.",
     "brand": "huligan",
-    "category": "chips",
+    "category": "crush",
     "order": 15,
     "image": "huligan-pretzel-crush-siracha-65.png",
     "static_image": "huligan-c6f72b14c3.png"
@@ -44,7 +44,7 @@
     "name": "Брускетта «Tomato & Mozzarella»",
     "package": "70 гр.",
     "brand": "krambals",
-    "category": "chips",
+    "category": "bruschetta",
     "order": 16,
     "image": "krambals-bruschetta-tomato-mozzarella.png",
     "static_image": "krambals-6bb92b92d7.png"
@@ -54,7 +54,7 @@
     "name": "Брускетта «Green Olives & Sea Salt»",
     "package": "70 гр.",
     "brand": "krambals",
-    "category": "chips",
+    "category": "bruschetta",
     "order": 17,
     "image": "krambals-bruschetta-green-olives.png",
     "static_image": "krambals-7c4a2bf29a.png"
@@ -64,7 +64,7 @@
     "name": "Брускетта «Creamy Cheese»",
     "package": "70 гр.",
     "brand": "krambals",
-    "category": "chips",
+    "category": "bruschetta",
     "order": 18,
     "image": "krambals-bruschetta-creamy-cheese.png",
     "static_image": "krambals-de61dbf854.png"
@@ -74,7 +74,7 @@
     "name": "Брускетта «Garden Grill»",
     "package": "70 гр.",
     "brand": "krambals",
-    "category": "chips",
+    "category": "bruschetta",
     "order": 19,
     "image": "krambals-bruschetta-garden-grill.png",
     "static_image": "krambals-87243afd35.png"
@@ -84,7 +84,7 @@
     "name": "Брускетта «Forest Mushrooms & Butter»",
     "package": "70 гр.",
     "brand": "krambals",
-    "category": "chips",
+    "category": "bruschetta",
     "order": 20,
     "image": "krambals-bruschetta-forest-mushrooms.png",
     "static_image": "krambals-f7e54b822c.png"
@@ -254,7 +254,7 @@
     "name": "Чипсы нори «Original»",
     "package": "4,5 гр.",
     "brand": "sen-soy",
-    "category": "seaweed",
+    "category": "chips",
     "order": 0,
     "image": "sen-soy-чипсы-нори-original-45-гр.png",
     "static_image": "sen-soy-2b6be6b0a1.png"
@@ -404,7 +404,7 @@
     "name": "«Рисова бумага»",
     "package": "100 гр.",
     "brand": "sen-soy",
-    "category": "noodles",
+    "category": "rice-paper",
     "order": 15,
     "image": "sen-soy-рисова-бумага-100-гр.png",
     "static_image": "sen-soy-4163f3c637.png"
@@ -424,7 +424,7 @@
     "name": "чипсы нори «Kimchi»",
     "package": "4,5 гр.",
     "brand": "sen-soy",
-    "category": "seaweed",
+    "category": "chips",
     "order": 17,
     "image": "sen-soy-чипсы-нори-kimchi-45-гр.png",
     "static_image": "sen-soy-5b96b8b437.png"
@@ -434,7 +434,7 @@
     "name": "чипсы нори «Original»",
     "package": "4,5 гр.",
     "brand": "sen-soy",
-    "category": "seaweed",
+    "category": "chips",
     "order": 18,
     "image": "sen-soy-чипсы-нори-original-45-гр.png",
     "static_image": "sen-soy-6a3aae92b4.png"
@@ -444,7 +444,7 @@
     "name": "чипсы нори «Olive»",
     "package": "4,5 гр.",
     "brand": "sen-soy",
-    "category": "seaweed",
+    "category": "chips",
     "order": 19,
     "image": "sen-soy-чипсы-нори-olive-45-гр.png",
     "static_image": "sen-soy-aff1c0dfeb.png"

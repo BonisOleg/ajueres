@@ -146,9 +146,9 @@ LANGUAGE_CODE = 'ru'
 
 # Plain strings (not gettext_lazy): Vercel imports settings before django.setup().
 LANGUAGES = [
-    ('ru', 'Русский'),
     ('uz', "O'zbekcha"),
     ('en', 'English'),
+    ('ru', 'Русский'),
 ]
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'

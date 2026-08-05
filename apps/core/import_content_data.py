@@ -4,31 +4,33 @@ from pathlib import Path
 
 NAME_FIX_BY_IMG = {}
 
+# (slug, name_ru, name_uz, name_en, order, parent_slug|None)
 CATEGORIES = [
-    (
-        'sauces',
-        'Соусы и маринады',
-        'Souslar va marinadlar',
-        'Sauces and marinades',
-        0,
-    ),
-    (
-        'noodles',
-        'Макаронные изделия',
-        'Makaron mahsulotlari',
-        'Pasta and noodles',
-        1,
-    ),
+    ('sauces', 'Соусы', 'Souslar', 'Sauces', 0, None),
+    ('noodles', 'Лапша', 'Lag‘mon', 'Noodles', 1, None),
     (
         'seaweed',
-        'Водорослевые продукты',
-        'Suv o‘tlari mahsulotlari',
+        'Продукты из морских водорослей',
+        'Dengiz suv o‘tlari mahsulotlari',
         'Seaweed products',
         2,
+        None,
     ),
-    ('syrups', 'Сиропы', 'Siropilar', 'Syrups', 3),
-    ('chips', 'Чипсы', 'Chipslar', 'Chips', 4),
+    (
+        'rice-paper',
+        'Рисовая бумага',
+        'Guruch qog‘ozi',
+        'Rice paper',
+        3,
+        None,
+    ),
+    ('snacks', 'СНЕКИ', 'SNEKLAR', 'SNACKS', 4, None),
+    ('chips', 'Чипсы', 'Chipslar', 'Chips', 0, 'snacks'),
+    ('bruschetta', 'Брускетта', 'Brusketta', 'Bruschetta', 1, 'snacks'),
+    ('crush', 'Краш', 'Krash', 'Crush', 2, 'snacks'),
 ]
+
+INACTIVE_CATEGORY_SLUGS = ('syrups',)
 
 HOME_BLOCKS = {
     'hero_visible': '1',
@@ -36,17 +38,17 @@ HOME_BLOCKS = {
     'brands_visible': '1',
     'cases_visible': '0',
     'hero_eyebrow': 'Дистрибьютор с 2018 года',
-    'hero_title': 'Мы выводим лучшие бренды на рынок Узбекистана',
+    'hero_title': 'Лучшие бренды в своем сегменте на рынке Узбекистана',
     'hero_text': (
-        'ООО «AJERES» — современная дистрибьюторская компания: импорт, '
-        'логистика, продажи, маркетинг и развитие брендов.'
+        'Импорт, эксклюзивная дистрибуция, вывод на рынок Узбекистана '
+        'новых производителей.'
     ),
     'hero_cta': 'Связаться с нами',
-    'services_title': 'Наши услуги',
+    'services_title': 'Наша деятельность',
     'brands_title': 'Наши бренды',
     'brands_subtitle': (
-        'Мы гордимся сотрудничеством с международными производителями, '
-        'которые доверили нам развитие своих брендов на рынке Узбекистана.'
+        'Эксклюзивно представляем производителей сильных брендов, '
+        'которые доверяют нам свое развитие'
     ),
 }
 
@@ -66,7 +68,7 @@ CONTACTS_BLOCKS = {
     'eyebrow': 'Контакты',
     'title': 'Свяжитесь с нами',
     'intro': (
-        'Команда ООО «AJERES» всегда открыта для новых партнёрств и готова '
+        'Команда ООО «AJERES» всегда открыта для новых партнерств и готова '
         'обсудить возможности сотрудничества.\n\n'
         'Если вы являетесь производителем продуктов питания, представителем '
         'торговой сети или заинтересованы в развитии вашего бренда на рынке '
@@ -76,6 +78,7 @@ CONTACTS_BLOCKS = {
     ),
     'partners_title': 'Сотрудничество',
     'form_title': 'Форма заявки',
+    'map_title': 'Наш офис в Ташкенте',
 }
 
 ADVANTAGE_ROWS = [
@@ -203,9 +206,9 @@ ADVANTAGE_ROWS = [
 ]
 
 STAT_ROWS = [
-    ('200+', 'партнёров', 'hamkorlar', 'partners'),
+    ('2000+', 'магазинов', 'do‘konlar', 'stores'),
     ('80+', 'видов товаров', 'mahsulot turlari', 'product types'),
-    ('7+', 'лет на рынке', 'yillik tajriba', 'years on the market'),
+    ('8+', 'лет на рынке', 'yillik tajriba', 'years on the market'),
     ('39M+', 'население рынка', 'bozor aholisi', 'market population'),
 ]
 
@@ -220,54 +223,104 @@ ABOUT_SECTIONS = [
             'на рынке продуктов питания Республики Узбекистан.\n\n'
             'Мы специализируемся на выводе международных брендов на местный рынок '
             'и обеспечиваем полный комплекс услуг: импорт, логистику, продажи, '
-            'маркетинг и развитие брендов.\n\n'
-            'Наша философия основана на долгосрочном сотрудничестве. Мы рассматриваем '
-            'каждого производителя как стратегического партнёра и инвестируем знания, '
-            'ресурсы и опыт в развитие его бренда.\n\n'
-            'Компания ООО «AJERES» сотрудничает с ведущими международными '
-            'производителями, помогая им успешно выйти на рынок, занять свою нишу '
-            'и обеспечить стабильный рост продаж.\n\n'
-            'Благодаря внимательному анализу рынка, поведения покупателей и '
-            'конкурентной среды наша команда профессионалов предложит наиболее '
-            'эффективную стратегию продвижения.\n\n'
-            'Глубокое знание рынка, развитая сеть продаж и комплексный подход, '
-            'сопровождение бренда на каждом этапе — от первых поставок до '
-            'масштабного присутствия в крупнейших торговых сетях страны.\n\n'
-            'Успех производителя напрямую зависит от профессионализма и качества '
-            'локального партнёра. Именно поэтому мы берём на себя ответственность '
-            'не только за продажи, но и за построение сильной позиции бренда '
-            'на рынке.'
+            'маркетинг и развитие брендов.'
         ),
         (
             '"AJERES" MChJ — O‘zbekiston Respublikasi oziq-ovqat mahsulotlari '
             'bozorida faoliyat yurituvchi zamonaviy distribyutorlik kompaniyasi.\n\n'
             'Biz xalqaro brendlarni mahalliy bozorga olib kirishga ixtisoslashganmiz '
             'hamda import, logistika, savdo, marketing va brendlarni rivojlantirish '
-            'bo‘yicha to‘liq xizmatlar majmuasini taqdim etamiz.\n\n'
+            'bo‘yicha to‘liq xizmatlar majmuasini taqdim etamiz.'
+        ),
+        (
+            'AJERES LLC is a modern food distribution company operating in the '
+            'Republic of Uzbekistan.\n\n'
+            'We specialize in bringing international brands to the local market and '
+            'provide a full cycle of services: import, logistics, sales, marketing '
+            'and brand development.'
+        ),
+    ),
+    (
+        'philosophy',
+        'Философия и партнёры',
+        'Falsafa va hamkorlar',
+        'Philosophy and partners',
+        (
+            'Наша философия основана на долгосрочном сотрудничестве. Мы рассматриваем '
+            'каждого производителя как стратегического партнера и инвестируем свои '
+            'знания, ресурсы и опыт в развитие его бренда.\n\n'
+            'Компания ООО «AJERES» сотрудничает с ведущими международными '
+            'производителями, помогая им успешно выйти на рынок, занять свою нишу '
+            'и обеспечить стабильный рост продаж.'
+        ),
+        (
             'Bizning falsafamiz uzoq muddatli hamkorlikka asoslangan. Har bir '
             'ishlab chiqaruvchini strategik hamkor sifatida ko‘ramiz va uning '
             'brendini rivojlantirish uchun o‘z bilimimiz, tajribamiz va '
             'resurslarimizni safarbar etamiz.\n\n'
             '"AJERES" MChJ yetakchi xalqaro ishlab chiqaruvchilar bilan hamkorlik '
             'qilib, ularga O‘zbekiston bozoriga muvaffaqiyatli kirish, o‘z o‘rnini '
-            'egallash va barqaror savdo o‘sishiga erishishda yordam beradi.\n\n'
+            'egallash va barqaror savdo o‘sishiga erishishda yordam beradi.'
+        ),
+        (
+            'Our philosophy is built on long-term partnership. We treat every '
+            'producer as a strategic partner and invest our knowledge, resources '
+            'and experience in growing their brand.\n\n'
+            'AJERES LLC works with leading international producers, helping them '
+            'enter the market, secure their niche and achieve stable sales growth.'
+        ),
+    ),
+    (
+        'analytics',
+        'Аналитика и сопровождение',
+        'Tahlil va qo‘llab-quvvatlash',
+        'Analytics and support',
+        (
+            'Благодаря внимательному анализу рынка, поведения покупателей и '
+            'конкурентной среды наша команда профессионалов предложит наиболее '
+            'эффективную стратегию продвижения.\n\n'
+            'Глубокое знание рынка, развитая сеть продаж и комплексный подход, '
+            'сопровождение бренда на каждом этапе — от первых поставок до '
+            'масштабного присутствия в крупнейших торговых сетях страны.'
+        ),
+        (
             'Bozor, iste’molchilar xulq-atvori va raqobat muhitini chuqur tahlil '
             'qilish orqali mutaxassislarimiz brendingizni rivojlantirish uchun eng '
             'samarali strategiyani taklif etadi.\n\n'
             'Bozorni chuqur bilishimiz, rivojlangan savdo tarmog‘imiz va kompleks '
             'yondashuvimiz tufayli biz brendni dastlabki yetkazib berishdan boshlab '
             'mamlakatning yirik savdo tarmoqlarida keng miqyosda namoyon '
-            'bo‘lishigacha bo‘lgan barcha bosqichlarda qo‘llab-quvvatlaymiz.\n\n'
+            'bo‘lishigacha bo‘lgan barcha bosqichlarda qo‘llab-quvvatlaymiz.'
+        ),
+        (
+            'Through careful analysis of the market, shopper behaviour and the '
+            'competitive landscape, our specialists propose the most effective '
+            'promotion strategy.\n\n'
+            'Deep market knowledge, a developed sales network and an end-to-end '
+            'approach accompany the brand at every stage — from the first shipments '
+            'to a strong presence in the country’s largest retail chains.'
+        ),
+    ),
+    (
+        'responsibility',
+        'Ответственность',
+        'Mas’uliyat',
+        'Responsibility',
+        (
+            'Успех производителя напрямую зависит от профессионализма и качества '
+            'локального партнера. Именно поэтому мы берем на себя ответственность '
+            'не только за продажи, но и за построение сильной позиции бренда на рынке.'
+        ),
+        (
             'Ishlab chiqaruvchining muvaffaqiyati ko‘p jihatdan mahalliy hamkorning '
             'professionalligi va ishonchliligiga bog‘liq. Shu sababli biz nafaqat '
             'savdo natijalari, balki brendning bozordagi kuchli mavqeini '
             'shakllantirish uchun ham mas’uliyatni o‘z zimmamizga olamiz.'
         ),
         (
-            'AJERES LLC is a modern food distribution company operating in Uzbekistan.\n\n'
-            'We specialize in bringing international brands to the local market and '
-            'provide a full cycle of services: import, logistics, sales, marketing '
-            'and brand development.'
+            'A producer’s success depends directly on the professionalism and quality '
+            'of the local partner. That is why we take responsibility not only for '
+            'sales, but also for building a strong brand position in the market.'
         ),
     ),
     (
@@ -276,36 +329,44 @@ ABOUT_SECTIONS = [
         'O‘zbekiston bozori salohiyati',
         'Uzbekistan market potential',
         (
-            'Узбекистан — одна из самых быстрорастущих экономик Центральной Азии.\n\n'
+            'Узбекистан является одной из самых быстрорастущих экономик Центральной Азии.\n\n'
             'Основные преимущества рынка:\n'
             '• население более 39 миллионов человек;\n'
             '• молодая и активно растущая аудитория;\n'
             '• ежегодный рост современного ритейла;\n'
             '• высокий спрос на импортные продукты питания;\n'
             '• благоприятный инвестиционный климат;\n'
-            '• стратегическое расположение в Центральной Азии.\n\n'
+            '• стратегическое расположение между странами Центральной Азии.\n\n'
             'Эти факторы делают рынок Узбекистана привлекательной площадкой для '
-            'международных производителей продуктов питания.\n\n'
-            'Наша компания помогает партнёрам безопасно и эффективно выйти на '
-            'этот рынок, без риска и репутационных потерь.'
+            'международных производителей продуктов питания. Наша компания помогает '
+            'партнерам безопасно и эффективно выйти на этот рынок, без риска и '
+            'репутационных потерь.'
         ),
         (
             'O‘zbekiston Markaziy Osiyodagi eng tez rivojlanayotgan iqtisodiyotlardan biridir.\n\n'
             'Bozorning asosiy afzalliklari:\n'
             '• 39 milliondan ortiq aholi;\n'
-            '• yosh va tez o‘sib borayotgan auditoriya;\n'
-            '• zamonaviy chakana savdoning yillik o‘sishi;\n'
-            '• import oziq-ovqatga yuqori talab;\n'
+            '• yosh va tez o‘sib borayotgan iste’molchilar auditoriyasi;\n'
+            '• zamonaviy chakana savdo tarmoqlarining yillik o‘sishi;\n'
+            '• import oziq-ovqat mahsulotlariga yuqori talab;\n'
             '• qulay investitsiya muhiti;\n'
             '• Markaziy Osiyo mamlakatlari o‘rtasidagi strategik geografik joylashuv.\n\n'
             'Mazkur omillar O‘zbekistonni xalqaro oziq-ovqat ishlab chiqaruvchilari '
-            'uchun jozibador bozorga aylantiradi.\n\n'
-            'Kompaniyamiz hamkorlarimizga ushbu bozorga xavfsiz, samarali va '
-            'reputatsion xatarlarsiz kirishga yordam beradi.'
+            'uchun jozibador bozorga aylantiradi. Kompaniyamiz hamkorlarimizga ushbu '
+            'bozorga xavfsiz, samarali va reputatsion xatarlarsiz kirishga yordam beradi.'
         ),
         (
-            'Uzbekistan is one of the fastest-growing economies in Central Asia, '
-            'with 39M+ population, rising modern retail and strong demand for imported foods.'
+            'Uzbekistan is one of the fastest-growing economies in Central Asia.\n\n'
+            'Key market advantages:\n'
+            '• population of more than 39 million people;\n'
+            '• a young and actively growing audience;\n'
+            '• annual growth of modern retail;\n'
+            '• high demand for imported food products;\n'
+            '• a favourable investment climate;\n'
+            '• a strategic location between Central Asian countries.\n\n'
+            'These factors make Uzbekistan an attractive platform for international '
+            'food producers. Our company helps partners enter this market safely and '
+            'effectively, without risk or reputational losses.'
         ),
     ),
     (
@@ -316,35 +377,37 @@ ABOUT_SECTIONS = [
         (
             'Предоставлять потребителям Узбекистана качественные продукты питания '
             'мирового уровня и помогать международным производителям успешно развивать '
-            'бизнес в Центральной Азии.'
+            'свой бизнес в Центральной Азии.'
         ),
         (
             'O‘zbekiston iste’molchilariga jahon darajasidagi sifatli oziq-ovqat '
             'mahsulotlarini taqdim etish hamda xalqaro ishlab chiqaruvchilarga '
-            'Markaziy Osiyoda biznesini muvaffaqiyatli rivojlantirishda ko‘maklashish.'
+            'Markaziy Osiyoda o‘z biznesini muvaffaqiyatli rivojlantirishda ko‘maklashish.'
         ),
         (
-            'Provide Uzbekistan consumers with world-class foods and help international '
-            'producers grow successfully in Central Asia.'
+            'Provide Uzbekistan consumers with world-class food products and help '
+            'international producers successfully grow their business in Central Asia.'
         ),
     ),
     (
-        'vision',
-        'Наше видение',
-        'Bizning qarashimiz',
-        'Our vision',
+        'goals',
+        'Наши цели',
+        'Bizning maqsadlarimiz',
+        'Our goals',
         (
             'Стать одним из ведущих дистрибьюторов международных брендов продуктов '
-            'питания в регионе. Мы выводим лучшие бренды на рынок Республики Узбекистан.'
+            'питания в регионе.\n\n'
+            'Мы выводим мировые бренды на рынок Республики Узбекистан.'
         ),
         (
             'Markaziy Osiyoda xalqaro oziq-ovqat brendlarining yetakchi '
-            'distribyutorlaridan biriga aylanish. Biz jahon brendlarini '
-            'O‘zbekiston Respublikasi bozoriga olib chiqamiz.'
+            'distribyutorlaridan biriga aylanish.\n\n'
+            'Biz jahon brendlarini O‘zbekiston Respublikasi bozoriga olib chiqamiz.'
         ),
         (
             'Become one of the leading distributors of international food brands '
-            'in the region.'
+            'in the region.\n\n'
+            'We bring world brands to the market of the Republic of Uzbekistan.'
         ),
     ),
 ]

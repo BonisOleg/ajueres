@@ -1,4 +1,4 @@
-/* Hero stats orbs — hover / press-hold. Mobile-first + iOS Safari. */
+/* Hero stats orbs — click toggle. Mobile-first + iOS Safari. */
 
 .hero-stats {
   position: absolute;
@@ -35,7 +35,7 @@
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
   user-select: none;
-  touch-action: none;
+  touch-action: manipulation;
   transition:
     transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.28s ease,
@@ -126,6 +126,20 @@
 
 .hero-stats__backdrop {
   display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: default;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero-stats.is-open .hero-stats__backdrop {
+  display: block;
 }
 
 .hero-stats__orbs {

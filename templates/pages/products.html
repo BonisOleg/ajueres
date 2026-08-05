@@ -73,7 +73,7 @@
                  hx-indicator="#catalog-results"
                  data-catalog-filters-close>{% trans 'Все' %}</a>
               {% for cat in categories %}
-                <a class="chip{% if active_category == cat.slug %} is-active{% endif %}"
+                <a class="chip{% if active_category == cat.slug or active_parent_slug == cat.slug %} is-active{% endif %}"
                    href="{% url 'products' %}?category={{ cat.slug }}"
                    hx-get="{% url 'products' %}?category={{ cat.slug }}"
                    hx-target="#catalog-results"
@@ -112,8 +112,7 @@
 {% if brands_showcase %}
 <section class="catalog-brands">
   <div class="catalog-brands__head">
-    <h2 class="heading heading--lg">{% trans 'Наши бренды' %}</h2>
-    <p class="catalog-brands__sub">{% trans 'Производители, которые мы представляем' %}</p>
+    <h2 class="heading heading--lg">{% trans 'Производители, которых мы представляем' %}</h2>
   </div>
   <div class="catalog-brands__mask">
     <div class="catalog-brands__track">

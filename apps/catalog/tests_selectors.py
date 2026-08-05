@@ -80,3 +80,35 @@ class CatalogSelectorsTests(TestCase):
         self.assertEqual(len(page.object_list), 2)
         grouped = group_by_brand(page.object_list)
         self.assertIn(self.brand, grouped)
+
+    def test_parent_category_includes_children(self):
+        snacks = Category.objects.create(slug='snacks', name='СНЕКИ', order=10)
+        chips = Category.objects.create(
+            slug='chips', name='Чипсы', parent=snacks, order=0
+        )
+        crush = Category.objects.create(
+            slug='crush', name='Краш', parent=snacks, order=1
+        )
+        Product.objects.create(
+            brand=self.brand,
+            category=chips,
+            slug='chip-1',
+            name='Рисовые чипсы',
+            name_ru='Рисовые чипсы',
+            package='50 гр.',
+            package_ru='50 гр.',
+            image=_tiny_png(),
+        )
+        Product.objects.create(
+            brand=self.brand,
+            category=crush,
+            slug='crush-1',
+            name='Pretzel Crush',
+            name_ru='Pretzel Crush',
+            package='70 гр.',
+            package_ru='70 гр.',
+            image=_tiny_png(),
+        )
+        self.assertEqual(get_products(category_slug='snacks').count(), 2)
+        self.assertEqual(get_products(category_slug='chips').count(), 1)
+        self.assertEqual(get_products(category_slug='crush').count(), 1)

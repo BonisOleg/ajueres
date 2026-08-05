@@ -10,10 +10,18 @@ class TimeStampedModel(models.Model):
 
 
 class Category(TimeStampedModel):
-    """Категорія каталогу (соуси, макаронні, нори, сиропи, чипси)."""
+    """Категорія каталогу (соуси, лапша, водорості, рисова бумага, снеки…)."""
 
     slug = models.SlugField('Slug', max_length=64, unique=True)
     name = models.CharField('Назва', max_length=255)
+    parent = models.ForeignKey(
+        'self',
+        verbose_name='Батьківська категорія',
+        related_name='children',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
     image = models.ImageField(
         'Зображення',
         upload_to='catalog/categories/',

@@ -10,9 +10,12 @@ from django.core.management.base import BaseCommand
 from apps.catalog.models import Brand, Category, Product
 from apps.catalog.selectors import invalidate_catalog_list_cache
 from apps.core.import_content_data import (
+    ABOUT_SECTIONS,
     ADVANTAGE_ROWS,
     BRAND_LOGOS_DIR,
     BRANDS_SPEC,
+    CATEGORIES,
+    INACTIVE_CATEGORY_SLUGS,
     PRODUCT_IMAGES_DIR,
     RETAIL_LOGOS_DIR,
     RETAIL_PARTNERS_SPEC,
@@ -89,7 +92,9 @@ class Command(BaseCommand):
         )
         if created:
             return
-        # do not overwrite existing content
+        if text and obj.text_html != text:
+            obj.text_html = text
+            obj.save()
 
     def _blocks(self):
         pairs = [
@@ -98,19 +103,25 @@ class Command(BaseCommand):
             ('home', 'brands_visible', '1'),
             ('home', 'cases_visible', '0'),
             ('home', 'hero_eyebrow', 'Дистрибьютор с 2018 года'),
-            ('home', 'hero_title', 'Азиатские вкусы для вашего бизнеса'),
+            (
+                'home',
+                'hero_title',
+                'Лучшие бренды в своем сегменте на рынке Узбекистана',
+            ),
             (
                 'home',
                 'hero_text',
-                'Соусы, маринады, лапша, нори, сиропы и чипсы — '
-                'оптовые поставки для магазинов и HoReCa.',
+                'Импорт, эксклюзивная дистрибуция, вывод на рынок Узбекистана '
+                'новых производителей.',
             ),
             ('home', 'hero_cta', 'Связаться с нами'),
+            ('home', 'services_title', 'Наша деятельность'),
             ('home', 'brands_title', 'Наши бренды'),
             (
                 'home',
                 'brands_subtitle',
-                'Работаем напрямую с производителями, которым доверяют профессионалы',
+                'Эксклюзивно представляем производителей сильных брендов, '
+                'которые доверяют нам свое развитие',
             ),
             ('about', 'eyebrow', 'О компании'),
             ('about', 'title', 'ООО «AJERES»'),
@@ -127,16 +138,21 @@ class Command(BaseCommand):
             (
                 'contacts',
                 'intro',
-                'Ответим на вопросы, пришлём прайс и подберём ассортимент '
-                'под ваш формат бизнеса. Работаем с магазинами, HoReCa и '
-                'дистрибьюторами.',
+                'Команда ООО «AJERES» всегда открыта для новых партнерств и '
+                'готова обсудить возможности сотрудничества.\n\n'
+                'Если вы являетесь производителем продуктов питания, '
+                'представителем торговой сети или заинтересованы в развитии '
+                'вашего бренда на рынке Узбекистана, свяжитесь с нами.\n\n'
+                'Мы ответим на все вопросы, подготовим коммерческое предложение '
+                'и предложим оптимальную стратегию выхода на рынок.',
             ),
-            ('contacts', 'partners_title', 'Для партнёров'),
+            ('contacts', 'partners_title', 'Сотрудничество'),
             ('contacts', 'form_title', 'Отправить нам запрос'),
             (
                 'contacts',
                 'form_lead',
-                'Заполните форму — свяжемся с вами и пришлём предложение.',
+                'Команда ООО «AJERES» всегда открыта для новых партнерств и '
+                'готова обсудить возможности сотрудничества.',
             ),
             ('contacts', 'phone_note', 'Пн–Сб, 9:00–18:00'),
             ('contacts', 'email_note', 'Отвечаем в течение дня'),
@@ -146,7 +162,7 @@ class Command(BaseCommand):
                 'wholesale_text',
                 'Отгрузка со склада в Ташкенте и доставка по региону.',
             ),
-            ('contacts', 'map_title', 'Наш склад в Ташкенте'),
+            ('contacts', 'map_title', 'Наш офис в Ташкенте'),
         ]
         for page, key, text in pairs:
             self._set_block(page, key, text)
@@ -213,40 +229,41 @@ class Command(BaseCommand):
 
 
     def _about(self):
-        if AboutSection.objects.exists():
-            return
-        sections = [
-            (
-                'history',
-                'О компании',
-                'ООО «AJERES» — современная дистрибьюторская компания, '
-                'работающая на рынке продуктов питания Республики Узбекистан.\n\n'
-                'Мы специализируемся на выводе международных брендов на местный '
-                'рынок и обеспечиваем полный комплекс услуг: импорт, логистику, '
-                'продажи, маркетинг и развитие брендов.',
-            ),
-            (
-                'mission',
-                'Наша миссия',
-                'Предоставлять потребителям Узбекистана качественные продукты '
-                'питания мирового уровня и помогать международным производителям '
-                'успешно развивать свой бизнес в Центральной Азии.',
-            ),
-            (
-                'vision',
-                'Наше видение',
-                'Стать одним из ведущих дистрибьюторов международных брендов '
-                'продуктов питания в регионе.',
-            ),
-        ]
-        for i, (key, title, body) in enumerate(sections):
-            AboutSection.objects.create(
+        keep_keys = set()
+        for i, row in enumerate(ABOUT_SECTIONS):
+            key = row[0]
+            keep_keys.add(key)
+            title_ru, title_uz, title_en = row[1], row[2], row[3]
+            body_ru, body_uz, body_en = row[4], row[5], row[6]
+            obj, _ = AboutSection.objects.get_or_create(
                 section_key=key,
-                title=title,
-                body=body,
-                order=i,
-                is_active=True,
+                defaults={
+                    'title': title_ru,
+                    'body': body_ru,
+                    'order': i,
+                    'is_active': True,
+                },
             )
+            obj.title = title_ru
+            obj.body = body_ru
+            obj.order = i
+            obj.is_active = True
+            update_fields = ['title', 'body', 'order', 'is_active']
+            for field, value in (
+                ('title_ru', title_ru),
+                ('title_uz', title_uz),
+                ('title_en', title_en),
+                ('body_ru', body_ru),
+                ('body_uz', body_uz),
+                ('body_en', body_en),
+            ):
+                if hasattr(obj, field):
+                    setattr(obj, field, value)
+                    update_fields.append(field)
+            obj.save(update_fields=list(dict.fromkeys(update_fields)))
+        AboutSection.objects.exclude(section_key__in=keep_keys).update(
+            is_active=False
+        )
 
     def _partners(self):
         if PartnerOffer.objects.exists():
@@ -370,24 +387,41 @@ class Command(BaseCommand):
         return [row for row in rows if isinstance(row, dict) and row.get('slug')]
 
     def _catalog(self):
-        categories = [
-            ('sauces', 'Соусы и маринады', 0),
-            ('noodles', 'Макаронные изделия', 1),
-            ('seaweed', 'Водорослевые продукты', 2),
-            ('syrups', 'Сиропы', 3),
-            ('chips', 'Чипсы', 4),
-        ]
         cat_map = {}
-        for slug, name, order in categories:
+        for slug, name_ru, _uz, _en, order, _parent in CATEGORIES:
             cat, _ = Category.objects.get_or_create(
                 slug=slug,
-                defaults={'name': name, 'order': order, 'is_active': True},
+                defaults={'name': name_ru, 'order': order, 'is_active': True},
             )
             cat.is_active = True
-            cat.name = name
+            cat.name = name_ru
+            if hasattr(cat, 'name_ru'):
+                cat.name_ru = name_ru
             cat.order = order
             cat.save()
             cat_map[slug] = cat
+
+        for slug, name_ru, name_uz, name_en, order, parent_slug in CATEGORIES:
+            cat = cat_map[slug]
+            cat.parent = cat_map.get(parent_slug) if parent_slug else None
+            cat.order = order
+            cat.is_active = True
+            cat.name = name_ru
+            update_fields = ['parent', 'order', 'is_active', 'name']
+            for field, value in (
+                ('name_ru', name_ru),
+                ('name_uz', name_uz),
+                ('name_en', name_en),
+            ):
+                if hasattr(cat, field):
+                    setattr(cat, field, value)
+                    update_fields.append(field)
+            cat.save(update_fields=list(dict.fromkeys(update_fields)))
+
+        if INACTIVE_CATEGORY_SLUGS:
+            Category.objects.filter(slug__in=INACTIVE_CATEGORY_SLUGS).update(
+                is_active=False
+            )
 
         brand_map = {}
         for slug, name, logo_file, order, featured in BRANDS_SPEC:

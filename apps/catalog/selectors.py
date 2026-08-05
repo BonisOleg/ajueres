@@ -8,7 +8,7 @@ from typing import Iterable
 
 from django.core.cache import cache
 from django.core.paginator import EmptyPage, Page, PageNotAnInteger, Paginator
-from django.db.models import Q, QuerySet
+from django.db.models import Prefetch, Q, QuerySet
 
 from .models import Brand, Category, Product
 
@@ -64,8 +64,43 @@ def get_brands_for_showcase(*, featured_only: bool = False) -> list[Brand]:
     return brands
 
 
-def get_categories() -> QuerySet[Category]:
-    return Category.objects.filter(is_active=True).order_by('order', 'name')
+def _children_prefetch() -> Prefetch:
+    return Prefetch(
+        'children',
+        queryset=Category.objects.filter(is_active=True).order_by('order', 'name'),
+    )
+
+
+def get_categories() -> list[Category]:
+    """Кореневі активні категорії з prefetch дітей для фільтра."""
+    return list(
+        Category.objects.filter(is_active=True, parent__isnull=True)
+        .prefetch_related(_children_prefetch())
+        .order_by('order', 'name')
+    )
+
+
+def resolve_category_filter(
+    category_slug: str | None,
+) -> tuple[Category | None, list[str]]:
+    """
+    Повертає (категорія, список slug для фільтра товарів).
+    Для батька — slug батька + активних нащадків.
+    """
+    if not category_slug:
+        return None, []
+    cat = (
+        Category.objects.filter(is_active=True, slug=category_slug)
+        .select_related('parent')
+        .prefetch_related(_children_prefetch())
+        .first()
+    )
+    if not cat:
+        return None, [category_slug]
+    child_slugs = [c.slug for c in cat.children.all()]
+    if child_slugs:
+        return cat, [cat.slug, *child_slugs]
+    return cat, [cat.slug]
 
 
 def get_products(
@@ -80,12 +115,14 @@ def get_products(
             brand__is_active=True,
             category__is_active=True,
         )
-        .select_related('brand', 'category')
+        .select_related('brand', 'category', 'category__parent')
         .order_by('brand__order', 'order', 'name')
     )
 
     if category_slug:
-        qs = qs.filter(category__slug=category_slug)
+        _, slugs = resolve_category_filter(category_slug)
+        if slugs:
+            qs = qs.filter(category__slug__in=slugs)
     if brand_slug:
         qs = qs.filter(brand__slug=brand_slug)
 

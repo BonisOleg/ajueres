@@ -5,10 +5,12 @@ from .models import Brand, Category, Product
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'order', 'is_active')
+    list_display = ('name', 'slug', 'parent', 'order', 'is_active')
     list_editable = ('order', 'is_active')
+    list_filter = ('parent', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ('name', 'slug')
+    autocomplete_fields = ('parent',)
 
 
 class ProductInline(admin.TabularInline):

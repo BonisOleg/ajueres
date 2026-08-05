@@ -6,6 +6,7 @@
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 <link rel="stylesheet" href="{% static 'css/home-2.css' %}">
+<link rel="stylesheet" href="{% static 'css/home-3.css' %}">
 <link rel="stylesheet" href="{% static 'css/home-stats.css' %}">
 {% endblock %}
 
@@ -29,8 +30,8 @@
   <div class="home-hero__stage">
     <div class="home-hero__copy reveal">
       <p class="home-hero__eyebrow">{% block_text blocks "hero_eyebrow" "Дистрибьютор с 2018 года" %}</p>
-      <h1 class="home-hero__title">{% block_text blocks "hero_title" "Мы выводим лучшие бренды на рынок Узбекистана" %}</h1>
-      <p class="home-hero__lead">{% block_text blocks "hero_text" "ООО «AJERES» — современная дистрибьюторская компания: импорт, логистика, продажи, маркетинг и развитие брендов." %}</p>
+      <h1 class="home-hero__title">{% block_text blocks "hero_title" "Лучшие бренды в своем сегменте на рынке Узбекистана" %}</h1>
+      <p class="home-hero__lead">{% block_text blocks "hero_text" "Импорт, эксклюзивная дистрибуция, вывод на рынок Узбекистана новых производителей." %}</p>
     </div>
     <div class="home-hero__cta reveal">
       <button type="button" class="btn btn--dark" data-open-contact-modal>
@@ -94,7 +95,7 @@
 {% if show_advantages %}
 <section class="home-advantages">
   <div class="home-advantages__head reveal">
-    <h2 class="heading heading--lg">{% block_text blocks "services_title" "Наши услуги" %}</h2>
+    <h2 class="heading heading--lg">{% block_text blocks "services_title" "Наша деятельность" %}</h2>
   </div>
   <div class="home-advantages__grid">
     {% for a in advantages %}
@@ -108,11 +109,36 @@
 </section>
 {% endif %}
 
+<section class="home-coop" aria-labelledby="home-coop-title">
+  <div class="home-coop__inner reveal">
+    <header class="home-coop__head">
+      <h2 class="heading heading--lg" id="home-coop-title">{% trans 'Сотрудничество' %}</h2>
+      <p class="home-coop__eyebrow">{% trans 'Для торговых сетей, дистрибьюторов и HoReCa' %}</p>
+    </header>
+    <p class="home-coop__lead">
+      {% trans 'Компания ООО «AJERES» предлагает широкий ассортимент качественных продуктов питания от международных производителей.' %}
+    </p>
+    <p class="home-coop__list-title">{% trans 'Нашим партнерам мы гарантируем:' %}</p>
+    <ul class="home-coop__list">
+      <li>{% trans 'Стабильные поставки' %}</li>
+      <li>{% trans 'Конкурентные цены' %}</li>
+      <li>{% trans 'Широкий ассортимент' %}</li>
+      <li>{% trans 'Маркетинговую поддержку' %}</li>
+      <li>{% trans 'Оперативную логистику' %}</li>
+      <li>{% trans 'Персональное сопровождение' %}</li>
+      <li>{% trans 'Профессиональную работу торговой команды' %}</li>
+    </ul>
+    <p class="home-coop__outro">
+      {% trans 'Мы стремимся строить долгосрочные отношения, основанные на доверии, прозрачности и взаимной выгоде.' %}
+    </p>
+  </div>
+</section>
+
 {% if show_brands %}
 <section class="home-brands">
   <div class="home-brands__head reveal">
     <h2 class="heading heading--lg">{% block_text blocks "brands_title" "Наши бренды" %}</h2>
-    <p class="home-brands__sub">{% block_text blocks "brands_subtitle" "Мы гордимся сотрудничеством с международными производителями, которые доверили нам развитие своих брендов на рынке Узбекистана." %}</p>
+    <p class="home-brands__sub">{% block_text blocks "brands_subtitle" "Эксклюзивно представляем производителей сильных брендов, которые доверяют нам свое развитие" %}</p>
   </div>
   <div class="home-brands__mask reveal">
     <div class="home-brands__track">
@@ -160,7 +186,7 @@
   <div class="home-cta__inner reveal">
     <div class="home-cta__copy">
       <h2 class="home-cta__title">{% trans 'Начнём сотрудничество?' %}</h2>
-      <p class="home-cta__text">{% trans 'Пришлём актуальный прайс и подберём ассортимент под ваш формат бизнеса.' %}</p>
+      <p class="home-cta__text">{% trans 'Свяжитесь с нами в любое удобное время, профессиональная команда специалистов готова ответить на все вопросы и обсудить взаимовыгодное сотрудничество' %}</p>
     </div>
     <div class="home-cta__actions">
       {% if site_settings.email %}

@@ -34,7 +34,7 @@
   <div class="about-stack">
     {% for section in sections %}
       <article
-        class="about-sheet about-sheet--{{ section.section_key|default:'section' }}"
+        class="about-sheet about-sheet--{{ section.section_key|default:'section' }}{% if section.section_key == 'philosophy' or section.section_key == 'analytics' or section.section_key == 'responsibility' %} about-sheet--card{% endif %}{% if section.section_key == 'market' %} about-sheet--market{% endif %}"
         data-section="{{ section.section_key }}"
       >
         <div class="about-sheet__paper">

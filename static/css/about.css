@@ -5,15 +5,15 @@
 }
 
 .about-stack {
-  --about-stack-max: min(720px, 100%);
+  --about-stack-max: min(960px, 100%);
   --paper: #fcfcfa;
   position: relative;
   width: 100%;
   max-width: var(--about-stack-max);
   margin: 0 auto;
   padding: 4px 0 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 18px;
 }
 
@@ -111,6 +111,18 @@
   color: color-mix(in srgb, var(--c-coral) 72%, var(--ink));
 }
 
+.about-sheet--philosophy .about-sheet__title {
+  color: color-mix(in srgb, var(--c-coral) 60%, var(--ink));
+}
+
+.about-sheet--analytics .about-sheet__title {
+  color: color-mix(in srgb, var(--c-blue) 55%, var(--ink));
+}
+
+.about-sheet--responsibility .about-sheet__title {
+  color: color-mix(in srgb, var(--c-amber, #f79315) 55%, var(--ink));
+}
+
 .about-sheet--market .about-sheet__title {
   color: color-mix(in srgb, var(--c-purple) 65%, var(--ink));
 }
@@ -119,8 +131,25 @@
   color: color-mix(in srgb, var(--c-green) 55%, var(--ink));
 }
 
-.about-sheet--vision .about-sheet__title {
+.about-sheet--vision .about-sheet__title,
+.about-sheet--goals .about-sheet__title {
   color: color-mix(in srgb, var(--c-blue) 55%, var(--ink));
+}
+
+.about-sheet--card .about-sheet__paper {
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(252, 252, 250, 0.9)),
+    var(--paper);
+}
+
+.about-sheet--market {
+  grid-column: 1 / -1;
+}
+
+.about-sheet--about,
+.about-sheet--mission,
+.about-sheet--goals {
+  grid-column: 1 / -1;
 }
 
 .about-cta {
@@ -173,13 +202,28 @@
   }
 }
 
+@media (min-width: 720px) {
+  .about-stack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-sheet--card {
+    height: 100%;
+  }
+
+  .about-sheet--card .about-sheet__paper {
+    height: 100%;
+  }
+}
+
 @media (min-width: 960px) {
   .about-main .contacts-chips {
     grid-template-columns: repeat(4, 1fr);
   }
 
   .about-stack {
-    --about-stack-max: 760px;
+    --about-stack-max: 960px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .about-sheet__paper {

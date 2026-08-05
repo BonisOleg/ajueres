@@ -26,6 +26,7 @@ from apps.core.import_content_data import (
     CATEGORIES,
     CONTACTS_BLOCKS,
     HOME_BLOCKS,
+    INACTIVE_CATEGORY_SLUGS,
     NAME_FIX_BY_IMG,
     PARTNER_ROWS,
     PRIVACY_DEFAULTS,
@@ -65,20 +66,17 @@ def abs_url(path: str) -> str:
 
 def guess_category(name: str) -> str:
     n = name.lower()
-    if any(x in n for x in ('нори', 'nori', 'чипсы нори')):
+    if any(x in n for x in ('рисова бумага', 'рисовая бумага', 'rice paper')):
+        return 'rice-paper'
+    if 'чипсы нори' in n or ('нори' in n and 'чип' in n):
+        return 'chips'
+    if any(x in n for x in ('суши нори', 'нори', 'nori')):
         return 'seaweed'
-    if any(
-        x in n
-        for x in (
-            'чипсы',
-            'chips',
-            'pretzel',
-            'bruschetta',
-            'брускетт',
-            'tortilla',
-            'тортиль',
-        )
-    ):
+    if any(x in n for x in ('брускетт', 'bruschetta')):
+        return 'bruschetta'
+    if any(x in n for x in ('crush', 'pretzel', 'краш')):
+        return 'crush'
+    if any(x in n for x in ('чипсы', 'chips', 'tortilla', 'тортиль', 'рисовые чипсы')):
         return 'chips'
     if any(
         x in n
@@ -90,13 +88,9 @@ def guess_category(name: str) -> str:
             'vermicelli',
             'fo - kho',
             'fo-kho',
-            'рисова бумага',
-            'рисовая бумага',
         )
     ):
         return 'noodles'
-    if 'сироп' in n or 'syrup' in n:
-        return 'syrups'
     return 'sauces'
 
 
@@ -229,16 +223,29 @@ class Command(BaseCommand):
         s.save()
 
     def _categories(self, force: bool):
-        for slug, ru, uz, en, order in CATEGORIES:
+        by_slug: dict[str, Category] = {}
+        for slug, ru, uz, en, order, parent_slug in CATEGORIES:
             cat, _ = Category.objects.get_or_create(slug=slug)
+            by_slug[slug] = cat
             if force or not cat.name_ru:
                 cat.name = ru
                 cat.name_ru = ru
                 cat.name_uz = uz
                 cat.name_en = en
-                cat.order = order
-                cat.is_active = True
-                cat.save()
+            cat.order = order
+            cat.is_active = True
+            cat.save()
+
+        for slug, _ru, _uz, _en, order, parent_slug in CATEGORIES:
+            cat = by_slug[slug]
+            cat.parent = by_slug.get(parent_slug) if parent_slug else None
+            cat.order = order
+            cat.save(update_fields=['parent', 'order', 'updated_at'])
+
+        if INACTIVE_CATEGORY_SLUGS:
+            Category.objects.filter(slug__in=INACTIVE_CATEGORY_SLUGS).update(
+                is_active=False
+            )
 
     def _set_block(self, page, key, text, force):
         obj, created = SiteBlock.objects.get_or_create(

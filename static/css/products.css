@@ -147,6 +147,22 @@
   padding-block: 2px;
 }
 
+.catalog-chips--sub {
+  margin: 10px 0 14px;
+  padding: 8px;
+  border-radius: 14px;
+  background: rgba(30, 36, 48, 0.04);
+  flex-wrap: wrap;
+}
+
+.catalog-stage .chip--sub {
+  min-height: 36px;
+  font-size: 0.75rem;
+  font-weight: 650;
+  padding: 6px 12px;
+  border-radius: 10px;
+}
+
 .catalog-stage .chip {
   border-radius: 12px;
   border: 1px solid rgba(30, 36, 48, 0.1);

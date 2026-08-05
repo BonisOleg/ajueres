@@ -3,220 +3,340 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AJERES 1.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-05 13:08+0500\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: apps/core/context_processors.py:21 templates/includes/breadcrumbs.html:6
+#: templates/includes/breadcrumbs.html:10 templates/includes/header.html:11
+#: templates/includes/header.html:121
 msgid "Главная"
 msgstr "Bosh sahifa"
-
-msgid "Продукты"
-msgstr "Mahsulotlar"
-
+#: apps/core/context_processors.py:22 templates/includes/breadcrumbs.html:20
+#: templates/includes/header.html:19 templates/includes/header.html:123
+#: templates/pages/products.html:4 templates/pages/products.html:22
 msgid "Каталог"
 msgstr "Katalog"
-
+#: apps/core/context_processors.py:23 templates/includes/breadcrumbs.html:18
+#: templates/includes/header.html:47 templates/includes/header.html:122
+#: templates/pages/about.html:4
 msgid "О компании"
 msgstr "Kompaniya haqida"
-
+#: apps/core/context_processors.py:24 templates/includes/breadcrumbs.html:22
+#: templates/includes/footer.html:48 templates/includes/header.html:48
+#: templates/includes/header.html:124 templates/includes/header.html:129
+#: templates/pages/contacts.html:4
 msgid "Контакты"
 msgstr "Aloqa"
-
-msgid "Слишком много заявок. Попробуйте позже."
-msgstr "So‘rovlar juda ko‘p. Keyinroq urinib ko‘ring."
-
-msgid "Заявка отправлена. Мы свяжемся с вами."
-msgstr "So‘rov yuborildi. Tez orada bog‘lanamiz."
-
-msgid "Русский"
-msgstr "Ruscha"
-
-msgid "O'zbekcha"
-msgstr "Oʻzbekcha"
-
-msgid "English"
-msgstr "Inglizcha"
-
-msgid "Дистрибьютор продуктов питания в Узбекистане"
-msgstr "O‘zbekistonda oziq-ovqat distribyutori"
-
-msgid "Назад"
-msgstr "Orqaga"
-
-msgid "Далее"
-msgstr "Keyingi"
-
-msgid "Хлебные крошки"
-msgstr "Navigatsiya izi"
-
-msgid "Политика приватности"
-msgstr "Maxfiylik siyosati"
-
-msgid "Закрыть"
-msgstr "Yopish"
-
-msgid "Связаться с нами"
-msgstr "Biz bilan bog‘laning"
-
-msgid "Оставьте заявку — мы ответим и подготовим коммерческое предложение."
-msgstr "So‘rov qoldiring — javob beramiz va tijorat taklifini tayyorlaymiz."
-
-msgid ""
-"Дистрибьютор азиатской и специализированной бакалеи для магазинов, HoReCa и "
-"партнёров."
-msgstr ""
-"Do‘konlar, HoReCa va hamkorlar uchun Osiyo va maxsus bakalya distribyutori."
-
-msgid "Меню"
-msgstr "Menyu"
-
-msgid "Навигация"
-msgstr "Navigatsiya"
-
-msgid "Все права защищены."
-msgstr "Barcha huquqlar himoyalangan."
-
-msgid "Политика конфиденциальности"
-msgstr "Maxfiylik siyosati"
-
-msgid "Основная навигация"
-msgstr "Asosiy navigatsiya"
-
-msgid "Категории продуктов"
-msgstr "Mahsulot kategoriyalari"
-
-msgid "Смотреть весь каталог"
-msgstr "Butun katalogni ko‘rish"
-
-msgid "Связаться"
-msgstr "Bog‘lanish"
-
-msgid "Закрыть меню"
-msgstr "Menyuni yopish"
-
-msgid "Контент скоро появится."
-msgstr "Kontent tez orada paydo bo‘ladi."
-
-msgid "Дистрибьютор продуктов питания"
-msgstr "Oziq-ovqat distribyutori"
-
-msgid "Каталог AJERES"
-msgstr "AJERES katalogi"
-
-msgid "Все товары"
-msgstr "Barcha mahsulotlar"
-
-msgid "Истории партнёров"
-msgstr "Hamkorlar hikoyalari"
-
-msgid "Начнём сотрудничество?"
-msgstr "Hamkorlikni boshlaymizmi?"
-
-msgid "Пришлём актуальный прайс и подберём ассортимент под ваш формат бизнеса."
-msgstr "Aktual narxlar ro‘yxatini yuboramiz va assortimentni biznesingizga moslaymiz."
-
-msgid "Написать на почту"
-msgstr "Email yozish"
-
-msgid "Наш каталог"
-msgstr "Bizning katalog"
-
-msgid ""
-"Фильтруйте по категориям или ищите по названию. Под каталогом — бренды-"
-"производители."
-msgstr ""
-"Kategoriya bo‘yicha filtrlang yoki nom bo‘yicha qidiring. Katalog ostida — brendlar."
-
-msgid "Категории"
-msgstr "Kategoriyalar"
-
-msgid "Все"
-msgstr "Hammasi"
-
-msgid "Поиск"
-msgstr "Qidiruv"
-
-msgid "Поиск товаров…"
-msgstr "Mahsulotlarni qidirish…"
-
-msgid "Наши бренды"
-msgstr "Bizning brendlar"
-
-msgid "Производители, которые мы представляем"
-msgstr "Biz vakili bo‘lgan ishlab chiqaruvchilar"
-
-msgid "Смотреть товары"
-msgstr "Mahsulotlarni ko‘rish"
-
-msgid "Ничего не найдено"
-msgstr "Hech narsa topilmadi"
-
-msgid "Сбросить"
-msgstr "Tozalash"
-
-msgid "Показано %(start)s–%(end)s из %(total)s"
-msgstr "%(total)s dan %(start)s–%(end)s ko‘rsatilmoqda"
-
-msgid "Страницы"
-msgstr "Sahifalar"
-
-msgid "С какой целью обращаетесь"
-msgstr "Murojaat maqsadi"
-
-msgid "Имя"
-msgstr "Ism"
-
-msgid "Телефон"
-msgstr "Telefon"
-
-msgid "Электронная почта"
-msgstr "Elektron pochta"
-
-msgid "Отправить"
-msgstr "Yuborish"
-
-msgid "Например: интересует оптовый прайс на соусы и лапшу"
-msgstr "Masalan: souslar va lag‘mon uchun ulgurji narxlar qiziqtiradi"
-
-msgid "Ваше имя"
-msgstr "Ismingiz"
-
-msgid "you@company.com"
-msgstr "you@company.com"
-
-msgid "Заявка отправлена"
-msgstr "So‘rov yuborildi"
-
-msgid "Мы свяжемся с вами в ближайшее время."
-msgstr "Tez orada siz bilan bog‘lanamiz."
-
+#: apps/core/i18n_content.py:6
 msgid "Дистрибьютор с 2018 года"
 msgstr "2018-yildan beri distribyutor"
-
-msgid "Мы выводим лучшие бренды на рынок Узбекистана"
-msgstr "Eng yaxshi brendlarni O‘zbekiston bozoriga olib chiqamiz"
-
+#: apps/core/i18n_content.py:7
+#| msgid "Мы выводим лучшие бренды на рынок Узбекистана"
+msgid "Лучшие бренды в своем сегменте на рынке Узбекистана"
+msgstr "O‘zbekiston bozorida o‘z segmentidagi eng yaxshi brendlar"
+#: apps/core/i18n_content.py:9
 msgid ""
-"ООО «AJERES» — современная дистрибьюторская компания: импорт, логистика, "
-"продажи, маркетинг и развитие брендов."
-msgstr ""
-"«AJERES» MChJ — zamonaviy distribyutor kompaniya: import, logistika, savdo, "
-"marketing va brend rivojlantirish."
+"Импорт, эксклюзивная дистрибуция, вывод на рынок Узбекистана новых "
+"производителей."
+msgstr "Import, eksklyuziv distribyutsiya, yangi ishlab chiqaruvchilarni O‘zbekiston bozoriga olib chiqish."
+#: apps/core/i18n_content.py:12 templates/includes/contact_modal.html:12
+#: templates/includes/header.html:149
+msgid "Связаться с нами"
+msgstr "Biz bilan bog‘laning"
+#: apps/core/i18n_content.py:13
+msgid "Наша деятельность"
+msgstr "Bizning faoliyatimiz"
+#: apps/core/i18n_content.py:14
+msgid "Наши бренды"
+msgstr "Bizning brendlar"
+#: apps/core/i18n_content.py:16
+msgid ""
+"Эксклюзивно представляем производителей сильных брендов, которые доверяют "
+"нам свое развитие"
+msgstr "Rivojlanishini bizga ishonib topshirgan kuchli brend ishlab chiqaruvchilarini eksklyuziv ravishda taqdim etamiz"
+#: apps/core/i18n_content.py:21 templates/pages/home.html:115
+msgid "Сотрудничество"
+msgstr "Hamkorlik"
+#: apps/core/i18n_content.py:22 templates/pages/contacts.html:43
+#: templates/pages/home.html:116
+msgid "Для торговых сетей, дистрибьюторов и HoReCa"
+msgstr "Savdo tarmoqlari, distribyutorlar va HoReCa uchun"
+#: apps/core/i18n_content.py:24 templates/pages/contacts.html:46
+#: templates/pages/home.html:119
+msgid ""
+"Компания ООО «AJERES» предлагает широкий ассортимент качественных продуктов "
+"питания от международных производителей."
+msgstr "\"AJERES\" MChJ xalqaro ishlab chiqaruvchilarning keng assortimentdagi sifatli oziq-ovqat mahsulotlarini taklif etadi."
+#: apps/core/i18n_content.py:27 templates/pages/home.html:121
+msgid "Нашим партнерам мы гарантируем:"
+msgstr "Hamkorlarimizga quyidagilarni kafolatlaymiz:"
+#: apps/core/i18n_content.py:28 templates/pages/home.html:123
+msgid "Стабильные поставки"
+msgstr "Barqaror yetkazib berish"
+#: apps/core/i18n_content.py:29 templates/pages/home.html:124
+msgid "Конкурентные цены"
+msgstr "Raqobatbardosh narxlar"
+#: apps/core/i18n_content.py:30 templates/pages/home.html:125
+msgid "Широкий ассортимент"
+msgstr "Keng assortiment"
+#: apps/core/i18n_content.py:31 templates/pages/home.html:126
+msgid "Маркетинговую поддержку"
+msgstr "Marketing qo‘llab-quvvatlovi"
+#: apps/core/i18n_content.py:32 templates/pages/home.html:127
+msgid "Оперативную логистику"
+msgstr "Tezkor logistika"
+#: apps/core/i18n_content.py:33 templates/pages/home.html:128
+msgid "Персональное сопровождение"
+msgstr "Shaxsiy yondashuv"
+#: apps/core/i18n_content.py:34 templates/pages/home.html:129
+msgid "Профессиональную работу торговой команды"
+msgstr "Professional savdo jamoasi"
+#: apps/core/i18n_content.py:36 templates/pages/home.html:132
+msgid ""
+"Мы стремимся строить долгосрочные отношения, основанные на доверии, "
+"прозрачности и взаимной выгоде."
+msgstr "Biz ishonch, ochiqlik va o‘zaro manfaat tamoyillariga asoslangan uzoq muddatli hamkorlikni yo‘lga qo‘yishga intilamiz."
+#: apps/core/i18n_content.py:41 templates/includes/footer.html:20
+#| msgid "Дистрибьютор продуктов питания в Узбекистане"
+msgid "Дистрибьютор продуктов питания в Республике Узбекистан"
+msgstr "O‘zbekiston Respublikasida oziq-ovqat mahsulotlari distribyutori"
+#: apps/leads/views.py:74
+msgid "Слишком много заявок. Попробуйте позже."
+msgstr "So‘rovlar juda ko‘p. Keyinroq urinib ko‘ring."
+#: apps/leads/views.py:92
+msgid "Заявка отправлена. Мы свяжемся с вами."
+msgstr "So‘rov yuborildi. Tez orada bog‘lanamiz."
+#: templates/base.html:9
+msgid "Дистрибьютор продуктов питания в Узбекистане"
+msgstr "O‘zbekistonda oziq-ovqat distribyutori"
+#: templates/includes/brands_carousel_arrows.html:2
+msgid "Назад"
+msgstr "Orqaga"
+#: templates/includes/brands_carousel_arrows.html:7
+msgid "Далее"
+msgstr "Keyingi"
+#: templates/includes/breadcrumbs.html:2
+msgid "Хлебные крошки"
+msgstr "Navigatsiya izi"
+#: templates/includes/contact_modal.html:5 templates/pages/home.html:75
+#: templates/pages/products.html:59
+msgid "Закрыть"
+msgstr "Yopish"
+#: templates/includes/contact_modal.html:13
+msgid "Оставьте заявку — мы ответим и подготовим коммерческое предложение."
+msgstr "So‘rov qoldiring — javob beramiz va tijorat taklifini tayyorlaymiz."
+#: templates/includes/footer.html:22
+msgid "Разработано студией"
+msgstr "Ishlab chiqilgan"
+#: templates/includes/footer.html:30
+msgid "Все права защищены."
+msgstr "Barcha huquqlar himoyalangan."
+#: templates/includes/footer.html:34 templates/includes/header.html:76
+#: templates/includes/header.html:99 templates/includes/header.html:119
+msgid "Меню"
+msgstr "Menyu"
+#: templates/includes/footer.html:35
+msgid "Навигация"
+msgstr "Navigatsiya"
+#: templates/includes/header.html:10 templates/includes/header.html:120
+msgid "Основная навигация"
+msgstr "Asosiy navigatsiya"
+#: templates/includes/header.html:25
+msgid "Категории продуктов"
+msgstr "Mahsulot kategoriyalari"
+#: templates/includes/header.html:39
+msgid "Смотреть весь каталог"
+msgstr "Butun katalogni ko‘rish"
+#: templates/includes/header.html:53
+msgid "Язык"
+msgstr "Til"
+#: templates/includes/header.html:74
+msgid "Связаться"
+msgstr "Bog‘lanish"
+#: templates/includes/header.html:92 templates/includes/header.html:112
+msgid "Закрыть меню"
+msgstr "Menyuni yopish"
+#: templates/pages/about.html:22
+msgid "ООО"
+msgstr "MChJ"
+#: templates/pages/about.html:51
+msgid "ООО «AJERES»"
+msgstr "«AJERES» MChJ"
+#: templates/pages/about.html:53
+msgid "Контент скоро появится."
+msgstr "Kontent tez orada paydo bo‘ladi."
+#: templates/pages/contacts.html:21
+msgid "Свяжитесь"
+msgstr "Bog‘laning"
+#: templates/pages/contacts.html:21
+msgid "с нами"
+msgstr "biz bilan"
+#: templates/pages/contacts.html:61 templates/partials/contact_success.html:6
+#| msgid "Заявка отправлена"
+msgid "Запрос отправлен!"
+msgstr "So‘rov yuborildi"
 
-msgid "Наши услуги"
-msgstr "Bizning xizmatlar"
+#: templates/pages/contacts.html:86
+msgid "Адрес"
+msgstr "Manzil"
+#: templates/pages/contacts.html:102 templates/partials/contact_form.html:55
+msgid "Телефон"
+msgstr "Telefon"
+#: templates/pages/contacts.html:118
+msgid "Почта"
+msgstr "Pochta"
+#: templates/pages/contacts.html:140
+msgid "Построить маршрут"
+msgstr "Marshrut qurish"
+#: templates/pages/contacts.html:146
+#| msgid "Каталог AJERES"
+msgid "Карта AJERES"
+msgstr "AJERES katalogi"
 
+#: templates/pages/home.html:4
+msgid "Дистрибьютор продуктов питания"
+msgstr "Oziq-ovqat distribyutori"
+#: templates/pages/home.html:53 templates/pages/home.html:73
 msgid "Наши преимущества"
 msgstr "Afzalliklarimiz"
 
+#: templates/pages/home.html:171
+msgid "Истории партнёров"
+msgstr "Hamkorlar hikoyalari"
+#: templates/pages/home.html:188
+msgid "Начнём сотрудничество?"
+msgstr "Hamkorlikni boshlaymizmi?"
+#: templates/pages/home.html:189
 msgid ""
-"Мы гордимся сотрудничеством с международными производителями, которые "
-"доверили нам развитие своих брендов на рынке Узбекистана."
-msgstr ""
-"O‘zbekiston bozorida brendlarini rivojlantirishni ishonib topshirgan xalqaro "
-"ishlab chiqaruvchilar bilan hamkorlikdan faxrlanamiz."
+"Свяжитесь с нами в любое удобное время, профессиональная команда "
+"специалистов готова ответить на все вопросы и обсудить взаимовыгодное "
+"сотрудничество"
+msgstr "Biz bilan qulay vaqtda bog‘laning — professional mutaxassislar jamoasi barcha savollaringizga javob berishga va o‘zaro manfaatli hamkorlikni muhokama qilishga tayyor"
+#: templates/pages/home.html:193
+msgid "Написать на почту"
+msgstr "Email yozish"
+#: templates/pages/products.html:42
+msgid "Фильтр"
+msgstr "Filtr"
+#: templates/pages/products.html:54 templates/pages/products.html:67
+msgid "Категории"
+msgstr "Kategoriyalar"
+#: templates/pages/products.html:74
+msgid "Все"
+msgstr "Hammasi"
+#: templates/pages/products.html:100
+msgid "Поиск"
+msgstr "Qidiruv"
+#: templates/pages/products.html:101
+msgid "Поиск товаров…"
+msgstr "Mahsulotlarni qidirish…"
+#: templates/pages/products.html:115
+#| msgid "Производители, которые мы представляем"
+msgid "Производители, которых мы представляем"
+msgstr "Biz vakili bo‘lgan ishlab chiqaruvchilar"
+#: templates/partials/catalog_results.html:21
+msgid "Ничего не найдено"
+msgstr "Hech narsa topilmadi"
+#: templates/partials/catalog_results.html:22
+msgid "Сбросить"
+msgstr "Tozalash"
+#: templates/partials/catalog_results.html:27
+#, python-format
+msgid "Показано %(start)s–%(end)s из %(total)s"
+msgstr "%(total)s dan %(start)s–%(end)s ko‘rsatilmoqda"
+#: templates/partials/catalog_results.html:55
+msgid "Страницы"
+msgstr "Sahifalar"
+#: templates/partials/contact_form.html:21
+msgid "С какой целью обращаетесь"
+msgstr "Murojaat maqsadi"
+#: templates/partials/contact_form.html:30
+msgid "Например: интересует оптовый прайс на соусы и лапшу"
+msgstr "Masalan: souslar va lag‘mon uchun ulgurji narxlar qiziqtiradi"
+#: templates/partials/contact_form.html:37
+msgid "Имя"
+msgstr "Ism"
+#: templates/partials/contact_form.html:46
+msgid "Ваше имя"
+msgstr "Ismingiz"
+#: templates/partials/contact_form.html:74
+msgid "Электронная почта"
+msgstr "Elektron pochta"
+#: templates/partials/contact_form.html:85
+msgid "you@company.com"
+msgstr "you@company.com"
+#: templates/partials/contact_form.html:92
+msgid "Отправить"
+msgstr "Yuborish"
+#: templates/partials/contact_success.html:7
+#| msgid "Мы свяжемся с вами в ближайшее время."
+msgid "Спасибо за обращение. Наш менеджер свяжется с вами в ближайшее время."
+msgstr "Tez orada siz bilan bog‘lanamiz."
 
-msgid "Язык"
-msgstr "Til"
+#~ msgid "Продукты"
+#~ msgstr "Mahsulotlar"
+
+#~ msgid "Русский"
+#~ msgstr "Ruscha"
+
+#~ msgid "O'zbekcha"
+#~ msgstr "Oʻzbekcha"
+
+#~ msgid "English"
+#~ msgstr "Inglizcha"
+
+#~ msgid "Политика приватности"
+#~ msgstr "Maxfiylik siyosati"
+
+#~ msgid ""
+#~ "Дистрибьютор азиатской и специализированной бакалеи для магазинов, HoReCa "
+#~ "и партнёров."
+#~ msgstr ""
+#~ "Do‘konlar, HoReCa va hamkorlar uchun Osiyo va maxsus bakalya "
+#~ "distribyutori."
+
+#~ msgid "Политика конфиденциальности"
+#~ msgstr "Maxfiylik siyosati"
+
+#~ msgid "Все товары"
+#~ msgstr "Barcha mahsulotlar"
+
+#~ msgid ""
+#~ "Пришлём актуальный прайс и подберём ассортимент под ваш формат бизнеса."
+#~ msgstr ""
+#~ "Aktual narxlar ro‘yxatini yuboramiz va assortimentni biznesingizga "
+#~ "moslaymiz."
+
+#~ msgid "Наш каталог"
+#~ msgstr "Bizning katalog"
+
+#~ msgid ""
+#~ "Фильтруйте по категориям или ищите по названию. Под каталогом — бренды-"
+#~ "производители."
+#~ msgstr ""
+#~ "Kategoriya bo‘yicha filtrlang yoki nom bo‘yicha qidiring. Katalog ostida "
+#~ "— brendlar."
+
+#~ msgid "Смотреть товары"
+#~ msgstr "Mahsulotlarni ko‘rish"
+
+#~ msgid ""
+#~ "ООО «AJERES» — современная дистрибьюторская компания: импорт, логистика, "
+#~ "продажи, маркетинг и развитие брендов."
+#~ msgstr ""
+#~ "«AJERES» MChJ — zamonaviy distribyutor kompaniya: import, logistika, "
+#~ "savdo, marketing va brend rivojlantirish."
+
+#~ msgid "Наши услуги"
+#~ msgstr "Bizning xizmatlar"
+
+#~ msgid ""
+#~ "Мы гордимся сотрудничеством с международными производителями, которые "
+#~ "доверили нам развитие своих брендов на рынке Узбекистана."
+#~ msgstr ""
+#~ "O‘zbekiston bozorida brendlarini rivojlantirishni ishonib topshirgan "
+#~ "xalqaro ishlab chiqaruvchilar bilan hamkorlikdan faxrlanamiz."

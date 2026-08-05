@@ -28,6 +28,9 @@ EN = {
     "Оставьте заявку — мы ответим и подготовим коммерческое предложение.": (
         "Leave a request — we will reply and prepare a commercial offer."
     ),
+    "Дистрибьютор продуктов питания в Республике Узбекистан": (
+        "Food distributor in the Republic of Uzbekistan"
+    ),
     "Дистрибьютор азиатской и специализированной бакалеи для магазинов, HoReCa и партнёров.": (
         "Distributor of Asian and specialty groceries for stores, HoReCa and partners."
     ),
@@ -49,6 +52,30 @@ EN = {
     "Пришлём актуальный прайс и подберём ассортимент под ваш формат бизнеса.": (
         "We’ll send an up-to-date price list and tailor the assortment to your business."
     ),
+    "Свяжитесь с нами в любое удобное время, профессиональная команда специалистов готова ответить на все вопросы и обсудить взаимовыгодное сотрудничество": (
+        "Contact us at any convenient time — our professional team is ready to answer "
+        "all questions and discuss mutually beneficial cooperation"
+    ),
+    "Сотрудничество": "Partnership",
+    "Для торговых сетей, дистрибьюторов и HoReCa": (
+        "For retail chains, distributors and HoReCa"
+    ),
+    "Компания ООО «AJERES» предлагает широкий ассортимент качественных продуктов питания от международных производителей.": (
+        "AJERES LLC offers a wide range of quality food products from international producers."
+    ),
+    "Нашим партнерам мы гарантируем:": "We guarantee our partners:",
+    "Стабильные поставки": "Stable supply",
+    "Конкурентные цены": "Competitive prices",
+    "Широкий ассортимент": "A broad assortment",
+    "Маркетинговую поддержку": "Marketing support",
+    "Оперативную логистику": "Responsive logistics",
+    "Персональное сопровождение": "Personal account care",
+    "Профессиональную работу торговой команды": "A professional sales team",
+    "Мы стремимся строить долгосрочные отношения, основанные на доверии, прозрачности и взаимной выгоде.": (
+        "We strive to build long-term relationships based on trust, transparency "
+        "and mutual benefit."
+    ),
+    "Производители, которых мы представляем": "Manufacturers we represent",
     "Написать на почту": "Email us",
     "Наш каталог": "Our catalog",
     "Фильтруйте по категориям или ищите по названию. Под каталогом — бренды-производители.": (
@@ -81,16 +108,36 @@ EN = {
     "Мы выводим лучшие бренды на рынок Узбекистана": (
         "We bring the best brands to the Uzbekistan market"
     ),
+    "Лучшие бренды в своем сегменте на рынке Узбекистана": (
+        "The best brands in their segment on the Uzbekistan market"
+    ),
+    "Импорт, эксклюзивная дистрибуция, вывод на рынок Узбекистана новых производителей.": (
+        "Import, exclusive distribution, and bringing new producers to the Uzbekistan market."
+    ),
     "ООО «AJERES» — современная дистрибьюторская компания: импорт, логистика, продажи, маркетинг и развитие брендов.": (
         "AJERES LLC is a modern distribution company: import, logistics, sales, "
         "marketing and brand development."
     ),
     "Наши услуги": "Our services",
+    "Наша деятельность": "Our activities",
     "Мы гордимся сотрудничеством с международными производителями, которые доверили нам развитие своих брендов на рынке Узбекистана.": (
         "We are proud to partner with international producers who entrusted us with "
         "developing their brands in Uzbekistan."
     ),
+    "Эксклюзивно представляем производителей сильных брендов, которые доверяют нам свое развитие": (
+        "We exclusively represent strong brand producers who trust us with their growth"
+    ),
+    "Производители, которые мы представляем": "Producers we represent",
     "Язык": "Language",
+    "Разработано студией": "Developed by",
+    "ООО": "LLC",
+    "ООО «AJERES»": "AJERES LLC",
+    "Свяжитесь": "Contact",
+    "с нами": "us",
+    "Адрес": "Address",
+    "Почта": "Email",
+    "Построить маршрут": "Get directions",
+    "Фильтр": "Filter",
 }
 
 UZ = {
@@ -114,6 +161,9 @@ UZ = {
     "Оставьте заявку — мы ответим и подготовим коммерческое предложение.": (
         "So‘rov qoldiring — javob beramiz va tijorat taklifini tayyorlaymiz."
     ),
+    "Дистрибьютор продуктов питания в Республике Узбекистан": (
+        "O‘zbekiston Respublikasida oziq-ovqat mahsulotlari distribyutori"
+    ),
     "Дистрибьютор азиатской и специализированной бакалеи для магазинов, HoReCa и партнёров.": (
         "Do‘konlar, HoReCa va hamkorlar uchun Osiyo va maxsus bakalya distribyutori."
     ),
@@ -134,6 +184,33 @@ UZ = {
     "Начнём сотрудничество?": "Hamkorlikni boshlaymizmi?",
     "Пришлём актуальный прайс и подберём ассортимент под ваш формат бизнеса.": (
         "Aktual narxlar ro‘yxatini yuboramiz va assortimentni biznesingizga moslaymiz."
+    ),
+    "Свяжитесь с нами в любое удобное время, профессиональная команда специалистов готова ответить на все вопросы и обсудить взаимовыгодное сотрудничество": (
+        "Biz bilan qulay vaqtda bog‘laning — professional mutaxassislar jamoasi barcha "
+        "savollaringizga javob berishga va o‘zaro manfaatli hamkorlikni muhokama qilishga tayyor"
+    ),
+    "Сотрудничество": "Hamkorlik",
+    "Для торговых сетей, дистрибьюторов и HoReCa": (
+        "Savdo tarmoqlari, distribyutorlar va HoReCa uchun"
+    ),
+    "Компания ООО «AJERES» предлагает широкий ассортимент качественных продуктов питания от международных производителей.": (
+        '"AJERES" MChJ xalqaro ishlab chiqaruvchilarning keng assortimentdagi sifatli '
+        'oziq-ovqat mahsulotlarini taklif etadi.'
+    ),
+    "Нашим партнерам мы гарантируем:": "Hamkorlarimizga quyidagilarni kafolatlaymiz:",
+    "Стабильные поставки": "Barqaror yetkazib berish",
+    "Конкурентные цены": "Raqobatbardosh narxlar",
+    "Широкий ассортимент": "Keng assortiment",
+    "Маркетинговую поддержку": "Marketing qo‘llab-quvvatlovi",
+    "Оперативную логистику": "Tezkor logistika",
+    "Персональное сопровождение": "Shaxsiy yondashuv",
+    "Профессиональную работу торговой команды": "Professional savdo jamoasi",
+    "Мы стремимся строить долгосрочные отношения, основанные на доверии, прозрачности и взаимной выгоде.": (
+        "Biz ishonch, ochiqlik va o‘zaro manfaat tamoyillariga asoslangan uzoq muddatli "
+        "hamkorlikni yo‘lga qo‘yishga intilamiz."
+    ),
+    "Производители, которых мы представляем": (
+        "Biz vakili bo‘lgan ishlab chiqaruvchilar"
     ),
     "Написать на почту": "Email yozish",
     "Наш каталог": "Bizning katalog",
@@ -167,21 +244,50 @@ UZ = {
     "Мы выводим лучшие бренды на рынок Узбекистана": (
         "Eng yaxshi brendlarni O‘zbekiston bozoriga olib chiqamiz"
     ),
+    "Лучшие бренды в своем сегменте на рынке Узбекистана": (
+        "O‘zbekiston bozorida o‘z segmentidagi eng yaxshi brendlar"
+    ),
+    "Импорт, эксклюзивная дистрибуция, вывод на рынок Узбекистана новых производителей.": (
+        "Import, eksklyuziv distribyutsiya, yangi ishlab chiqaruvchilarni O‘zbekiston "
+        "bozoriga olib chiqish."
+    ),
     "ООО «AJERES» — современная дистрибьюторская компания: импорт, логистика, продажи, маркетинг и развитие брендов.": (
         "«AJERES» MChJ — zamonaviy distribyutor kompaniya: import, logistika, savdo, "
         "marketing va brend rivojlantirish."
     ),
     "Наши услуги": "Bizning xizmatlar",
+    "Наша деятельность": "Bizning faoliyatimiz",
     "Мы гордимся сотрудничеством с международными производителями, которые доверили нам развитие своих брендов на рынке Узбекистана.": (
         "O‘zbekiston bozorida brendlarini rivojlantirishni ishonib topshirgan xalqaro "
         "ishlab chiqaruvchilar bilan hamkorlikdan faxrlanamiz."
     ),
+    "Эксклюзивно представляем производителей сильных брендов, которые доверяют нам свое развитие": (
+        "Rivojlanishini bizga ishonib topshirgan kuchli brend ishlab chiqaruvchilarini "
+        "eksklyuziv ravishda taqdim etamiz"
+    ),
+    "Производители, которые мы представляем": "Biz vakili bo‘lgan ishlab chiqaruvchilar",
     "Язык": "Til",
+    "Разработано студией": "Ishlab chiqilgan",
+    "ООО": "MChJ",
+    "ООО «AJERES»": "«AJERES» MChJ",
+    "Свяжитесь": "Bog‘laning",
+    "с нами": "biz bilan",
+    "Адрес": "Manzil",
+    "Почта": "Pochta",
+    "Построить маршрут": "Marshrut qurish",
+    "Фильтр": "Filtr",
 }
 
 
 def _unescape_po(s: str) -> str:
-    return bytes(s, "utf-8").decode("unicode_escape")
+    # Keep UTF-8 text intact; only resolve PO string escapes.
+    return (
+        s.replace("\\\\", "\0")
+        .replace("\\n", "\n")
+        .replace("\\t", "\t")
+        .replace('\\"', '"')
+        .replace("\0", "\\")
+    )
 
 
 def _escape_po(s: str) -> str:
@@ -191,7 +297,12 @@ def _escape_po(s: str) -> str:
 def fill_po(path: Path, mapping: dict[str, str], lang: str) -> None:
     text = path.read_text(encoding="utf-8")
     text = text.replace("#, fuzzy\n", "")
-    text = re.sub(r"Language:.*\n", f"Language: {lang}\n", text, count=1)
+    text = re.sub(
+        r'"Language:.*\\n"',
+        f'"Language: {lang}\\n"',
+        text,
+        count=1,
+    )
 
     pattern = re.compile(
         r'(msgid (?:"(?:\\.|[^"\\])*"\s*)+)\s*'

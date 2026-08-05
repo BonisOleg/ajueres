@@ -23,12 +23,20 @@ def _catalog_context(request):
     )
     grouped = selectors.group_by_brand(page_obj.object_list)
 
+    active_cat, _ = selectors.resolve_category_filter(category)
+    active_parent_slug = None
+    if active_cat:
+        active_parent_slug = (
+            active_cat.parent.slug if active_cat.parent_id else active_cat.slug
+        )
+
     return {
         'categories': selectors.get_categories(),
         'grouped_products': grouped,
         'page_obj': page_obj,
         'paginator': page_obj.paginator,
         'active_category': category,
+        'active_parent_slug': active_parent_slug,
         'active_brand': brand,
         'search_q': selectors.normalize_search_query(q) or (q or '').strip(),
         'brands_showcase': selectors.get_brands_for_showcase(featured_only=True),

@@ -48,9 +48,9 @@
   align-items: center;
   gap: 10px;
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
   color: var(--ink);
   flex: none;
 }
@@ -60,12 +60,23 @@
 }
 
 .logo__dot {
-  width: 13px;
-  height: 13px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--c-coral), var(--c-pink));
   box-shadow: 0 0 0 4px var(--accent-soft);
   flex: none;
+}
+
+@media (max-width: 639px) {
+  .logo {
+    font-size: 1.35rem;
+  }
+
+  .logo__dot {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 .nav-desktop {

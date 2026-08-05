@@ -1,5 +1,21 @@
 {% load i18n static ajeres_tags %}
 
+{% for cat in categories %}
+  {% if cat.children.all and active_parent_slug == cat.slug %}
+    <div class="chips catalog-chips catalog-chips--sub" role="tablist" aria-label="{% firstof cat.name cat.slug %}">
+      {% for child in cat.children.all %}
+        <a class="chip chip--sub{% if active_category == child.slug %} is-active{% endif %}"
+           href="{% url 'products' %}?category={{ child.slug }}"
+           hx-get="{% url 'products' %}?category={{ child.slug }}"
+           hx-target="#catalog-results"
+           hx-push-url="true"
+           hx-indicator="#catalog-results"
+           data-catalog-filters-close>{% firstof child.name child.slug %}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endfor %}
+
 {% if page_obj.paginator.count == 0 %}
   <div class="empty-state">
     <p>{% trans 'Ничего не найдено' %}</p>
