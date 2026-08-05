@@ -1,238 +1,442 @@
-/* About — static paper cards, no scroll stack animation. */
+/* About page — overview, values and market proof. */
 
 .about-main {
-  padding-bottom: clamp(40px, 5vw, 72px);
+  gap: clamp(28px, 4vw, 48px);
+  padding-top: clamp(28px, 4vw, 48px);
+  padding-bottom: clamp(40px, 6vw, 80px);
 }
 
-.about-stack {
-  --about-stack-max: min(960px, 100%);
-  --paper: #fcfcfa;
+.about-section-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2.6vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* Social proof directly below the page hero. */
+.about-proof {
   position: relative;
-  width: 100%;
-  max-width: var(--about-stack-max);
-  margin: 0 auto;
-  padding: 4px 0 0;
+  z-index: 2;
+  max-width: 1160px;
+  margin: clamp(-18px, -1.5vw, -10px) auto 0;
+  padding-inline:
+    max(clamp(18px, 4vw, 42px), env(safe-area-inset-left, 0px))
+    max(clamp(18px, 4vw, 42px), env(safe-area-inset-right, 0px));
+}
+
+.about-proof__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.about-proof__item {
+  min-width: 0;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 88px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(30, 36, 48, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 14px 32px -24px rgba(20, 36, 64, 0.34);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-proof__item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.about-proof__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.about-proof__label {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 650;
+  overflow-wrap: break-word;
+}
+
+.about-proof__item--coral .about-proof__value { color: var(--c-coral); }
+.about-proof__item--green .about-proof__value { color: var(--c-green); }
+.about-proof__item--blue .about-proof__value { color: var(--c-blue); }
+.about-proof__item--amber .about-proof__value { color: var(--c-amber); }
+
+/* About + mission + goals asymmetric overview. */
+.about-overview {
+  min-width: 0;
+  overflow: visible;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 18px;
-}
-
-.about-sheet {
-  position: relative;
-  margin: 0;
-}
-
-.about-sheet__paper {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  border-radius: 22px;
-  background-color: var(--paper);
+  border-radius: 24px;
   border: 1px solid rgba(30, 36, 48, 0.08);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.92) inset,
-    0 18px 40px -28px rgba(20, 36, 64, 0.28),
-    0 2px 10px rgba(20, 36, 64, 0.05);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(248, 244, 238, 0.82)),
+    radial-gradient(100% 80% at 0 0, rgba(255, 90, 54, 0.1), transparent 58%);
+  box-shadow: 0 18px 42px -30px rgba(20, 36, 64, 0.32);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.about-sheet__paper::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  opacity: 0.26;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.92 0 0 0 0 0.92 0 0 0 0 0.9 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  mix-blend-mode: multiply;
+.about-overview:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
-.about-sheet__paper::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.75) 0%,
-    rgba(255, 255, 255, 0.14) 30%,
-    transparent 58%
-  );
+.about-overview__content,
+.about-overview__accent {
+  min-width: 0;
+  overflow: visible;
+  padding: clamp(24px, 3vw, 32px);
 }
 
-.about-sheet__body {
-  position: relative;
-  z-index: 1;
-  padding: clamp(22px, 3.4vw, 40px) clamp(18px, 3.2vw, 36px);
-}
-
-.about-sheet__title {
-  font-family: var(--font-serif);
-  font-weight: 600;
-  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  margin: 0 0 14px;
-  text-wrap: balance;
-  font-style: normal;
-  font-synthesis: none;
-}
-
-.about-sheet__text {
+.about-overview__text {
+  margin-top: 16px;
+  color: #3d4757;
   font-size: clamp(0.9375rem, 1.2vw, 1.0625rem);
   line-height: 1.65;
-  color: #3d4757;
 }
 
-.about-sheet__text p {
-  margin: 0 0 0.9em;
+.about-overview__text p + p {
+  margin-top: 12px;
 }
 
-.about-sheet__text p:last-child {
-  margin-bottom: 0;
+.about-overview__mission {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(31, 169, 104, 0.08);
+  color: #29483a;
 }
 
-.about-sheet__text ul,
-.about-sheet__text ol {
-  margin: 0.4em 0 1em;
-  padding-left: 1.2em;
+.about-overview__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  color: #fff;
+  background: var(--c-green);
 }
 
-.about-sheet__text li + li {
-  margin-top: 0.35em;
+.about-overview__mission h3,
+.about-overview__accent h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
-.about-sheet--history .about-sheet__title,
-.about-sheet--about .about-sheet__title {
-  color: color-mix(in srgb, var(--c-coral) 72%, var(--ink));
+.about-overview__mission p,
+.about-overview__accent p {
+  margin-top: 8px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  overflow-wrap: break-word;
 }
 
-.about-sheet--philosophy .about-sheet__title {
-  color: color-mix(in srgb, var(--c-coral) 60%, var(--ink));
-}
-
-.about-sheet--analytics .about-sheet__title {
-  color: color-mix(in srgb, var(--c-blue) 55%, var(--ink));
-}
-
-.about-sheet--responsibility .about-sheet__title {
-  color: color-mix(in srgb, var(--c-amber, #f79315) 55%, var(--ink));
-}
-
-.about-sheet--market .about-sheet__title {
-  color: color-mix(in srgb, var(--c-purple) 65%, var(--ink));
-}
-
-.about-sheet--mission .about-sheet__title {
-  color: color-mix(in srgb, var(--c-green) 55%, var(--ink));
-}
-
-.about-sheet--vision .about-sheet__title,
-.about-sheet--goals .about-sheet__title {
-  color: color-mix(in srgb, var(--c-blue) 55%, var(--ink));
-}
-
-.about-sheet--card .about-sheet__paper {
+.about-overview__accent {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(252, 252, 250, 0.9)),
-    var(--paper);
+    radial-gradient(90% 80% at 100% 0%, rgba(255, 255, 255, 0.18), transparent 55%),
+    linear-gradient(145deg, #345f9d, #1d3f75);
 }
 
-.about-sheet--market {
-  grid-column: 1 / -1;
+.about-overview__accent-mark {
+  position: absolute;
+  top: 8px;
+  right: 20px;
+  z-index: -1;
+  font-family: Georgia, serif;
+  font-size: 7rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.1);
 }
 
-.about-sheet--about,
-.about-sheet--mission,
-.about-sheet--goals {
-  grid-column: 1 / -1;
+/* Three values — equal-height, unclipped cards. */
+.about-values {
+  min-width: 0;
+}
+
+.about-values__heading {
+  margin-bottom: 20px;
+}
+
+.about-values__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.about-value {
+  min-width: 0;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  height: 100%;
+  padding: clamp(24px, 3vw, 32px);
+  border-radius: 22px;
+  border: 1px solid rgba(30, 36, 48, 0.08);
+  background: #fff;
+  box-shadow: 0 16px 34px -28px rgba(20, 36, 64, 0.3);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.about-value:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.about-value--philosophy:hover { border-color: rgba(255, 90, 54, 0.32); }
+.about-value--analytics:hover { border-color: rgba(62, 123, 250, 0.32); }
+.about-value--responsibility:hover { border-color: rgba(247, 147, 21, 0.32); }
+
+.about-value__number {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+.about-value__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+
+.about-value__points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.about-value__points li {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #3d4757;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  overflow: visible;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.about-value__check {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  border-radius: 8px;
+  color: #fff;
+  background: var(--c-coral);
+}
+
+.about-value--analytics .about-value__check { background: var(--c-blue); }
+.about-value--responsibility .about-value__check { background: var(--c-amber); }
+
+/* Uzbekistan market map/facts block. */
+.about-market {
+  min-width: 0;
+  overflow: visible;
+  display: grid;
+  grid-template-columns: 1fr;
+  border-radius: 24px;
+  color: #fff;
+  background:
+    radial-gradient(100% 100% at 0% 0%, rgba(124, 92, 252, 0.32), transparent 55%),
+    linear-gradient(145deg, #233e70, #162a4c);
+  box-shadow: 0 22px 48px -30px rgba(17, 38, 75, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-market:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.about-market__intro,
+.about-market__facts {
+  min-width: 0;
+  overflow: visible;
+  padding: clamp(24px, 3vw, 32px);
+}
+
+.about-market__eyebrow {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.about-market .about-section-title {
+  color: #fff;
+}
+
+.about-market__lead {
+  margin-top: 18px;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.about-market__outro {
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  overflow-wrap: break-word;
+}
+
+.about-market__facts {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.about-market__facts h3 {
+  margin-bottom: 16px;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.about-market__facts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.about-market__facts li {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+}
+
+.about-market__fact-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  color: #fff;
+  background: var(--c-purple);
 }
 
 .about-cta {
   display: flex;
   justify-content: center;
-  margin: clamp(8px, 2vw, 20px) auto clamp(28px, 4vw, 48px);
-  max-width: var(--about-stack-max, 720px);
+  margin: 0 auto;
 }
 
 .about-cta__btn {
   min-width: min(280px, 100%);
 }
 
-.contacts-chip--amber {
-  background: var(--t-amber);
-}
-
-.contacts-chip--amber:hover,
-.contacts-chip--amber:focus-visible {
-  box-shadow: 0 14px 28px -18px rgba(247, 147, 21, 0.55);
-}
-
-.contacts-chip--amber .contacts-chip__icon {
-  background: var(--c-amber);
-}
-
-.contacts-chip--amber .contacts-chip__label {
-  color: #9a5a0a;
-}
-
-.about-main .contacts-chip [data-counter],
-.about-main .contacts-chip__value {
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-}
-
-.about-main .contacts-chip .contacts-chip__label {
-  text-transform: none;
-  letter-spacing: 0.02em;
-  font-size: 0.8125rem;
-  font-weight: 600;
-}
-
-@media (min-width: 720px) {
-  .about-main .contacts-chips {
-    grid-template-columns: repeat(2, 1fr);
+@media (min-width: 640px) {
+  .about-proof__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
-}
 
-@media (min-width: 720px) {
-  .about-stack {
+  .about-market__facts ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .about-sheet--card {
-    height: 100%;
-  }
-
-  .about-sheet--card .about-sheet__paper {
-    height: 100%;
-  }
 }
 
-@media (min-width: 960px) {
-  .about-main .contacts-chips {
-    grid-template-columns: repeat(4, 1fr);
+@media (min-width: 768px) {
+  .about-overview {
+    grid-template-columns: minmax(0, 1.45fr) minmax(250px, 0.75fr);
   }
 
-  .about-stack {
-    --about-stack-max: 960px;
+  .about-values__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .about-sheet__paper {
-    border-radius: 24px;
+  .about-market {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   }
 }
 
-@media (max-width: 899px) {
-  .about-sheet__paper {
-    border-radius: 18px;
+@media (max-width: 639px) {
+  .about-cta,
+  .about-cta__btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-proof__item,
+  .about-overview,
+  .about-value,
+  .about-market {
+    transition: none;
+  }
+
+  .about-proof__item:hover,
+  .about-overview:hover,
+  .about-value:hover,
+  .about-market:hover {
+    transform: none;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .about-proof__item,
+  .about-overview,
+  .about-value,
+  .about-market {
+    -webkit-transform: translateZ(0);
   }
 }

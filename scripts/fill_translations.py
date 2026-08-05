@@ -58,6 +58,8 @@ EN = {
     ),
     "Сотрудничество": "Partnership",
     "Стать партнером": "Become a partner",
+    "3 ключевые ценности": "3 core values",
+    "Рынок Узбекистана": "Uzbekistan market",
     "Для торговых сетей, дистрибьюторов и HoReCa": (
         "For retail chains, distributors and HoReCa"
     ),
@@ -200,6 +202,8 @@ UZ = {
     ),
     "Сотрудничество": "Hamkorlik",
     "Стать партнером": "Hamkor bo‘lish",
+    "3 ключевые ценности": "3 asosiy qadriyat",
+    "Рынок Узбекистана": "O‘zbekiston bozori",
     "Для торговых сетей, дистрибьюторов и HoReCa": (
         "Savdo tarmoqlari, distribyutorlar va HoReCa uchun"
     ),

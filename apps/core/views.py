@@ -83,10 +83,59 @@ def home(request):
     return render(request, 'pages/home.html', _home_context())
 
 
+def _about_presentation(sections):
+    """Prepare exact CMS copy for structured rendering without rewriting it."""
+    by_key = {section.section_key: section for section in sections}
+    for section in sections:
+        section.presentation_paragraphs = [
+            paragraph.strip()
+            for paragraph in (section.body or '').split('\n\n')
+            if paragraph.strip()
+        ]
+
+    market = by_key.get('market')
+    market_intro = ''
+    market_label = ''
+    market_facts = []
+    market_outro = []
+    if market:
+        lines = [line.strip() for line in (market.body or '').splitlines()]
+        facts_started = False
+        for line in lines:
+            if not line:
+                continue
+            if line.startswith('•'):
+                facts_started = True
+                market_facts.append(line.removeprefix('•').strip())
+            elif not market_intro:
+                market_intro = line
+            elif not facts_started and not market_label:
+                market_label = line
+            else:
+                market_outro.append(line)
+
+    return {
+        'about_section': by_key.get('about'),
+        'mission_section': by_key.get('mission'),
+        'goals_section': by_key.get('goals') or by_key.get('vision'),
+        'value_sections': [
+            section
+            for key in ('philosophy', 'analytics', 'responsibility')
+            if (section := by_key.get(key))
+        ],
+        'market_section': market,
+        'market_intro': market_intro,
+        'market_label': market_label,
+        'market_facts': market_facts,
+        'market_outro': market_outro,
+    }
+
+
 def about(request):
     blocks = selectors.get_blocks('about')
-    sections = selectors.get_about_sections()
+    sections = list(selectors.get_about_sections())
     stats = list(selectors.get_company_stats())
+    presentation = _about_presentation(sections)
     return render(
         request,
         'pages/about.html',
@@ -94,5 +143,6 @@ def about(request):
             'blocks': blocks,
             'sections': sections,
             'stats': stats,
+            **presentation,
         },
     )

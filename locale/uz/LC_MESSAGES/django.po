@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AJERES 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-05 14:34+0500\n"
+"POT-Creation-Date: 2026-08-05 15:17+0500\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +65,6 @@ msgstr "Hamkorlik"
 msgid "Для торговых сетей, дистрибьюторов и HoReCa"
 msgstr "Savdo tarmoqlari, distribyutorlar va HoReCa uchun"
 #: apps/core/i18n_content.py:23 templates/pages/home.html:129
-#| msgid "Истории партнёров"
 msgid "Стать партнером"
 msgstr "Hamkor bo‘lish"
 #: apps/core/i18n_content.py:25 templates/pages/contacts.html:46
@@ -103,10 +102,16 @@ msgid ""
 "Мы стремимся строить долгосрочные отношения, основанные на доверии, "
 "прозрачности и взаимной выгоде."
 msgstr "Biz ishonch, ochiqlik va o‘zaro manfaat tamoyillariga asoslangan uzoq muddatli hamkorlikni yo‘lga qo‘yishga intilamiz."
-#: apps/core/i18n_content.py:42 templates/includes/footer.html:20
+#: apps/core/i18n_content.py:42 templates/pages/about.html:89
+msgid "3 ключевые ценности"
+msgstr "3 asosiy qadriyat"
+#: apps/core/i18n_content.py:43 templates/pages/about.html:116
+msgid "Рынок Узбекистана"
+msgstr "O‘zbekiston bozori"
+#: apps/core/i18n_content.py:46 templates/includes/footer.html:20
 msgid "Дистрибьютор продуктов питания в Республике Узбекистан"
 msgstr "O‘zbekiston Respublikasida oziq-ovqat mahsulotlari distribyutori"
-#: apps/core/i18n_content.py:46
+#: apps/core/i18n_content.py:50
 msgid ""
 "Команда ООО «AJERES» всегда открыта для новых партнерств и готова обсудить "
 "возможности сотрудничества.\n"
@@ -177,12 +182,11 @@ msgstr "Menyuni yopish"
 #: templates/pages/about.html:22
 msgid "ООО"
 msgstr "MChJ"
-#: templates/pages/about.html:51
-msgid "ООО «AJERES»"
-msgstr "«AJERES» MChJ"
-#: templates/pages/about.html:53
-msgid "Контент скоро появится."
-msgstr "Kontent tez orada paydo bo‘ladi."
+#: templates/pages/about.html:34 templates/pages/home.html:53
+#: templates/pages/home.html:73
+msgid "Наши преимущества"
+msgstr "Afzalliklarimiz"
+
 #: templates/pages/contacts.html:21
 msgid "Свяжитесь"
 msgstr "Bog‘laning"
@@ -212,10 +216,6 @@ msgstr "AJERES katalogi"
 #: templates/pages/home.html:4
 msgid "Дистрибьютор продуктов питания"
 msgstr "Oziq-ovqat distribyutori"
-#: templates/pages/home.html:53 templates/pages/home.html:73
-msgid "Наши преимущества"
-msgstr "Afzalliklarimiz"
-
 #: templates/pages/home.html:219
 msgid "Истории партнёров"
 msgstr "Hamkorlar hikoyalari"
@@ -286,6 +286,12 @@ msgstr "Yuborish"
 #: templates/partials/contact_success.html:7
 msgid "Спасибо за обращение. Наш менеджер свяжется с вами в ближайшее время."
 msgstr "Tez orada siz bilan bog‘lanamiz."
+
+#~ msgid "ООО «AJERES»"
+#~ msgstr "«AJERES» MChJ"
+
+#~ msgid "Контент скоро появится."
+#~ msgstr "Kontent tez orada paydo bo‘ladi."
 
 #~ msgid "Продукты"
 #~ msgstr "Mahsulotlar"

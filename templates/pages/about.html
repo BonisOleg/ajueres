@@ -30,33 +30,111 @@
   </div>
 </section>
 
-<section class="contacts-main about-main">
-  <div class="about-stack">
-    {% for section in sections %}
-      <article
-        class="about-sheet about-sheet--{{ section.section_key|default:'section' }}{% if section.section_key == 'philosophy' or section.section_key == 'analytics' or section.section_key == 'responsibility' %} about-sheet--card{% endif %}{% if section.section_key == 'market' %} about-sheet--market{% endif %}"
-        data-section="{{ section.section_key }}"
-      >
-        <div class="about-sheet__paper">
-          <div class="about-sheet__body">
-            <h2 class="about-sheet__title"{% if forloop.first %} id="about-coop-title"{% endif %}>{{ section.title }}</h2>
-            <div class="about-sheet__text">{{ section.body|linebreaks }}</div>
-          </div>
-        </div>
-      </article>
-    {% empty %}
-      <article class="about-sheet">
-        <div class="about-sheet__paper">
-          <div class="about-sheet__body">
-            <h2 class="about-sheet__title" id="about-coop-title">{% trans 'ООО «AJERES»' %}</h2>
-            <div class="about-sheet__text">
-              <p>{% trans 'Контент скоро появится.' %}</p>
-            </div>
-          </div>
-        </div>
+{% if stats %}
+<section class="about-proof" aria-label="{% trans 'Наши преимущества' %}">
+  <div class="about-proof__grid" role="list">
+    {% for s in stats %}
+      {% cycle 'coral' 'green' 'blue' 'amber' as proof_tone silent %}
+      <article class="about-proof__item about-proof__item--{{ proof_tone }} reveal" role="listitem">
+        <span class="about-proof__value">{{ s.value }}</span>
+        <span class="about-proof__label">{{ s.label }}</span>
       </article>
     {% endfor %}
   </div>
+</section>
+{% endif %}
+
+<section class="contacts-main about-main">
+  {% if about_section or mission_section or goals_section %}
+    <section class="about-overview reveal" aria-labelledby="about-overview-title">
+      <div class="about-overview__content">
+        {% if about_section %}
+          <div class="about-overview__block">
+            <h2 class="about-section-title" id="about-overview-title">{{ about_section.title }}</h2>
+            <div class="about-overview__text">
+              {% for paragraph in about_section.presentation_paragraphs %}
+                <p>{{ paragraph }}</p>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+        {% if mission_section %}
+          <div class="about-overview__mission">
+            <span class="about-overview__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3l2.3 4.7L19.5 9l-3.8 3.7.9 5.3-4.6-2.5L7.4 18l.9-5.3L4.5 9l5.2-1.3L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <h3>{{ mission_section.title }}</h3>
+              {% for paragraph in mission_section.presentation_paragraphs %}
+                <p>{{ paragraph }}</p>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      {% if goals_section %}
+        <aside class="about-overview__accent">
+          <span class="about-overview__accent-mark" aria-hidden="true">“</span>
+          <h2>{{ goals_section.title }}</h2>
+          {% for paragraph in goals_section.presentation_paragraphs %}
+            <p>{{ paragraph }}</p>
+          {% endfor %}
+        </aside>
+      {% endif %}
+    </section>
+  {% endif %}
+
+  {% if value_sections %}
+    <section class="about-values" aria-labelledby="about-values-title">
+      <h2 class="about-section-title about-values__heading" id="about-values-title">{% trans '3 ключевые ценности' %}</h2>
+      <div class="about-values__grid">
+        {% for section in value_sections %}
+          <article class="about-value about-value--{{ section.section_key }} reveal">
+            <div>
+              <span class="about-value__number" aria-hidden="true">0{{ forloop.counter }}</span>
+              <h3 class="about-value__title">{{ section.title }}</h3>
+            </div>
+            <ul class="about-value__points">
+              {% for paragraph in section.presentation_paragraphs %}
+                <li>
+                  <span class="about-value__check" aria-hidden="true">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  <span>{{ paragraph }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% if market_section %}
+    <section class="about-market reveal" aria-labelledby="about-market-title">
+      <div class="about-market__intro">
+        <span class="about-market__eyebrow">{% trans 'Рынок Узбекистана' %}</span>
+        <h2 class="about-section-title" id="about-market-title">{{ market_section.title }}</h2>
+        {% if market_intro %}<p class="about-market__lead">{{ market_intro }}</p>{% endif %}
+        {% for paragraph in market_outro %}
+          <p class="about-market__outro">{{ paragraph }}</p>
+        {% endfor %}
+      </div>
+      <div class="about-market__facts">
+        {% if market_label %}<h3>{{ market_label }}</h3>{% endif %}
+        <ul>
+          {% for fact in market_facts %}
+            <li>
+              <span class="about-market__fact-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span>{{ fact }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+  {% endif %}
 
   <div class="about-cta">
     <a class="btn btn--dark about-cta__btn" href="{% url 'contacts' %}">
@@ -65,29 +143,5 @@
     </a>
   </div>
 
-  {% if stats %}
-    <div class="contacts-chips" role="list">
-      {% for s in stats %}
-        {% cycle 'coral' 'green' 'blue' 'amber' as chip_tone silent %}
-        <div class="contacts-chip contacts-chip--{{ chip_tone }}" role="listitem">
-          <span class="contacts-chip__icon" aria-hidden="true">
-            {% if chip_tone == 'coral' %}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            {% elif chip_tone == 'green' %}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg>
-            {% elif chip_tone == 'blue' %}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            {% else %}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
-            {% endif %}
-          </span>
-          <span class="contacts-chip__body">
-            <span class="contacts-chip__value">{{ s.value }}</span>
-            <span class="contacts-chip__label">{{ s.label }}</span>
-          </span>
-        </div>
-      {% endfor %}
-    </div>
-  {% endif %}
 </section>
 {% endblock %}
