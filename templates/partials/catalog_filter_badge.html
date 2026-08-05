@@ -1,0 +1,9 @@
+{% load i18n %}
+<span id="catalog-filter-btn-count" class="catalog-filter-btn__count{% if not active_categories %} is-empty{% endif %}" aria-hidden="true"{% if oob %} hx-swap-oob="true"{% endif %}>
+  {% if active_categories %}{{ active_categories|length }}{% endif %}
+</span>
+<span id="catalog-filter-btn-sr" class="sr-only"{% if oob %} hx-swap-oob="true"{% endif %}>
+  {% if active_categories %}
+    {% blocktrans count active_categories|length as count %}Выбрано {{ count }} категорию{% plural %}Выбрано {{ count }} категорий{% endblocktrans %}
+  {% endif %}
+</span>

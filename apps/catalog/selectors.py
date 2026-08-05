@@ -79,6 +79,27 @@ def get_categories() -> list[Category]:
     )
 
 
+def parse_category_slugs(raw_values: Iterable[str] | str | None) -> list[str]:
+    """Нормалізує category з GET: getlist, comma-separated, без дублікатів."""
+    if raw_values is None:
+        return []
+    if isinstance(raw_values, str):
+        values = [raw_values]
+    else:
+        values = list(raw_values)
+
+    result: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        for part in str(value).split(','):
+            slug = part.strip()
+            if not slug or slug in seen:
+                continue
+            seen.add(slug)
+            result.append(slug)
+    return result
+
+
 def resolve_category_filter(
     category_slug: str | None,
 ) -> tuple[Category | None, list[str]]:
@@ -102,9 +123,36 @@ def resolve_category_filter(
     return cat, [cat.slug]
 
 
+def resolve_categories_filter(
+    category_slugs: Iterable[str] | str | None,
+) -> tuple[list[Category], list[str]]:
+    """Об'єднує кілька категорій (OR): батьки розгортаються в дітей."""
+    slugs = parse_category_slugs(category_slugs)
+    if not slugs:
+        return [], []
+
+    categories: list[Category] = []
+    product_slugs: list[str] = []
+    seen_cats: set[str] = set()
+    seen_products: set[str] = set()
+
+    for slug in slugs:
+        cat, resolved = resolve_category_filter(slug)
+        if cat and cat.slug not in seen_cats:
+            seen_cats.add(cat.slug)
+            categories.append(cat)
+        for item in resolved:
+            if item in seen_products:
+                continue
+            seen_products.add(item)
+            product_slugs.append(item)
+    return categories, product_slugs
+
+
 def get_products(
     *,
     category_slug: str | None = None,
+    category_slugs: Iterable[str] | str | None = None,
     brand_slug: str | None = None,
     q: str | None = None,
 ) -> QuerySet[Product]:
@@ -118,8 +166,11 @@ def get_products(
         .order_by('brand__order', 'order', 'name')
     )
 
+    selected = parse_category_slugs(category_slugs)
     if category_slug:
-        _, slugs = resolve_category_filter(category_slug)
+        selected = parse_category_slugs([*selected, category_slug])
+    if selected:
+        _, slugs = resolve_categories_filter(selected)
         if slugs:
             qs = qs.filter(category__slug__in=slugs)
     if brand_slug:

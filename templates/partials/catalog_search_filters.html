@@ -1,0 +1,10 @@
+{% if oob %}
+<div id="catalog-search-filters" hx-swap-oob="true">
+{% endif %}
+  {% for slug in active_categories %}
+    <input type="hidden" name="category" value="{{ slug }}">
+  {% endfor %}
+  {% if active_brand %}<input type="hidden" name="brand" value="{{ active_brand }}">{% endif %}
+{% if oob %}
+</div>
+{% endif %}

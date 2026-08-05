@@ -6,13 +6,15 @@ from . import selectors
 
 
 def _catalog_context(request):
-    category = (request.GET.get('category') or '').strip() or None
+    categories_selected = selectors.parse_category_slugs(
+        request.GET.getlist('category')
+    )
     brand = (request.GET.get('brand') or '').strip() or None
     q = request.GET.get('q')
     page = request.GET.get('page', 1)
 
     products_qs = selectors.get_products(
-        category_slug=category,
+        category_slugs=categories_selected,
         brand_slug=brand,
         q=q,
     )
@@ -23,20 +25,25 @@ def _catalog_context(request):
     )
     grouped = selectors.group_by_brand(page_obj.object_list)
 
-    active_cat, _ = selectors.resolve_category_filter(category)
-    active_parent_slug = None
-    if active_cat:
-        active_parent_slug = (
-            active_cat.parent.slug if active_cat.parent_id else active_cat.slug
-        )
+    resolved_cats, _ = selectors.resolve_categories_filter(categories_selected)
+    active_parent_slugs: list[str] = []
+    seen_parents: set[str] = set()
+    for cat in resolved_cats:
+        parent_slug = cat.parent.slug if cat.parent_id else cat.slug
+        if parent_slug in seen_parents:
+            continue
+        seen_parents.add(parent_slug)
+        active_parent_slugs.append(parent_slug)
 
     return {
         'categories': selectors.get_categories(),
         'grouped_products': grouped,
         'page_obj': page_obj,
         'paginator': page_obj.paginator,
-        'active_category': category,
-        'active_parent_slug': active_parent_slug,
+        'active_categories': categories_selected,
+        'active_category': categories_selected[0] if categories_selected else None,
+        'active_parent_slugs': active_parent_slugs,
+        'active_parent_slug': active_parent_slugs[0] if active_parent_slugs else None,
         'active_brand': brand,
         'search_q': selectors.normalize_search_query(q) or (q or '').strip(),
         'brands_showcase': selectors.get_brands_for_showcase(featured_only=True),
@@ -47,9 +54,11 @@ def _catalog_context(request):
 @require_GET
 def products(request):
     ctx = _catalog_context(request)
+    is_htmx = request.headers.get('HX-Request') == 'true'
+    ctx['hx_oob'] = is_htmx
     template = (
         'partials/catalog_results.html'
-        if request.headers.get('HX-Request') == 'true'
+        if is_htmx
         else 'pages/products.html'
     )
     return render(request, template, ctx)

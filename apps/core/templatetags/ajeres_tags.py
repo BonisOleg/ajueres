@@ -1,11 +1,12 @@
 from pathlib import Path
+from urllib.parse import urlencode
 
 import json
 
 from django import template
 from django.template.defaultfilters import linebreaks
 from django.templatetags.static import static
-from django.urls import translate_url
+from django.urls import reverse, translate_url
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import check_for_language
@@ -114,3 +115,42 @@ def advantage_icon(icon_key):
         f'<img src="{url}" alt="" width="184" height="184" '
         f'loading="lazy" decoding="async">'
     )
+
+
+@register.simple_tag(takes_context=True)
+def catalog_filter_url(
+    context,
+    *,
+    toggle_category=None,
+    clear_categories=False,
+    page=None,
+):
+    """
+    URL каталогу зі збереженням brand/q і toggle category (OR multi-select).
+    clear_categories=True — «Все».
+    """
+    categories = list(context.get('active_categories') or [])
+    brand = context.get('active_brand') or ''
+    search_q = context.get('search_q') or ''
+
+    if clear_categories:
+        categories = []
+    elif toggle_category:
+        slug = str(toggle_category).strip()
+        if slug in categories:
+            categories = [item for item in categories if item != slug]
+        elif slug:
+            categories = [*categories, slug]
+
+    params: list[tuple[str, str]] = [('category', slug) for slug in categories]
+    if brand:
+        params.append(('brand', brand))
+    if search_q:
+        params.append(('q', search_q))
+    if page not in (None, '', 1, '1'):
+        params.append(('page', str(page)))
+
+    base = reverse('products')
+    if not params:
+        return base
+    return f'{base}?{urlencode(params)}'

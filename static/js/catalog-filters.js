@@ -1,6 +1,15 @@
 (function () {
   'use strict';
 
+  function syncFilterButtonState() {
+    var btn = document.getElementById('catalog-filter-btn');
+    var countEl = document.getElementById('catalog-filter-btn-count');
+    if (!btn || !countEl) return;
+    var raw = (countEl.textContent || '').trim();
+    var has = raw !== '' && !countEl.classList.contains('is-empty');
+    btn.classList.toggle('has-filters', has);
+  }
+
   function initCatalogFilters() {
     var root = document.querySelector('[data-catalog-filters]');
     if (!root) return;
@@ -47,20 +56,22 @@
     }
 
     function syncA11y(open) {
+      var currentBtn = document.getElementById('catalog-filter-btn') || openBtn;
       if (!isMobile()) {
         panel.removeAttribute('aria-hidden');
         panel.removeAttribute('aria-modal');
-        openBtn.setAttribute('aria-expanded', 'false');
+        currentBtn.setAttribute('aria-expanded', 'false');
         return;
       }
       panel.setAttribute('aria-hidden', open ? 'false' : 'true');
       panel.setAttribute('aria-modal', open ? 'true' : 'false');
-      openBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      currentBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
 
     function setOpen(open, silent) {
       if (!isMobile() && open) return;
 
+      var currentBtn = document.getElementById('catalog-filter-btn') || openBtn;
       window.clearTimeout(closeTimer);
       parkDrawer();
       syncA11y(!!open);
@@ -81,19 +92,20 @@
         if (!isOpen()) backdrop.setAttribute('hidden', '');
       }, 280);
 
-      if (!silent && openBtn) openBtn.focus();
+      if (!silent && currentBtn) currentBtn.focus();
     }
 
     syncPlacement();
     syncA11y(false);
-
-    openBtn.addEventListener('click', function () {
-      setOpen(!isOpen());
-    });
+    syncFilterButtonState();
 
     document.addEventListener('click', function (evt) {
       var t = evt.target;
       if (!t || !t.closest) return;
+      if (t.closest('[data-catalog-filters-open]')) {
+        setOpen(!isOpen());
+        return;
+      }
       if (t.closest('[data-catalog-filters-close]')) {
         if (isOpen()) setOpen(false);
       }
@@ -111,4 +123,5 @@
   }
 
   document.addEventListener('DOMContentLoaded', initCatalogFilters);
+  document.body.addEventListener('htmx:afterSwap', syncFilterButtonState);
 })();

@@ -29,18 +29,7 @@
     <div class="catalog-panel">
       <div class="catalog-panel__tools">
         <div class="catalog-filters" data-catalog-filters>
-          <button
-            type="button"
-            class="catalog-filter-btn"
-            data-catalog-filters-open
-            aria-expanded="false"
-            aria-controls="catalog-filters-panel"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M4 6h16M7 12h10M10 18h4"/>
-            </svg>
-            {% trans 'Фильтр' %}
-          </button>
+          {% include "partials/catalog_filter_btn.html" %}
 
           <div class="catalog-filters__backdrop" data-catalog-filters-close hidden></div>
 
@@ -64,23 +53,7 @@
               </button>
             </div>
 
-            <div class="chips catalog-chips" role="tablist" aria-label="{% trans 'Категории' %}">
-              <a class="chip{% if not active_category %} is-active{% endif %}"
-                 href="{% url 'products' %}"
-                 hx-get="{% url 'products' %}"
-                 hx-target="#catalog-results"
-                 hx-push-url="true"
-                 hx-indicator="#catalog-results"
-                 data-catalog-filters-close>{% trans 'Все' %}</a>
-              {% for cat in categories %}
-                <a class="chip{% if active_category == cat.slug or active_parent_slug == cat.slug %} is-active{% endif %}"
-                   href="{% url 'products' %}?category={{ cat.slug }}"
-                   hx-get="{% url 'products' %}?category={{ cat.slug }}"
-                   hx-target="#catalog-results"
-                   hx-push-url="true"
-                   data-catalog-filters-close>{% firstof cat.name cat.slug %}</a>
-              {% endfor %}
-            </div>
+            {% include "partials/catalog_chips.html" %}
           </div>
         </div>
 
@@ -91,9 +64,10 @@
               hx-trigger="keyup changed delay:300ms from:input[name=q], search"
               hx-target="#catalog-results"
               hx-push-url="true"
-              hx-include="[name='category'],[name='brand']">
-          {% if active_category %}<input type="hidden" name="category" value="{{ active_category }}">{% endif %}
-          {% if active_brand %}<input type="hidden" name="brand" value="{{ active_brand }}">{% endif %}
+              hx-include="#catalog-search-filters">
+          <div id="catalog-search-filters">
+            {% include "partials/catalog_search_filters.html" %}
+          </div>
           <span class="catalog-search__icon" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
           </span>

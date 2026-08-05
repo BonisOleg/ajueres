@@ -184,11 +184,45 @@
   transform: scale(0.98);
 }
 
-.catalog-stage .chip.is-active,
-.catalog-stage .chip:hover {
+.catalog-stage .chip.is-active {
   background: linear-gradient(145deg, #2a4f8f 0%, #163a72 55%, #0e1b33 100%);
   border-color: rgba(255, 255, 255, 0.28);
   color: #fff;
+}
+
+.catalog-stage .chip:hover {
+  border-color: rgba(42, 79, 143, 0.45);
+  color: #163a72;
+}
+
+.catalog-stage .chip.is-active:hover {
+  background: linear-gradient(145deg, #2a4f8f 0%, #163a72 55%, #0e1b33 100%);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+.catalog-filter-btn__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #163a72;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.catalog-filter-btn__count.is-empty {
+  display: none;
+}
+
+.catalog-filter-btn.has-filters {
+  border-color: rgba(22, 58, 114, 0.35);
+  background: rgba(22, 58, 114, 0.06);
 }
 
 /* Mobile: Filter button + right drawer (no horizontal chip scroll) */

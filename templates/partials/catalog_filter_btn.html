@@ -1,0 +1,15 @@
+{% load i18n %}
+<button
+  type="button"
+  id="catalog-filter-btn"
+  class="catalog-filter-btn{% if active_categories %} has-filters{% endif %}"
+  data-catalog-filters-open
+  aria-expanded="false"
+  aria-controls="catalog-filters-panel"
+>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <path d="M4 6h16M7 12h10M10 18h4"/>
+  </svg>
+  {% trans 'Фильтр' %}
+  {% include "partials/catalog_filter_badge.html" %}
+</button>

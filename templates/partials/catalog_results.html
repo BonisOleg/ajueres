@@ -1,16 +1,24 @@
 {% load i18n static ajeres_tags %}
 
+{% if hx_oob %}
+  {% include "partials/catalog_chips.html" with oob=True %}
+  {% include "partials/catalog_search_filters.html" with oob=True %}
+  {% include "partials/catalog_filter_badge.html" with oob=True %}
+{% endif %}
+
 {% for cat in categories %}
-  {% if cat.children.all and active_parent_slug == cat.slug %}
+  {% if cat.children.all and cat.slug in active_parent_slugs %}
     <div class="chips catalog-chips catalog-chips--sub" role="tablist" aria-label="{% firstof cat.name cat.slug %}">
       {% for child in cat.children.all %}
-        <a class="chip chip--sub{% if active_category == child.slug %} is-active{% endif %}"
-           href="{% url 'products' %}?category={{ child.slug }}"
-           hx-get="{% url 'products' %}?category={{ child.slug }}"
+        {% catalog_filter_url toggle_category=child.slug as child_url %}
+        <a class="chip chip--sub{% if child.slug in active_categories %} is-active{% endif %}"
+           href="{{ child_url }}"
+           hx-get="{{ child_url }}"
            hx-target="#catalog-results"
            hx-push-url="true"
            hx-indicator="#catalog-results"
-           data-catalog-filters-close>{% firstof child.name child.slug %}</a>
+           data-catalog-filters-close
+           {% if child.slug in active_categories %}aria-pressed="true"{% else %}aria-pressed="false"{% endif %}>{% firstof child.name child.slug %}</a>
       {% endfor %}
     </div>
   {% endif %}
@@ -54,8 +62,9 @@
   {% if page_obj.paginator.num_pages > 1 %}
     <nav class="pagination" aria-label="{% trans 'Страницы' %}">
       {% if page_obj.has_previous %}
-        <a href="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}"
-           hx-get="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}"
+        {% catalog_filter_url page=page_obj.previous_page_number as prev_url %}
+        <a href="{{ prev_url }}"
+           hx-get="{{ prev_url }}"
            hx-target="#catalog-results"
            hx-push-url="true">‹</a>
       {% else %}
@@ -66,16 +75,18 @@
         {% if num == page_obj.number %}
           <span class="is-current">{{ num }}</span>
         {% elif num >= page_obj.number|add:'-2' and num <= page_obj.number|add:'2' %}
-          <a href="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ num }}"
-             hx-get="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ num }}"
+          {% catalog_filter_url page=num as page_url %}
+          <a href="{{ page_url }}"
+             hx-get="{{ page_url }}"
              hx-target="#catalog-results"
              hx-push-url="true">{{ num }}</a>
         {% endif %}
       {% endfor %}
 
       {% if page_obj.has_next %}
-        <a href="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ page_obj.next_page_number }}"
-           hx-get="?{% if active_category %}category={{ active_category }}&{% endif %}{% if active_brand %}brand={{ active_brand }}&{% endif %}{% if search_q %}q={{ search_q|urlencode }}&{% endif %}page={{ page_obj.next_page_number }}"
+        {% catalog_filter_url page=page_obj.next_page_number as next_url %}
+        <a href="{{ next_url }}"
+           hx-get="{{ next_url }}"
            hx-target="#catalog-results"
            hx-push-url="true">›</a>
       {% else %}

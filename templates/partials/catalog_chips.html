@@ -1,0 +1,29 @@
+{% load i18n ajeres_tags %}
+<div
+  id="catalog-chips"
+  class="chips catalog-chips"
+  role="tablist"
+  aria-label="{% trans 'Категории' %}"
+  {% if oob %}hx-swap-oob="true"{% endif %}
+>
+  {% catalog_filter_url clear_categories=True as all_url %}
+  <a class="chip{% if not active_categories %} is-active{% endif %}"
+     href="{{ all_url }}"
+     hx-get="{{ all_url }}"
+     hx-target="#catalog-results"
+     hx-push-url="true"
+     hx-indicator="#catalog-results"
+     data-catalog-filters-close
+     {% if not active_categories %}aria-current="true"{% endif %}>{% trans 'Все' %}</a>
+  {% for cat in categories %}
+    {% catalog_filter_url toggle_category=cat.slug as cat_url %}
+    <a class="chip{% if cat.slug in active_categories %} is-active{% endif %}"
+       href="{{ cat_url }}"
+       hx-get="{{ cat_url }}"
+       hx-target="#catalog-results"
+       hx-push-url="true"
+       hx-indicator="#catalog-results"
+       data-catalog-filters-close
+       {% if cat.slug in active_categories %}aria-pressed="true"{% else %}aria-pressed="false"{% endif %}>{% firstof cat.name cat.slug %}</a>
+  {% endfor %}
+</div>

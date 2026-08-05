@@ -148,3 +148,24 @@ class CatalogSelectorsTests(TestCase):
         self.assertEqual(get_products(category_slug='snacks').count(), 2)
         self.assertEqual(get_products(category_slug='chips').count(), 1)
         self.assertEqual(get_products(category_slug='crush').count(), 1)
+
+    def test_multiple_categories_use_or_logic(self):
+        noodles = Category.objects.create(slug='noodles', name='Лапша', order=2)
+        Product.objects.create(
+            brand=self.brand,
+            category=noodles,
+            slug='noodle-1',
+            name='Udon',
+            name_ru='Udon',
+            package='300 гр.',
+            package_ru='300 гр.',
+            image=_tiny_png(),
+        )
+        self.assertEqual(
+            get_products(category_slugs=['sauces', 'noodles']).count(),
+            4,
+        )
+        self.assertEqual(
+            get_products(category_slugs='sauces,noodles').count(),
+            4,
+        )
