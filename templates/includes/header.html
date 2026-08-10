@@ -1,10 +1,16 @@
-{% load i18n ajeres_tags %}
+{% load i18n static ajeres_tags %}
 <header class="site-header">
   <div class="site-header__wrap">
     <div class="site-header__capsule">
       <a class="logo" href="{% url 'home' %}">
-        <span class="logo__dot" aria-hidden="true"></span>
-        AJERES
+        <img
+          class="logo__img"
+          src="{% static 'img/logo-ajeres.png' %}"
+          alt="AJERES"
+          width="196"
+          height="48"
+          decoding="async"
+        >
       </a>
 
       <nav class="nav-desktop" aria-label="{% trans 'Основная навигация' %}">
@@ -105,10 +111,16 @@
     </div>
 
     <div class="nav-mobile__top">
-      <span class="nav-mobile__brand">
-        <span class="logo__dot" aria-hidden="true"></span>
-        AJERES
-      </span>
+      <a class="nav-mobile__brand" href="{% url 'home' %}">
+        <img
+          class="logo__img"
+          src="{% static 'img/logo-ajeres.png' %}"
+          alt="AJERES"
+          width="168"
+          height="41"
+          decoding="async"
+        >
+      </a>
       <button type="button" class="nav-mobile__close" id="nav-mobile-close" aria-label="{% trans 'Закрыть меню' %}">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>

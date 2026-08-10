@@ -73,22 +73,22 @@
 }
 
 .site-footer__brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.6rem;
-  letter-spacing: 0.06em;
+  gap: 0;
+  line-height: 0;
   margin-bottom: 10px;
   color: var(--foot-fg);
-  -webkit-text-stroke: 0.85px currentColor;
-  text-shadow:
-    0.45px 0 0 currentColor,
-    -0.45px 0 0 currentColor,
-    0 0.45px 0 currentColor,
-    0 -0.45px 0 currentColor;
-  paint-order: stroke fill;
+}
+
+.site-footer__brand .logo__img,
+.logo__img--footer {
+  height: 38px;
+  width: auto;
+  max-width: min(180px, 56vw);
+  object-fit: contain;
+  /* Dark wordmark → light on footer */
+  filter: brightness(0) invert(1);
 }
 
 .site-footer__text {

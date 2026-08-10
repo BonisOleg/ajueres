@@ -13,10 +13,16 @@
   <div class="container">
     <div class="site-footer__grid">
       <div class="site-footer__col site-footer__col--brand">
-        <div class="site-footer__brand">
-          <span class="logo__dot" aria-hidden="true"></span>
-          AJERES
-        </div>
+        <a class="site-footer__brand" href="{% url 'home' %}">
+          <img
+            class="logo__img logo__img--footer"
+            src="{% static 'img/logo-ajeres.png' %}"
+            alt="AJERES"
+            width="180"
+            height="44"
+            decoding="async"
+          >
+        </a>
         <p class="site-footer__text">{% trans 'Дистрибьютор продуктов питания в Республике Узбекистан' %}</p>
         <p class="site-footer__credit">
           {% trans 'Разработано студией' %}

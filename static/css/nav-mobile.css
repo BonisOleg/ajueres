@@ -144,19 +144,14 @@
 .nav-mobile__brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: 0.06em;
+  gap: 0;
+  line-height: 0;
   color: var(--ink);
-  -webkit-text-stroke: 0.75px currentColor;
-  text-shadow:
-    0.4px 0 0 currentColor,
-    -0.4px 0 0 currentColor,
-    0 0.4px 0 currentColor,
-    0 -0.4px 0 currentColor;
-  paint-order: stroke fill;
+}
+
+.nav-mobile__brand .logo__img {
+  height: 34px;
+  max-width: min(168px, 52vw);
 }
 
 .nav-mobile__close {

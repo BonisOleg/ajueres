@@ -46,25 +46,23 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.65rem;
-  letter-spacing: 0.06em;
-  color: var(--ink);
+  gap: 0;
   flex: none;
-  /* Comfortaa max weight is 700 — fake extra bold via stroke + shadow */
-  -webkit-text-stroke: 0.85px currentColor;
-  text-shadow:
-    0.45px 0 0 currentColor,
-    -0.45px 0 0 currentColor,
-    0 0.45px 0 currentColor,
-    0 -0.45px 0 currentColor;
-  paint-order: stroke fill;
+  line-height: 0;
+  color: var(--ink);
 }
 
 .logo:hover {
   color: var(--ink);
+  opacity: 0.92;
+}
+
+.logo__img {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: min(196px, 42vw);
+  object-fit: contain;
 }
 
 .logo__dot {
@@ -77,8 +75,9 @@
 }
 
 @media (max-width: 639px) {
-  .logo {
-    font-size: 1.35rem;
+  .logo__img {
+    height: 34px;
+    max-width: min(168px, 46vw);
   }
 
   .logo__dot {
