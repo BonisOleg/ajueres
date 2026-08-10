@@ -144,7 +144,7 @@
 .nav-mobile__brand {
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: 10px;
   line-height: 0;
   color: var(--ink);
 }

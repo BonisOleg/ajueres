@@ -75,7 +75,7 @@
 .site-footer__brand {
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: 10px;
   line-height: 0;
   margin-bottom: 10px;
   color: var(--foot-fg);

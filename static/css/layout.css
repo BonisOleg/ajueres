@@ -46,7 +46,7 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: 10px;
   flex: none;
   line-height: 0;
   color: var(--ink);
