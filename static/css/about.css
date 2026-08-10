@@ -414,6 +414,14 @@
 }
 
 @media (max-width: 639px) {
+  .about-overview__icon {
+    display: none;
+  }
+
+  .about-overview__mission {
+    gap: 0;
+  }
+
   .about-cta,
   .about-cta__btn {
     width: 100%;
