@@ -25,6 +25,8 @@ CATALOG_JSON = ROOT / 'content' / 'catalog_products.json'
 STATIC_CATALOG = ROOT / 'static' / 'img' / 'catalog'
 CANVAS = 1000
 OBJECT_LIMIT = 920
+STATIC_MAX_SIDE = 800
+STATIC_WEBP_QUALITY = 78
 
 DEFAULT_XLSX = Path.home() / 'Downloads' / 'Перевод_названий (2).xlsx'
 DEFAULT_ZIP = Path.home() / 'Downloads' / 'Фото_Товара_Все.zip'
@@ -157,6 +159,17 @@ def _on_white(image: Image.Image) -> Image.Image:
     return canvas.convert('RGB')
 
 
+def _static_webp_bytes(image: Image.Image) -> bytes:
+    """Легкий WebP для static/img/catalog (Vercel bundle)."""
+    import io
+
+    thumb = image.copy()
+    thumb.thumbnail((STATIC_MAX_SIDE, STATIC_MAX_SIDE), Image.Resampling.LANCZOS)
+    buffer = io.BytesIO()
+    thumb.save(buffer, format='WEBP', quality=STATIC_WEBP_QUALITY, method=4)
+    return buffer.getvalue()
+
+
 def _find_photo(extract_dir: Path, num: int) -> Path:
     for ext in ('.png', '.jpg', '.jpeg', '.webp', '.PNG', '.JPG', '.JPEG', '.WEBP'):
         path = extract_dir / f'{num}{ext}'
@@ -165,7 +178,7 @@ def _find_photo(extract_dir: Path, num: int) -> Path:
     raise CommandError(f'Photo not found for product №{num}')
 
 
-def _static_name(brand: str, payload: bytes, ext: str = '.png') -> str:
+def _static_name(brand: str, payload: bytes, ext: str = '.webp') -> str:
     digest = hashlib.md5(payload).hexdigest()[:10]
     return f'{brand}-{digest}{ext}'
 
@@ -232,9 +245,9 @@ class Command(BaseCommand):
                 content_name = f'{slug}.png'
                 content_path = PRODUCT_IMAGES_DIR / content_name
                 image.save(content_path, 'PNG', optimize=True)
-                payload = content_path.read_bytes()
-                static_name = _static_name(brand, payload, '.png')
-                (STATIC_CATALOG / static_name).write_bytes(payload)
+                static_payload = _static_webp_bytes(image)
+                static_name = _static_name(brand, static_payload, '.webp')
+                (STATIC_CATALOG / static_name).write_bytes(static_payload)
 
                 row = {
                     'slug': slug,

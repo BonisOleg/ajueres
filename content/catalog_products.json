@@ -11,7 +11,7 @@
     "category": "noodles",
     "order": 0,
     "image": "sen-soy-somen-noodle-300-1.png",
-    "static_image": "sen-soy-ba1eb4984d.png"
+    "static_image": "sen-soy-253860885e.webp"
   },
   {
     "slug": "sen-soy-sweet-chili-sauce-260-2",
@@ -25,7 +25,7 @@
     "category": "sauces",
     "order": 1,
     "image": "sen-soy-sweet-chili-sauce-260-2.png",
-    "static_image": "sen-soy-95860795f8.png"
+    "static_image": "sen-soy-76404c59ae.webp"
   },
   {
     "slug": "sen-soy-sriracha-sauce-310-3",
@@ -39,7 +39,7 @@
     "category": "sauces",
     "order": 2,
     "image": "sen-soy-sriracha-sauce-310-3.png",
-    "static_image": "sen-soy-b499bdecc3.png"
+    "static_image": "sen-soy-62eb414b9c.webp"
   },
   {
     "slug": "sen-soy-sushi-nori-28-4",
@@ -53,7 +53,7 @@
     "category": "seaweed",
     "order": 3,
     "image": "sen-soy-sushi-nori-28-4.png",
-    "static_image": "sen-soy-20509c5a06.png"
+    "static_image": "sen-soy-4c46b120af.webp"
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-original-45-5",
@@ -67,7 +67,7 @@
     "category": "chips",
     "order": 4,
     "image": "sen-soy-seaweed-nori-chips-original-45-5.png",
-    "static_image": "sen-soy-87067c4777.png"
+    "static_image": "sen-soy-efe11dce03.webp"
   },
   {
     "slug": "sen-soy-hot-chili-sauce-260-6",
@@ -81,7 +81,7 @@
     "category": "sauces",
     "order": 5,
     "image": "sen-soy-hot-chili-sauce-260-6.png",
-    "static_image": "sen-soy-34057aa0b1.png"
+    "static_image": "sen-soy-0eb1b152b2.webp"
   },
   {
     "slug": "sen-soy-soy-sauce-classic-250-7",
@@ -95,7 +95,7 @@
     "category": "sauces",
     "order": 6,
     "image": "sen-soy-soy-sauce-classic-250-7.png",
-    "static_image": "sen-soy-680db5eb98.png"
+    "static_image": "sen-soy-bf294156d7.webp"
   },
   {
     "slug": "sen-soy-soy-sauce-dark-220-8",
@@ -109,7 +109,7 @@
     "category": "sauces",
     "order": 7,
     "image": "sen-soy-soy-sauce-dark-220-8.png",
-    "static_image": "sen-soy-746626204d.png"
+    "static_image": "sen-soy-5b4c2409ec.webp"
   },
   {
     "slug": "sen-soy-sweet-chili-mango-sauce-320-9",
@@ -123,7 +123,7 @@
     "category": "sauces",
     "order": 8,
     "image": "sen-soy-sweet-chili-mango-sauce-320-9.png",
-    "static_image": "sen-soy-4329bfdaae.png"
+    "static_image": "sen-soy-4d718815cd.webp"
   },
   {
     "slug": "sen-soy-teriyaki-sweet-sauce-320-10",
@@ -137,7 +137,7 @@
     "category": "sauces",
     "order": 9,
     "image": "sen-soy-teriyaki-sweet-sauce-320-10.png",
-    "static_image": "sen-soy-6ed5824f29.png"
+    "static_image": "sen-soy-78d2925cd4.webp"
   },
   {
     "slug": "sen-soy-unagi-sauce-320-11",
@@ -151,7 +151,7 @@
     "category": "sauces",
     "order": 10,
     "image": "sen-soy-unagi-sauce-320-11.png",
-    "static_image": "sen-soy-826ab8e295.png"
+    "static_image": "sen-soy-feb55be35a.webp"
   },
   {
     "slug": "sen-soy-soy-sauce-classic-1l-12",
@@ -165,7 +165,7 @@
     "category": "sauces",
     "order": 11,
     "image": "sen-soy-soy-sauce-classic-1l-12.png",
-    "static_image": "sen-soy-ba3fc034f6.png"
+    "static_image": "sen-soy-f329cd047a.webp"
   },
   {
     "slug": "sen-soy-udon-noodle-300-13",
@@ -179,7 +179,7 @@
     "category": "noodles",
     "order": 12,
     "image": "sen-soy-udon-noodle-300-13.png",
-    "static_image": "sen-soy-5d2f3b031a.png"
+    "static_image": "sen-soy-f363478d89.webp"
   },
   {
     "slug": "sen-soy-egg-noodle-300-14",
@@ -193,7 +193,7 @@
     "category": "noodles",
     "order": 13,
     "image": "sen-soy-egg-noodle-300-14.png",
-    "static_image": "sen-soy-4c45c25a9e.png"
+    "static_image": "sen-soy-d7a412c170.webp"
   },
   {
     "slug": "sen-soy-rice-vermicelli-noodle-300-15",
@@ -207,7 +207,7 @@
     "category": "noodles",
     "order": 14,
     "image": "sen-soy-rice-vermicelli-noodle-300-15.png",
-    "static_image": "sen-soy-a6d0d3ec6f.png"
+    "static_image": "sen-soy-c635ca3761.webp"
   },
   {
     "slug": "sen-soy-fo-kho-noodle-200-16",
@@ -221,7 +221,7 @@
     "category": "noodles",
     "order": 15,
     "image": "sen-soy-fo-kho-noodle-200-16.png",
-    "static_image": "sen-soy-6459d31e84.png"
+    "static_image": "sen-soy-11d039ca81.webp"
   },
   {
     "slug": "sen-soy-tom-yum-soup-base-80-17",
@@ -235,7 +235,7 @@
     "category": "sauces",
     "order": 16,
     "image": "sen-soy-tom-yum-soup-base-80-17.png",
-    "static_image": "sen-soy-a65e89be41.png"
+    "static_image": "sen-soy-d501e684ff.webp"
   },
   {
     "slug": "sen-soy-rice-paper-100-18",
@@ -249,7 +249,7 @@
     "category": "rice-paper",
     "order": 17,
     "image": "sen-soy-rice-paper-100-18.png",
-    "static_image": "sen-soy-358fc684c8.png"
+    "static_image": "sen-soy-bb4896d47f.webp"
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-kimchi-45-19",
@@ -263,7 +263,7 @@
     "category": "chips",
     "order": 18,
     "image": "sen-soy-seaweed-nori-chips-kimchi-45-19.png",
-    "static_image": "sen-soy-408af7b350.png"
+    "static_image": "sen-soy-06acf35e15.webp"
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-olive-45-20",
@@ -277,7 +277,7 @@
     "category": "chips",
     "order": 19,
     "image": "sen-soy-seaweed-nori-chips-olive-45-20.png",
-    "static_image": "sen-soy-5dcccd2ea2.png"
+    "static_image": "sen-soy-217a8f6460.webp"
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-tom-yum-45-21",
@@ -291,7 +291,7 @@
     "category": "chips",
     "order": 20,
     "image": "sen-soy-seaweed-nori-chips-tom-yum-45-21.png",
-    "static_image": "sen-soy-a6e3cada26.png"
+    "static_image": "sen-soy-b1d4bb5c4f.webp"
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-teriyaki-45-22",
@@ -305,7 +305,7 @@
     "category": "chips",
     "order": 21,
     "image": "sen-soy-seaweed-nori-chips-teriyaki-45-22.png",
-    "static_image": "sen-soy-86f6163709.png"
+    "static_image": "sen-soy-ffd8d05469.webp"
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-wasabi-45-23",
@@ -319,7 +319,7 @@
     "category": "chips",
     "order": 22,
     "image": "sen-soy-seaweed-nori-chips-wasabi-45-23.png",
-    "static_image": "sen-soy-a3483ed1ab.png"
+    "static_image": "sen-soy-eb31e0e7f1.webp"
   },
   {
     "slug": "sen-soy-oyster-sauce-310-24",
@@ -333,7 +333,7 @@
     "category": "sauces",
     "order": 23,
     "image": "sen-soy-oyster-sauce-310-24.png",
-    "static_image": "sen-soy-9e9784ac8f.png"
+    "static_image": "sen-soy-1bf55afb4f.webp"
   },
   {
     "slug": "sen-soy-sweet-chili-sauce-320-25",
@@ -347,7 +347,7 @@
     "category": "sauces",
     "order": 24,
     "image": "sen-soy-sweet-chili-sauce-320-25.png",
-    "static_image": "sen-soy-5c239f2114.png"
+    "static_image": "sen-soy-7156134da6.webp"
   },
   {
     "slug": "sen-soy-chili-pineapple-sauce-320-26",
@@ -361,7 +361,7 @@
     "category": "sauces",
     "order": 25,
     "image": "sen-soy-chili-pineapple-sauce-320-26.png",
-    "static_image": "sen-soy-665f54087f.png"
+    "static_image": "sen-soy-4021d71f01.webp"
   },
   {
     "slug": "sen-soy-rice-vinegar-220-27",
@@ -375,7 +375,7 @@
     "category": "sauces",
     "order": 26,
     "image": "sen-soy-rice-vinegar-220-27.png",
-    "static_image": "sen-soy-06547f1fb9.png"
+    "static_image": "sen-soy-785c9ba171.webp"
   },
   {
     "slug": "sen-soy-spicy-soy-sauce-250-28",
@@ -389,7 +389,7 @@
     "category": "sauces",
     "order": 27,
     "image": "sen-soy-spicy-soy-sauce-250-28.png",
-    "static_image": "sen-soy-228dda12cf.png"
+    "static_image": "sen-soy-dd421c638c.webp"
   },
   {
     "slug": "sen-soy-light-soy-sauce-250-29",
@@ -403,7 +403,7 @@
     "category": "sauces",
     "order": 28,
     "image": "sen-soy-light-soy-sauce-250-29.png",
-    "static_image": "sen-soy-2cae74e215.png"
+    "static_image": "sen-soy-0266bd892c.webp"
   },
   {
     "slug": "sen-soy-wok-sauce-310-30",
@@ -417,7 +417,7 @@
     "category": "sauces",
     "order": 29,
     "image": "sen-soy-wok-sauce-310-30.png",
-    "static_image": "sen-soy-7f51f29e2f.png"
+    "static_image": "sen-soy-70ff92e95e.webp"
   },
   {
     "slug": "yamchan-hot-chili-sauce-200-31",
@@ -431,7 +431,7 @@
     "category": "sauces",
     "order": 30,
     "image": "yamchan-hot-chili-sauce-200-31.png",
-    "static_image": "yamchan-c833bcde08.png"
+    "static_image": "yamchan-d3147bdd2d.webp"
   },
   {
     "slug": "yamchan-sweet-chili-sauce-200-32",
@@ -445,7 +445,7 @@
     "category": "sauces",
     "order": 31,
     "image": "yamchan-sweet-chili-sauce-200-32.png",
-    "static_image": "yamchan-1fefafd824.png"
+    "static_image": "yamchan-adbe44c8ca.webp"
   },
   {
     "slug": "yamchan-classic-soy-sauce-200-33",
@@ -459,7 +459,7 @@
     "category": "sauces",
     "order": 32,
     "image": "yamchan-classic-soy-sauce-200-33.png",
-    "static_image": "yamchan-21e8e06733.png"
+    "static_image": "yamchan-185a557721.webp"
   },
   {
     "slug": "yamchan-teriyaki-soy-sauce-200-34",
@@ -473,7 +473,7 @@
     "category": "sauces",
     "order": 33,
     "image": "yamchan-teriyaki-soy-sauce-200-34.png",
-    "static_image": "yamchan-156a68a92b.png"
+    "static_image": "yamchan-2165dee5b8.webp"
   },
   {
     "slug": "sen-soy-sweet-and-sour-sauce-260-35",
@@ -487,7 +487,7 @@
     "category": "sauces",
     "order": 34,
     "image": "sen-soy-sweet-and-sour-sauce-260-35.png",
-    "static_image": "sen-soy-44fbb1715e.png"
+    "static_image": "sen-soy-faed7efc4b.webp"
   },
   {
     "slug": "sen-soy-soy-sauce-for-sushi-220-36",
@@ -501,7 +501,7 @@
     "category": "sauces",
     "order": 35,
     "image": "sen-soy-soy-sauce-for-sushi-220-36.png",
-    "static_image": "sen-soy-09cd5cc044.png"
+    "static_image": "sen-soy-8438080a5e.webp"
   },
   {
     "slug": "sen-soy-teriyaki-sauce-with-sesame-320-37",
@@ -515,7 +515,7 @@
     "category": "sauces",
     "order": 36,
     "image": "sen-soy-teriyaki-sauce-with-sesame-320-37.png",
-    "static_image": "sen-soy-f981de34c2.png"
+    "static_image": "sen-soy-e7675c7124.webp"
   },
   {
     "slug": "sen-soy-tom-yum-noodle-soup-65-38",
@@ -529,7 +529,7 @@
     "category": "noodles",
     "order": 37,
     "image": "sen-soy-tom-yum-noodle-soup-65-38.png",
-    "static_image": "sen-soy-2114265595.png"
+    "static_image": "sen-soy-55616fe131.webp"
   },
   {
     "slug": "sen-soy-ramen-noodle-soup-65-39",
@@ -543,7 +543,7 @@
     "category": "noodles",
     "order": 38,
     "image": "sen-soy-ramen-noodle-soup-65-39.png",
-    "static_image": "sen-soy-0947ddd9c7.png"
+    "static_image": "sen-soy-78c0321998.webp"
   },
   {
     "slug": "paprichi-sweet-and-sour-sauce-320-40",
@@ -557,7 +557,7 @@
     "category": "sauces",
     "order": 39,
     "image": "paprichi-sweet-and-sour-sauce-320-40.png",
-    "static_image": "paprichi-22cf078633.png"
+    "static_image": "paprichi-8ea22a8e12.webp"
   },
   {
     "slug": "paprichi-barbecue-sauce-320-41",
@@ -571,7 +571,7 @@
     "category": "sauces",
     "order": 40,
     "image": "paprichi-barbecue-sauce-320-41.png",
-    "static_image": "paprichi-571213f748.png"
+    "static_image": "paprichi-0964fe5e74.webp"
   },
   {
     "slug": "paprichi-barbecue-sauce-320-42",
@@ -585,7 +585,7 @@
     "category": "sauces",
     "order": 41,
     "image": "paprichi-barbecue-sauce-320-42.png",
-    "static_image": "paprichi-2d9ab8ab65.png"
+    "static_image": "paprichi-a89109ed73.webp"
   },
   {
     "slug": "paprichi-sweet-and-spicy-sauce-320-43",
@@ -599,7 +599,7 @@
     "category": "sauces",
     "order": 42,
     "image": "paprichi-sweet-and-spicy-sauce-320-43.png",
-    "static_image": "paprichi-29b1b148e9.png"
+    "static_image": "paprichi-c3db40bb4f.webp"
   },
   {
     "slug": "riceup-rice-chips-barbecue-60",
@@ -613,7 +613,7 @@
     "category": "chips",
     "order": 43,
     "image": "riceup-rice-chips-barbecue-60.png",
-    "static_image": "riceup-a08d1e4cf3.png"
+    "static_image": "riceup-434c7e3abb.webp"
   },
   {
     "slug": "riceup-rice-chips-cheese-60",
@@ -627,7 +627,7 @@
     "category": "chips",
     "order": 44,
     "image": "riceup-rice-chips-cheese-60.png",
-    "static_image": "riceup-566b0e2a21.png"
+    "static_image": "riceup-c01af5ae27.webp"
   },
   {
     "slug": "riceup-rice-chips-hot-chili-60",
@@ -641,7 +641,7 @@
     "category": "chips",
     "order": 45,
     "image": "riceup-rice-chips-hot-chili-60.png",
-    "static_image": "riceup-6c814cb094.png"
+    "static_image": "riceup-bce41beaae.webp"
   },
   {
     "slug": "riceup-rice-chips-ketchup-60",
@@ -655,7 +655,7 @@
     "category": "chips",
     "order": 46,
     "image": "riceup-rice-chips-ketchup-60.png",
-    "static_image": "riceup-eb666df029.png"
+    "static_image": "riceup-f1fbfe846e.webp"
   },
   {
     "slug": "riceup-rice-chips-sea-salt-60",
@@ -669,7 +669,7 @@
     "category": "chips",
     "order": 47,
     "image": "riceup-rice-chips-sea-salt-60.png",
-    "static_image": "riceup-4d63e3f877.png"
+    "static_image": "riceup-2f51e0d345.webp"
   },
   {
     "slug": "riceup-rice-chips-sour-cream-onion-60",
@@ -683,7 +683,7 @@
     "category": "chips",
     "order": 48,
     "image": "riceup-rice-chips-sour-cream-onion-60.png",
-    "static_image": "riceup-dedda714a8.png"
+    "static_image": "riceup-1385dd6ada.webp"
   },
   {
     "slug": "riceup-tortilla-black-olives-60",
@@ -697,7 +697,7 @@
     "category": "chips",
     "order": 49,
     "image": "riceup-tortilla-black-olives-60.png",
-    "static_image": "riceup-d96072f88a.png"
+    "static_image": "riceup-1794d40610.webp"
   },
   {
     "slug": "riceup-tortilla-nacho-cheese-60",
@@ -711,7 +711,7 @@
     "category": "chips",
     "order": 50,
     "image": "riceup-tortilla-nacho-cheese-60.png",
-    "static_image": "riceup-d74402a4c6.png"
+    "static_image": "riceup-d44ab1685e.webp"
   },
   {
     "slug": "riceup-tortilla-salt-60",
@@ -725,7 +725,7 @@
     "category": "chips",
     "order": 51,
     "image": "riceup-tortilla-salt-60.png",
-    "static_image": "riceup-f2dbc41b26.png"
+    "static_image": "riceup-9b82bf0654.webp"
   },
   {
     "slug": "riceup-tortilla-sour-cream-onion-60",
@@ -739,7 +739,7 @@
     "category": "chips",
     "order": 52,
     "image": "riceup-tortilla-sour-cream-onion-60.png",
-    "static_image": "riceup-4dad551694.png"
+    "static_image": "riceup-0659e7527f.webp"
   },
   {
     "slug": "riceup-tortilla-texas-bbq-60",
@@ -753,7 +753,7 @@
     "category": "chips",
     "order": 53,
     "image": "riceup-tortilla-texas-bbq-60.png",
-    "static_image": "riceup-1709d2a248.png"
+    "static_image": "riceup-2e839ec740.webp"
   },
   {
     "slug": "riceup-tortilla-yellow-cheddar-60",
@@ -767,7 +767,7 @@
     "category": "chips",
     "order": 54,
     "image": "riceup-tortilla-yellow-cheddar-60.png",
-    "static_image": "riceup-fda7083192.png"
+    "static_image": "riceup-35e9096af4.webp"
   },
   {
     "slug": "krambals-bruschetta-tomato-mozzarella",
@@ -781,7 +781,7 @@
     "category": "bruschetta",
     "order": 55,
     "image": "krambals-bruschetta-tomato-mozzarella.png",
-    "static_image": "krambals-4742ba1cba.png"
+    "static_image": "krambals-2c519f0d4f.webp"
   },
   {
     "slug": "krambals-bruschetta-green-olives",
@@ -795,7 +795,7 @@
     "category": "bruschetta",
     "order": 56,
     "image": "krambals-bruschetta-green-olives.png",
-    "static_image": "krambals-30f565c003.png"
+    "static_image": "krambals-7304f849e4.webp"
   },
   {
     "slug": "krambals-bruschetta-creamy-cheese",
@@ -809,7 +809,7 @@
     "category": "bruschetta",
     "order": 57,
     "image": "krambals-bruschetta-creamy-cheese.png",
-    "static_image": "krambals-185886e4a8.png"
+    "static_image": "krambals-15e81cc0bc.webp"
   },
   {
     "slug": "krambals-bruschetta-garden-grill",
@@ -823,7 +823,7 @@
     "category": "bruschetta",
     "order": 58,
     "image": "krambals-bruschetta-garden-grill.png",
-    "static_image": "krambals-6414c316ed.png"
+    "static_image": "krambals-258c4813fe.webp"
   },
   {
     "slug": "krambals-bruschetta-forest-mushrooms",
@@ -837,7 +837,7 @@
     "category": "bruschetta",
     "order": 59,
     "image": "krambals-bruschetta-forest-mushrooms.png",
-    "static_image": "krambals-d5812848e2.png"
+    "static_image": "krambals-95d6759071.webp"
   },
   {
     "slug": "huligan-pretzel-crush-cheese-65",
@@ -851,7 +851,7 @@
     "category": "crush",
     "order": 60,
     "image": "huligan-pretzel-crush-cheese-65.png",
-    "static_image": "huligan-31f2b7bd77.png"
+    "static_image": "huligan-1172bfadba.webp"
   },
   {
     "slug": "huligan-pretzel-crush-honey-mustard-65",
@@ -865,7 +865,7 @@
     "category": "crush",
     "order": 61,
     "image": "huligan-pretzel-crush-honey-mustard-65.png",
-    "static_image": "huligan-918eae17c0.png"
+    "static_image": "huligan-cd5535d43f.webp"
   },
   {
     "slug": "huligan-pretzel-crush-jalapeno-65",
@@ -879,7 +879,7 @@
     "category": "crush",
     "order": 62,
     "image": "huligan-pretzel-crush-jalapeno-65.png",
-    "static_image": "huligan-a9c36155cd.png"
+    "static_image": "huligan-04d792e450.webp"
   },
   {
     "slug": "huligan-pretzel-crush-siracha-65",
@@ -893,6 +893,6 @@
     "category": "crush",
     "order": 63,
     "image": "huligan-pretzel-crush-siracha-65.png",
-    "static_image": "huligan-35cb43cd9b.png"
+    "static_image": "huligan-462c9fd65b.webp"
   }
 ]

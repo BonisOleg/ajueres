@@ -1,0 +1,25 @@
+# Keep Vercel serverless bundle under the 225 MB function limit.
+# Catalog UI serves static/img/catalog (WebP); seed originals stay local only.
+
+.venv/
+venv/
+.env
+.tmp/
+__pycache__/
+*.py[cod]
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+content/products/
+node_modules/
+.mypy_cache/
+.pytest_cache/
+*.egg-info/
+.DS_Store
+
+# Local design drafts — not needed at runtime
+AJERES Homepage Redesign/
+AJERES Главная.dc.html
+AJERES-Business-Logic.md
+AJERES-Models.md
