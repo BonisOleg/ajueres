@@ -77,11 +77,18 @@
   align-items: center;
   gap: 10px;
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 1.5rem;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
   margin-bottom: 10px;
   color: var(--foot-fg);
+  -webkit-text-stroke: 0.85px currentColor;
+  text-shadow:
+    0.45px 0 0 currentColor,
+    -0.45px 0 0 currentColor,
+    0 0.45px 0 currentColor,
+    0 -0.45px 0 currentColor;
+  paint-order: stroke fill;
 }
 
 .site-footer__text {
