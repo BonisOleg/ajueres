@@ -12,10 +12,12 @@ from apps.catalog.selectors import invalidate_catalog_list_cache
 from apps.core.import_content_data import (
     ABOUT_SECTIONS,
     ADVANTAGE_ROWS,
+    BRAND_I18N,
     BRAND_LOGOS_DIR,
     BRANDS_SPEC,
     CATEGORIES,
     INACTIVE_CATEGORY_SLUGS,
+    PARTNER_ROWS,
     PRODUCT_IMAGES_DIR,
     RETAIL_LOGOS_DIR,
     RETAIL_PARTNERS_SPEC,
@@ -273,30 +275,29 @@ class Command(BaseCommand):
         )
 
     def _partners(self):
-        if PartnerOffer.objects.exists():
-            return
-        offers = [
-            (
-                'Стратегия продвижения',
-                'Помогаем выстроить эффективную стратегию вывода и роста бренда.',
-            ),
-            (
-                'Логистика',
-                'Организация поставок, склад и доставка по сети партнёров.',
-            ),
-            (
-                'Маркетинговая поддержка',
-                'Промо, трейд-маркетинг и digital-инструменты для роста продаж.',
-            ),
-            (
-                'Консультации по продажам',
-                'Работа с сетями, HoReCa и традиционной розницей.',
-            ),
-        ]
-        for i, (title, text) in enumerate(offers):
-            PartnerOffer.objects.create(
-                title=title, text=text, order=i, is_active=True
-            )
+        keep_ids = []
+        for i, row in enumerate(PARTNER_ROWS):
+            title_ru, title_uz, title_en, text_ru, text_uz, text_en = row
+            offer = PartnerOffer.objects.filter(order=i).first()
+            if offer is None:
+                offer = PartnerOffer(order=i)
+            offer.title = title_ru
+            offer.text = text_ru
+            offer.order = i
+            offer.is_active = True
+            for field, value in (
+                ('title_ru', title_ru),
+                ('title_uz', title_uz),
+                ('title_en', title_en),
+                ('text_ru', text_ru),
+                ('text_uz', text_uz),
+                ('text_en', text_en),
+            ):
+                if hasattr(offer, field):
+                    setattr(offer, field, value)
+            offer.save()
+            keep_ids.append(offer.pk)
+        PartnerOffer.objects.exclude(pk__in=keep_ids).update(is_active=False)
 
     def _retail_partners(self):
         for slug, name, logo_file, order in RETAIL_PARTNERS_SPEC:
@@ -447,10 +448,20 @@ class Command(BaseCommand):
                     'is_featured': featured,
                 },
             )
-            brand.name = name
+            name_ru, name_uz, name_en = BRAND_I18N.get(
+                slug, (name, name, name)
+            )
+            brand.name = name_ru
             brand.order = order
             brand.is_featured = featured
             brand.is_active = True
+            for field, value in (
+                ('name_ru', name_ru),
+                ('name_uz', name_uz),
+                ('name_en', name_en),
+            ):
+                if hasattr(brand, field):
+                    setattr(brand, field, value)
             self._ensure_brand_logo(brand, logo_file, force=False)
             brand.save()
             brand_map[slug] = brand

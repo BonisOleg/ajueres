@@ -146,11 +146,16 @@
   align-items: center;
   gap: 10px;
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 1.25rem;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
   color: var(--ink);
-  -webkit-text-stroke: 0.4px currentColor;
+  -webkit-text-stroke: 0.75px currentColor;
+  text-shadow:
+    0.4px 0 0 currentColor,
+    -0.4px 0 0 currentColor,
+    0 0.4px 0 currentColor,
+    0 -0.4px 0 currentColor;
   paint-order: stroke fill;
 }
 

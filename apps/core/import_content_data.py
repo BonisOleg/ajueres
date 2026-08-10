@@ -420,48 +420,54 @@ ABOUT_SECTIONS = [
 
 PARTNER_ROWS = [
     (
-        'Для торговых сетей, дистрибьюторов и HoReCa',
-        'Savdo tarmoqlari, distribyutorlar va HoReCa uchun',
-        'For retail, distributors and HoReCa',
-        (
-            'Компания ООО «AJERES» предлагает широкий ассортимент качественных '
-            'продуктов питания от международных производителей.\n\n'
-            'Нашим партнёрам мы гарантируем:\n'
-            '• стабильные поставки;\n'
-            '• конкурентные цены;\n'
-            '• широкий ассортимент;\n'
-            '• маркетинговую поддержку;\n'
-            '• оперативную логистику;\n'
-            '• персональное сопровождение;\n'
-            '• профессиональную работу торговой команды.\n\n'
-            'Мы стремимся строить долгосрочные отношения, основанные на доверии, '
-            'прозрачности и взаимной выгоде.'
-        ),
-        (
-            '"AJERES" MChJ xalqaro ishlab chiqaruvchilarning keng assortimentdagi '
-            'sifatli oziq-ovqat mahsulotlarini taklif etadi.\n\n'
-            'Hamkorlarimizga quyidagilarni kafolatlaymiz:\n'
-            '• barqaror yetkazib berish;\n'
-            '• raqobatbardosh narxlar;\n'
-            '• keng assortiment;\n'
-            '• marketing qo‘llab-quvvatlovi;\n'
-            '• tezkor logistika;\n'
-            '• shaxsiy yondashuv;\n'
-            '• professional savdo jamoasi.\n\n'
-            'Biz ishonch, ochiqlik va o‘zaro manfaat tamoyillariga asoslangan '
-            'uzoq muddatli hamkorlikni yo‘lga qo‘yishga intilamiz.'
-        ),
-        (
-            'AJERES offers a wide range of quality foods from international '
-            'producers to retail chains, distributors and HoReCa.\n\n'
-            'We guarantee stable supply, competitive prices, a broad assortment, '
-            'marketing support, responsive logistics, dedicated account care and '
-            'a professional sales team.\n\n'
-            'We build long-term partnerships based on trust, transparency and '
-            'mutual benefit.'
-        ),
+        'Стратегия продвижения',
+        'Brendni ilgari surish strategiyasi',
+        'Promotion strategy',
+        'Помогаем выстроить эффективную стратегию вывода и роста бренда.',
+        'Brendni bozorga chiqarish va o‘stirish uchun samarali strategiyani quramiz.',
+        'We help build an effective strategy to launch and grow the brand.',
+    ),
+    (
+        'Логистика',
+        'Logistika',
+        'Logistics',
+        'Организация поставок, склад и доставка по сети партнёров.',
+        'Yetkazib berish, ombor va hamkorlar tarmog‘i bo‘ylab yetkazib berishni tashkil qilamiz.',
+        'Supply organization, warehousing and delivery across the partner network.',
+    ),
+    (
+        'Маркетинговая поддержка',
+        'Marketing qo‘llab-quvvatlash',
+        'Marketing support',
+        'Промо, трейд-маркетинг и digital-инструменты для роста продаж.',
+        'Savdo o‘sishi uchun promo, treyd-marketing va digital vositalar.',
+        'Promo, trade marketing and digital tools to grow sales.',
+    ),
+    (
+        'Консультации по продажам',
+        'Savdo bo‘yicha konsultatsiyalar',
+        'Sales consulting',
+        'Работа с сетями, HoReCa и традиционной розницей.',
+        'Savdo tarmoqlari, HoReCa va an’anaviy chakana savdo bilan ishlash.',
+        'Working with retail chains, HoReCa and traditional trade.',
     ),
 ]
+
+# slug -> (name_ru, name_uz, name_en)
+BRAND_I18N = {
+    'sen-soy': ('Sen Soy', 'Sen Soy', 'Sen Soy'),
+    'paprichi': ('Папричи', 'Paprichi', 'Paprichi'),
+    'riceup': ('RICEUP', 'RICEUP', 'RICEUP'),
+    'gaudo': ('GAUDO', 'GAUDO', 'GAUDO'),
+    'krambals': ('KRAMBALS', 'KRAMBALS', 'KRAMBALS'),
+    'yamchan': ('ЯМЧАН', 'Yamchan', 'Yamchan'),
+    'huligan': ('HULIGAN', 'HULIGAN', 'HULIGAN'),
+    'prince-of-chester': (
+        'Prince of Chester',
+        'Prince of Chester',
+        'Prince of Chester',
+    ),
+}
 
 PRIVACY_DEFAULTS = {
     'title': 'Политика приватности',

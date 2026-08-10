@@ -17,6 +17,7 @@ from PIL import Image
 from apps.catalog.models import Brand, Category, Product
 from apps.catalog.selectors import invalidate_catalog_list_cache
 from apps.core.import_content_data import BRANDS_SPEC, CATEGORIES, PRODUCT_IMAGES_DIR
+from apps.core.import_content_data import BRAND_I18N
 from apps.core.models import SiteBlock
 from apps.core.selectors import invalidate_site_blocks_cache
 
@@ -337,10 +338,18 @@ class Command(BaseCommand):
                     'is_featured': featured,
                 },
             )
-            brand.name = name
+            name_ru, name_uz, name_en = BRAND_I18N.get(slug, (name, name, name))
+            brand.name = name_ru
             brand.order = order
             brand.is_featured = featured
             brand.is_active = True
+            for field, value in (
+                ('name_ru', name_ru),
+                ('name_uz', name_uz),
+                ('name_en', name_en),
+            ):
+                if hasattr(brand, field):
+                    setattr(brand, field, value)
             brand.save()
 
     def _upsert_product(self, row: dict, content_path: Path):

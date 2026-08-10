@@ -48,12 +48,18 @@
   align-items: center;
   gap: 10px;
   font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 1.5rem;
-  letter-spacing: 0.02em;
+  font-weight: 700;
+  font-size: 1.65rem;
+  letter-spacing: 0.06em;
   color: var(--ink);
   flex: none;
-  -webkit-text-stroke: 0.45px currentColor;
+  /* Comfortaa max weight is 700 — fake extra bold via stroke + shadow */
+  -webkit-text-stroke: 0.85px currentColor;
+  text-shadow:
+    0.45px 0 0 currentColor,
+    -0.45px 0 0 currentColor,
+    0 0.45px 0 currentColor,
+    0 -0.45px 0 currentColor;
   paint-order: stroke fill;
 }
 

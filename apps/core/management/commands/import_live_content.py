@@ -21,6 +21,7 @@ from apps.core.import_content_data import (
     ABOUT_BLOCKS,
     ABOUT_SECTIONS,
     ADVANTAGE_ROWS,
+    BRAND_I18N,
     BRAND_LOGOS_DIR,
     BRANDS_SPEC,
     CATEGORIES,
@@ -317,21 +318,26 @@ class Command(BaseCommand):
 
         if force:
             PartnerOffer.objects.all().delete()
-        if not PartnerOffer.objects.exists() or force:
-            PartnerOffer.objects.all().delete()
-            for i, row in enumerate(PARTNER_ROWS):
-                PartnerOffer.objects.create(
-                    title=row[0],
-                    title_ru=row[0],
-                    title_uz=row[1],
-                    title_en=row[2],
-                    text=row[3],
-                    text_ru=row[3],
-                    text_uz=row[4],
-                    text_en=row[5],
-                    order=i,
-                    is_active=True,
-                )
+        keep_ids = []
+        for i, row in enumerate(PARTNER_ROWS):
+            title_ru, title_uz, title_en, text_ru, text_uz, text_en = row
+            offer = PartnerOffer.objects.filter(order=i).first()
+            if offer is None or force:
+                if offer is None:
+                    offer = PartnerOffer(order=i)
+            offer.title = title_ru
+            offer.title_ru = title_ru
+            offer.title_uz = title_uz
+            offer.title_en = title_en
+            offer.text = text_ru
+            offer.text_ru = text_ru
+            offer.text_uz = text_uz
+            offer.text_en = text_en
+            offer.order = i
+            offer.is_active = True
+            offer.save()
+            keep_ids.append(offer.pk)
+        PartnerOffer.objects.exclude(pk__in=keep_ids).update(is_active=False)
 
         LegalDocument.objects.update_or_create(
             slug='privacy',
@@ -346,12 +352,18 @@ class Command(BaseCommand):
                 defaults={'name': name, 'order': order, 'is_featured': featured},
             )
             brand.name = name
+            name_ru, name_uz, name_en = BRAND_I18N.get(slug, (name, name, name))
+            brand.name = name_ru
+            if hasattr(brand, 'name_ru'):
+                brand.name_ru = name_ru
+                brand.name_uz = name_uz
+                brand.name_en = name_en
             brand.order = order
             brand.is_featured = featured
             brand.is_active = True
-            brand.short_description_ru = f'Бренд {name} в портфеле AJERES'
-            brand.short_description_uz = f'AJERES portfelidagi {name} brendi'
-            brand.short_description_en = f'{name} brand in the AJERES portfolio'
+            brand.short_description_ru = f'Бренд {name_ru} в портфеле AJERES'
+            brand.short_description_uz = f'AJERES portfelidagi {name_uz} brendi'
+            brand.short_description_en = f'{name_en} brand in the AJERES portfolio'
             if logo_file:
                 local = BRAND_LOGOS_DIR / logo_file
                 if local.is_file():
