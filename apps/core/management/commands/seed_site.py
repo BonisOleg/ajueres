@@ -116,12 +116,12 @@ class Command(BaseCommand):
             ),
             ('home', 'hero_cta', 'Связаться с нами'),
             ('home', 'services_title', 'Наша деятельность'),
-            ('home', 'brands_title', 'Наши бренды'),
+            ('home', 'brands_title', 'Наши партнёры'),
             (
                 'home',
                 'brands_subtitle',
-                'Эксклюзивно представляем производителей сильных брендов, '
-                'которые доверяют нам свое развитие',
+                'Ритейл-партнёры и производители, с которыми мы развиваем '
+                'ассортимент на рынке Узбекистана',
             ),
             ('about', 'eyebrow', 'О компании'),
             ('about', 'title', 'ООО «AJERES»'),
@@ -129,7 +129,9 @@ class Command(BaseCommand):
                 'about',
                 'intro',
                 'Современная дистрибьюторская компания на рынке продуктов '
-                'питания Республики Узбекистан.',
+                'питания Республики Узбекистан. Специализируемся на выводе '
+                'международных брендов и полном комплексе услуг: импорт, '
+                'логистика, продажи, маркетинг и развитие брендов.',
             ),
             ('about', 'cta', 'Связаться с нами'),
             ('about', 'side_image', ''),
@@ -365,8 +367,14 @@ class Command(BaseCommand):
             current_size = 0
         if force or not product.image or current_size < 2000:
             # ASCII-safe media filename for serverless FS.
-            safe_name = f'{product.brand.slug}-{product.pk or product.slug[:24]}.png'
-            safe_name = ''.join(ch if ch.isascii() and (ch.isalnum() or ch in '-_.') else '-' for ch in safe_name)
+            ext = path.suffix.lower() if path.suffix else '.png'
+            if ext not in {'.png', '.jpg', '.jpeg', '.webp'}:
+                ext = '.png'
+            safe_name = f'{product.brand.slug}-{product.pk or product.slug[:24]}{ext}'
+            safe_name = ''.join(
+                ch if ch.isascii() and (ch.isalnum() or ch in '-_.') else '-'
+                for ch in safe_name
+            )
             product.image.save(safe_name, ContentFile(path.read_bytes()), save=False)
 
     def _ensure_brand_logo(self, brand: Brand, logo_file: str | None, force: bool = False):
@@ -457,30 +465,44 @@ class Command(BaseCommand):
                 self.stderr.write(f'Skip product {slug}: unknown brand/category')
                 continue
             keep_slugs.add(slug)
+            name_ru = row.get('name') or row.get('name_ru') or slug
+            name_en = row.get('name_en') or ''
+            name_uz = row.get('name_uz') or ''
+            package = row.get('package') or ''
             try:
                 product, created = Product.objects.get_or_create(
                     slug=slug,
                     defaults={
                         'brand': brand,
                         'category': category,
-                        'name': row.get('name') or slug,
-                        'package': row.get('package') or '',
+                        'name': name_ru,
+                        'package': package,
                         'order': int(row.get('order') or 0),
                         'is_active': True,
                     },
                 )
                 product.brand = brand
                 product.category = category
-                product.name = row.get('name') or product.name
-                product.package = row.get('package') or ''
+                product.name = name_ru
+                product.package = package
                 product.order = int(row.get('order') or 0)
                 product.is_active = True
+                for field, value in (
+                    ('name_ru', name_ru),
+                    ('name_en', name_en),
+                    ('name_uz', name_uz),
+                    ('package_ru', package),
+                    ('package_en', row.get('package_en') or package),
+                    ('package_uz', row.get('package_uz') or package),
+                ):
+                    if value and hasattr(product, field):
+                        setattr(product, field, value)
                 # On Vercel UI serves static/img/catalog; skip heavy media copies.
                 if not getattr(settings, 'IS_VERCEL', False):
                     self._ensure_product_image(
                         product,
                         image_name=row.get('image'),
-                        force=False,
+                        force=bool(row.get('force_image')),
                     )
                 product.save()
             except Exception as exc:  # noqa: BLE001 — keep seeding other rows

@@ -10,3 +10,4 @@ staticfiles/
 *.egg-info/
 .mypy_cache/
 .pytest_cache/
+.tmp/

@@ -146,10 +146,12 @@
   align-items: center;
   gap: 10px;
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 900;
   font-size: 1.25rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
   color: var(--ink);
+  -webkit-text-stroke: 0.4px currentColor;
+  paint-order: stroke fill;
 }
 
 .nav-mobile__close {

@@ -183,7 +183,7 @@ MEDIA_ROOT = (Path('/tmp') / 'ajeres-media') if IS_VERCEL else (BASE_DIR / 'medi
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Catalog
-CATALOG_PER_PAGE = int(os.environ.get('CATALOG_PER_PAGE', '24'))
+CATALOG_PER_PAGE = int(os.environ.get('CATALOG_PER_PAGE', '72'))
 
 # Security (production)
 # SECURE_SSL_REDIRECT=False у Docker до SSL (інакше healthcheck 301 → unhealthy)

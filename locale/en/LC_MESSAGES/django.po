@@ -50,14 +50,46 @@ msgstr "Contact us"
 msgid "Наша деятельность"
 msgstr "Our activities"
 #: apps/core/i18n_content.py:14
+msgid "Наши партнёры"
+msgstr "Our partners"
+#: apps/core/i18n_content.py:16
+msgid ""
+"Ритейл-партнёры и производители, с которыми мы развиваем ассортимент на "
+"рынке Узбекистана"
+msgstr "Retail partners and manufacturers with whom we grow the assortment in Uzbekistan"
+#: apps/core/i18n_content.py:21
 msgid "Наши бренды"
 msgstr "Our brands"
-#: apps/core/i18n_content.py:16
+#: apps/core/i18n_content.py:23
 msgid ""
 "Эксклюзивно представляем производителей сильных брендов, которые доверяют "
 "нам свое развитие"
 msgstr "We exclusively represent strong brand producers who trust us with their growth"
-#: apps/core/i18n_content.py:21 templates/pages/home.html:117
+#: apps/core/i18n_content.py:29
+msgid "ООО «AJERES»"
+msgstr "AJERES LLC"
+#: apps/core/i18n_content.py:31
+msgid ""
+"Современная дистрибьюторская компания на рынке продуктов питания Республики "
+"Узбекистан. Специализируемся на выводе международных брендов и полном "
+"комплексе услуг: импорт, логистика, продажи, маркетинг и развитие брендов."
+msgstr ""
+"A modern food distribution company in Uzbekistan. We specialize in launching "
+"international brands and a full service cycle: import, logistics, sales, "
+"marketing and brand development."
+#: apps/core/i18n_content.py:37
+msgid "Свяжитесь с нами"
+msgstr "Contact us"
+#: apps/core/i18n_content.py:39
+msgid "Форма заявки"
+msgstr "Request form"
+#: apps/core/i18n_content.py:40
+msgid "Отправить нам запрос"
+msgstr "Send us a request"
+#: apps/core/i18n_content.py:41
+msgid "Наш офис в Ташкенте"
+msgstr "Our office in Tashkent"
+#: apps/core/i18n_content.py:28 templates/pages/home.html:117
 msgid "Сотрудничество"
 msgstr "Partnership"
 #: apps/core/i18n_content.py:22 templates/pages/contacts.html:43
@@ -286,9 +318,6 @@ msgstr "Send"
 #: templates/partials/contact_success.html:7
 msgid "Спасибо за обращение. Наш менеджер свяжется с вами в ближайшее время."
 msgstr "We will contact you shortly."
-
-#~ msgid "ООО «AJERES»"
-#~ msgstr "AJERES LLC"
 
 #~ msgid "Контент скоро появится."
 #~ msgstr "Content coming soon."

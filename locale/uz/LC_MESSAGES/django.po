@@ -50,14 +50,46 @@ msgstr "Biz bilan bog‘laning"
 msgid "Наша деятельность"
 msgstr "Bizning faoliyatimiz"
 #: apps/core/i18n_content.py:14
+msgid "Наши партнёры"
+msgstr "Bizning hamkorlarimiz"
+#: apps/core/i18n_content.py:16
+msgid ""
+"Ритейл-партнёры и производители, с которыми мы развиваем ассортимент на "
+"рынке Узбекистана"
+msgstr "Biz O‘zbekiston bozorida assortimentni birga rivojlantirayotgan chakana savdo hamkorlari va ishlab chiqaruvchilar"
+#: apps/core/i18n_content.py:21
 msgid "Наши бренды"
 msgstr "Bizning brendlar"
-#: apps/core/i18n_content.py:16
+#: apps/core/i18n_content.py:23
 msgid ""
 "Эксклюзивно представляем производителей сильных брендов, которые доверяют "
 "нам свое развитие"
 msgstr "Rivojlanishini bizga ishonib topshirgan kuchli brend ishlab chiqaruvchilarini eksklyuziv ravishda taqdim etamiz"
-#: apps/core/i18n_content.py:21 templates/pages/home.html:117
+#: apps/core/i18n_content.py:29
+msgid "ООО «AJERES»"
+msgstr "«AJERES» MChJ"
+#: apps/core/i18n_content.py:31
+msgid ""
+"Современная дистрибьюторская компания на рынке продуктов питания Республики "
+"Узбекистан. Специализируемся на выводе международных брендов и полном "
+"комплексе услуг: импорт, логистика, продажи, маркетинг и развитие брендов."
+msgstr ""
+"O‘zbekiston Respublikasi oziq-ovqat bozoridagi zamonaviy distribyutorlik "
+"kompaniyasi. Xalqaro brendlarni bozorga chiqarish hamda to‘liq xizmatlar "
+"majmuasi: import, logistika, savdo, marketing va brendlarni rivojlantirish."
+#: apps/core/i18n_content.py:37
+msgid "Свяжитесь с нами"
+msgstr "Biz bilan bog‘laning"
+#: apps/core/i18n_content.py:39
+msgid "Форма заявки"
+msgstr "So‘rov shakli"
+#: apps/core/i18n_content.py:40
+msgid "Отправить нам запрос"
+msgstr "Bizga so‘rov yuboring"
+#: apps/core/i18n_content.py:41
+msgid "Наш офис в Ташкенте"
+msgstr "Toshkentdagi ofisimiz"
+#: apps/core/i18n_content.py:28 templates/pages/home.html:117
 msgid "Сотрудничество"
 msgstr "Hamkorlik"
 #: apps/core/i18n_content.py:22 templates/pages/contacts.html:43
@@ -286,9 +318,6 @@ msgstr "Yuborish"
 #: templates/partials/contact_success.html:7
 msgid "Спасибо за обращение. Наш менеджер свяжется с вами в ближайшее время."
 msgstr "Tez orada siz bilan bog‘lanamiz."
-
-#~ msgid "ООО «AJERES»"
-#~ msgstr "«AJERES» MChJ"
 
 #~ msgid "Контент скоро появится."
 #~ msgstr "Kontent tez orada paydo bo‘ladi."

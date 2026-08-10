@@ -13,7 +13,7 @@ from django.db.models import Prefetch, Q, QuerySet
 from .models import Brand, Category, Product
 from .search import SEARCH_MAX_LEN, SEARCH_MIN_LEN, tokenize
 
-CATALOG_PER_PAGE = 24
+CATALOG_PER_PAGE = 72
 _WHITESPACE_RE = re.compile(r'\s+')
 
 _CACHE_BRANDS_ALL = 'brands_public:all'

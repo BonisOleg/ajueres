@@ -100,7 +100,7 @@ def get_partner_offers():
 
 
 def get_retail_partners() -> list[RetailPartner]:
-    """Покупці (ритейл) для блоку «Наши бренды» на головній — лише з логотипом."""
+    """Покупці (ритейл) для блоку «Наши партнёры» на головній — лише з логотипом."""
     cached_ids = cache.get(_CACHE_RETAIL)
     base = RetailPartner.objects.filter(is_active=True).exclude(logo='').order_by(
         'order', 'name'

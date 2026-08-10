@@ -50,9 +50,11 @@
   font-family: var(--font-display);
   font-weight: 900;
   font-size: 1.5rem;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.02em;
   color: var(--ink);
   flex: none;
+  -webkit-text-stroke: 0.45px currentColor;
+  paint-order: stroke fill;
 }
 
 .logo:hover {
