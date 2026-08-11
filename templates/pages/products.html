@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static %}
+{% load i18n static ajeres_tags %}
 
 {% block title %}{% trans 'Каталог' %} — AJERES{% endblock %}
 
@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="contacts-hero catalog-hero" aria-labelledby="catalog-hero-title">
+<section class="contacts-hero catalog-hero" aria-labelledby="catalog-hero-title" {% section_style "products" "catalog" %}>
   <div class="contacts-hero__bg catalog-hero__bg" aria-hidden="true"></div>
   <div class="contacts-hero__fade" aria-hidden="true"></div>
   <div class="contacts-hero__inner">
@@ -23,7 +23,7 @@
   </div>
 </section>
 
-<section class="catalog-stage">
+<section class="catalog-stage" {% section_style "products" "catalog" %}>
   <div class="catalog-stage__glow" aria-hidden="true"></div>
   <div class="container catalog-stage__wrap">
     <div class="catalog-panel">
@@ -84,7 +84,7 @@
 </section>
 
 {% if brands_showcase %}
-<section class="catalog-brands">
+<section class="catalog-brands" {% section_style "products" "brands" %}>
   <div class="catalog-brands__head">
     <h2 class="heading heading--lg">{% trans 'Производители, которых мы представляем' %}</h2>
   </div>

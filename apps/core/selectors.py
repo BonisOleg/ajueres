@@ -8,12 +8,14 @@ from django.utils.translation import get_language
 from .models import (
     AboutSection,
     Advantage,
+    BlockStyle,
     CaseStudy,
     CompanyStat,
     LegalDocument,
     PartnerOffer,
     RetailPartner,
     SiteBlock,
+    SiteButtonStyle,
     SiteSettings,
 )
 
@@ -22,6 +24,9 @@ _CACHE_SETTINGS = 'site_settings'
 _CACHE_BLOCKS_TTL = 60 * 10
 _CACHE_RETAIL = 'retail_partners_public'
 _CACHE_RETAIL_TTL = 60 * 10
+_CACHE_BUTTONS = 'site_button_styles'
+_CACHE_BLOCK_STYLES = 'block_styles_all'
+_CACHE_THEME_TTL = 60 * 10
 
 
 def get_site_settings() -> SiteSettings:
@@ -135,3 +140,29 @@ def invalidate_site_blocks_cache(page: str | None = None) -> None:
     keys = [_blocks_cache_key(p, lang) for p in pages for lang in langs]
     if keys:
         cache.delete_many(keys)
+
+
+def get_button_styles() -> dict[str, SiteButtonStyle]:
+    cached = cache.get(_CACHE_BUTTONS)
+    if cached is not None:
+        return cached
+    SiteButtonStyle.ensure_defaults()
+    styles = {obj.role: obj for obj in SiteButtonStyle.objects.all()}
+    cache.set(_CACHE_BUTTONS, styles, timeout=_CACHE_THEME_TTL)
+    return styles
+
+
+def get_block_styles() -> dict[str, BlockStyle]:
+    cached = cache.get(_CACHE_BLOCK_STYLES)
+    if cached is not None:
+        return cached
+    styles = {
+        obj.cache_key: obj
+        for obj in BlockStyle.objects.all()
+    }
+    cache.set(_CACHE_BLOCK_STYLES, styles, timeout=_CACHE_THEME_TTL)
+    return styles
+
+
+def invalidate_theme_cache() -> None:
+    cache.delete_many([_CACHE_BUTTONS, _CACHE_BLOCK_STYLES, _CACHE_SETTINGS])

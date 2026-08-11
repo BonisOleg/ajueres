@@ -1,5 +1,5 @@
-{% load i18n %}
-<div class="contact-modal" id="contact-modal" hidden aria-hidden="true">
+{% load i18n ajeres_tags %}
+<div class="contact-modal" id="contact-modal" hidden aria-hidden="true" {% section_style "site" "modal" %}>
   <div class="contact-modal__backdrop" data-close-contact-modal></div>
   <div class="contact-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
     <button type="button" class="contact-modal__close" data-close-contact-modal aria-label="{% trans 'Закрыть' %}">

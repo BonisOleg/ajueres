@@ -12,6 +12,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import check_for_language
 
 from apps.core.selectors import get_block_image, get_block_text
+from apps.core.theme_css import button_style_attr, section_style_attr
 
 register = template.Library()
 
@@ -84,6 +85,24 @@ def block_text_br(blocks, key, default=''):
 @register.simple_tag
 def block_image(blocks, key):
     return get_block_image(blocks or {}, key)
+
+
+@register.simple_tag(takes_context=True)
+def section_style(context, page, section_key):
+    """Inline style attribute for section background override."""
+    return section_style_attr(context.get('block_styles') or {}, page, section_key)
+
+
+@register.simple_tag(takes_context=True)
+def btn_style(context, role='primary', page='', section_key=''):
+    """Inline style for button fill (section override → global role)."""
+    return button_style_attr(
+        context.get('button_styles') or {},
+        context.get('block_styles') or {},
+        role=role,
+        page=page,
+        section_key=section_key,
+    )
 
 
 @register.filter(needs_autoescape=True)

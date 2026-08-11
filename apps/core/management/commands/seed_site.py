@@ -85,6 +85,10 @@ class Command(BaseCommand):
             if hasattr(s, field):
                 setattr(s, field, value)
         s.save()
+        from apps.core.models import BlockStyle, SiteButtonStyle
+
+        SiteButtonStyle.ensure_defaults()
+        BlockStyle.ensure_defaults()
 
     def _set_block(self, page, key, text='', image=None):
         obj, created = SiteBlock.objects.get_or_create(
@@ -124,6 +128,17 @@ class Command(BaseCommand):
                 'brands_subtitle',
                 'Ритейл-партнёры и производители, с которыми мы развиваем '
                 'ассортимент на рынке Узбекистана',
+            ),
+            ('home', 'coop_title', 'Сотрудничество'),
+            ('home', 'coop_eyebrow', 'Для торговых сетей, дистрибьюторов и HoReCa'),
+            ('home', 'coop_cta', 'Стать партнером'),
+            ('home', 'cta_title', 'Начнём сотрудничество?'),
+            (
+                'home',
+                'cta_text',
+                'Свяжитесь с нами в любое удобное время, профессиональная команда '
+                'специалистов готова ответить на все вопросы и обсудить '
+                'взаимовыгодное сотрудничество',
             ),
             ('about', 'eyebrow', 'О компании'),
             ('about', 'title', 'ООО «AJERES»'),

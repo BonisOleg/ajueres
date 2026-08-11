@@ -240,7 +240,10 @@ em {
   color: #fff;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, transparent 45%),
-    linear-gradient(145deg, #ff7a52 0%, var(--accent) 48%, var(--accent-ink) 100%);
+    var(
+      --btn-primary-bg,
+      linear-gradient(145deg, #ff7a52 0%, var(--accent) 48%, var(--accent-ink) 100%)
+    );
   border: 1px solid rgba(255, 255, 255, 0.38);
   box-shadow:
     0 14px 32px rgba(255, 90, 54, 0.34),
@@ -266,7 +269,7 @@ em {
   color: var(--c-ink);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, transparent 48%),
-    #ffffff;
+    var(--btn-secondary-bg, #ffffff);
   border: 1px solid rgba(27, 23, 18, 0.14);
   box-shadow:
     0 10px 24px rgba(20, 36, 64, 0.08),
@@ -293,7 +296,10 @@ em {
   overflow: visible;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, transparent 45%),
-    linear-gradient(145deg, #ff7a52 0%, var(--accent) 48%, var(--accent-ink) 100%);
+    var(
+      --btn-primary-bg,
+      linear-gradient(145deg, #ff7a52 0%, var(--accent) 48%, var(--accent-ink) 100%)
+    );
   border: 1px solid rgba(255, 255, 255, 0.38);
   box-shadow:
     0 14px 32px rgba(255, 90, 54, 0.34),

@@ -8,6 +8,7 @@ from pathlib import Path
 
 from csp.constants import NONE, SELF, UNSAFE_INLINE
 from django.core.management.utils import get_random_secret_key
+from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -33,6 +34,9 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 INSTALLED_APPS = [
+    'unfold',
+    'unfold.contrib.filters',
+    'unfold.contrib.forms',
     'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +49,26 @@ INSTALLED_APPS = [
     'apps.catalog',
     'apps.leads',
 ]
+
+
+def _admin_navigation(request):
+    from apps.core.admin_nav import build_navigation
+
+    return build_navigation(request)
+
+
+UNFOLD = {
+    'SITE_TITLE': 'AJERES Admin',
+    'SITE_HEADER': 'AJERES — Адмінпанель',
+    'SITE_SYMBOL': 'storefront',
+    'SITE_URL': reverse_lazy('home'),
+    'SIDEBAR': {
+        'show_search': True,
+        'command_search': True,
+        'show_all_applications': False,
+        'navigation': _admin_navigation,
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

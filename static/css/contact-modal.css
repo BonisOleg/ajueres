@@ -254,6 +254,15 @@
 }
 
 .contact-modal__body .btn--primary {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.26) 0%, transparent 45%),
+    var(
+      --btn-modal-bg,
+      var(
+        --btn-primary-bg,
+        linear-gradient(145deg, #ff7a52 0%, var(--accent) 48%, var(--accent-ink) 100%)
+      )
+    );
   box-shadow:
     0 14px 28px rgba(255, 90, 54, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.42),

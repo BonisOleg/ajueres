@@ -1,0 +1,9 @@
+{% load i18n %}
+<div class="hex-color-input">
+  <input type="color"
+         class="hex-color-input__picker"
+         value="{% if widget.value %}{{ widget.value }}{% else %}#ff5a36{% endif %}"
+         aria-label="{% trans 'Вибір кольору' %}"
+         data-hex-color-picker>
+  {% include "django/forms/widgets/input.html" %}
+</div>

@@ -11,7 +11,7 @@
 {% block content %}
 {% block_text blocks "title" "Свяжитесь с нами" as contacts_title %}
 
-<section class="contacts-hero" aria-labelledby="contacts-hero-title">
+<section class="contacts-hero" aria-labelledby="contacts-hero-title" {% section_style "contacts" "intro" %}>
   <div class="contacts-hero__bg" aria-hidden="true"></div>
   <div class="contacts-hero__fade" aria-hidden="true"></div>
   <div class="contacts-hero__inner reveal">
@@ -83,7 +83,7 @@
 
 <section class="contacts-main">
   <div class="contacts-split">
-    <aside class="contacts-coop reveal" aria-labelledby="contacts-coop-title">
+    <aside class="contacts-coop reveal" aria-labelledby="contacts-coop-title" {% section_style "contacts" "partners" %}>
       <h2 class="contacts-coop__eyebrow" id="contacts-coop-title">{% block_text blocks "partners_title" "Сотрудничество" %}</h2>
       {% if offers %}
         {% if offers|length > 1 %}
@@ -140,13 +140,13 @@
           {% trans 'Компания ООО «AJERES» предлагает широкий ассортимент качественных продуктов питания от международных производителей.' %}
         </p>
       {% endif %}
-      <button type="button" class="btn btn--primary contacts-coop__cta" data-open-contact-modal>
+      <button type="button" class="btn btn--primary contacts-coop__cta" data-open-contact-modal {% btn_style "primary" page="contacts" section_key="partners" %}>
         {% trans 'Стать партнером' %}
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
     </aside>
 
-    <div class="contacts-request contacts-request--compact reveal" id="request">
+    <div class="contacts-request contacts-request--compact reveal" id="request" {% section_style "contacts" "form" %}>
       <h2 class="contacts-request__title">{% block_text blocks "form_title" "Форма заявки" %}</h2>
 
       {% if messages %}
@@ -169,7 +169,7 @@
 </section>
 
 {% if site_settings.address %}
-<section class="contacts-map reveal" aria-labelledby="contacts-map-title">
+<section class="contacts-map reveal" aria-labelledby="contacts-map-title" {% section_style "contacts" "map" %}>
   <div class="contacts-map__frame">
     <div class="contacts-map__head">
       <h2 class="contacts-map__title" id="contacts-map-title">

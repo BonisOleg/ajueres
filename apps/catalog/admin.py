@@ -1,10 +1,12 @@
 from django.contrib import admin
 
+from unfold.admin import ModelAdmin, TabularInline
+
 from .models import Brand, Category, Product
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(ModelAdmin):
     list_display = ('name', 'slug', 'parent', 'order', 'is_active')
     list_editable = ('order', 'is_active')
     list_filter = ('parent', 'is_active')
@@ -13,15 +15,16 @@ class CategoryAdmin(admin.ModelAdmin):
     autocomplete_fields = ('parent',)
 
 
-class ProductInline(admin.TabularInline):
+class ProductInline(TabularInline):
     model = Product
     extra = 0
     fields = ('name', 'package', 'category', 'image', 'order', 'is_active')
     show_change_link = True
+    tab = True
 
 
 @admin.register(Brand)
-class BrandAdmin(admin.ModelAdmin):
+class BrandAdmin(ModelAdmin):
     list_display = ('name', 'slug', 'order', 'is_featured', 'is_active')
     list_editable = ('order', 'is_featured', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
@@ -30,10 +33,11 @@ class BrandAdmin(admin.ModelAdmin):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(ModelAdmin):
     list_display = ('name', 'brand', 'category', 'package', 'order', 'is_active')
     list_filter = ('brand', 'category', 'is_active')
     list_editable = ('order', 'is_active')
     search_fields = ('name', 'package', 'brand__name', 'search_text')
     prepopulated_fields = {'slug': ('name', 'package')}
     autocomplete_fields = ('brand', 'category')
+    list_select_related = ('brand', 'category')

@@ -1,5 +1,14 @@
 from django.core.cache import cache
+from django.core.exceptions import ValidationError
 from django.db import models
+
+from .theme_fields import (
+    DEFAULT_ACCENT,
+    DEFAULT_ACCENT_INK,
+    DEFAULT_ACCENT_SOFT,
+    validate_hex_color,
+)
+from .theme_models import BlockStyle, SiteButtonStyle  # noqa: F401
 
 
 class TimeStampedModel(models.Model):
@@ -18,6 +27,25 @@ class SiteSettings(models.Model):
     email = models.EmailField('Email', blank=True)
     address = models.TextField('Адреса', blank=True)
 
+    accent_color = models.CharField(
+        'Акцентний колір',
+        max_length=7,
+        default=DEFAULT_ACCENT,
+        help_text='Hex, напр. #FF5A36',
+    )
+    accent_ink = models.CharField(
+        'Акцент (темніший / hover)',
+        max_length=7,
+        default=DEFAULT_ACCENT_INK,
+        help_text='Hex',
+    )
+    accent_soft = models.CharField(
+        'Акцент (мʼякий фон)',
+        max_length=7,
+        default=DEFAULT_ACCENT_SOFT,
+        help_text='Hex',
+    )
+
     class Meta:
         verbose_name = 'Налаштування сайту'
         verbose_name_plural = 'Налаштування сайту'
@@ -25,8 +53,20 @@ class SiteSettings(models.Model):
     def __str__(self):
         return self.company_name or 'SiteSettings'
 
+    def clean(self):
+        super().clean()
+        errors = {}
+        for field in ('accent_color', 'accent_ink', 'accent_soft'):
+            try:
+                validate_hex_color(getattr(self, field), allow_blank=False)
+            except ValidationError as exc:
+                errors[field] = exc
+        if errors:
+            raise ValidationError(errors)
+
     def save(self, *args, **kwargs):
         self.pk = 1
+        self.full_clean()
         super().save(*args, **kwargs)
         cache.delete('site_settings')
 
@@ -37,6 +77,8 @@ class SiteSettings(models.Model):
     def load(cls):
         obj, _ = cls.objects.get_or_create(pk=1)
         return obj
+
+    get_solo = load
 
 
 class SiteBlock(models.Model):
@@ -213,3 +255,7 @@ class CaseStudy(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+
+# CMS proxy slots (must be imported with the model graph for migrations/admin).
+from .cms_proxy_models import SECTION_PROXY_MODELS as _SECTION_PROXY_MODELS  # noqa: E402,F401

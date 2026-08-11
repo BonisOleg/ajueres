@@ -1,0 +1,183 @@
+"""Theme / style models: global button fills + per-section overrides."""
+
+from __future__ import annotations
+
+from django.core.cache import cache
+from django.core.exceptions import ValidationError
+from django.db import models
+from django.utils.translation import gettext_lazy as _
+
+from .theme_fields import (
+    BUTTON_ROLES,
+    DEFAULT_ACCENT,
+    DEFAULT_GRADIENT_ANGLE,
+    DEFAULT_GRADIENT_END,
+    DEFAULT_GRADIENT_START,
+    FILL_GRADIENT,
+    FillStyleMixin,
+    SECTION_STYLE_KEYS,
+    validate_hex_color,
+)
+
+
+_CACHE_BUTTONS = 'site_button_styles'
+_CACHE_BLOCK_STYLES = 'block_styles_all'
+
+
+class SiteButtonStyle(FillStyleMixin):
+    """Глобальні стилі кнопок (primary / secondary / header / modal)."""
+
+    role = models.CharField(
+        _('Роль кнопки'),
+        max_length=32,
+        choices=BUTTON_ROLES,
+        unique=True,
+    )
+
+    class Meta:
+        verbose_name = 'Стиль кнопки'
+        verbose_name_plural = 'Стилі кнопок'
+        ordering = ['role']
+
+    def __str__(self):
+        return self.get_role_display()
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+        cache.delete(_CACHE_BUTTONS)
+        cache.delete('site_settings')
+
+    def delete(self, *args, **kwargs):
+        result = super().delete(*args, **kwargs)
+        cache.delete(_CACHE_BUTTONS)
+        return result
+
+    @classmethod
+    def ensure_defaults(cls) -> list['SiteButtonStyle']:
+        defaults = {
+            'primary': {
+                'fill_type': FILL_GRADIENT,
+                'solid_color': DEFAULT_ACCENT,
+                'gradient_start': DEFAULT_GRADIENT_START,
+                'gradient_end': DEFAULT_GRADIENT_END,
+                'gradient_angle': DEFAULT_GRADIENT_ANGLE,
+            },
+            'secondary': {
+                'fill_type': 'solid',
+                'solid_color': '#ffffff',
+                'gradient_start': '#ffffff',
+                'gradient_end': '#f3f3f3',
+                'gradient_angle': 180,
+            },
+            'header': {
+                'fill_type': FILL_GRADIENT,
+                'solid_color': DEFAULT_ACCENT,
+                'gradient_start': DEFAULT_GRADIENT_START,
+                'gradient_end': DEFAULT_GRADIENT_END,
+                'gradient_angle': DEFAULT_GRADIENT_ANGLE,
+            },
+            'modal': {
+                'fill_type': FILL_GRADIENT,
+                'solid_color': DEFAULT_ACCENT,
+                'gradient_start': DEFAULT_GRADIENT_START,
+                'gradient_end': DEFAULT_GRADIENT_END,
+                'gradient_angle': DEFAULT_GRADIENT_ANGLE,
+            },
+        }
+        result = []
+        for role, payload in defaults.items():
+            obj, _ = cls.objects.get_or_create(role=role, defaults=payload)
+            result.append(obj)
+        return result
+
+
+class BlockStyle(FillStyleMixin):
+    """Стилі секції: фон + опційний override заливки кнопок секції."""
+
+    page = models.CharField(_('Сторінка'), max_length=64, db_index=True)
+    section_key = models.CharField(_('Секція'), max_length=64)
+    label = models.CharField(_('Назва в адмінці'), max_length=128, blank=True)
+    bg_color = models.CharField(
+        _('Колір фону секції'),
+        max_length=7,
+        blank=True,
+        default='',
+        help_text=_('Hex. Порожньо = CSS за замовчуванням'),
+    )
+    override_button_fill = models.BooleanField(
+        _('Override заливки кнопок у секції'),
+        default=False,
+        help_text=_('Якщо увімкнено — fill_* нижче замінюють глобальні стилі кнопок у цій секції'),
+    )
+
+    class Meta:
+        verbose_name = 'Стиль секції'
+        verbose_name_plural = 'Стилі секцій'
+        ordering = ['page', 'section_key']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['page', 'section_key'],
+                name='uniq_blockstyle_page_section',
+            ),
+        ]
+
+    def __str__(self):
+        return self.label or f'{self.page}.{self.section_key}'
+
+    def clean(self):
+        try:
+            validate_hex_color(self.bg_color, allow_blank=True)
+        except ValidationError as exc:
+            raise ValidationError({'bg_color': exc}) from exc
+
+        if self.override_button_fill:
+            super().clean()
+        else:
+            # Skip strict fill validation when override off
+            models.Model.clean(self)
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        if not self.label:
+            for page, key, title in SECTION_STYLE_KEYS:
+                if page == self.page and key == self.section_key:
+                    self.label = title
+                    break
+        super().save(*args, **kwargs)
+        cache.delete(_CACHE_BLOCK_STYLES)
+
+    def delete(self, *args, **kwargs):
+        result = super().delete(*args, **kwargs)
+        cache.delete(_CACHE_BLOCK_STYLES)
+        return result
+
+    @property
+    def cache_key(self) -> str:
+        return f'{self.page}.{self.section_key}'
+
+    def section_inline_style(self) -> str:
+        bg = (self.bg_color or '').strip()
+        if not bg:
+            return ''
+        return f'background-color: {bg};'
+
+    @classmethod
+    def ensure_defaults(cls) -> int:
+        created = 0
+        for page, key, title in SECTION_STYLE_KEYS:
+            _, was_created = cls.objects.get_or_create(
+                page=page,
+                section_key=key,
+                defaults={
+                    'label': title,
+                    'fill_type': FILL_GRADIENT,
+                    'gradient_start': DEFAULT_GRADIENT_START,
+                    'gradient_end': DEFAULT_GRADIENT_END,
+                    'gradient_angle': DEFAULT_GRADIENT_ANGLE,
+                    'override_button_fill': False,
+                },
+            )
+            if was_created:
+                created += 1
+        return created

@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="home-hero">
+<section class="home-hero" {% section_style "home" "hero" %}>
   <div class="home-hero__bg" aria-hidden="true">
     <img
       class="home-hero__img"
@@ -34,7 +34,7 @@
       <p class="home-hero__lead">{% block_text blocks "hero_text" "Импорт, эксклюзивная дистрибуция, вывод на рынок Узбекистана новых производителей." %}</p>
     </div>
     <div class="home-hero__cta reveal">
-      <button type="button" class="btn btn--dark" data-open-contact-modal>
+      <button type="button" class="btn btn--dark" data-open-contact-modal {% btn_style "primary" page="home" section_key="hero" %}>
         {% block_text blocks "hero_cta" "Связаться с нами" %}
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
@@ -63,7 +63,7 @@
     </span>
   </button>
 
-  <div class="hero-stats" data-hero-stats>
+  <div class="hero-stats" data-hero-stats {% section_style "home" "stats" %}>
     <div
       class="hero-stats__panel"
       id="hero-stats-panel"
@@ -93,7 +93,7 @@
 </section>
 
 {% if show_advantages %}
-<section class="home-advantages">
+<section class="home-advantages" {% section_style "home" "advantages" %}>
   <div class="home-advantages__head reveal">
     <h2 class="heading heading--lg">{% block_text blocks "services_title" "Наша деятельность" %}</h2>
   </div>
@@ -109,13 +109,13 @@
 </section>
 {% endif %}
 
-<section class="home-coop" aria-labelledby="home-coop-title">
+<section class="home-coop" aria-labelledby="home-coop-title" {% section_style "home" "coop" %}>
   <div class="home-coop__inner reveal">
     <div class="home-coop__grid">
       <div class="home-coop__info">
         <header class="home-coop__head">
-          <h2 class="heading heading--lg" id="home-coop-title">{% trans 'Сотрудничество' %}</h2>
-          <p class="home-coop__eyebrow">{% trans 'Для торговых сетей, дистрибьюторов и HoReCa' %}</p>
+          <h2 class="heading heading--lg" id="home-coop-title">{% block_text blocks "coop_title" "Сотрудничество" %}</h2>
+          <p class="home-coop__eyebrow">{% block_text blocks "coop_eyebrow" "Для торговых сетей, дистрибьюторов и HoReCa" %}</p>
         </header>
         <div class="home-coop__copy">
           <p class="home-coop__lead">
@@ -125,8 +125,8 @@
             {% trans 'Мы стремимся строить долгосрочные отношения, основанные на доверии, прозрачности и взаимной выгоде.' %}
           </blockquote>
         </div>
-        <button type="button" class="btn btn--dark home-coop__cta" data-open-contact-modal>
-          {% trans 'Стать партнером' %}
+        <button type="button" class="btn btn--dark home-coop__cta" data-open-contact-modal {% btn_style "primary" page="home" section_key="coop" %}>
+          {% block_text blocks "coop_cta" "Стать партнером" %}
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
       </div>
@@ -183,7 +183,7 @@
 </section>
 
 {% if show_brands %}
-<section class="home-brands">
+<section class="home-brands" {% section_style "home" "brands" %}>
   <div class="home-brands__head reveal">
     <h2 class="heading heading--lg">{% block_text blocks "brands_title" "Наши партнёры" %}</h2>
     <p class="home-brands__sub">{% block_text blocks "brands_subtitle" "Ритейл-партнёры и производители, с которыми мы развиваем ассортимент на рынке Узбекистана" %}</p>
@@ -232,7 +232,7 @@
 {% endif %}
 
 {% if show_cases %}
-<section class="home-cases">
+<section class="home-cases" {% section_style "home" "cases" %}>
   <div class="home-brands__head reveal">
     <h2 class="heading heading--lg">{% trans 'Истории партнёров' %}</h2>
   </div>
@@ -248,17 +248,17 @@
 </section>
 {% endif %}
 
-<section class="home-cta">
+<section class="home-cta" {% section_style "home" "cta" %}>
   <div class="home-cta__inner reveal">
     <div class="home-cta__copy">
-      <h2 class="home-cta__title">{% trans 'Начнём сотрудничество?' %}</h2>
-      <p class="home-cta__text">{% trans 'Свяжитесь с нами в любое удобное время, профессиональная команда специалистов готова ответить на все вопросы и обсудить взаимовыгодное сотрудничество' %}</p>
+      <h2 class="home-cta__title">{% block_text blocks "cta_title" "Начнём сотрудничество?" %}</h2>
+      <p class="home-cta__text">{% block_text blocks "cta_text" "Свяжитесь с нами в любое удобное время, профессиональная команда специалистов готова ответить на все вопросы и обсудить взаимовыгодное сотрудничество" %}</p>
     </div>
     <div class="home-cta__actions">
       {% if site_settings.email %}
         <a class="btn btn--glass" href="mailto:{{ site_settings.email }}">{% trans 'Написать на почту' %}</a>
       {% endif %}
-      <button type="button" class="btn btn--dark" data-open-contact-modal>
+      <button type="button" class="btn btn--dark" data-open-contact-modal {% btn_style "primary" page="home" section_key="cta" %}>
         {% block_text blocks "hero_cta" "Связаться с нами" %}
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
