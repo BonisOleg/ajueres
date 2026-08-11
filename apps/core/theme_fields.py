@@ -13,8 +13,8 @@ HEX_COLOR_RE = re.compile(r'^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$')
 FILL_SOLID = 'solid'
 FILL_GRADIENT = 'gradient'
 FILL_TYPE_CHOICES = (
-    (FILL_SOLID, _('Однотонний')),
-    (FILL_GRADIENT, _('Градієнт')),
+    (FILL_SOLID, _('Однотонный')),
+    (FILL_GRADIENT, _('Градиент')),
 )
 
 DEFAULT_ACCENT = '#ff5a36'
@@ -25,29 +25,29 @@ DEFAULT_GRADIENT_END = '#e04822'
 DEFAULT_GRADIENT_ANGLE = 145
 
 BUTTON_ROLES = (
-    ('primary', _('Primary (основна CTA)')),
+    ('primary', _('Primary (основная CTA)')),
     ('secondary', _('Secondary')),
     ('header', _('Header')),
     ('modal', _('Modal')),
 )
 
 SECTION_STYLE_KEYS = (
-    ('home', 'hero', 'Головна — Hero'),
-    ('home', 'advantages', 'Головна — Переваги'),
-    ('home', 'brands', 'Головна — Бренди'),
-    ('home', 'stats', 'Головна — Статистика'),
-    ('home', 'coop', 'Головна — Співпраця'),
-    ('home', 'cases', 'Головна — Кейси'),
-    ('home', 'cta', 'Головна — CTA'),
-    ('about', 'intro', 'Про компанію — Intro'),
-    ('about', 'content', 'Про компанію — Контент'),
-    ('about', 'cta', 'Про компанію — CTA'),
+    ('home', 'hero', 'Главная — Hero'),
+    ('home', 'advantages', 'Главная — Преимущества'),
+    ('home', 'brands', 'Главная — Бренды'),
+    ('home', 'stats', 'Главная — Статистика'),
+    ('home', 'coop', 'Главная — Сотрудничество'),
+    ('home', 'cases', 'Главная — Кейсы'),
+    ('home', 'cta', 'Главная — CTA'),
+    ('about', 'intro', 'О компании — Intro'),
+    ('about', 'content', 'О компании — Контент'),
+    ('about', 'cta', 'О компании — CTA'),
     ('products', 'catalog', 'Каталог'),
-    ('products', 'brands', 'Каталог — Бренди'),
-    ('contacts', 'intro', 'Контакти — Intro'),
-    ('contacts', 'form', 'Контакти — Форма'),
-    ('contacts', 'partners', 'Контакти — Партнери'),
-    ('contacts', 'map', 'Контакти — Карта'),
+    ('products', 'brands', 'Каталог — Бренды'),
+    ('contacts', 'intro', 'Контакты — Intro'),
+    ('contacts', 'form', 'Контакты — Форма'),
+    ('contacts', 'partners', 'Контакты — Партнёры'),
+    ('contacts', 'map', 'Контакты — Карта'),
     ('site', 'header', 'Сайт — Header'),
     ('site', 'footer', 'Сайт — Footer'),
     ('site', 'modal', 'Сайт — Modal'),
@@ -59,9 +59,9 @@ def validate_hex_color(value: str, *, allow_blank: bool = True) -> None:
     if not raw:
         if allow_blank:
             return
-        raise ValidationError(_('Колір обовʼязковий (Hex, напр. #FF5A36).'))
+        raise ValidationError(_('Цвет обязателен (Hex, напр. #FF5A36).'))
     if not HEX_COLOR_RE.match(raw):
-        raise ValidationError(_('Невірний Hex-колір. Приклад: #FF5A36'))
+        raise ValidationError(_('Неверный Hex-цвет. Пример: #FF5A36'))
 
 
 def normalize_hex(value: str, default: str = '') -> str:
@@ -127,19 +127,19 @@ def validate_fill_payload(
         if require_complete or (gradient_start or gradient_end or gradient_angle is not None):
             if not (gradient_start or '').strip():
                 errors[f'{p}gradient_start'] = ValidationError(
-                    _('Для градієнта вкажіть початковий колір.')
+                    _('Для градиента укажите начальный цвет.')
                 )
             if not (gradient_end or '').strip():
                 errors[f'{p}gradient_end'] = ValidationError(
-                    _('Для градієнта вкажіть кінцевий колір.')
+                    _('Для градиента укажите конечный цвет.')
                 )
         if gradient_angle is not None and not (0 <= int(gradient_angle) <= 360):
             errors[f'{p}gradient_angle'] = ValidationError(
-                _('Кут градієнта має бути в діапазоні 0–360.')
+                _('Угол градиента должен быть в диапазоне 0–360.')
             )
     elif fill_type == FILL_SOLID and require_complete and not (solid_color or '').strip():
         errors[f'{p}solid_color'] = ValidationError(
-            _('Для однотонної заливки вкажіть колір.')
+            _('Для однотонной заливки укажите цвет.')
         )
 
     return errors
@@ -155,28 +155,28 @@ class FillStyleMixin(models.Model):
         default=FILL_GRADIENT,
     )
     solid_color = models.CharField(
-        _('Однотонний колір'),
+        _('Однотонный цвет'),
         max_length=7,
         blank=True,
         default='',
         help_text=_('Hex, напр. #FF5A36'),
     )
     gradient_start = models.CharField(
-        _('Градієнт — початок'),
+        _('Градиент — начало'),
         max_length=7,
         blank=True,
         default=DEFAULT_GRADIENT_START,
         help_text=_('Hex'),
     )
     gradient_end = models.CharField(
-        _('Градієнт — кінець'),
+        _('Градиент — конец'),
         max_length=7,
         blank=True,
         default=DEFAULT_GRADIENT_END,
         help_text=_('Hex'),
     )
     gradient_angle = models.PositiveSmallIntegerField(
-        _('Кут градієнта (°)'),
+        _('Угол градиента (°)'),
         default=DEFAULT_GRADIENT_ANGLE,
         help_text=_('0–360'),
     )

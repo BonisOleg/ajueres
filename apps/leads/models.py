@@ -5,16 +5,16 @@ class ContactInquiry(models.Model):
     """Заявка з форми зворотного зв'язку (4 поля з карти сайту)."""
 
     class Status(models.TextChoices):
-        NEW = 'new', 'Нова'
-        PROCESSED = 'processed', 'Опрацьована'
+        NEW = 'new', 'Новая'
+        PROCESSED = 'processed', 'Обработана'
 
     class Language(models.TextChoices):
         RU = 'ru', 'Русский'
         UZ = 'uz', "O'zbekcha"
         EN = 'en', 'English'
 
-    purpose = models.TextField('Мета звернення')
-    name = models.CharField("Ім'я", max_length=255)
+    purpose = models.TextField('Цель обращения')
+    name = models.CharField('Имя', max_length=255)
     phone = models.CharField('Телефон', max_length=64)
     email = models.EmailField('Email')
     language = models.CharField(
@@ -31,7 +31,7 @@ class ContactInquiry(models.Model):
         db_index=True,
     )
     ip_address = models.GenericIPAddressField('IP', null=True, blank=True)
-    created_at = models.DateTimeField('Створено', auto_now_add=True)
+    created_at = models.DateTimeField('Создано', auto_now_add=True)
 
     class Meta:
         verbose_name = 'Заявка'

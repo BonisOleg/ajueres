@@ -29,19 +29,19 @@
       {% if section.preview_url %}
         <a class="border border-base-200 dark:border-base-700 rounded-default px-3 py-2 text-sm hover:border-primary-500"
            href="{{ section.preview_url }}" target="_blank" rel="noopener">
-          {% trans "Переглянути на сайті" %}
+          Перейти на сайт
         </a>
       {% endif %}
       {% if style_url %}
         <a class="border border-base-200 dark:border-base-700 rounded-default px-3 py-2 text-sm hover:border-primary-500"
            href="{{ style_url }}">
-          {% trans "Стилі секції" %}
+          Стили секции
         </a>
       {% endif %}
     </div>
   </div>
 
-  <div class="cms-lang-tabs" role="tablist" aria-label="{% trans 'Мови контенту' %}">
+  <div class="cms-lang-tabs" role="tablist" aria-label="Языки контента">
     {% for lang in cms_langs %}
       <button
         type="button"
@@ -105,7 +105,7 @@
                 </div>
               {% empty %}
                 <p class="text-font-subtle-light dark:text-font-subtle-dark text-sm">
-                  {% trans "Немає текстових полів для цієї мови." %}
+                  Нет текстовых полей для этого языка.
                 </p>
               {% endfor %}
             </div>
@@ -116,7 +116,7 @@
 
     <div class="site-content-editor__actions">
       <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white rounded-default px-4 py-2">
-        {% trans "Зберегти" %}
+        Сохранить
       </button>
     </div>
   </form>

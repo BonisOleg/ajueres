@@ -12,8 +12,8 @@ from .theme_models import BlockStyle, SiteButtonStyle  # noqa: F401
 
 
 class TimeStampedModel(models.Model):
-    created_at = models.DateTimeField('Створено', auto_now_add=True)
-    updated_at = models.DateTimeField('Оновлено', auto_now=True)
+    created_at = models.DateTimeField('Создано', auto_now_add=True)
+    updated_at = models.DateTimeField('Обновлено', auto_now=True)
 
     class Meta:
         abstract = True
@@ -22,33 +22,33 @@ class TimeStampedModel(models.Model):
 class SiteSettings(models.Model):
     """Singleton глобальних налаштувань сайту (pk=1)."""
 
-    company_name = models.CharField('Назва компанії', max_length=255, default='AJERES')
+    company_name = models.CharField('Название компании', max_length=255, default='AJERES')
     phone = models.CharField('Телефон', max_length=64, blank=True)
     email = models.EmailField('Email', blank=True)
-    address = models.TextField('Адреса', blank=True)
+    address = models.TextField('Адрес', blank=True)
 
     accent_color = models.CharField(
-        'Акцентний колір',
+        'Акцентный цвет',
         max_length=7,
         default=DEFAULT_ACCENT,
         help_text='Hex, напр. #FF5A36',
     )
     accent_ink = models.CharField(
-        'Акцент (темніший / hover)',
+        'Акцент (темнее / hover)',
         max_length=7,
         default=DEFAULT_ACCENT_INK,
         help_text='Hex',
     )
     accent_soft = models.CharField(
-        'Акцент (мʼякий фон)',
+        'Акцент (мягкий фон)',
         max_length=7,
         default=DEFAULT_ACCENT_SOFT,
         help_text='Hex',
     )
 
     class Meta:
-        verbose_name = 'Налаштування сайту'
-        verbose_name_plural = 'Налаштування сайту'
+        verbose_name = 'Настройки сайта'
+        verbose_name_plural = 'Настройки сайта'
 
     def __str__(self):
         return self.company_name or 'SiteSettings'
@@ -84,10 +84,10 @@ class SiteSettings(models.Model):
 class SiteBlock(models.Model):
     """CMS-блок: унікальна пара (page, key) — тексти/фото/visibility секцій."""
 
-    page = models.CharField('Сторінка', max_length=64, db_index=True)
+    page = models.CharField('Страница', max_length=64, db_index=True)
     key = models.CharField('Ключ', max_length=128)
     text_html = models.TextField('Текст / HTML / visibility', blank=True, default='')
-    image = models.ImageField('Зображення', upload_to='cms/blocks/', blank=True, null=True)
+    image = models.ImageField('Изображение', upload_to='cms/blocks/', blank=True, null=True)
 
     class Meta:
         verbose_name = 'CMS-блок'
@@ -115,8 +115,8 @@ class LegalDocument(TimeStampedModel):
     body = models.TextField('Текст', blank=True)
 
     class Meta:
-        verbose_name = 'Правовий документ'
-        verbose_name_plural = 'Правові документи'
+        verbose_name = 'Правовой документ'
+        verbose_name_plural = 'Правовые документы'
         ordering = ['slug']
 
     def __str__(self):
@@ -127,10 +127,10 @@ class Advantage(TimeStampedModel):
     """Переваги на головній."""
 
     icon_key = models.CharField(
-        'Ключ іконки',
+        'Ключ иконки',
         max_length=64,
         blank=True,
-        help_text='Ідентифікатор іконки у фронтенді',
+        help_text='Идентификатор иконки во фронтенде',
     )
     title = models.CharField('Заголовок', max_length=255)
     text = models.TextField('Опис', blank=True)
@@ -138,8 +138,8 @@ class Advantage(TimeStampedModel):
     is_active = models.BooleanField('Активно', default=True)
 
     class Meta:
-        verbose_name = 'Перевага'
-        verbose_name_plural = 'Переваги'
+        verbose_name = 'Преимущество'
+        verbose_name_plural = 'Преимущества'
         ordering = ['order', 'id']
 
     def __str__(self):
@@ -149,14 +149,14 @@ class Advantage(TimeStampedModel):
 class CompanyStat(TimeStampedModel):
     """Цифри компанії (200+ партнерів тощо)."""
 
-    value = models.CharField('Значення', max_length=64)
-    label = models.CharField('Підпис', max_length=255)
+    value = models.CharField('Значение', max_length=64)
+    label = models.CharField('Подпись', max_length=255)
     order = models.PositiveIntegerField('Порядок', default=0, db_index=True)
     is_active = models.BooleanField('Активно', default=True)
 
     class Meta:
         verbose_name = 'Цифра'
-        verbose_name_plural = 'Цифри'
+        verbose_name_plural = 'Цифры'
         ordering = ['order', 'id']
 
     def __str__(self):
@@ -167,7 +167,7 @@ class AboutSection(TimeStampedModel):
     """Секції сторінки «Про компанію»."""
 
     section_key = models.SlugField(
-        'Ключ секції',
+        'Ключ секции',
         max_length=64,
         unique=True,
         help_text='history, mission, vision, values, market…',
@@ -178,8 +178,8 @@ class AboutSection(TimeStampedModel):
     is_active = models.BooleanField('Активно', default=True)
 
     class Meta:
-        verbose_name = 'Секція «Про компанію»'
-        verbose_name_plural = 'Секції «Про компанію»'
+        verbose_name = 'Секция «О компании»'
+        verbose_name_plural = 'Секции «О компании»'
         ordering = ['order', 'id']
 
     def __str__(self):
@@ -195,8 +195,8 @@ class PartnerOffer(TimeStampedModel):
     is_active = models.BooleanField('Активно', default=True)
 
     class Meta:
-        verbose_name = 'Пропозиція для партнерів'
-        verbose_name_plural = 'Пропозиції для партнерів'
+        verbose_name = 'Предложение для партнёров'
+        verbose_name_plural = 'Предложения для партнёров'
         ordering = ['order', 'id']
 
     def __str__(self):
@@ -207,7 +207,7 @@ class RetailPartner(TimeStampedModel):
     """Покупець / ритейл-партнер — логотипи в блоці «Наши бренды» на головній."""
 
     slug = models.SlugField('Slug', max_length=64, unique=True)
-    name = models.CharField('Назва', max_length=255)
+    name = models.CharField('Название', max_length=255)
     logo = models.ImageField(
         'Логотип',
         upload_to='core/retail_partners/',
@@ -218,8 +218,8 @@ class RetailPartner(TimeStampedModel):
     is_active = models.BooleanField('Активно', default=True)
 
     class Meta:
-        verbose_name = 'Покупець (ритейл)'
-        verbose_name_plural = 'Покупці (ритейл)'
+        verbose_name = 'Покупатель (ритейл)'
+        verbose_name_plural = 'Покупатели (ритейл)'
         ordering = ['order', 'name']
 
     def __str__(self):
@@ -250,7 +250,7 @@ class CaseStudy(TimeStampedModel):
 
     class Meta:
         verbose_name = 'Кейс'
-        verbose_name_plural = 'Кейси'
+        verbose_name_plural = 'Кейсы'
         ordering = ['order', 'id']
 
     def __str__(self):

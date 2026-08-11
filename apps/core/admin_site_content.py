@@ -79,7 +79,7 @@ class SitePageContentForm(forms.Form):
             if vis_block is not None:
                 initial = _truthy(vis_block.text_html_ru or vis_block.text_html or '1')
             self.fields['section_visible'] = forms.BooleanField(
-                label=_('Показувати секцію на сайті'),
+                label=_('Показывать секцию на сайте'),
                 required=False,
                 initial=initial,
                 widget=UnfoldBooleanWidget(),
@@ -192,7 +192,7 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
         form = SitePageContentForm(section, blocks_map, request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, _('Контент секції збережено.'))
+            messages.success(request, _('Контент секции сохранён.'))
             return HttpResponseRedirect(request.path)
     else:
         form = SitePageContentForm(section, blocks_map)
@@ -244,7 +244,7 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
     if leftover:
         grouped_fields.append(
             {
-                'title': _('Інше'),
+                'title': _('Прочее'),
                 'shared_fields': leftover,
                 'lang_panels': [],
                 'has_langs': False,

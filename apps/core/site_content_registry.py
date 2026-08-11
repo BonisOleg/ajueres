@@ -5,8 +5,6 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy as _
-
 
 @dataclass(frozen=True)
 class FieldGroup:
@@ -41,7 +39,7 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
     ContentSection(
         slug='hero',
         page_slug='home',
-        title=str(_('Головна — Hero')),
+        title='Главная — Hero',
         sidebar_icon='image',
         preview_url='/',
         visibility_key='hero_visible',
@@ -55,15 +53,15 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
             ('home', 'hero_visible'),
         ),
         field_groups=(
-            FieldGroup('Основний контент', ('hero_eyebrow', 'hero_title', 'hero_text', 'hero_cta')),
-            FieldGroup('Медіафайли', ('hero_image',)),
+            FieldGroup('Основной контент', ('hero_eyebrow', 'hero_title', 'hero_text', 'hero_cta')),
+            FieldGroup('Медиафайлы', ('hero_image',)),
         ),
-        description='Hero головної: тексти, CTA, зображення, видимість.',
+        description='Hero главной: тексты, CTA, изображение, видимость.',
     ),
     ContentSection(
         slug='advantages',
         page_slug='home',
-        title=str(_('Головна — Переваги')),
+        title='Главная — Преимущества',
         sidebar_icon='star',
         preview_url='/',
         visibility_key='advantages_visible',
@@ -72,13 +70,13 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
             ('home', 'services_title'),
             ('home', 'advantages_visible'),
         ),
-        field_groups=(FieldGroup('Основний контент', ('services_title',)),),
-        description='Заголовок блоку переваг. Картки — у розділі «Переваги».',
+        field_groups=(FieldGroup('Основной контент', ('services_title',)),),
+        description='Заголовок блока преимуществ. Карточки — в разделе «Преимущества».',
     ),
     ContentSection(
         slug='brands',
         page_slug='home',
-        title=str(_('Головна — Бренди')),
+        title='Главная — Бренды',
         sidebar_icon='storefront',
         preview_url='/',
         visibility_key='brands_visible',
@@ -89,14 +87,14 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
             ('home', 'brands_visible'),
         ),
         field_groups=(
-            FieldGroup('Основний контент', ('brands_title', 'brands_subtitle')),
+            FieldGroup('Основной контент', ('brands_title', 'brands_subtitle')),
         ),
-        description='Заголовки каруселі брендів/партнерів.',
+        description='Заголовки карусели брендов/партнёров.',
     ),
     ContentSection(
         slug='coop',
         page_slug='home',
-        title=str(_('Головна — Співпраця')),
+        title='Главная — Сотрудничество',
         sidebar_icon='handshake',
         preview_url='/',
         style_section_key='coop',
@@ -106,13 +104,13 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
             ('home', 'coop_cta'),
         ),
         field_groups=(
-            FieldGroup('Основний контент', ('coop_title', 'coop_eyebrow', 'coop_cta')),
+            FieldGroup('Основной контент', ('coop_title', 'coop_eyebrow', 'coop_cta')),
         ),
     ),
     ContentSection(
         slug='cta',
         page_slug='home',
-        title=str(_('Головна — CTA')),
+        title='Главная — CTA',
         sidebar_icon='campaign',
         preview_url='/',
         style_section_key='cta',
@@ -120,12 +118,12 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
             ('home', 'cta_title'),
             ('home', 'cta_text'),
         ),
-        field_groups=(FieldGroup('Основний контент', ('cta_title', 'cta_text')),),
+        field_groups=(FieldGroup('Основной контент', ('cta_title', 'cta_text')),),
     ),
     ContentSection(
         slug='about',
         page_slug='about',
-        title=str(_('Про компанію')),
+        title='О компании',
         sidebar_icon='business',
         preview_url='/about/',
         style_section_key='intro',
@@ -137,15 +135,15 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
             ('about', 'side_image'),
         ),
         field_groups=(
-            FieldGroup('Основний контент', ('eyebrow', 'title', 'intro', 'cta')),
-            FieldGroup('Медіафайли', ('side_image',)),
+            FieldGroup('Основной контент', ('eyebrow', 'title', 'intro', 'cta')),
+            FieldGroup('Медиафайлы', ('side_image',)),
         ),
-        description='Шапка /about. Секції тексту — у «Секції Про компанію».',
+        description='Шапка /about. Секции текста — в «Секции О компании».',
     ),
     ContentSection(
         slug='contacts',
         page_slug='contacts',
-        title=str(_('Контакти')),
+        title='Контакты',
         sidebar_icon='call',
         preview_url='/contacts/',
         style_section_key='intro',
@@ -163,9 +161,9 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
             ('contacts', 'map_title'),
         ),
         field_groups=(
-            FieldGroup('Основний контент', ('eyebrow', 'title', 'intro', 'partners_title')),
+            FieldGroup('Основной контент', ('eyebrow', 'title', 'intro', 'partners_title')),
             FieldGroup(
-                'Форма та контакти',
+                'Форма и контакты',
                 (
                     'form_title',
                     'form_lead',

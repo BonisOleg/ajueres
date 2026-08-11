@@ -34,14 +34,14 @@ class SiteSettingsAdmin(
 ):
     fieldsets = (
         (
-            'Основний контент',
+            'Основной контент',
             {'fields': ('company_name', 'phone', 'email', 'address')},
         ),
         (
-            'Стилі та кольори',
+            'Стили и цвета',
             {
                 'fields': ('accent_color', 'accent_ink', 'accent_soft'),
-                'description': 'Глобальні акценти. Кнопки — у «Стилі кнопок».',
+                'description': 'Глобальные акценты. Кнопки — в «Стили кнопок».',
             },
         ),
     )
@@ -66,7 +66,7 @@ class SiteButtonStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
     fieldsets = (
         ('Роль', {'fields': ('role',)}),
         (
-            'Стилі та кольори',
+            'Стили и цвета',
             {
                 'fields': (
                     'fill_type',
@@ -90,7 +90,7 @@ class SiteButtonStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
             kwargs['widget'] = HexColorInputWidget()
         return super().formfield_for_dbfield(db_field, request, **kwargs)
 
-    @admin.display(description='Колір')
+    @admin.display(description='Цвет')
     def swatch(self, obj):
         bg = obj.as_css_background(fallback='#ccc')
         return format_html(
@@ -120,11 +120,11 @@ class BlockStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
 
     fieldsets = (
         (
-            'Основний контент',
+            'Основной контент',
             {'fields': ('page', 'section_key', 'label')},
         ),
         (
-            'Стилі та кольори',
+            'Стили и цвета',
             {
                 'fields': (
                     'bg_color',

@@ -1,9 +1,8 @@
-"""Unfold sidebar navigation for AJERES admin."""
+"""Unfold sidebar navigation for AJERES admin (Russian UI labels)."""
 
 from __future__ import annotations
 
 from django.urls import reverse_lazy
-from django.utils.translation import gettext_lazy as _
 
 from .site_content_registry import build_content_sidebar_items
 
@@ -11,99 +10,99 @@ from .site_content_registry import build_content_sidebar_items
 def build_navigation(request=None):
     return [
         {
-            'title': _('Налаштування'),
+            'title': 'Настройки',
             'separator': False,
             'items': [
                 {
-                    'title': _('Сайт'),
+                    'title': 'Сайт',
                     'icon': 'settings',
                     'link': reverse_lazy('admin:core_sitesettings_changelist'),
                 },
                 {
-                    'title': _('Стилі кнопок'),
+                    'title': 'Стили кнопок',
                     'icon': 'palette',
                     'link': reverse_lazy('admin:core_sitebuttonstyle_changelist'),
                 },
                 {
-                    'title': _('Стилі секцій'),
+                    'title': 'Стили секций',
                     'icon': 'format_paint',
                     'link': reverse_lazy('admin:core_blockstyle_changelist'),
                 },
             ],
         },
         {
-            'title': _('Контент сторінок'),
+            'title': 'Контент страниц',
             'separator': True,
             'items': build_content_sidebar_items(),
         },
         {
-            'title': _('Контент'),
+            'title': 'Контент',
             'separator': True,
             'items': [
                 {
-                    'title': _('Переваги'),
+                    'title': 'Преимущества',
                     'icon': 'star',
                     'link': reverse_lazy('admin:core_advantage_changelist'),
                 },
                 {
-                    'title': _('Цифри'),
+                    'title': 'Цифры',
                     'icon': 'analytics',
                     'link': reverse_lazy('admin:core_companystat_changelist'),
                 },
                 {
-                    'title': _('Секції «Про компанію»'),
+                    'title': 'Секции «О компании»',
                     'icon': 'article',
                     'link': reverse_lazy('admin:core_aboutsection_changelist'),
                 },
                 {
-                    'title': _('Пропозиції партнерам'),
+                    'title': 'Предложения партнёрам',
                     'icon': 'handshake',
                     'link': reverse_lazy('admin:core_partneroffer_changelist'),
                 },
                 {
-                    'title': _('Покупці (ритейл)'),
+                    'title': 'Покупатели (ритейл)',
                     'icon': 'store',
                     'link': reverse_lazy('admin:core_retailpartner_changelist'),
                 },
                 {
-                    'title': _('Кейси'),
+                    'title': 'Кейсы',
                     'icon': 'emoji_events',
                     'link': reverse_lazy('admin:core_casestudy_changelist'),
                 },
                 {
-                    'title': _('Правові документи'),
+                    'title': 'Правовые документы',
                     'icon': 'gavel',
                     'link': reverse_lazy('admin:core_legaldocument_changelist'),
                 },
             ],
         },
         {
-            'title': _('Каталог'),
+            'title': 'Каталог',
             'separator': True,
             'items': [
                 {
-                    'title': _('Категорії'),
+                    'title': 'Категории',
                     'icon': 'category',
                     'link': reverse_lazy('admin:catalog_category_changelist'),
                 },
                 {
-                    'title': _('Бренди'),
+                    'title': 'Бренды',
                     'icon': 'sell',
                     'link': reverse_lazy('admin:catalog_brand_changelist'),
                 },
                 {
-                    'title': _('Товари'),
+                    'title': 'Товары',
                     'icon': 'inventory_2',
                     'link': reverse_lazy('admin:catalog_product_changelist'),
                 },
             ],
         },
         {
-            'title': _('Ліди'),
+            'title': 'Лиды',
             'separator': True,
             'items': [
                 {
-                    'title': _('Заявки'),
+                    'title': 'Заявки',
                     'icon': 'inbox',
                     'link': reverse_lazy('admin:leads_contactinquiry_changelist'),
                 },

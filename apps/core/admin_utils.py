@@ -63,4 +63,4 @@ class ImagePreviewMixin:
             self.preview_max_height,
         )
 
-    get_image_preview.short_description = 'Превʼю'
+    get_image_preview.short_description = 'Превью'

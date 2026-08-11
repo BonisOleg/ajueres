@@ -36,7 +36,7 @@ class SiteButtonStyle(FillStyleMixin):
 
     class Meta:
         verbose_name = 'Стиль кнопки'
-        verbose_name_plural = 'Стилі кнопок'
+        verbose_name_plural = 'Стили кнопок'
         ordering = ['role']
 
     def __str__(self):
@@ -95,25 +95,25 @@ class SiteButtonStyle(FillStyleMixin):
 class BlockStyle(FillStyleMixin):
     """Стилі секції: фон + опційний override заливки кнопок секції."""
 
-    page = models.CharField(_('Сторінка'), max_length=64, db_index=True)
-    section_key = models.CharField(_('Секція'), max_length=64)
-    label = models.CharField(_('Назва в адмінці'), max_length=128, blank=True)
+    page = models.CharField(_('Страница'), max_length=64, db_index=True)
+    section_key = models.CharField(_('Секция'), max_length=64)
+    label = models.CharField(_('Название в админке'), max_length=128, blank=True)
     bg_color = models.CharField(
-        _('Колір фону секції'),
+        _('Цвет фона секции'),
         max_length=7,
         blank=True,
         default='',
-        help_text=_('Hex. Порожньо = CSS за замовчуванням'),
+        help_text=_('Hex. Пусто = CSS по умолчанию'),
     )
     override_button_fill = models.BooleanField(
-        _('Override заливки кнопок у секції'),
+        _('Override заливки кнопок в секции'),
         default=False,
-        help_text=_('Якщо увімкнено — fill_* нижче замінюють глобальні стилі кнопок у цій секції'),
+        help_text=_('Если включено — fill_* ниже заменяют глобальные стили кнопок в этой секции'),
     )
 
     class Meta:
-        verbose_name = 'Стиль секції'
-        verbose_name_plural = 'Стилі секцій'
+        verbose_name = 'Стиль секции'
+        verbose_name_plural = 'Стили секций'
         ordering = ['page', 'section_key']
         constraints = [
             models.UniqueConstraint(

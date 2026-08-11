@@ -60,7 +60,7 @@ def _admin_navigation(request):
 # Never put reverse_lazy / gettext_lazy values directly in UNFOLD.
 UNFOLD = {
     'SITE_TITLE': 'AJERES Admin',
-    'SITE_HEADER': 'AJERES — Адмінпанель',
+    'SITE_HEADER': 'AJERES — Админ-панель',
     'SITE_SYMBOL': 'storefront',
     'SITE_URL': '/',
     'SIDEBAR': {
@@ -86,6 +86,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'apps.core.middleware.AdminForceRussianMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

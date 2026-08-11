@@ -23,8 +23,8 @@ def _translated_values(obj, base_fields: tuple[str, ...]):
 
 
 class TimeStampedModel(models.Model):
-    created_at = models.DateTimeField('Створено', auto_now_add=True)
-    updated_at = models.DateTimeField('Оновлено', auto_now=True)
+    created_at = models.DateTimeField('Создано', auto_now_add=True)
+    updated_at = models.DateTimeField('Обновлено', auto_now=True)
 
     class Meta:
         abstract = True
@@ -34,17 +34,17 @@ class Category(TimeStampedModel):
     """Категорія каталогу (соуси, лапша, водорості, рисова бумага, снеки…)."""
 
     slug = models.SlugField('Slug', max_length=64, unique=True)
-    name = models.CharField('Назва', max_length=255)
+    name = models.CharField('Название', max_length=255)
     parent = models.ForeignKey(
         'self',
-        verbose_name='Батьківська категорія',
+        verbose_name='Родительская категория',
         related_name='children',
         on_delete=models.CASCADE,
         null=True,
         blank=True,
     )
     image = models.ImageField(
-        'Зображення',
+        'Изображение',
         upload_to='catalog/categories/',
         blank=True,
         null=True,
@@ -53,8 +53,8 @@ class Category(TimeStampedModel):
     is_active = models.BooleanField('Активно', default=True)
 
     class Meta:
-        verbose_name = 'Категорія'
-        verbose_name_plural = 'Категорії'
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
         ordering = ['order', 'name']
 
     def __str__(self):
@@ -69,25 +69,25 @@ class Brand(TimeStampedModel):
     """Бренд = виробник. Блок під каталогом на /products."""
 
     slug = models.SlugField('Slug', max_length=64, unique=True)
-    name = models.CharField('Назва', max_length=255)
+    name = models.CharField('Название', max_length=255)
     logo = models.ImageField(
         'Логотип',
         upload_to='catalog/brands/',
         blank=True,
         null=True,
     )
-    short_description = models.TextField('Короткий опис', blank=True)
+    short_description = models.TextField('Краткое описание', blank=True)
     order = models.PositiveIntegerField('Порядок', default=0, db_index=True)
     is_active = models.BooleanField('Активно', default=True)
     is_featured = models.BooleanField(
-        'Під каталогом',
+        'Под каталогом',
         default=True,
-        help_text='Показувати в блоці виробників під каталогом на /products',
+        help_text='Показывать в блоке производителей под каталогом на /products',
     )
 
     class Meta:
         verbose_name = 'Бренд'
-        verbose_name_plural = 'Бренди'
+        verbose_name_plural = 'Бренды'
         ordering = ['order', 'name']
 
     def __str__(self):
@@ -124,16 +124,16 @@ class Product(TimeStampedModel):
         Category,
         on_delete=models.PROTECT,
         related_name='products',
-        verbose_name='Категорія',
+        verbose_name='Категория',
     )
     slug = models.SlugField('Slug', max_length=128, unique=True)
     name = models.CharField(
-        'Назва',
+        'Название',
         max_length=255,
-        help_text='Без дубля бренду, напр. Соус «Сладкий Чили»',
+        help_text='Без дубля бренда, напр. Соус «Сладкий Чили»',
     )
     package = models.CharField(
-        'Фасування',
+        'Фасовка',
         max_length=64,
         help_text='Напр. 235 гр., 1 л., 4,5 гр.',
     )
@@ -147,15 +147,15 @@ class Product(TimeStampedModel):
     order = models.PositiveIntegerField('Порядок', default=0, db_index=True)
     is_active = models.BooleanField('Активно', default=True)
     search_text = models.TextField(
-        'Пошуковий текст',
+        'Поисковый текст',
         blank=True,
         editable=False,
-        help_text='Заповнюється автоматично при збереженні товару.',
+        help_text='Заполняется автоматически при сохранении товара.',
     )
 
     class Meta:
         verbose_name = 'Товар'
-        verbose_name_plural = 'Товари'
+        verbose_name_plural = 'Товары'
         ordering = ['brand__order', 'order', 'name']
         indexes = [
             models.Index(fields=['category', 'is_active']),
