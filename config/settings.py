@@ -8,7 +8,6 @@ from pathlib import Path
 
 from csp.constants import NONE, SELF, UNSAFE_INLINE
 from django.core.management.utils import get_random_secret_key
-from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -57,11 +56,13 @@ def _admin_navigation(request):
     return build_navigation(request)
 
 
+# Plain strings / callables only: Vercel JSON-serializes settings before django.setup().
+# Never put reverse_lazy / gettext_lazy values directly in UNFOLD.
 UNFOLD = {
     'SITE_TITLE': 'AJERES Admin',
     'SITE_HEADER': 'AJERES — Адмінпанель',
     'SITE_SYMBOL': 'storefront',
-    'SITE_URL': reverse_lazy('home'),
+    'SITE_URL': '/',
     'SIDEBAR': {
         'show_search': True,
         'command_search': True,
