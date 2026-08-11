@@ -9,6 +9,7 @@ from django.core.management.base import BaseCommand
 
 from apps.catalog.models import Brand, Category, Product
 from apps.catalog.selectors import invalidate_catalog_list_cache
+from apps.core.ensure_superuser import ensure_default_superuser
 from apps.core.import_content_data import (
     ABOUT_SECTIONS,
     ADVANTAGE_ROWS,
@@ -59,10 +60,16 @@ class Command(BaseCommand):
         self._retail_partners()
         self._privacy()
         self._catalog()
+        self._superuser()
         invalidate_catalog_list_cache()
         invalidate_site_blocks_cache()
         invalidate_retail_partners_cache()
         self.stdout.write(self.style.SUCCESS('Seed complete'))
+
+    def _superuser(self):
+        username, created = ensure_default_superuser()
+        action = 'created' if created else 'updated'
+        self.stdout.write(f'Superuser {action}: {username}')
 
     def _settings(self):
         s = SiteSettings.load()
