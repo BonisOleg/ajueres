@@ -9,6 +9,7 @@ from django.core.management.base import BaseCommand
 
 from apps.catalog.models import Brand, Category, Product
 from apps.catalog.selectors import invalidate_catalog_list_cache
+from apps.core.block_i18n import BLOCK_I18N
 from apps.core.ensure_superuser import ensure_default_superuser
 from apps.core.import_content_data import (
     ABOUT_SECTIONS,
@@ -98,19 +99,38 @@ class Command(BaseCommand):
         BlockStyle.ensure_defaults()
 
     def _set_block(self, page, key, text='', image=None):
+        i18n = BLOCK_I18N.get((page, key), {})
+        ru = i18n.get('ru') or text or ''
+        uz = i18n.get('uz') or ''
+        en = i18n.get('en') or ''
+        defaults = {'text_html': ru, 'text_html_ru': ru}
+        if uz:
+            defaults['text_html_uz'] = uz
+        if en:
+            defaults['text_html_en'] = en
+
         obj, created = SiteBlock.objects.get_or_create(
             page=page,
             key=key,
-            defaults={'text_html': text, 'text_html_ru': text},
+            defaults=defaults,
         )
-        if created:
-            return
         changed = False
-        if text and obj.text_html != text:
-            obj.text_html = text
+        if created:
+            # get_or_create already applied defaults
+            return
+
+        # Fill missing translations only (never overwrite editor content).
+        if ru and not (obj.text_html_ru or '').strip():
+            obj.text_html_ru = ru
             changed = True
-        if text and hasattr(obj, 'text_html_ru') and not (obj.text_html_ru or '').strip():
-            obj.text_html_ru = text
+        if ru and not (obj.text_html or '').strip():
+            obj.text_html = ru
+            changed = True
+        if uz and not (getattr(obj, 'text_html_uz', '') or '').strip():
+            obj.text_html_uz = uz
+            changed = True
+        if en and not (getattr(obj, 'text_html_en', '') or '').strip():
+            obj.text_html_en = en
             changed = True
         if changed:
             obj.save()

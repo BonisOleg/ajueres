@@ -85,6 +85,7 @@ MIDDLEWARE = [
     'csp.middleware.CSPMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'apps.core.middleware.PreferDefaultLanguageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'apps.core.middleware.AdminForceRussianMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -180,10 +181,11 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'ru'
 
 # Plain strings (not gettext_lazy): Vercel imports settings before django.setup().
+# Default language first — used when Accept-Language is ignored on first visit.
 LANGUAGES = [
+    ('ru', 'Русский'),
     ('uz', "O'zbekcha"),
     ('en', 'English'),
-    ('ru', 'Русский'),
 ]
 
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
