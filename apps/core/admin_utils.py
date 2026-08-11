@@ -5,8 +5,14 @@ from __future__ import annotations
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils.html import format_html
+from modeltranslation.admin import TabbedTranslationAdmin
+from unfold.admin import ModelAdmin
 
 from .admin_site_content_widgets import apply_readable_widget
+
+
+class UnfoldTranslationAdmin(ModelAdmin, TabbedTranslationAdmin):
+    """Unfold ModelAdmin + modeltranslation language tabs (MRO: Unfold first)."""
 
 
 class SingletonModelAdminMixin:

@@ -8,6 +8,7 @@ from .models import (
     LegalDocument,
     PartnerOffer,
     RetailPartner,
+    SiteBlock,
     SiteSettings,
 )
 
@@ -15,6 +16,11 @@ from .models import (
 @register(SiteSettings)
 class SiteSettingsTranslationOptions(TranslationOptions):
     fields = ('company_name', 'address')
+
+
+@register(SiteBlock)
+class SiteBlockTranslationOptions(TranslationOptions):
+    fields = ('text_html',)
 
 
 @register(LegalDocument)

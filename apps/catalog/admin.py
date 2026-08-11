@@ -1,12 +1,14 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationTabularInline
+from unfold.admin import TabularInline
 
-from unfold.admin import ModelAdmin, TabularInline
+from apps.core.admin_utils import UnfoldTranslationAdmin
 
 from .models import Brand, Category, Product
 
 
 @admin.register(Category)
-class CategoryAdmin(ModelAdmin):
+class CategoryAdmin(UnfoldTranslationAdmin):
     list_display = ('name', 'slug', 'parent', 'order', 'is_active')
     list_editable = ('order', 'is_active')
     list_filter = ('parent', 'is_active')
@@ -15,7 +17,7 @@ class CategoryAdmin(ModelAdmin):
     autocomplete_fields = ('parent',)
 
 
-class ProductInline(TabularInline):
+class ProductInline(TabularInline, TranslationTabularInline):
     model = Product
     extra = 0
     fields = ('name', 'package', 'category', 'image', 'order', 'is_active')
@@ -24,7 +26,7 @@ class ProductInline(TabularInline):
 
 
 @admin.register(Brand)
-class BrandAdmin(ModelAdmin):
+class BrandAdmin(UnfoldTranslationAdmin):
     list_display = ('name', 'slug', 'order', 'is_featured', 'is_active')
     list_editable = ('order', 'is_featured', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
@@ -33,7 +35,7 @@ class BrandAdmin(ModelAdmin):
 
 
 @admin.register(Product)
-class ProductAdmin(ModelAdmin):
+class ProductAdmin(UnfoldTranslationAdmin):
     list_display = ('name', 'brand', 'category', 'package', 'order', 'is_active')
     list_filter = ('brand', 'category', 'is_active')
     list_editable = ('order', 'is_active')

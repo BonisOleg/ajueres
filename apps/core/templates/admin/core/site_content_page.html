@@ -11,10 +11,11 @@
 {% block extrahead %}
   {{ block.super }}
   {{ media }}
+  <script src="{% static 'js/admin/cms_lang_tabs.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
-<div class="site-content-editor">
+<div class="site-content-editor" data-cms-lang-root>
   <div class="site-content-editor__head">
     <div>
       <h1 class="text-font-important-light dark:text-font-important-dark text-xl font-semibold">
@@ -40,6 +41,20 @@
     </div>
   </div>
 
+  <div class="cms-lang-tabs" role="tablist" aria-label="{% trans 'Мови контенту' %}">
+    {% for lang in cms_langs %}
+      <button
+        type="button"
+        class="cms-lang-tabs__btn{% if forloop.first %} is-active{% endif %}"
+        role="tab"
+        data-cms-lang-tab="{{ lang.code }}"
+        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+      >
+        {{ lang.label }}
+      </button>
+    {% endfor %}
+  </div>
+
   <form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     {% if form.non_field_errors %}
@@ -63,7 +78,8 @@
         <h2 class="site-content-editor__fieldset-title text-font-important-light dark:text-font-important-dark font-semibold">
           {{ group.title }}
         </h2>
-        {% for field in group.fields %}
+
+        {% for field in group.shared_fields %}
           <div class="site-content-editor__field">
             {{ field.label_tag }}
             {{ field }}
@@ -73,6 +89,28 @@
             {% if field.errors %}<div class="text-red-600">{{ field.errors }}</div>{% endif %}
           </div>
         {% endfor %}
+
+        {% if group.has_langs %}
+          {% for panel in group.lang_panels %}
+            <div
+              class="cms-lang-panel{% if forloop.first %} is-active{% endif %}"
+              data-cms-lang-panel="{{ panel.code }}"
+              {% if not forloop.first %}hidden{% endif %}
+            >
+              {% for field in panel.fields %}
+                <div class="site-content-editor__field">
+                  {{ field.label_tag }}
+                  {{ field }}
+                  {% if field.errors %}<div class="text-red-600">{{ field.errors }}</div>{% endif %}
+                </div>
+              {% empty %}
+                <p class="text-font-subtle-light dark:text-font-subtle-dark text-sm">
+                  {% trans "Немає текстових полів для цієї мови." %}
+                </p>
+              {% endfor %}
+            </div>
+          {% endfor %}
+        {% endif %}
       </fieldset>
     {% endfor %}
 

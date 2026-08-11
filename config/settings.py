@@ -69,6 +69,15 @@ UNFOLD = {
         'show_all_applications': False,
         'navigation': _admin_navigation,
     },
+    'EXTENSIONS': {
+        'modeltranslation': {
+            'flags': {
+                'ru': 'RU',
+                'uz': 'UZ',
+                'en': 'EN',
+            },
+        },
+    },
 }
 
 MIDDLEWARE = [

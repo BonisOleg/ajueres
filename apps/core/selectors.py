@@ -59,13 +59,16 @@ def get_blocks(page: str) -> dict[str, SiteBlock]:
 
 
 def get_block_text(blocks: dict[str, SiteBlock], key: str, default: str = '') -> str:
+    """Текст блоку для поточної мови (modeltranslation). Fallback — gettext default."""
     from django.utils.translation import gettext as _
 
     block = blocks.get(key) if blocks else None
     if block is None:
         return _(default) if default else ''
-    text = (block.text_html or '').strip() or default
-    return _(text) if text else ''
+    text = (block.text_html or '').strip()
+    if text:
+        return text
+    return _(default) if default else ''
 
 
 def get_block_image(blocks: dict[str, SiteBlock], key: str):

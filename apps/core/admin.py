@@ -1,9 +1,7 @@
-"""Django admin for core: Unfold + CMS proxies + theme styles."""
+"""Django admin for core: Unfold + CMS proxies + theme styles + i18n tabs."""
 
 from django.contrib import admin
 from django.utils.html import format_html
-
-from unfold.admin import ModelAdmin
 
 from .admin_site_content_proxies import register_site_content_section_admins
 from .admin_site_content_widgets import HexColorInputWidget
@@ -11,6 +9,7 @@ from .admin_utils import (
     ImagePreviewMixin,
     ReadableUnfoldFieldsMixin,
     SingletonModelAdminMixin,
+    UnfoldTranslationAdmin,
 )
 from .models import (
     AboutSection,
@@ -24,12 +23,14 @@ from .models import (
     SiteButtonStyle,
     SiteSettings,
 )
+from unfold.admin import ModelAdmin
+
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(
     ReadableUnfoldFieldsMixin,
     SingletonModelAdminMixin,
-    ModelAdmin,
+    UnfoldTranslationAdmin,
 ):
     fieldsets = (
         (
@@ -154,38 +155,42 @@ class BlockStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
 
 
 @admin.register(LegalDocument)
-class LegalDocumentAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
+class LegalDocumentAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
     list_display = ('slug', 'title', 'updated_at')
     prepopulated_fields = {'slug': ('title',)}
 
 
 @admin.register(Advantage)
-class AdvantageAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
+class AdvantageAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
     list_display = ('title', 'order', 'is_active')
     list_editable = ('order', 'is_active')
 
 
 @admin.register(CompanyStat)
-class CompanyStatAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
+class CompanyStatAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
     list_display = ('value', 'label', 'order', 'is_active')
     list_editable = ('order', 'is_active')
 
 
 @admin.register(AboutSection)
-class AboutSectionAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
+class AboutSectionAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
     list_display = ('section_key', 'title', 'order', 'is_active')
     list_editable = ('order', 'is_active')
     prepopulated_fields = {'section_key': ('title',)}
 
 
 @admin.register(PartnerOffer)
-class PartnerOfferAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
+class PartnerOfferAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
     list_display = ('title', 'order', 'is_active')
     list_editable = ('order', 'is_active')
 
 
 @admin.register(RetailPartner)
-class RetailPartnerAdmin(ImagePreviewMixin, ReadableUnfoldFieldsMixin, ModelAdmin):
+class RetailPartnerAdmin(
+    ImagePreviewMixin,
+    ReadableUnfoldFieldsMixin,
+    UnfoldTranslationAdmin,
+):
     list_display = ('name', 'slug', 'order', 'is_active', 'get_image_preview')
     list_editable = ('order', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
@@ -195,7 +200,7 @@ class RetailPartnerAdmin(ImagePreviewMixin, ReadableUnfoldFieldsMixin, ModelAdmi
 
 
 @admin.register(CaseStudy)
-class CaseStudyAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
+class CaseStudyAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
     list_display = ('title', 'metric', 'order', 'is_active')
     list_editable = ('order', 'is_active')
 

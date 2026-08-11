@@ -101,12 +101,18 @@ class Command(BaseCommand):
         obj, created = SiteBlock.objects.get_or_create(
             page=page,
             key=key,
-            defaults={'text_html': text},
+            defaults={'text_html': text, 'text_html_ru': text},
         )
         if created:
             return
+        changed = False
         if text and obj.text_html != text:
             obj.text_html = text
+            changed = True
+        if text and hasattr(obj, 'text_html_ru') and not (obj.text_html_ru or '').strip():
+            obj.text_html_ru = text
+            changed = True
+        if changed:
             obj.save()
 
     def _blocks(self):

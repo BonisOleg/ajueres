@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from django import forms
+from django.conf import settings
 from django.contrib import messages
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
@@ -28,26 +29,44 @@ except ImportError:  # pragma: no cover
     UnfoldAdminFileFieldWidget = forms.ClearableFileInput
     UnfoldBooleanWidget = forms.CheckboxInput
 
+CMS_LANGS = tuple(getattr(settings, 'MODELTRANSLATION_LANGUAGES', ('ru', 'uz', 'en')))
+CMS_LANG_LABELS = {
+    'ru': 'RU',
+    'uz': 'UZ',
+    'en': 'EN',
+}
+
 
 def _field_name(page: str, key: str, suffix: str) -> str:
     return f'block__{page}__{key}__{suffix}'
 
 
+def _truthy(raw: str) -> bool:
+    return (raw or '').strip().lower() in {'1', 'true', 'yes', 'on'}
+
+
 def load_section_blocks(section) -> dict[tuple[str, str], SiteBlock]:
     result: dict[tuple[str, str], SiteBlock] = {}
     for page, key in section.blocks:
-        defaults = {'text_html': BLOCK_DEFAULTS.get((page, key), '')}
-        obj, _ = SiteBlock.objects.get_or_create(
+        default_text = BLOCK_DEFAULTS.get((page, key), '')
+        defaults = {'text_html': default_text}
+        # Prefill default language column when modeltranslation is active.
+        defaults['text_html_ru'] = default_text
+        obj, created = SiteBlock.objects.get_or_create(
             page=page,
             key=key,
             defaults=defaults,
         )
+        if created is False and default_text and not (obj.text_html_ru or obj.text_html):
+            obj.text_html_ru = default_text
+            obj.text_html = default_text
+            obj.save(update_fields=['text_html', 'text_html_ru'])
         result[(page, key)] = obj
     return result
 
 
 class SitePageContentForm(forms.Form):
-    """Dynamically built from ContentSection.blocks."""
+    """Dynamically built from ContentSection.blocks (text fields × languages)."""
 
     def __init__(self, section, blocks_map, *args, **kwargs):
         self.section = section
@@ -58,12 +77,7 @@ class SitePageContentForm(forms.Form):
             vis_block = blocks_map.get((section.page_slug, section.visibility_key))
             initial = True
             if vis_block is not None:
-                initial = (vis_block.text_html or '1').strip() in {
-                    '1',
-                    'true',
-                    'yes',
-                    'on',
-                }
+                initial = _truthy(vis_block.text_html_ru or vis_block.text_html or '1')
             self.fields['section_visible'] = forms.BooleanField(
                 label=_('Показувати секцію на сайті'),
                 required=False,
@@ -79,12 +93,7 @@ class SitePageContentForm(forms.Form):
             btype = block_type(page, key)
 
             if btype == 'visibility' or is_visibility_key(key):
-                initial = (block.text_html or '').strip() in {
-                    '1',
-                    'true',
-                    'yes',
-                    'on',
-                }
+                initial = _truthy(block.text_html_ru or block.text_html)
                 self.fields[_field_name(page, key, 'visible')] = forms.BooleanField(
                     label=label,
                     required=False,
@@ -98,19 +107,24 @@ class SitePageContentForm(forms.Form):
                     widget=UnfoldAdminFileFieldWidget(),
                 )
             else:
-                widget = (
-                    CmsAdminTextInputWidget()
-                    if key in INLINE_KEYS
-                    else CmsAdminTextareaWidget(
-                        attrs={'rows': 4 if key in MULTILINE_KEYS else 2}
+                for lang in CMS_LANGS:
+                    widget = (
+                        CmsAdminTextInputWidget()
+                        if key in INLINE_KEYS
+                        else CmsAdminTextareaWidget(
+                            attrs={'rows': 4 if key in MULTILINE_KEYS else 2}
+                        )
                     )
-                )
-                self.fields[_field_name(page, key, 'text_html')] = forms.CharField(
-                    label=label,
-                    required=False,
-                    initial=block.text_html or '',
-                    widget=widget,
-                )
+                    attr = f'text_html_{lang}'
+                    initial = getattr(block, attr, None)
+                    if initial is None:
+                        initial = block.text_html if lang == 'ru' else ''
+                    self.fields[_field_name(page, key, attr)] = forms.CharField(
+                        label=f'{label} [{CMS_LANG_LABELS.get(lang, lang.upper())}]',
+                        required=False,
+                        initial=initial or '',
+                        widget=widget,
+                    )
 
     def save(self):
         section = self.section
@@ -119,9 +133,12 @@ class SitePageContentForm(forms.Form):
         if section.visibility_key:
             vis = '1' if cleaned.get('section_visible') else '0'
             block = self.blocks_map[(section.page_slug, section.visibility_key)]
-            if block.text_html != vis:
-                block.text_html = vis
-                block.save(update_fields=['text_html'])
+            block.text_html = vis
+            block.text_html_ru = vis
+            for lang in CMS_LANGS:
+                if lang != 'ru':
+                    setattr(block, f'text_html_{lang}', vis)
+            block.save()
 
         for page, key in section.blocks:
             if section.visibility_key and key == section.visibility_key:
@@ -131,19 +148,25 @@ class SitePageContentForm(forms.Form):
 
             if btype == 'visibility' or is_visibility_key(key):
                 val = '1' if cleaned.get(_field_name(page, key, 'visible')) else '0'
-                if block.text_html != val:
-                    block.text_html = val
-                    block.save(update_fields=['text_html'])
+                block.text_html = val
+                block.text_html_ru = val
+                for lang in CMS_LANGS:
+                    if lang != 'ru':
+                        setattr(block, f'text_html_{lang}', val)
+                block.save()
             elif btype == 'image':
                 image = cleaned.get(_field_name(page, key, 'image'))
                 if image:
                     block.image = image
                     block.save(update_fields=['image'])
             else:
-                text = cleaned.get(_field_name(page, key, 'text_html'), '')
-                if block.text_html != text:
-                    block.text_html = text
-                    block.save(update_fields=['text_html'])
+                for lang in CMS_LANGS:
+                    attr = f'text_html_{lang}'
+                    text = cleaned.get(_field_name(page, key, attr), '')
+                    setattr(block, attr, text)
+                # Keep canonical text_html in sync with default language.
+                block.text_html = getattr(block, 'text_html_ru', '') or ''
+                block.save()
 
         invalidate_site_blocks_cache(section.page_slug)
 
@@ -184,19 +207,49 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
         used_names.add('section_visible')
 
     for group in section.field_groups:
-        fields = []
+        shared_fields = []
+        lang_fields: dict[str, list] = {lang: [] for lang in CMS_LANGS}
         for key in group.keys:
-            for suffix in ('text_html', 'image', 'visible'):
-                name = _field_name(section.page_slug, key, suffix)
-                if name in form.fields:
-                    fields.append(form[name])
-                    used_names.add(name)
-        if fields:
-            grouped_fields.append({'title': group.title, 'fields': fields})
+            image_name = _field_name(section.page_slug, key, 'image')
+            visible_name = _field_name(section.page_slug, key, 'visible')
+            if image_name in form.fields:
+                shared_fields.append(form[image_name])
+                used_names.add(image_name)
+            elif visible_name in form.fields:
+                shared_fields.append(form[visible_name])
+                used_names.add(visible_name)
+            else:
+                for lang in CMS_LANGS:
+                    name = _field_name(section.page_slug, key, f'text_html_{lang}')
+                    if name in form.fields:
+                        lang_fields[lang].append(form[name])
+                        used_names.add(name)
+        grouped_fields.append(
+            {
+                'title': group.title,
+                'shared_fields': shared_fields,
+                'lang_panels': [
+                    {
+                        'code': lang,
+                        'label': CMS_LANG_LABELS.get(lang, lang.upper()),
+                        'fields': lang_fields[lang],
+                    }
+                    for lang in CMS_LANGS
+                ],
+                'has_langs': any(lang_fields.values()),
+            }
+        )
 
     leftover = [form[name] for name in form.fields if name not in used_names]
     if leftover:
-        grouped_fields.append({'title': _('Інше'), 'fields': leftover})
+        grouped_fields.append(
+            {
+                'title': _('Інше'),
+                'shared_fields': leftover,
+                'lang_panels': [],
+                'has_langs': False,
+            }
+        )
 
     context = {
         **model_admin.admin_site.each_context(request),
@@ -204,6 +257,10 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
         'section': section,
         'form': form,
         'grouped_fields': grouped_fields,
+        'cms_langs': [
+            {'code': lang, 'label': CMS_LANG_LABELS.get(lang, lang.upper())}
+            for lang in CMS_LANGS
+        ],
         'opts': model_admin.model._meta,
         'has_view_permission': True,
         'has_change_permission': True,
