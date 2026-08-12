@@ -264,7 +264,8 @@ class ProductFilterSelectorsTests(TestCase):
         self.with_gluten.extra_filters.add(gf)
         response = self.client.get(reverse('products'))
         self.assertContains(response, 'catalog-features')
-        self.assertContains(response, 'product-card__badge')
+        self.assertContains(response, 'catalog-feature__icon')
+        self.assertNotContains(response, 'product-card__badge')
         self.assertContains(response, gf.name)
 
     def test_feature_filter_excludes_snacks(self):
