@@ -28,6 +28,11 @@ def build_navigation(request=None):
                     'icon': 'format_paint',
                     'link': reverse_lazy('admin:core_blockstyle_changelist'),
                 },
+                {
+                    'title': 'Сменить пароль',
+                    'icon': 'lock_reset',
+                    'link': reverse_lazy('admin:password_change'),
+                },
             ],
         },
         {

@@ -49,7 +49,7 @@ def _bootstrap_vercel() -> None:
         # Always re-seed: idempotent, fills missing stats (e.g. 4th orb).
         call_command('seed_site', verbosity=0)
     else:
-        # Managed Postgres: content seed is optional; admin must exist for /admin/.
+        # Managed Postgres: content seed is optional; admin must exist for the panel.
         ensure_default_superuser()
 
 

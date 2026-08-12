@@ -8,7 +8,7 @@ from django.urls import include, path
 urlpatterns = [
     path('healthz/', lambda request: HttpResponse('ok', content_type='text/plain')),
     path('i18n/', include('django.conf.urls.i18n')),
-    path('admin/', admin.site.urls),
+    path(settings.ADMIN_URL, admin.site.urls),
 ]
 
 urlpatterns += i18n_patterns(

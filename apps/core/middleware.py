@@ -6,6 +6,11 @@ from django.conf import settings
 from django.utils import translation
 
 
+def _is_admin_path(path: str) -> bool:
+    prefix = getattr(settings, 'ADMIN_PATH_PREFIX', '/admin')
+    return path == prefix or path.startswith(f'{prefix}/')
+
+
 class PreferDefaultLanguageMiddleware:
     """
     First visit without language cookie/session → force LANGUAGE_CODE (ru).
@@ -18,7 +23,7 @@ class PreferDefaultLanguageMiddleware:
         self.default = getattr(settings, 'LANGUAGE_CODE', 'ru') or 'ru'
 
     def __call__(self, request):
-        if request.path.startswith('/admin'):
+        if _is_admin_path(request.path):
             return self.get_response(request)
 
         has_cookie = bool(request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME))
@@ -36,7 +41,7 @@ class PreferDefaultLanguageMiddleware:
 
 class AdminForceRussianMiddleware:
     """
-    Force Russian UI for /admin/* without changing public LANGUAGES / LANGUAGE_CODE.
+    Force Russian UI for the secret admin path without changing public LANGUAGES.
     Restores previous language after the request (thread-local safety).
     """
 
@@ -44,7 +49,7 @@ class AdminForceRussianMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        if not request.path.startswith('/admin'):
+        if not _is_admin_path(request.path):
             return self.get_response(request)
 
         previous = translation.get_language()

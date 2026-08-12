@@ -23,7 +23,7 @@ python3 manage.py runserver
 ```
 
 Сайт: http://127.0.0.1:8000/ru/  
-Адмінка: http://127.0.0.1:8000/admin/  
+Адмінка: `http://127.0.0.1:8000/<ADMIN_URL>/` (значення з `.env`, не `/admin/`)  
 Healthcheck: http://127.0.0.1:8000/healthz/
 
 ## Структура URL
@@ -54,7 +54,7 @@ Static і media — Docker volumes (`static_volume`, `media_volume`); nginx ві
 ## DigitalOcean Droplet (prod + SSL)
 
 1. Клон репо на сервер → `/var/www/ajeres`
-2. `cp .env.example .env` → заповнити `SECRET_KEY`, `POSTGRES_PASSWORD`, `ALLOWED_HOSTS` (домен, IP, `web`, `127.0.0.1`, `localhost`)
+2. `cp .env.example .env` → заповнити `SECRET_KEY`, `POSTGRES_PASSWORD`, `ADMIN_URL`, `ALLOWED_HOSTS` (домен, IP, `web`, `127.0.0.1`, `localhost`)
 3. HTTP: `docker compose up -d --build`
 4. DNS A `@` / `www` → IP Droplet
 5. Certbot на хості (`certonly --standalone`), потім у `deploy/nginx/docker.prod.conf` підставити шлях сертифіката

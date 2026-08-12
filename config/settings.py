@@ -17,6 +17,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY') or get_random_secret_key()
 DEBUG = os.environ.get('DEBUG', 'True').lower() in ('1', 'true', 'yes')
 
+# Non-default admin path (security through obscurity). Override via ADMIN_URL.
+_ADMIN_SLUG = (os.environ.get('ADMIN_URL') or 'f7YG0XG1JUr0iUzF').strip().strip('/')
+if not _ADMIN_SLUG or _ADMIN_SLUG.lower() == 'admin':
+    _ADMIN_SLUG = 'f7YG0XG1JUr0iUzF'
+ADMIN_URL = f'{_ADMIN_SLUG}/'
+ADMIN_PATH_PREFIX = f'/{_ADMIN_SLUG}'
+
 ALLOWED_HOSTS = [
     h.strip()
     for h in os.environ.get(
@@ -98,7 +105,7 @@ MIDDLEWARE = [
 # CSP: style-src дозволяє 'unsafe-inline' через CSS custom properties у шаблонах
 # (home hero-stats --i/--rev) та JS element.style у каруселі. script-src суворий.
 CONTENT_SECURITY_POLICY = {
-    'EXCLUDE_URL_PREFIXES': ['/admin/'],
+    'EXCLUDE_URL_PREFIXES': [f'/{ADMIN_URL}'],
     'DIRECTIVES': {
         'default-src': [SELF],
         'script-src': [SELF],

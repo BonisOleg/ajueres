@@ -78,7 +78,7 @@ class Command(BaseCommand):
 
     def _superuser(self):
         username, created = ensure_default_superuser()
-        action = 'created' if created else 'updated'
+        action = 'created' if created else 'ensured'
         self.stdout.write(f'Superuser {action}: {username}')
 
     def _settings(self):
