@@ -2,6 +2,7 @@
 
 {% if hx_oob %}
   {% include "partials/catalog_chips.html" with oob=True %}
+  {% include "partials/catalog_feature_filters.html" with oob=True %}
   {% include "partials/catalog_search_filters.html" with oob=True %}
   {% include "partials/catalog_filter_badge.html" with oob=True %}
 {% endif %}
@@ -46,6 +47,16 @@
               {% product_image_url product as img_url %}
               {% if img_url %}
                 <img src="{{ img_url }}" alt="{{ product.name }}" loading="lazy" width="300" height="300">
+              {% endif %}
+              {% if not product.is_snack and product.extra_filters.all %}
+                <div class="product-card__badges">
+                  {% for item in product.extra_filters.all %}
+                    {% filter_icon_url item as badge_url %}
+                    {% if badge_url %}
+                      <img class="product-card__badge" src="{{ badge_url }}" alt="{{ item.name }}" title="{{ item.name }}" width="28" height="28" loading="lazy" decoding="async">
+                    {% endif %}
+                  {% endfor %}
+                </div>
               {% endif %}
             </div>
             <div class="product-card__body">

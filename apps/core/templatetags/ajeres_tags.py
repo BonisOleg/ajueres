@@ -13,6 +13,7 @@ from django.utils.translation import check_for_language
 
 from apps.core.selectors import get_block_image, get_block_text
 from apps.core.theme_css import button_style_attr, section_style_attr
+from apps.catalog.product_filter_defaults import FILTER_SLUGS, filter_icon_static_path
 
 register = template.Library()
 
@@ -136,19 +137,38 @@ def advantage_icon(icon_key):
     )
 
 
+@register.simple_tag
+def filter_icon_url(product_filter):
+    """Завантажена іконка або static/img/product-filters/{slug}.png."""
+    image = getattr(product_filter, 'icon', None)
+    if image:
+        try:
+            url = image.url
+        except ValueError:
+            url = ''
+        if url:
+            return url
+    slug = getattr(product_filter, 'slug', '') or ''
+    if slug in FILTER_SLUGS:
+        return static(filter_icon_static_path(slug))
+    return ''
+
+
 @register.simple_tag(takes_context=True)
 def catalog_filter_url(
     context,
     *,
     toggle_category=None,
     clear_categories=False,
+    toggle_feature=None,
     page=None,
 ):
     """
-    URL каталогу зі збереженням brand/q і toggle category (OR multi-select).
+    URL каталогу зі збереженням brand/q/feature і toggle category (OR multi-select).
     clear_categories=True — «Все».
     """
     categories = list(context.get('active_categories') or [])
+    features = list(context.get('active_features') or [])
     brand = context.get('active_brand') or ''
     search_q = context.get('search_q') or ''
 
@@ -160,8 +180,22 @@ def catalog_filter_url(
             categories = [item for item in categories if item != slug]
         elif slug:
             categories = [*categories, slug]
+        now_on = slug in categories
+        snacks = set(context.get('snacks_slugs') or ())
+        if now_on and slug in snacks:
+            features = []
+
+    if toggle_feature:
+        slug = str(toggle_feature).strip()
+        snacks = set(context.get('snacks_slugs') or ())
+        categories = [item for item in categories if item not in snacks]
+        if slug in features:
+            features = [item for item in features if item != slug]
+        elif slug:
+            features = [*features, slug]
 
     params: list[tuple[str, str]] = [('category', slug) for slug in categories]
+    params.extend(('feature', slug) for slug in features)
     if brand:
         params.append(('brand', brand))
     if search_q:

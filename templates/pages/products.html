@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{% static 'css/contacts.css' %}">
 <link rel="stylesheet" href="{% static 'css/products.css' %}">
 <link rel="stylesheet" href="{% static 'css/products-2.css' %}">
+<link rel="stylesheet" href="{% static 'css/product-filters.css' %}">
 {% endblock %}
 
 {% block extra_js %}
@@ -74,6 +75,8 @@
           <label class="sr-only" for="catalog-q">{% trans 'Поиск' %}</label>
           <input id="catalog-q" type="search" name="q" value="{{ search_q }}" placeholder="{% trans 'Поиск товаров…' %}" autocomplete="off">
         </form>
+
+        {% include "partials/catalog_feature_filters.html" %}
       </div>
 
       <div id="catalog-results" class="catalog-panel__results">

@@ -146,6 +146,13 @@ class Product(TimeStampedModel):
     )
     order = models.PositiveIntegerField('Порядок', default=0, db_index=True)
     is_active = models.BooleanField('Активно', default=True)
+    extra_filters = models.ManyToManyField(
+        'ProductFilter',
+        verbose_name='Дополнительные фильтры',
+        related_name='products',
+        blank=True,
+        help_text='Иконки свойств на карточке. Назначаются вручную.',
+    )
     search_text = models.TextField(
         'Поисковый текст',
         blank=True,
@@ -165,6 +172,15 @@ class Product(TimeStampedModel):
     def __str__(self):
         return f'{self.brand.name} — {self.name} ({self.package})'
 
+    def is_snack(self) -> bool:
+        category = self.category if self.category_id else None
+        if category is None:
+            return False
+        if category.slug == 'snacks':
+            return True
+        parent = category.parent if category.parent_id else None
+        return bool(parent and parent.slug == 'snacks')
+
     def build_search_text(self) -> str:
         """Назва/фасування/опис усіх мов + бренд + категорія, нормалізовані."""
         brand = self.brand if self.brand_id else None
@@ -182,6 +198,30 @@ class Product(TimeStampedModel):
         if update_fields is not None:
             kwargs['update_fields'] = {*update_fields, 'search_text'}
         super().save(*args, **kwargs)
+
+
+class ProductFilter(TimeStampedModel):
+    """Додатковий фільтр/властивість товару з іконкою (як на Krambals)."""
+
+    slug = models.SlugField('Slug', max_length=64, unique=True)
+    name = models.CharField('Название', max_length=128)
+    icon = models.ImageField(
+        'Иконка',
+        upload_to='catalog/filters/',
+        blank=True,
+        null=True,
+        help_text='Пусто — стандартная иконка из static/img/product-filters/.',
+    )
+    order = models.PositiveIntegerField('Порядок', default=0, db_index=True)
+    is_active = models.BooleanField('Активно', default=True)
+
+    class Meta:
+        verbose_name = 'Фильтр товара'
+        verbose_name_plural = 'Фильтры товаров'
+        ordering = ['order', 'name']
+
+    def __str__(self):
+        return self.name
 
 
 def refresh_products_search_text(queryset) -> int:

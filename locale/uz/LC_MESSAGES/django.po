@@ -272,6 +272,15 @@ msgstr "Kategoriyalar"
 #: templates/pages/products.html:74
 msgid "Все"
 msgstr "Hammasi"
+#: templates/partials/catalog_feature_filters.html:7
+#: templates/partials/catalog_feature_filters.html:10
+msgid "Свойства"
+msgstr "Xususiyatlar"
+#: templates/partials/catalog_filter_badge.html:9
+#, python-format
+msgid "Выбрано %(count)s фильтр"
+msgid_plural "Выбрано %(count)s фильтров"
+msgstr[0] "%(count)s ta filtr tanlandi"
 #: templates/pages/products.html:100
 msgid "Поиск"
 msgstr "Qidiruv"

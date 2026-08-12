@@ -8,6 +8,10 @@ from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 
 from apps.catalog.models import Brand, Category, Product
+from apps.catalog.product_filter_defaults import (
+    ensure_product_filter_assignments,
+    ensure_product_filters,
+)
 from apps.catalog.selectors import invalidate_catalog_list_cache
 from apps.core.block_i18n import BLOCK_I18N
 from apps.core.ensure_superuser import ensure_default_superuser
@@ -61,6 +65,11 @@ class Command(BaseCommand):
         self._retail_partners()
         self._privacy()
         self._catalog()
+        created_filters = ensure_product_filters()
+        assigned_filters = ensure_product_filter_assignments()
+        self.stdout.write(
+            f'Product filters created: {created_filters}, assigned: {assigned_filters}'
+        )
         self._superuser()
         invalidate_catalog_list_cache()
         invalidate_site_blocks_cache()

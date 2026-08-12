@@ -2,7 +2,7 @@
 <button
   type="button"
   id="catalog-filter-btn"
-  class="catalog-filter-btn{% if active_categories %} has-filters{% endif %}"
+  class="catalog-filter-btn{% if active_categories or active_features %} has-filters{% endif %}"
   data-catalog-filters-open
   aria-expanded="false"
   aria-controls="catalog-filters-panel"

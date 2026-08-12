@@ -10,10 +10,11 @@ from django.core.cache import cache
 from django.core.paginator import EmptyPage, Page, PageNotAnInteger, Paginator
 from django.db.models import Prefetch, Q, QuerySet
 
-from .models import Brand, Category, Product
+from .models import Brand, Category, Product, ProductFilter
 from .search import SEARCH_MAX_LEN, SEARCH_MIN_LEN, tokenize
 
 CATALOG_PER_PAGE = 72
+SNACKS_ROOT_SLUG = 'snacks'
 _WHITESPACE_RE = re.compile(r'\s+')
 
 _CACHE_BRANDS_ALL = 'brands_public:all'
@@ -149,10 +150,40 @@ def resolve_categories_filter(
     return categories, product_slugs
 
 
+def get_snacks_slugs() -> set[str]:
+    """Slug кореневої «Снеки» та всіх прямих нащадків."""
+    slugs = {SNACKS_ROOT_SLUG}
+    children = Category.objects.filter(
+        is_active=True,
+        parent__slug=SNACKS_ROOT_SLUG,
+    ).values_list('slug', flat=True)
+    slugs.update(children)
+    return slugs
+
+
+def selection_includes_snacks(
+    category_slugs: Iterable[str] | str | None,
+    snacks_slugs: set[str] | None = None,
+) -> bool:
+    selected = parse_category_slugs(category_slugs)
+    if not selected:
+        return False
+    snacks = snacks_slugs if snacks_slugs is not None else get_snacks_slugs()
+    return any(slug in snacks for slug in selected)
+
+
+def get_product_filters() -> list[ProductFilter]:
+    """Активні додаткові фільтри для ряду іконок у каталозі."""
+    return list(
+        ProductFilter.objects.filter(is_active=True).order_by('order', 'name')
+    )
+
+
 def get_products(
     *,
     category_slug: str | None = None,
     category_slugs: Iterable[str] | str | None = None,
+    extra_filter_slugs: Iterable[str] | str | None = None,
     brand_slug: str | None = None,
     q: str | None = None,
 ) -> QuerySet[Product]:
@@ -163,6 +194,14 @@ def get_products(
             category__is_active=True,
         )
         .select_related('brand', 'category', 'category__parent')
+        .prefetch_related(
+            Prefetch(
+                'extra_filters',
+                queryset=ProductFilter.objects.filter(is_active=True).order_by(
+                    'order', 'name'
+                ),
+            )
+        )
         .order_by('brand__order', 'order', 'name')
     )
 
@@ -175,6 +214,15 @@ def get_products(
             qs = qs.filter(category__slug__in=slugs)
     if brand_slug:
         qs = qs.filter(brand__slug=brand_slug)
+
+    features = parse_category_slugs(extra_filter_slugs)
+    if features:
+        snacks_slugs = get_snacks_slugs()
+        qs = qs.exclude(category__slug__in=snacks_slugs)
+        qs = qs.filter(
+            extra_filters__slug__in=features,
+            extra_filters__is_active=True,
+        ).distinct()
 
     search_q = build_product_search_q(normalize_search_query(q))
     if search_q is not None:

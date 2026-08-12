@@ -95,6 +95,11 @@ def build_navigation(request=None):
                     'icon': 'inventory_2',
                     'link': reverse_lazy('admin:catalog_product_changelist'),
                 },
+                {
+                    'title': 'Фильтры товаров',
+                    'icon': 'filter_alt',
+                    'link': reverse_lazy('admin:catalog_productfilter_changelist'),
+                },
             ],
         },
         {

@@ -9,12 +9,23 @@ def _catalog_context(request):
     categories_selected = selectors.parse_category_slugs(
         request.GET.getlist('category')
     )
+    features_selected = selectors.parse_category_slugs(
+        request.GET.getlist('feature')
+    )
+    snacks_slugs = selectors.get_snacks_slugs()
+    show_general_features = not selectors.selection_includes_snacks(
+        categories_selected,
+        snacks_slugs,
+    )
+    if not show_general_features:
+        features_selected = []
     brand = (request.GET.get('brand') or '').strip() or None
     q = request.GET.get('q')
     page = request.GET.get('page', 1)
 
     products_qs = selectors.get_products(
         category_slugs=categories_selected,
+        extra_filter_slugs=features_selected,
         brand_slug=brand,
         q=q,
     )
@@ -44,6 +55,12 @@ def _catalog_context(request):
         'active_category': categories_selected[0] if categories_selected else None,
         'active_parent_slugs': active_parent_slugs,
         'active_parent_slug': active_parent_slugs[0] if active_parent_slugs else None,
+        'active_features': features_selected,
+        'product_filters': (
+            selectors.get_product_filters() if show_general_features else []
+        ),
+        'show_general_features': show_general_features,
+        'snacks_slugs': snacks_slugs,
         'active_brand': brand,
         'search_q': selectors.normalize_search_query(q) or (q or '').strip(),
         'brands_showcase': selectors.get_brands_for_showcase(featured_only=True),

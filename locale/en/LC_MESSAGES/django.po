@@ -272,6 +272,16 @@ msgstr "Categories"
 #: templates/pages/products.html:74
 msgid "Все"
 msgstr "All"
+#: templates/partials/catalog_feature_filters.html:7
+#: templates/partials/catalog_feature_filters.html:10
+msgid "Свойства"
+msgstr "Properties"
+#: templates/partials/catalog_filter_badge.html:9
+#, python-format
+msgid "Выбрано %(count)s фильтр"
+msgid_plural "Выбрано %(count)s фильтров"
+msgstr[0] "%(count)s filter selected"
+msgstr[1] "%(count)s filters selected"
 #: templates/pages/products.html:100
 msgid "Поиск"
 msgstr "Search"

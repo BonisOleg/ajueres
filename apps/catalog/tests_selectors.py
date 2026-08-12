@@ -1,9 +1,14 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 
-from apps.catalog.models import Brand, Category, Product
+from apps.catalog.models import Brand, Category, Product, ProductFilter
+from apps.catalog.product_filter_defaults import (
+    ensure_product_filter_assignments,
+    ensure_product_filters,
+)
 from apps.catalog.selectors import (
     get_brands_for_showcase,
+    get_product_filters,
     get_products,
     group_by_brand,
     normalize_search_query,
@@ -169,3 +174,126 @@ class CatalogSelectorsTests(TestCase):
             get_products(category_slugs='sauces,noodles').count(),
             4,
         )
+
+
+class ProductFilterSelectorsTests(TestCase):
+    def setUp(self):
+        self.cat = Category.objects.create(slug='sauces', name='Соусы')
+        self.brand = Brand.objects.create(slug='sen-soy', name='Sen Soy')
+        self.gluten = ProductFilter.objects.create(
+            slug='gluten-free',
+            name='Без глютена',
+            order=10,
+        )
+        self.palm = ProductFilter.objects.create(
+            slug='palm-oil-free',
+            name='Без пальмового масла',
+            order=20,
+        )
+        self.with_gluten = Product.objects.create(
+            brand=self.brand,
+            category=self.cat,
+            slug='sauce-gf',
+            name='Соус без глютена',
+            name_ru='Соус без глютена',
+            package='235 гр.',
+            package_ru='235 гр.',
+            image=_tiny_png(),
+        )
+        self.with_gluten.extra_filters.add(self.gluten)
+        self.plain = Product.objects.create(
+            brand=self.brand,
+            category=self.cat,
+            slug='sauce-plain',
+            name='Соус обычный',
+            name_ru='Соус обычный',
+            package='235 гр.',
+            package_ru='235 гр.',
+            image=_tiny_png(),
+        )
+
+    def test_filter_by_feature_slug(self):
+        qs = get_products(extra_filter_slugs=['gluten-free'])
+        self.assertEqual(list(qs), [self.with_gluten])
+
+    def test_feature_or_logic(self):
+        self.plain.extra_filters.add(self.palm)
+        qs = get_products(extra_filter_slugs=['gluten-free', 'palm-oil-free'])
+        self.assertEqual(set(qs), {self.with_gluten, self.plain})
+
+    def test_inactive_feature_hidden(self):
+        self.gluten.is_active = False
+        self.gluten.save()
+        self.assertEqual(get_products(extra_filter_slugs=['gluten-free']).count(), 0)
+        names = [item.slug for item in get_product_filters()]
+        self.assertNotIn('gluten-free', names)
+
+    def test_ensure_seed_is_idempotent(self):
+        first = ensure_product_filters()
+        second = ensure_product_filters()
+        self.assertGreaterEqual(first, 6)
+        self.assertEqual(second, 0)
+        self.assertGreaterEqual(ProductFilter.objects.count(), 8)
+
+    def test_assign_filters_to_known_products(self):
+        rice_paper = Product.objects.create(
+            brand=self.brand,
+            category=self.cat,
+            slug='sen-soy-rice-paper-100-18',
+            name='«Рисова бумага»',
+            name_ru='«Рисова бумага»',
+            package='100 гр.',
+            package_ru='100 гр.',
+            image=_tiny_png(),
+        )
+        first = ensure_product_filter_assignments()
+        second = ensure_product_filter_assignments()
+        slugs = set(rice_paper.extra_filters.values_list('slug', flat=True))
+        self.assertGreaterEqual(first, 1)
+        self.assertEqual(second, 0)
+        self.assertEqual(
+            slugs,
+            {'gluten-free', 'palm-oil-free', 'no-preservatives', 'natural'},
+        )
+
+    def test_catalog_page_shows_assigned_badge(self):
+        from django.urls import reverse
+
+        ensure_product_filters()
+        gf = ProductFilter.objects.get(slug='gluten-free')
+        self.with_gluten.extra_filters.add(gf)
+        response = self.client.get(reverse('products'))
+        self.assertContains(response, 'catalog-features')
+        self.assertContains(response, 'product-card__badge')
+        self.assertContains(response, gf.name)
+
+    def test_feature_filter_excludes_snacks(self):
+        snacks = Category.objects.create(slug='snacks', name='Снеки', order=10)
+        chips = Category.objects.create(
+            slug='chips', name='Чипсы', parent=snacks, order=0
+        )
+        snack = Product.objects.create(
+            brand=self.brand,
+            category=chips,
+            slug='nori-chips',
+            name='Чипсы нори',
+            name_ru='Чипсы нори',
+            package='4,5 гр.',
+            package_ru='4,5 гр.',
+            image=_tiny_png(),
+        )
+        snack.extra_filters.add(self.gluten)
+        qs = get_products(extra_filter_slugs=['gluten-free'])
+        self.assertEqual(list(qs), [self.with_gluten])
+        self.assertNotIn(snack, qs)
+
+    def test_snacks_category_hides_general_feature_row(self):
+        from django.urls import reverse
+
+        ensure_product_filters()
+        Category.objects.create(slug='snacks', name='Снеки', order=10)
+        response = self.client.get(reverse('products'), {'category': 'snacks'})
+        html = response.content.decode()
+        self.assertRegex(html, r'id="catalog-features"[^>]*\bhidden\b')
+        self.assertNotIn('catalog-feature__icon', html)
+

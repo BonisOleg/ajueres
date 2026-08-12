@@ -4,6 +4,9 @@
   {% for slug in active_categories %}
     <input type="hidden" name="category" value="{{ slug }}">
   {% endfor %}
+  {% for slug in active_features %}
+    <input type="hidden" name="feature" value="{{ slug }}">
+  {% endfor %}
   {% if active_brand %}<input type="hidden" name="brand" value="{{ active_brand }}">{% endif %}
 {% if oob %}
 </div>

@@ -1,0 +1,31 @@
+{% load i18n ajeres_tags %}
+<div
+  id="catalog-features"
+  class="catalog-features"
+  role="group"
+  aria-label="{% trans 'Свойства' %}"
+  {% if not product_filters %}hidden{% endif %}
+  {% if oob %}hx-swap-oob="true"{% endif %}
+>
+  {% if product_filters %}
+  <p class="catalog-features__title">{% trans 'Свойства' %}</p>
+  <div class="catalog-features__row">
+    {% for item in product_filters %}
+      {% catalog_filter_url toggle_feature=item.slug as feature_url %}
+      {% filter_icon_url item as icon_url %}
+      <a class="catalog-feature{% if item.slug in active_features %} is-active{% endif %}"
+         href="{{ feature_url }}"
+         hx-get="{{ feature_url }}"
+         hx-target="#catalog-results"
+         hx-push-url="true"
+         hx-indicator="#catalog-results"
+         {% if item.slug in active_features %}aria-pressed="true"{% else %}aria-pressed="false"{% endif %}>
+        {% if icon_url %}
+          <img class="catalog-feature__icon" src="{{ icon_url }}" alt="" width="72" height="72" loading="lazy" decoding="async">
+        {% endif %}
+        <span class="catalog-feature__label">{{ item.name }}</span>
+      </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
