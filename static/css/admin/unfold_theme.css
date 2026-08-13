@@ -1,0 +1,119 @@
+/* Unfold light theme: AJERES orange / navy / green. No !important. */
+
+:root {
+  --admin-orange: #ff5a36;
+  --admin-orange-soft: #fff0ea;
+  --admin-navy: #0f1835;
+  --admin-green: #1fa968;
+  --admin-green-soft: #d8f2e5;
+  --admin-blue: #3e7bfa;
+  --admin-blue-soft: #e2eaff;
+}
+
+.admin-brand-logo,
+.admin-brand-logo img {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: min(148px, 46vw);
+  object-fit: contain;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.admin-theme-switch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0 0 0.35rem;
+  padding: 0 0.35rem 0.45rem;
+  border-bottom: 1px solid var(--color-base-200, #ede7de);
+  overflow: hidden;
+}
+
+.admin-theme-switch__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.admin-theme-switch__item:hover {
+  background: var(--color-base-100, #f3eee6);
+}
+
+.admin-theme-switch__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.admin-theme-switch__item .material-symbols-outlined {
+  flex: none;
+  margin: 0;
+}
+
+.admin-theme-dropdown {
+  right: 0;
+  left: auto;
+  width: min(11.5rem, calc(100vw - 2rem));
+  max-width: calc(100vw - 2rem);
+  overflow: hidden;
+}
+
+.admin-theme-dropdown .admin-theme-switch {
+  margin: 0;
+  padding: 0.2rem;
+  border-bottom: 0;
+}
+
+html.dark .admin-theme-switch {
+  border-bottom-color: var(--color-base-700, #243044);
+}
+
+html.dark .admin-theme-switch__item:hover {
+  background: var(--color-base-700, #243044);
+}
+
+.admin-user-menu {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+  .admin-brand-logo,
+  .admin-brand-logo img {
+    height: 36px;
+    max-width: min(128px, 42vw);
+  }
+}
+
+@media (max-width: 639px) {
+  .admin-brand-logo,
+  .admin-brand-logo img {
+    height: 32px;
+    max-width: min(112px, 40vw);
+  }
+
+  .admin-theme-switch__item {
+    min-height: 2.75rem;
+    padding-top: max(0.4rem, env(safe-area-inset-top, 0px));
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .admin-theme-switch__item {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}

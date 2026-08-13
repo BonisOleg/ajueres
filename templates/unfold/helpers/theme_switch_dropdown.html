@@ -1,0 +1,40 @@
+{% load i18n %}
+
+{% if not theme %}
+    <div class="relative" x-data="{ openTheme: false }">
+        <a class="block cursor-pointer h-[18px] leading-none hover:text-base-700 dark:hover:text-base-200" x-on:click="openTheme = !openTheme">
+            <span class="material-symbols-outlined">
+                <span x-text="adminTheme == 'dark' && 'dark_mode' || adminTheme == 'light' && 'light_mode' || 'computer'"></span>
+            </span>
+        </a>
+
+        <nav class="admin-theme-dropdown absolute bg-white border border-base-200 flex flex-col leading-none py-1 rounded-default shadow-lg top-7 z-50 dark:bg-base-800 dark:border-base-700"
+             x-cloak
+             x-show="openTheme"
+             x-transition
+             x-on:click.outside="openTheme = false">
+            <div class="admin-theme-switch">
+                <a class="admin-theme-switch__item hover:text-base-700 dark:hover:text-base-200"
+                   x-on:click="adminTheme = 'light'"
+                   x-bind:class="adminTheme == 'light' && 'text-primary-600 dark:text-primary-500'">
+                    <span class="material-symbols-outlined">light_mode</span>
+                    <span class="admin-theme-switch__label">{% trans "Light" %}</span>
+                </a>
+
+                <a class="admin-theme-switch__item hover:text-base-700 dark:hover:text-base-200"
+                   x-on:click="adminTheme = 'dark'"
+                   x-bind:class="adminTheme == 'dark' && 'text-primary-600 dark:text-primary-500'">
+                    <span class="material-symbols-outlined">dark_mode</span>
+                    <span class="admin-theme-switch__label">{% trans "Dark" %}</span>
+                </a>
+
+                <a class="admin-theme-switch__item hover:text-base-700 dark:hover:text-base-200"
+                   x-on:click="adminTheme = 'auto'"
+                   x-bind:class="adminTheme == 'auto' && 'text-primary-600 dark:text-primary-500'">
+                    <span class="material-symbols-outlined">computer</span>
+                    <span class="admin-theme-switch__label">{% trans "System" %}</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+{% endif %}

@@ -1,4 +1,4 @@
-"""Dark-readable CMS widgets + Hex color picker for Unfold admin."""
+"""CMS widgets + hex color picker for Unfold (light-first, dark: variants)."""
 
 from __future__ import annotations
 
@@ -11,30 +11,9 @@ except ImportError:  # pragma: no cover
     INPUT_CLASSES = ['border', 'rounded-default', 'px-3', 'py-2', 'w-full']
     TEXTAREA_CLASSES = INPUT_CLASSES
 
-_SKIP_CLASSES = frozenset(
-    {
-        'bg-white',
-        'text-font-default-light',
-        'border-base-200',
-        'dark:bg-base-900',
-        'dark:border-base-700',
-        'dark:text-font-default-dark',
-    }
-)
-_FORCE_CLASSES = (
-    'bg-base-900',
-    'text-base-100',
-    'border-base-700',
-    'placeholder-base-400',
-)
-
 
 def cms_control_classes(base) -> list[str]:
-    classes = [c for c in list(base) if c not in _SKIP_CLASSES]
-    for item in _FORCE_CLASSES:
-        if item not in classes:
-            classes.append(item)
-    return classes
+    return list(base)
 
 
 class CmsAdminTextInputWidget(AdminTextInputWidget):
@@ -79,7 +58,7 @@ class HexColorInputWidget(forms.TextInput):
 
 
 def apply_readable_widget(widget) -> None:
-    """Mutate widget classes for dark Unfold readability."""
+    """Keep text widgets on Unfold light-readable input classes."""
     from django.forms.widgets import CheckboxInput, ClearableFileInput, Select
 
     if isinstance(widget, (CheckboxInput, ClearableFileInput, Select, HexColorInputWidget)):
