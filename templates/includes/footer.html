@@ -24,9 +24,9 @@
             decoding="async"
           >
         </a>
-        <p class="site-footer__text">{% trans 'Дистрибьютор продуктов питания в Республике Узбекистан' %}</p>
+        <p class="site-footer__text">{% block_text site_blocks "tagline" "Дистрибьютор продуктов питания в Республике Узбекистан" %}</p>
         <p class="site-footer__credit">
-          {% trans 'Разработано студией' %}
+          {% block_text site_blocks "credit" "Разработано студией" %}
           <a
             class="site-footer__credit-link"
             href="https://www.prometeylabs.com/"
@@ -34,11 +34,11 @@
             rel="noopener noreferrer"
           >PrometeyLabs</a>
         </p>
-        <p class="site-footer__copy">© {% now "Y" %} AJERES. {% trans 'Все права защищены.' %}</p>
+        <p class="site-footer__copy">© {% now "Y" %} AJERES. {% block_text site_blocks "copyright" "Все права защищены." %}</p>
       </div>
 
       <div class="site-footer__col site-footer__col--menu">
-        <div class="site-footer__label">{% trans 'Меню' %}</div>
+        <div class="site-footer__label">{% block_text site_blocks "menu_label" "Меню" %}</div>
         <nav class="site-footer__nav" aria-label="{% trans 'Навигация' %}">
           {% for item in nav_items %}
             <a
@@ -52,7 +52,7 @@
       </div>
 
       <div class="site-footer__col site-footer__col--contacts">
-        <div class="site-footer__label">{% trans 'Контакты' %}</div>
+        <div class="site-footer__label">{% block_text site_blocks "contacts_label" "Контакты" %}</div>
         <div class="site-footer__contacts">
           {% if site_settings.phone %}
             <a class="site-footer__contact" href="tel:{{ site_settings.phone|cut:' '|cut:'('|cut:')'|cut:'-' }}">{{ site_settings.phone }}</a>

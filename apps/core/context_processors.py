@@ -1,20 +1,30 @@
-from django.utils.translation import get_language, gettext_lazy as _
+from django.utils.translation import get_language
 
 from apps.catalog import selectors as catalog_selectors
 
-from .selectors import get_block_styles, get_button_styles, get_site_settings
+from .button_preview import overlay_button_styles
+from .selectors import (
+    get_block_styles,
+    get_block_text,
+    get_blocks,
+    get_button_styles,
+    get_site_settings,
+)
 from .theme_css import build_theme_root_css
 
 
 def site_context(request):
     lang = getattr(request, 'LANGUAGE_CODE', None) or get_language() or 'ru'
     settings_obj = get_site_settings()
-    button_styles = get_button_styles()
+    button_styles, button_preview = overlay_button_styles(request, get_button_styles())
     block_styles = get_block_styles()
+    site_blocks = get_blocks('site')
     return {
         'site_settings': settings_obj,
         'button_styles': button_styles,
+        'button_preview': button_preview,
         'block_styles': block_styles,
+        'site_blocks': site_blocks,
         'theme_css_vars': build_theme_root_css(settings_obj, button_styles),
         'current_language': lang,
         'form_data': {},
@@ -25,10 +35,26 @@ def site_context(request):
             {'code': 'en', 'label': 'EN'},
         ),
         'nav_items': (
-            {'url_name': 'home', 'label': _('Главная'), 'tone': 'coral'},
-            {'url_name': 'products', 'label': _('Каталог'), 'tone': 'green'},
-            {'url_name': 'about', 'label': _('О компании'), 'tone': 'blue'},
-            {'url_name': 'contacts', 'label': _('Контакты'), 'tone': 'purple'},
+            {
+                'url_name': 'home',
+                'label': get_block_text(site_blocks, 'nav_home', 'Главная'),
+                'tone': 'coral',
+            },
+            {
+                'url_name': 'products',
+                'label': get_block_text(site_blocks, 'nav_catalog', 'Каталог'),
+                'tone': 'green',
+            },
+            {
+                'url_name': 'about',
+                'label': get_block_text(site_blocks, 'nav_about', 'О компании'),
+                'tone': 'blue',
+            },
+            {
+                'url_name': 'contacts',
+                'label': get_block_text(site_blocks, 'nav_contacts', 'Контакты'),
+                'tone': 'purple',
+            },
         ),
         'nav_categories': list(catalog_selectors.get_categories()[:6]),
     }

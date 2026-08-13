@@ -97,7 +97,24 @@ html.dark .admin-theme-switch__item:hover {
 
 .admin-user-menu {
   max-width: 100%;
-  overflow: hidden;
+  overflow: visible;
+}
+
+.admin-user-menu__panel {
+  overflow: auto;
+  max-height: min(70vh, 24rem);
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-user-menu__trigger {
+  width: calc(100% + 3rem);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media (max-width: 1023px) {
@@ -126,6 +143,81 @@ html.dark .admin-theme-switch__item:hover {
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
   }
+}
+
+.admin-save-error {
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #f0b4b4;
+  border-radius: 0.6rem;
+  background: #fff4f4;
+  color: #8a1f1f;
+}
+
+html.dark .admin-save-error {
+  border-color: #7a3030;
+  background: #3a1a1a;
+  color: #ffc9c9;
+}
+
+.admin-nav-folder {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin-nav-folder__btn {
+  width: calc(100% + 1.5rem);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.admin-nav-folder__chevron {
+  flex: none;
+  transition: transform 0.18s ease;
+}
+
+.admin-nav-folder__chevron--open {
+  transform: rotate(90deg);
+}
+
+.admin-nav-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0.1rem 0 0.35rem;
+  padding: 0 0 0 0.7rem;
+  list-style: none;
+}
+
+.admin-nav-sub a,
+.admin-nav-sub .admin-nav-folder__btn {
+  min-height: 38px;
+}
+
+@media (max-width: 1023px) {
+  .admin-nav-folder__btn,
+  .admin-nav-sub a {
+    min-height: 2.75rem;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .admin-nav-folder__btn {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+[x-cloak] {
+  display: none;
 }
 
 .button-style-preview {
@@ -163,4 +255,25 @@ html.dark .admin-theme-switch__item:hover {
   box-shadow:
     0 10px 24px rgba(20, 36, 64, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.button-style-preview__open {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.95rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--color-primary-500, #ff5a36);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button-style-preview__open:hover,
+.button-style-preview__open:focus-visible {
+  background: var(--color-primary-600, #db3f1c);
 }

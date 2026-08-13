@@ -9,22 +9,19 @@ from django.contrib.auth import get_user_model
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 
-from apps.core.admin_nav import build_navigation
+from apps.core.admin_nav import iter_nav_items
 from apps.core.ensure_superuser import ensure_default_superuser
 
 
 class AdminPasswordNavTests(SimpleTestCase):
     def test_sidebar_has_password_change_item(self):
-        titles = [
-            item['title']
-            for group in build_navigation()
-            for item in group['items']
-        ]
+        items = list(iter_nav_items())
+        titles = [item['title'] for item in items]
         self.assertIn('Сменить пароль', titles)
         links = [
             str(item['link'])
-            for group in build_navigation()
-            for item in group['items']
+            for item in items
+            if item.get('link') is not None and not callable(item.get('link'))
         ]
         self.assertIn(reverse('admin:password_change'), links)
 
@@ -52,6 +49,30 @@ class EnsureSuperuserPasswordTests(TestCase):
         user.refresh_from_db()
         self.assertTrue(user.check_password('OwnerNewPass456!'))
         self.assertFalse(user.check_password('FirstPass123!'))
+
+
+class AdminUserMenuTests(TestCase):
+    def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.create_superuser(
+            'owner',
+            'owner@ajeres.uz',
+            'OldPass123!',
+        )
+        self.client.force_login(self.user)
+
+    def test_plaque_menu_has_site_themes_and_password(self):
+        response = self.client.get(reverse('admin:index'))
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode()
+        self.assertIn('admin-user-menu__trigger', content)
+        self.assertIn('openUserLinks = !openUserLinks', content)
+        self.assertIn('Открыть сайт', content)
+        self.assertIn('Сменить пароль', content)
+        self.assertIn(reverse('admin:password_change'), content)
+        self.assertIn('Светлая', content)
+        self.assertIn('Тёмная', content)
+        self.assertIn('admin-user-menu__panel', content)
 
 
 class AdminPasswordChangeViewTests(TestCase):

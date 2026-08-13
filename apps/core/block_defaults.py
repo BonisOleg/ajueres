@@ -75,6 +75,19 @@ BLOCK_DEFAULTS: dict[tuple[str, str], str] = {
         'wholesale_text',
     ): 'Отгрузка со склада в Ташкенте и доставка по региону.',
     ('contacts', 'map_title'): 'Наш офис в Ташкенте',
+    ('site', 'nav_home'): 'Главная',
+    ('site', 'nav_catalog'): 'Каталог',
+    ('site', 'nav_about'): 'О компании',
+    ('site', 'nav_contacts'): 'Контакты',
+    ('site', 'nav_mega_label'): 'Категории продуктов',
+    ('site', 'nav_mega_all'): 'Смотреть весь каталог',
+    ('site', 'cta'): 'Связаться',
+    ('site', 'cta_mobile'): 'Связаться с нами',
+    ('site', 'tagline'): 'Дистрибьютор продуктов питания в Республике Узбекистан',
+    ('site', 'credit'): 'Разработано студией',
+    ('site', 'copyright'): 'Все права защищены.',
+    ('site', 'menu_label'): 'Меню',
+    ('site', 'contacts_label'): 'Контакты',
 }
 
 BLOCK_LABELS: dict[tuple[str, str], str] = {
@@ -111,6 +124,19 @@ BLOCK_LABELS: dict[tuple[str, str], str] = {
     ('contacts', 'wholesale_title'): 'Опт — заголовок',
     ('contacts', 'wholesale_text'): 'Опт — текст',
     ('contacts', 'map_title'): 'Карта — заголовок',
+    ('site', 'nav_home'): 'Меню — Главная',
+    ('site', 'nav_catalog'): 'Меню — Каталог',
+    ('site', 'nav_about'): 'Меню — О компании',
+    ('site', 'nav_contacts'): 'Меню — Контакты',
+    ('site', 'nav_mega_label'): 'Мегаменю — заголовок',
+    ('site', 'nav_mega_all'): 'Мегаменю — весь каталог',
+    ('site', 'cta'): 'Кнопка «Связаться»',
+    ('site', 'cta_mobile'): 'Кнопка в мобильном меню',
+    ('site', 'tagline'): 'Подвал — описание',
+    ('site', 'credit'): 'Подвал — «Разработано»',
+    ('site', 'copyright'): 'Подвал — копирайт',
+    ('site', 'menu_label'): 'Подвал — заголовок меню',
+    ('site', 'contacts_label'): 'Подвал — заголовок контактов',
 }
 
 BLOCK_CONTENT_TYPES: dict[tuple[str, str], BlockType] = {
@@ -137,6 +163,17 @@ INLINE_KEYS = frozenset(
         'email_note',
         'wholesale_title',
         'map_title',
+        'nav_home',
+        'nav_catalog',
+        'nav_about',
+        'nav_contacts',
+        'nav_mega_label',
+        'nav_mega_all',
+        'cta_mobile',
+        'credit',
+        'copyright',
+        'menu_label',
+        'contacts_label',
     }
 )
 
@@ -148,6 +185,7 @@ MULTILINE_KEYS = frozenset(
         'intro',
         'form_lead',
         'wholesale_text',
+        'tagline',
     }
 )
 

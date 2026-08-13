@@ -15,7 +15,7 @@
       </a>
 
       <nav class="nav-desktop" aria-label="{% trans 'Основная навигация' %}">
-        <a href="{% url 'home' %}" data-tone="coral"{% if request.resolver_match.url_name == 'home' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Главная' %}</a>
+        <a href="{% url 'home' %}" data-tone="coral"{% if request.resolver_match.url_name == 'home' %} class="is-active" aria-current="page"{% endif %}>{% block_text site_blocks "nav_home" "Главная" %}</a>
 
         <div class="nav-desktop__mega" data-mega>
           <a
@@ -23,13 +23,13 @@
             href="{% url 'products' %}"
             data-mega-trigger
           >
-            {% trans 'Каталог' %}
+            {% block_text site_blocks "nav_catalog" "Каталог" %}
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </a>
           {% if nav_categories %}
           <div class="nav-desktop__mega-panel" data-mega-panel>
             <div class="nav-desktop__mega-card">
-              <div class="nav-desktop__mega-label">{% trans 'Категории продуктов' %}</div>
+              <div class="nav-desktop__mega-label">{% block_text site_blocks "nav_mega_label" "Категории продуктов" %}</div>
               <div class="nav-desktop__mega-grid">
                 {% for cat in nav_categories %}
                   <a class="nav-desktop__mega-item" href="{% url 'products' %}?category={{ cat.slug }}">
@@ -43,7 +43,7 @@
                 {% endfor %}
               </div>
               <a class="nav-desktop__mega-all" href="{% url 'products' %}">
-                {% trans 'Смотреть весь каталог' %}
+                {% block_text site_blocks "nav_mega_all" "Смотреть весь каталог" %}
                 <span aria-hidden="true">→</span>
               </a>
             </div>
@@ -51,8 +51,8 @@
           {% endif %}
         </div>
 
-        <a href="{% url 'about' %}" data-tone="blue"{% if request.resolver_match.url_name == 'about' %} class="is-active" aria-current="page"{% endif %}>{% trans 'О компании' %}</a>
-        <a href="{% url 'contacts' %}" data-tone="purple"{% if request.resolver_match.url_name == 'contacts' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Контакты' %}</a>
+        <a href="{% url 'about' %}" data-tone="blue"{% if request.resolver_match.url_name == 'about' %} class="is-active" aria-current="page"{% endif %}>{% block_text site_blocks "nav_about" "О компании" %}</a>
+        <a href="{% url 'contacts' %}" data-tone="purple"{% if request.resolver_match.url_name == 'contacts' %} class="is-active" aria-current="page"{% endif %}>{% block_text site_blocks "nav_contacts" "Контакты" %}</a>
       </nav>
 
       <div class="site-header__tools">
@@ -78,9 +78,9 @@
           </div>
         </div>
 
-        <button type="button" class="header-cta" data-open-contact-modal>{% trans 'Связаться' %}</button>
+        <button type="button" class="header-cta" data-open-contact-modal>{% block_text site_blocks "cta" "Связаться" %}</button>
 
-        <button type="button" class="burger" id="burger" aria-label="{% trans 'Меню' %}" aria-expanded="false" aria-controls="mobile-nav">
+        <button type="button" class="burger" id="burger" aria-label="{% block_text site_blocks "menu_label" "Меню" %}" aria-expanded="false" aria-controls="mobile-nav">
           <span class="burger__line"></span>
           <span class="burger__line"></span>
           <span class="burger__line"></span>
@@ -103,7 +103,7 @@
     class="nav-mobile__sheet"
     role="dialog"
     aria-modal="true"
-    aria-label="{% trans 'Меню' %}"
+    aria-label="{% block_text site_blocks "menu_label" "Меню" %}"
   >
     <div class="nav-mobile__scene" aria-hidden="true">
       <div class="nav-mobile__sky"></div>
@@ -130,17 +130,17 @@
 
     <div class="nav-mobile__body">
       <section class="nav-mobile__block">
-        <h2 class="nav-mobile__label">{% trans 'Меню' %}</h2>
+        <h2 class="nav-mobile__label">{% block_text site_blocks "menu_label" "Меню" %}</h2>
         <nav class="nav-mobile__panel" aria-label="{% trans 'Основная навигация' %}">
-          <a href="{% url 'home' %}"{% if request.resolver_match.url_name == 'home' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Главная' %}</a>
-          <a href="{% url 'about' %}"{% if request.resolver_match.url_name == 'about' %} class="is-active" aria-current="page"{% endif %}>{% trans 'О компании' %}</a>
-          <a href="{% url 'products' %}"{% if request.resolver_match.url_name == 'products' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Каталог' %}</a>
-          <a href="{% url 'contacts' %}"{% if request.resolver_match.url_name == 'contacts' %} class="is-active" aria-current="page"{% endif %}>{% trans 'Контакты' %}</a>
+          <a href="{% url 'home' %}"{% if request.resolver_match.url_name == 'home' %} class="is-active" aria-current="page"{% endif %}>{% block_text site_blocks "nav_home" "Главная" %}</a>
+          <a href="{% url 'about' %}"{% if request.resolver_match.url_name == 'about' %} class="is-active" aria-current="page"{% endif %}>{% block_text site_blocks "nav_about" "О компании" %}</a>
+          <a href="{% url 'products' %}"{% if request.resolver_match.url_name == 'products' %} class="is-active" aria-current="page"{% endif %}>{% block_text site_blocks "nav_catalog" "Каталог" %}</a>
+          <a href="{% url 'contacts' %}"{% if request.resolver_match.url_name == 'contacts' %} class="is-active" aria-current="page"{% endif %}>{% block_text site_blocks "nav_contacts" "Контакты" %}</a>
         </nav>
       </section>
 
       <section class="nav-mobile__block nav-mobile__block--contact">
-        <h2 class="nav-mobile__label">{% trans 'Контакты' %}</h2>
+        <h2 class="nav-mobile__label">{% block_text site_blocks "contacts_label" "Контакты" %}</h2>
         {% if site_settings.phone or site_settings.address %}
         <div class="nav-mobile__contacts">
           {% if site_settings.phone %}
@@ -160,7 +160,7 @@
         </div>
         {% endif %}
         <button type="button" class="nav-mobile__cta" data-open-contact-modal>
-          {% trans 'Связаться с нами' %}
+          {% block_text site_blocks "cta_mobile" "Связаться с нами" %}
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
       </section>

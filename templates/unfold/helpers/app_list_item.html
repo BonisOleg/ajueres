@@ -1,0 +1,48 @@
+{% load unfold ajeres_admin %}
+
+{% with children=item|nav_children %}
+{% if item.has_permission %}
+    {% if children %}
+        {% nav_branch_active children as nested_active %}
+        <li class="admin-nav-folder" x-data="{ open: {% if nested_active %}true{% else %}false{% endif %} }">
+            <button
+                type="button"
+                class="admin-nav-folder__btn flex h-[38px] items-center -mx-3 px-3 rounded-default hover:text-primary-600 dark:hover:text-primary-500 {% if nested_active %}font-semibold text-primary-600 dark:text-primary-500{% endif %}"
+                x-on:click="open = !open"
+                x-bind:aria-expanded="open.toString()"
+            >
+                {% if item.icon %}
+                    <span class="material-symbols-outlined md-18 mr-3 w-[18px]">
+                        {{ item.icon }}
+                    </span>
+                {% endif %}
+                <span>{{ item.title|safe }}</span>
+                {% include "unfold/helpers/app_list_badge.html" with item=item %}
+                <span
+                    class="material-symbols-outlined admin-nav-folder__chevron ml-auto md-18"
+                    x-bind:class="{'admin-nav-folder__chevron--open': open}"
+                >
+                    chevron_right
+                </span>
+            </button>
+            <ol class="admin-nav-sub" x-show="open" x-cloak>
+                {% for child in children %}
+                    {% include "unfold/helpers/app_list_item.html" with item=child %}
+                {% endfor %}
+            </ol>
+        </li>
+    {% else %}
+        <li>
+            <a href="{% if item.link_callback %}{{ item.link_callback }}{% else %}{{ item.link }}{% endif %}" class="flex h-[38px] items-center -mx-3 px-3 rounded-default hover:text-primary-600 dark:hover:text-primary-500 {% if item.active %}bg-base-100 font-semibold text-primary-600 dark:bg-white/[.06] dark:text-primary-500 active{% endif %}">
+                {% if item.icon %}
+                    <span class="material-symbols-outlined md-18 mr-3 w-[18px]">
+                        {{ item.icon }}
+                    </span>
+                {% endif %}
+                <span>{{ item.title|safe }}</span>
+                {% include "unfold/helpers/app_list_badge.html" with item=item %}
+            </a>
+        </li>
+    {% endif %}
+{% endif %}
+{% endwith %}

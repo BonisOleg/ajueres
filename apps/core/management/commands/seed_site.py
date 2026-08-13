@@ -229,6 +229,23 @@ class Command(BaseCommand):
                 'Отгрузка со склада в Ташкенте и доставка по региону.',
             ),
             ('contacts', 'map_title', 'Наш офис в Ташкенте'),
+            ('site', 'nav_home', 'Главная'),
+            ('site', 'nav_catalog', 'Каталог'),
+            ('site', 'nav_about', 'О компании'),
+            ('site', 'nav_contacts', 'Контакты'),
+            ('site', 'nav_mega_label', 'Категории продуктов'),
+            ('site', 'nav_mega_all', 'Смотреть весь каталог'),
+            ('site', 'cta', 'Связаться'),
+            ('site', 'cta_mobile', 'Связаться с нами'),
+            (
+                'site',
+                'tagline',
+                'Дистрибьютор продуктов питания в Республике Узбекистан',
+            ),
+            ('site', 'credit', 'Разработано студией'),
+            ('site', 'copyright', 'Все права защищены.'),
+            ('site', 'menu_label', 'Меню'),
+            ('site', 'contacts_label', 'Контакты'),
         ]
         for page, key, text in pairs:
             self._set_block(page, key, text)

@@ -45,7 +45,7 @@ class SiteSettingsAdmin(
             'Стили и цвета',
             {
                 'fields': ('accent_color', 'accent_ink', 'accent_soft'),
-                'description': 'Глобальные акценты. Кнопки — в «Стили кнопок».',
+                'description': 'Глобальные акценты. Кнопки — в разделе «Стили».',
             },
         ),
     )
@@ -67,7 +67,7 @@ class SiteButtonStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
     list_filter = ('fill_type',)
     ordering = ('role',)
     actions = ('reset_selected_to_site_default',)
-    actions_detail = ('reset_to_site_default',)
+    actions_detail = ('preview_on_site', 'reset_to_site_default')
     actions_row = ('reset_to_site_default',)
     change_form_before_template = 'admin/core/button_style_preview.html'
 
@@ -134,6 +134,19 @@ class SiteButtonStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
             messages.SUCCESS,
         )
 
+    class Media:
+        js = ('js/admin/button_style_preview.js',)
+
+    @action(
+        description='Попередній перегляд',
+        icon='visibility',
+        url_path='preview-on-site',
+        variant=ActionVariant.PRIMARY,
+        attrs={'data-button-preview': '1'},
+    )
+    def preview_on_site(self, request, object_id):
+        return HttpResponseRedirect(reverse('home'))
+
     @action(
         description='Сбросить к виду сайта',
         icon='restart_alt',
@@ -162,6 +175,7 @@ class BlockStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
         'page',
         'section_key',
         'bg_color',
+        'bg_preview',
         'override_button_fill',
         'fill_type',
     )
@@ -179,6 +193,7 @@ class BlockStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
             {
                 'fields': (
                     'bg_color',
+                    'bg_image',
                     'override_button_fill',
                     'fill_type',
                     'solid_color',
@@ -199,6 +214,52 @@ class BlockStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
         }:
             kwargs['widget'] = HexColorInputWidget()
         return super().formfield_for_dbfield(db_field, request, **kwargs)
+
+    @admin.display(description='Фон')
+    def bg_preview(self, obj):
+        image = obj.bg_image
+        if image:
+            try:
+                return format_html(
+                    '<img src="{}" alt="" width="40" height="28" '
+                    'style="width:40px;height:28px;object-fit:cover;'
+                    'border-radius:6px;background:{};">',
+                    image.url,
+                    obj.bg_color or '#eee',
+                )
+            except ValueError:
+                pass
+        color = (obj.bg_color or '').strip()
+        if not color:
+            return '—'
+        return format_html(
+            '<span style="display:inline-block;width:28px;height:28px;'
+            'border-radius:6px;border:1px solid #c9c0b4;background:{};"></span>',
+            color,
+        )
+
+    def get_urls(self):
+        from django.urls import path
+
+        info = self.model._meta.app_label, self.model._meta.model_name
+        custom = [
+            path(
+                'section/<slug:page>/<slug:section_key>/',
+                self.admin_site.admin_view(self.redirect_to_section),
+                name='%s_%s_section' % info,
+            ),
+        ]
+        return custom + super().get_urls()
+
+    def redirect_to_section(self, request, page, section_key):
+        BlockStyle.ensure_defaults()
+        obj = BlockStyle.objects.filter(page=page, section_key=section_key).first()
+        if obj is None:
+            self.message_user(request, 'Стиль секции не найден.', messages.ERROR)
+            return HttpResponseRedirect(reverse('admin:core_blockstyle_changelist'))
+        return HttpResponseRedirect(
+            reverse('admin:core_blockstyle_change', args=[obj.pk])
+        )
 
     def changelist_view(self, request, extra_context=None):
         BlockStyle.ensure_defaults()

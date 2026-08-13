@@ -37,9 +37,73 @@ class ContentSection:
 
 CONTENT_SECTIONS: tuple[ContentSection, ...] = (
     ContentSection(
+        slug='header',
+        page_slug='site',
+        title='Шапка сайта',
+        sidebar_title='Шапка',
+        sidebar_icon='web_asset',
+        preview_url='/',
+        style_section_key='header',
+        blocks=(
+            ('site', 'nav_home'),
+            ('site', 'nav_catalog'),
+            ('site', 'nav_about'),
+            ('site', 'nav_contacts'),
+            ('site', 'nav_mega_label'),
+            ('site', 'nav_mega_all'),
+            ('site', 'cta'),
+            ('site', 'cta_mobile'),
+            ('site', 'menu_label'),
+            ('site', 'contacts_label'),
+        ),
+        field_groups=(
+            FieldGroup(
+                'Пункты меню',
+                ('nav_home', 'nav_catalog', 'nav_about', 'nav_contacts'),
+            ),
+            FieldGroup(
+                'Каталог и CTA',
+                ('nav_mega_label', 'nav_mega_all', 'cta', 'cta_mobile'),
+            ),
+            FieldGroup(
+                'Подписи меню',
+                ('menu_label', 'contacts_label'),
+            ),
+        ),
+        description=(
+            'Подписи существующих пунктов и кнопки «Связаться». '
+            'Новые кнопки добавить нельзя. Фон шапки — цвет или картинка ниже.'
+        ),
+    ),
+    ContentSection(
+        slug='footer',
+        page_slug='site',
+        title='Подвал сайта',
+        sidebar_title='Подвал',
+        sidebar_icon='vertical_align_bottom',
+        preview_url='/',
+        style_section_key='footer',
+        blocks=(
+            ('site', 'tagline'),
+            ('site', 'credit'),
+            ('site', 'copyright'),
+            ('site', 'menu_label'),
+            ('site', 'contacts_label'),
+        ),
+        field_groups=(
+            FieldGroup('Тексты', ('tagline', 'credit', 'copyright')),
+            FieldGroup('Заголовки колонок', ('menu_label', 'contacts_label')),
+        ),
+        description=(
+            'Существующие подписи подвала. Пункты меню берутся из «Шапки». '
+            'Новые кнопки добавить нельзя. Фон — цвет или картинка ниже.'
+        ),
+    ),
+    ContentSection(
         slug='hero',
         page_slug='home',
         title='Главная — Hero',
+        sidebar_title='Hero',
         sidebar_icon='image',
         preview_url='/',
         visibility_key='hero_visible',
@@ -62,6 +126,7 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
         slug='advantages',
         page_slug='home',
         title='Главная — Преимущества',
+        sidebar_title='Преимущества',
         sidebar_icon='star',
         preview_url='/',
         visibility_key='advantages_visible',
@@ -71,12 +136,13 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
             ('home', 'advantages_visible'),
         ),
         field_groups=(FieldGroup('Основной контент', ('services_title',)),),
-        description='Заголовок блока преимуществ. Карточки — в разделе «Преимущества».',
+        description='Заголовок блока преимуществ. Карточки — пункт «Карточки преимуществ».',
     ),
     ContentSection(
         slug='brands',
         page_slug='home',
         title='Главная — Бренды',
+        sidebar_title='Бренды',
         sidebar_icon='storefront',
         preview_url='/',
         visibility_key='brands_visible',
@@ -95,6 +161,7 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
         slug='coop',
         page_slug='home',
         title='Главная — Сотрудничество',
+        sidebar_title='Сотрудничество',
         sidebar_icon='handshake',
         preview_url='/',
         style_section_key='coop',
@@ -111,6 +178,7 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
         slug='cta',
         page_slug='home',
         title='Главная — CTA',
+        sidebar_title='CTA',
         sidebar_icon='campaign',
         preview_url='/',
         style_section_key='cta',
@@ -123,7 +191,8 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
     ContentSection(
         slug='about',
         page_slug='about',
-        title='О компании',
+        title='О компании — Шапка',
+        sidebar_title='Шапка',
         sidebar_icon='business',
         preview_url='/about/',
         style_section_key='intro',
@@ -138,12 +207,13 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
             FieldGroup('Основной контент', ('eyebrow', 'title', 'intro', 'cta')),
             FieldGroup('Медиафайлы', ('side_image',)),
         ),
-        description='Шапка /about. Секции текста — в «Секции О компании».',
+        description='Шапка /about. Секции текста — пункт «Секции».',
     ),
     ContentSection(
         slug='contacts',
         page_slug='contacts',
-        title='Контакты',
+        title='Контакты — Тексты',
+        sidebar_title='Тексты',
         sidebar_icon='call',
         preview_url='/contacts/',
         style_section_key='intro',
@@ -197,12 +267,12 @@ def all_registry_block_keys() -> list[tuple[str, str]]:
     return keys
 
 
-def build_content_sidebar_items() -> list[dict]:
-    return [
-        {
-            'title': section.sidebar_title or section.title,
-            'icon': section.sidebar_icon,
-            'link': reverse_lazy(f'admin:core_{section.admin_model_name}_changelist'),
-        }
-        for section in CONTENT_SECTIONS
-    ]
+def cms_sidebar_item(page_slug: str, section_slug: str) -> dict:
+    section = get_section(page_slug, section_slug)
+    if section is None:
+        raise ValueError(f'Unknown CMS section: {page_slug}/{section_slug}')
+    return {
+        'title': section.sidebar_title or section.title,
+        'icon': section.sidebar_icon,
+        'link': reverse_lazy(f'admin:core_{section.admin_model_name}_changelist'),
+    }

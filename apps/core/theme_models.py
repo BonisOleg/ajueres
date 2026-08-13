@@ -88,6 +88,13 @@ class BlockStyle(FillStyleMixin):
         default='',
         help_text=_('Hex. Пусто = CSS по умолчанию'),
     )
+    bg_image = models.ImageField(
+        _('Фоновое изображение'),
+        upload_to='cms/section-bg/',
+        blank=True,
+        null=True,
+        help_text=_('Если задано — покрывает секцию. Цвет остаётся запасным фоном.'),
+    )
     override_button_fill = models.BooleanField(
         _('Override заливки кнопок в секции'),
         default=False,
@@ -140,10 +147,22 @@ class BlockStyle(FillStyleMixin):
         return f'{self.page}.{self.section_key}'
 
     def section_inline_style(self) -> str:
+        parts: list[str] = []
         bg = (self.bg_color or '').strip()
-        if not bg:
-            return ''
-        return f'background-color: {bg};'
+        if bg:
+            parts.append(f'background-color: {bg};')
+        image = self.bg_image
+        if image:
+            try:
+                url = image.url
+            except ValueError:
+                url = ''
+            if url:
+                parts.append(f'background-image: url("{url}");')
+                parts.append('background-size: cover;')
+                parts.append('background-position: center;')
+                parts.append('background-repeat: no-repeat;')
+        return ' '.join(parts)
 
     @classmethod
     def ensure_defaults(cls) -> int:

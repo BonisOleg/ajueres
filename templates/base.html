@@ -27,7 +27,13 @@
   <script src="{% static 'js/htmx.min.js' %}" defer></script>
   {% block extra_head %}{% endblock %}
 </head>
-<body class="page-shell" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+<body class="page-shell{% if button_preview %} page-shell--preview{% endif %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  {% if button_preview %}
+    <div class="preview-banner" role="status">
+      <span>{% trans 'Попередній перегляд стилю кнопки — не збережено.' %}</span>
+      <a class="preview-banner__exit" href="?clear_btn_preview=1">{% trans 'Вийти з перегляду' %}</a>
+    </div>
+  {% endif %}
   {% include "includes/header.html" %}
   <main class="site-main">
     {% block content %}{% endblock %}

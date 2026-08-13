@@ -6,10 +6,17 @@ from django import forms
 from django.contrib.admin.widgets import AdminTextareaWidget, AdminTextInputWidget
 
 try:
-    from unfold.widgets import INPUT_CLASSES, TEXTAREA_CLASSES
+    from unfold.widgets import (
+        INPUT_CLASSES,
+        TEXTAREA_CLASSES,
+        UnfoldAdminImageFieldWidget,
+    )
 except ImportError:  # pragma: no cover
+    from django.contrib.admin.widgets import AdminFileWidget
+
     INPUT_CLASSES = ['border', 'rounded-default', 'px-3', 'py-2', 'w-full']
     TEXTAREA_CLASSES = INPUT_CLASSES
+    UnfoldAdminImageFieldWidget = AdminFileWidget
 
 
 def cms_control_classes(base) -> list[str]:
@@ -35,6 +42,15 @@ class CmsAdminTextareaWidget(AdminTextareaWidget):
         if existing:
             merged = list(dict.fromkeys([*merged, *str(existing).split()]))
         attrs['class'] = ' '.join(merged)
+        super().__init__(attrs=attrs)
+
+
+class CmsAdminImageWidget(UnfoldAdminImageFieldWidget):
+    """Image upload with current-file preview (Unfold requires accept=image/*)."""
+
+    def __init__(self, attrs=None):
+        attrs = dict(attrs or {})
+        attrs.setdefault('accept', 'image/*')
         super().__init__(attrs=attrs)
 
 

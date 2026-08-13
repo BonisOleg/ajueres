@@ -5,12 +5,21 @@ from __future__ import annotations
 from django import forms
 from django.conf import settings
 from django.contrib import messages
+from django.core.exceptions import ValidationError
+from django.db import IntegrityError
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from .admin_site_content_widgets import CmsAdminTextareaWidget, CmsAdminTextInputWidget
+from .admin_utils import format_admin_save_error
+
+from .admin_site_content_widgets import (
+    CmsAdminImageWidget,
+    CmsAdminTextareaWidget,
+    CmsAdminTextInputWidget,
+    HexColorInputWidget,
+)
 from .block_defaults import (
     BLOCK_DEFAULTS,
     BLOCK_LABELS,
@@ -22,11 +31,11 @@ from .block_defaults import (
 from .models import BlockStyle, SiteBlock, SiteSettings
 from .selectors import invalidate_site_blocks_cache
 from .site_content_registry import get_section
+from .theme_fields import validate_hex_color
 
 try:
-    from unfold.widgets import UnfoldAdminFileFieldWidget, UnfoldBooleanWidget
+    from unfold.widgets import UnfoldBooleanWidget
 except ImportError:  # pragma: no cover
-    UnfoldAdminFileFieldWidget = forms.ClearableFileInput
     UnfoldBooleanWidget = forms.CheckboxInput
 
 CMS_LANGS = tuple(getattr(settings, 'MODELTRANSLATION_LANGUAGES', ('ru', 'uz', 'en')))
@@ -68,9 +77,10 @@ def load_section_blocks(section) -> dict[tuple[str, str], SiteBlock]:
 class SitePageContentForm(forms.Form):
     """Dynamically built from ContentSection.blocks (text fields × languages)."""
 
-    def __init__(self, section, blocks_map, *args, **kwargs):
+    def __init__(self, section, blocks_map, *args, style_obj=None, **kwargs):
         self.section = section
         self.blocks_map = blocks_map
+        self.style_obj = style_obj
         super().__init__(*args, **kwargs)
 
         if section.visibility_key:
@@ -101,11 +111,14 @@ class SitePageContentForm(forms.Form):
                     widget=UnfoldBooleanWidget(),
                 )
             elif btype == 'image':
-                self.fields[_field_name(page, key, 'image')] = forms.ImageField(
+                image_field = forms.ImageField(
                     label=label,
                     required=False,
-                    widget=UnfoldAdminFileFieldWidget(),
+                    widget=CmsAdminImageWidget(),
                 )
+                if block.image:
+                    image_field.initial = block.image
+                self.fields[_field_name(page, key, 'image')] = image_field
             else:
                 for lang in CMS_LANGS:
                     widget = (
@@ -125,6 +138,30 @@ class SitePageContentForm(forms.Form):
                         initial=initial or '',
                         widget=widget,
                     )
+
+        if style_obj is not None:
+            self.fields['style_bg_color'] = forms.CharField(
+                label=_('Цвет фона'),
+                required=False,
+                initial=style_obj.bg_color or '',
+                widget=HexColorInputWidget(),
+                help_text=_('Hex. Пусто — фон как в CSS сайта.'),
+            )
+            image_field = forms.ImageField(
+                label=_('Фоновое изображение'),
+                required=False,
+                widget=CmsAdminImageWidget(),
+                help_text=_('Картинка поверх цвета. Пусто — только цвет / дефолт.'),
+            )
+            if style_obj.bg_image:
+                image_field.initial = style_obj.bg_image
+            self.fields['style_bg_image'] = image_field
+
+    def clean_style_bg_color(self):
+        value = (self.cleaned_data.get('style_bg_color') or '').strip()
+        if value:
+            validate_hex_color(value, allow_blank=False)
+        return value
 
     def save(self):
         section = self.section
@@ -159,6 +196,9 @@ class SitePageContentForm(forms.Form):
                 if image:
                     block.image = image
                     block.save(update_fields=['image'])
+                elif image is False:
+                    block.image = None
+                    block.save(update_fields=['image'])
             else:
                 for lang in CMS_LANGS:
                     attr = f'text_html_{lang}'
@@ -167,6 +207,16 @@ class SitePageContentForm(forms.Form):
                 # Keep canonical text_html in sync with default language.
                 block.text_html = getattr(block, 'text_html_ru', '') or ''
                 block.save()
+
+        if self.style_obj is not None:
+            style = self.style_obj
+            style.bg_color = cleaned.get('style_bg_color') or ''
+            image = cleaned.get('style_bg_image')
+            if image:
+                style.bg_image = image
+            elif image is False:
+                style.bg_image = None
+            style.save()
 
         invalidate_site_blocks_cache(section.page_slug)
 
@@ -189,13 +239,23 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
         )
 
     if request.method == 'POST':
-        form = SitePageContentForm(section, blocks_map, request.POST, request.FILES)
+        form = SitePageContentForm(
+            section,
+            blocks_map,
+            request.POST,
+            request.FILES,
+            style_obj=style_obj,
+        )
         if form.is_valid():
-            form.save()
-            messages.success(request, _('Контент секции сохранён.'))
-            return HttpResponseRedirect(request.path)
+            try:
+                form.save()
+            except (ValidationError, IntegrityError, OSError, ValueError) as exc:
+                messages.error(request, format_admin_save_error(exc))
+            else:
+                messages.success(request, _('Контент секции сохранён.'))
+                return HttpResponseRedirect(request.path)
     else:
-        form = SitePageContentForm(section, blocks_map)
+        form = SitePageContentForm(section, blocks_map, style_obj=style_obj)
 
     style_url = ''
     if style_obj is not None:
@@ -240,6 +300,12 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
             }
         )
 
+    style_fields = []
+    for name in ('style_bg_color', 'style_bg_image'):
+        if name in form.fields:
+            style_fields.append(form[name])
+            used_names.add(name)
+
     leftover = [form[name] for name in form.fields if name not in used_names]
     if leftover:
         grouped_fields.append(
@@ -257,6 +323,7 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
         'section': section,
         'form': form,
         'grouped_fields': grouped_fields,
+        'style_fields': style_fields,
         'cms_langs': [
             {'code': lang, 'label': CMS_LANG_LABELS.get(lang, lang.upper())}
             for lang in CMS_LANGS

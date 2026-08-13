@@ -138,4 +138,69 @@ BLOCK_I18N: dict[tuple[str, str], dict[str, str]] = {
         'uz': 'Biz bilan bog‘laning',
         'en': 'Contact us',
     },
+    ('site', 'nav_home'): {
+        'ru': 'Главная',
+        'uz': 'Bosh sahifa',
+        'en': 'Home',
+    },
+    ('site', 'nav_catalog'): {
+        'ru': 'Каталог',
+        'uz': 'Katalog',
+        'en': 'Catalog',
+    },
+    ('site', 'nav_about'): {
+        'ru': 'О компании',
+        'uz': 'Kompaniya haqida',
+        'en': 'About',
+    },
+    ('site', 'nav_contacts'): {
+        'ru': 'Контакты',
+        'uz': 'Aloqa',
+        'en': 'Contacts',
+    },
+    ('site', 'nav_mega_label'): {
+        'ru': 'Категории продуктов',
+        'uz': 'Mahsulot kategoriyalari',
+        'en': 'Product categories',
+    },
+    ('site', 'nav_mega_all'): {
+        'ru': 'Смотреть весь каталог',
+        'uz': 'Butun katalogni ko‘rish',
+        'en': 'View full catalog',
+    },
+    ('site', 'cta'): {
+        'ru': 'Связаться',
+        'uz': 'Bog‘lanish',
+        'en': 'Contact',
+    },
+    ('site', 'cta_mobile'): {
+        'ru': 'Связаться с нами',
+        'uz': 'Biz bilan bog‘laning',
+        'en': 'Contact us',
+    },
+    ('site', 'tagline'): {
+        'ru': 'Дистрибьютор продуктов питания в Республике Узбекистан',
+        'uz': 'O‘zbekiston Respublikasida oziq-ovqat mahsulotlari distribyutori',
+        'en': 'Food distributor in the Republic of Uzbekistan',
+    },
+    ('site', 'credit'): {
+        'ru': 'Разработано студией',
+        'uz': 'Studiya tomonidan ishlab chiqilgan',
+        'en': 'Designed by',
+    },
+    ('site', 'copyright'): {
+        'ru': 'Все права защищены.',
+        'uz': 'Barcha huquqlar himoyalangan.',
+        'en': 'All rights reserved.',
+    },
+    ('site', 'menu_label'): {
+        'ru': 'Меню',
+        'uz': 'Menyu',
+        'en': 'Menu',
+    },
+    ('site', 'contacts_label'): {
+        'ru': 'Контакты',
+        'uz': 'Aloqa',
+        'en': 'Contacts',
+    },
 }

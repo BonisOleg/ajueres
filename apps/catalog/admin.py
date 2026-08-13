@@ -4,15 +4,16 @@ from django.utils.html import format_html
 from modeltranslation.admin import TranslationTabularInline
 from unfold.admin import TabularInline
 
-from apps.core.admin_utils import UnfoldTranslationAdmin
+from apps.core.admin_utils import ImagePreviewMixin, UnfoldTranslationAdmin
 
 from .models import Brand, Category, Product, ProductFilter
 from .product_filter_defaults import FILTER_SLUGS, filter_icon_static_path
 
 
 @admin.register(Category)
-class CategoryAdmin(UnfoldTranslationAdmin):
-    list_display = ('name', 'slug', 'parent', 'order', 'is_active')
+class CategoryAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
+    list_display = ('name', 'slug', 'parent', 'order', 'is_active', 'get_image_preview')
+    readonly_fields = ('get_image_preview',)
     list_editable = ('order', 'is_active')
     list_filter = ('parent', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
@@ -27,10 +28,18 @@ class ProductInline(TabularInline, TranslationTabularInline):
     show_change_link = True
     tab = True
 
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        formfield = super().formfield_for_dbfield(db_field, request, **kwargs)
+        if formfield is not None and db_field.name == 'image':
+            formfield.widget.attrs.setdefault('accept', 'image/*')
+        return formfield
+
 
 @admin.register(Brand)
-class BrandAdmin(UnfoldTranslationAdmin):
-    list_display = ('name', 'slug', 'order', 'is_featured', 'is_active')
+class BrandAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
+    list_display = ('name', 'slug', 'order', 'is_featured', 'is_active', 'get_image_preview')
+    readonly_fields = ('get_image_preview',)
+    preview_field = 'logo'
     list_editable = ('order', 'is_featured', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ('name', 'slug')
@@ -67,8 +76,9 @@ class ProductFilterAdmin(UnfoldTranslationAdmin):
 
 
 @admin.register(Product)
-class ProductAdmin(UnfoldTranslationAdmin):
+class ProductAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
     list_display = (
+        'get_image_preview',
         'name',
         'brand',
         'category',
@@ -77,7 +87,9 @@ class ProductAdmin(UnfoldTranslationAdmin):
         'order',
         'is_active',
     )
+    readonly_fields = ('get_image_preview',)
     list_filter = ('brand', 'category', 'is_active', 'extra_filters')
+    list_display_links = ('name',)
     list_editable = ('order', 'is_active')
     search_fields = ('name', 'package', 'brand__name', 'search_text')
     prepopulated_fields = {'slug': ('name', 'package')}

@@ -57,8 +57,22 @@
 
   <form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
-    {% if form.non_field_errors %}
-      <div class="text-red-600">{{ form.non_field_errors }}</div>
+    {% if form.errors %}
+      <div class="admin-save-error" role="alert">
+        <p class="admin-save-error__title">Не удалось сохранить. Исправьте ошибки:</p>
+        <ul class="admin-save-error__list">
+          {% for field in form %}
+            {% if field.errors %}
+              {% for error in field.errors %}
+                <li>{{ field.label }}: {{ error }}</li>
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
     {% endif %}
 
     {% if form.section_visible %}
@@ -113,6 +127,27 @@
         {% endif %}
       </fieldset>
     {% endfor %}
+
+    {% if style_fields %}
+      <fieldset class="site-content-editor__fieldset border border-base-200 dark:border-base-700 rounded-default shadow-sm dark:bg-base-900 p-4 md:p-5">
+        <h2 class="site-content-editor__fieldset-title text-font-important-light dark:text-font-important-dark font-semibold">
+          Фон секции
+        </h2>
+        <p class="text-font-subtle-light dark:text-font-subtle-dark text-sm">
+          Цвет или картинка. Пустые поля — вид сайта по умолчанию.
+        </p>
+        {% for field in style_fields %}
+          <div class="site-content-editor__field">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+              <p class="text-font-subtle-light dark:text-font-subtle-dark text-sm">{{ field.help_text }}</p>
+            {% endif %}
+            {% if field.errors %}<div class="text-red-600">{{ field.errors }}</div>{% endif %}
+          </div>
+        {% endfor %}
+      </fieldset>
+    {% endif %}
 
     <div class="site-content-editor__actions">
       <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white rounded-default px-4 py-2">

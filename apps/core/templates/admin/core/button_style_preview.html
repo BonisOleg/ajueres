@@ -1,15 +1,26 @@
 {% load i18n %}
 {% if original %}
-  <div class="button-style-preview">
+  <div class="button-style-preview"
+       data-button-preview-root
+       data-site-home-url="{% url 'home' %}"
+       data-role="{{ original.role }}">
     <p class="button-style-preview__label">{% trans 'Так кнопка виглядає на сайті' %}</p>
     <span class="button-style-preview__btn{% if original.role == 'secondary' %} button-style-preview__btn--ghost{% endif %}"
+          data-button-preview-sample
           style="background: {{ original.as_css_background }}">
       {% trans 'Кнопка' %}
     </span>
-    {% if original.is_site_default %}
-      <p class="button-style-preview__hint">{% trans 'Зараз — вигляд сайту (дефолт).' %}</p>
-    {% else %}
-      <p class="button-style-preview__hint">{% trans 'Змінено. «Сбросить к виду сайта» поверне дефолт.' %}</p>
-    {% endif %}
+    <p class="button-style-preview__hint" data-button-preview-hint>
+      {% if original.is_site_default %}
+        {% trans 'Зараз — вигляд сайту (дефолт). Зміни в формі одразу видно тут.' %}
+      {% else %}
+        {% trans 'Змінено. «Сбросить к виду сайта» поверне дефолт.' %}
+      {% endif %}
+    </p>
+    <button type="button"
+            class="button-style-preview__open"
+            data-button-preview="1">
+      {% trans 'Попередній перегляд на сайті' %}
+    </button>
   </div>
 {% endif %}
