@@ -262,8 +262,8 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
             for lang in CMS_LANGS
         ],
         'opts': model_admin.model._meta,
-        'has_view_permission': True,
-        'has_change_permission': True,
+        'has_view_permission': model_admin.has_view_permission(request),
+        'has_change_permission': model_admin.has_change_permission(request),
         'style_url': style_url,
         'media': form.media,
     }

@@ -27,9 +27,10 @@ def _catalog_preview():
     categories = list(catalog_selectors.get_categories()[:6])
     preview = []
     for index, category in enumerate(categories):
+        _, slugs = catalog_selectors.resolve_category_filter(category.slug)
         qs = Product.objects.filter(
             is_active=True,
-            category=category,
+            category__slug__in=slugs or [category.slug],
             brand__is_active=True,
         ).select_related('brand').order_by('order', 'name')
         products = list(qs[:4])

@@ -241,9 +241,27 @@
 }
 
 .contact-modal__body .form__error {
-  margin: 0;
+  margin: 4px 0 0;
   font-size: 0.75rem;
   color: #ff8f7a;
+}
+
+.contact-modal__body .form__input.is-invalid,
+.contact-modal__body .form__textarea.is-invalid {
+  border-color: #ff6b57;
+  box-shadow: 0 0 0 3px rgba(255, 107, 87, 0.22);
+  background: rgba(255, 90, 54, 0.1);
+}
+
+.contact-modal__body .form__input.is-invalid:focus,
+.contact-modal__body .form__textarea.is-invalid:focus {
+  border-color: #ff6b57;
+  box-shadow: 0 0 0 3px rgba(255, 107, 87, 0.28);
+}
+
+.contact-modal__body .form__submit.is-loading,
+.contact-modal__body .form__submit:disabled {
+  opacity: 0.72;
 }
 
 .contact-modal__body .btn {
@@ -360,5 +378,12 @@ body.modal-open {
   .contact-modal__body .form__textarea,
   .contact-modal__body .btn {
     transition: none;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .contact-modal__body .form__input,
+  .contact-modal__body .form__textarea {
+    font-size: 16px;
   }
 }

@@ -288,8 +288,11 @@
     if (!modal) return;
 
     var dialog = modal.querySelector('.contact-modal__dialog');
+    var formRoot = document.getElementById('contact-modal-form-root');
+    var formTemplate = formRoot ? formRoot.innerHTML : '';
     var lastTrigger = null;
     var closeTimer = 0;
+    var hideTimer = 0;
 
     function focusableNodes() {
       if (!dialog) return [];
@@ -302,9 +305,21 @@
       });
     }
 
+    function restoreFormIfNeeded() {
+      if (!formRoot || !formTemplate) return;
+      if (!formRoot.querySelector('.form-success')) return;
+      formRoot.innerHTML = formTemplate;
+      if (typeof window.AJERES_initContactForms === 'function') {
+        window.AJERES_initContactForms(formRoot);
+      }
+    }
+
     function openModal(trigger) {
       lastTrigger = trigger || null;
       window.clearTimeout(closeTimer);
+      window.clearTimeout(hideTimer);
+      restoreFormIfNeeded();
+      document.body.classList.remove('is-nav-open');
       modal.removeAttribute('hidden');
       modal.setAttribute('aria-hidden', 'false');
       modal.classList.add('is-open');
@@ -317,12 +332,15 @@
     }
 
     function closeModal() {
+      window.clearTimeout(closeTimer);
       modal.classList.remove('is-open');
       modal.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('modal-open');
-      window.setTimeout(function () {
+      window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(function () {
         if (!modal.classList.contains('is-open')) {
           modal.setAttribute('hidden', '');
+          restoreFormIfNeeded();
         }
       }, 280);
       if (lastTrigger) lastTrigger.focus();
@@ -342,6 +360,7 @@
       if (!modal.classList.contains('is-open')) return;
       if (evt.key === 'Escape') {
         evt.preventDefault();
+        evt.stopImmediatePropagation();
         closeModal();
         return;
       }
@@ -357,6 +376,13 @@
         evt.preventDefault();
         first.focus();
       }
+    });
+
+    document.body.addEventListener('htmx:afterSwap', function (evt) {
+      if (!evt.target || evt.target.id !== 'contact-modal-form-root') return;
+      if (!evt.target.querySelector('.form-success')) return;
+      window.clearTimeout(closeTimer);
+      closeTimer = window.setTimeout(closeModal, 2600);
     });
   }
 
@@ -595,22 +621,5 @@
     initLangSwitch();
     initMegaMenu();
     initHomeCatalog();
-  });
-
-  document.body.addEventListener('htmx:afterSwap', function (evt) {
-    if (evt.target && evt.target.id === 'contact-modal-form-root') {
-      if (evt.target.querySelector('.form-success')) {
-        window.setTimeout(function () {
-          var modal = document.getElementById('contact-modal');
-          if (!modal || !modal.classList.contains('is-open')) return;
-          modal.classList.remove('is-open');
-          modal.setAttribute('aria-hidden', 'true');
-          document.body.classList.remove('modal-open');
-          window.setTimeout(function () {
-            modal.setAttribute('hidden', '');
-          }, 280);
-        }, 2600);
-      }
-    }
   });
 })();

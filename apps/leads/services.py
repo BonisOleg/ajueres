@@ -8,15 +8,17 @@ from typing import Any
 
 from django.core.cache import cache
 from django.core.exceptions import ValidationError
-from django.core.validators import validate_email
-from django.utils import timezone
 from django.utils.translation import get_language
+from django.utils.translation import gettext as _
 
 from .models import ContactInquiry
 
-_PHONE_RE = re.compile(r'^[\d\s\+\-\(\)]+$')
 _RATE_LIMIT = 5
 _RATE_WINDOW_SECONDS = 60 * 60
+_EMAIL_RE = re.compile(
+    r'^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$',
+)
+_PHONE_DIGITS_RE = re.compile(r'^\d{12}$')
 
 
 class RateLimitExceeded(Exception):
@@ -55,7 +57,7 @@ def submit_contact_inquiry(
     )
 
     if ip_address:
-        _enforce_rate_limit(ip_address)
+        _check_and_bump_rate_limit(ip_address)
 
     lang = _resolve_language(language)
 
@@ -69,9 +71,6 @@ def submit_contact_inquiry(
         ip_address=ip_address or None,
     )
 
-    if ip_address:
-        _bump_rate_limit(ip_address)
-
     return ContactInquiryResult(inquiry=inquiry, skipped_honeypot=False)
 
 
@@ -79,28 +78,35 @@ def _validate_fields(**raw: Any) -> dict[str, str]:
     errors: dict[str, list[str]] = {}
 
     purpose = (raw.get('purpose') or '').strip()
-    if len(purpose) < 3:
-        errors.setdefault('purpose', []).append('Мінімум 3 символи.')
+    if len(purpose) < 5:
+        errors.setdefault('purpose', []).append(
+            _('Укажите цель обращения (минимум 5 символов).')
+        )
     elif len(purpose) > 2000:
-        errors.setdefault('purpose', []).append('Максимум 2000 символів.')
+        errors.setdefault('purpose', []).append(
+            _('Максимум 2000 символов.')
+        )
 
     name = (raw.get('name') or '').strip()
-    if len(name) < 2:
-        errors.setdefault('name', []).append('Мінімум 2 символи.')
+    if not _is_valid_name(name):
+        errors.setdefault('name', []).append(
+            _('Имя должно содержать только буквы и быть не короче 2 символов.')
+        )
     elif len(name) > 255:
-        errors.setdefault('name', []).append('Максимум 255 символів.')
+        errors.setdefault('name', []).append(_('Максимум 255 символов.'))
 
-    phone = (raw.get('phone') or '').strip()
-    if len(phone) < 5 or len(phone) > 64:
-        errors.setdefault('phone', []).append('Довжина телефону 5–64 символи.')
-    elif not _PHONE_RE.match(phone):
-        errors.setdefault('phone', []).append('Недопустимі символи в телефоні.')
+    phone_raw = (raw.get('phone') or '').strip()
+    phone = _normalize_uz_phone(phone_raw)
+    if phone is None:
+        errors.setdefault('phone', []).append(
+            _('Введите корректный номер телефона в формате +998 (XX) XXX-XX-XX.')
+        )
 
     email = (raw.get('email') or '').strip().lower()
-    try:
-        validate_email(email)
-    except ValidationError:
-        errors.setdefault('email', []).append('Некоректний email.')
+    if not email or not _EMAIL_RE.match(email):
+        errors.setdefault('email', []).append(
+            _('Введите корректный адрес электронной почты.')
+        )
 
     if errors:
         raise ValidationError(errors)
@@ -108,9 +114,33 @@ def _validate_fields(**raw: Any) -> dict[str, str]:
     return {
         'purpose': purpose,
         'name': name,
-        'phone': phone,
+        'phone': phone or '',
         'email': email,
     }
+
+
+def _is_valid_name(name: str) -> bool:
+    if len(name) < 2:
+        return False
+    has_letter = False
+    for ch in name:
+        if ch in ' -':
+            continue
+        if ch.isdigit() or not ch.isalpha():
+            return False
+        has_letter = True
+    return has_letter
+
+
+def _normalize_uz_phone(value: str) -> str | None:
+    """Повертає +998 (XX) XXX-XX-XX або None, якщо не 12 цифр з кодом 998."""
+    digits = re.sub(r'\D', '', value or '')
+    if not digits.startswith('998'):
+        return None
+    if not _PHONE_DIGITS_RE.match(digits):
+        return None
+    local = digits[3:]
+    return f'+998 ({local[:2]}) {local[2:5]}-{local[5:7]}-{local[7:9]}'
 
 
 def _resolve_language(language: str | None) -> str:
@@ -125,19 +155,15 @@ def _rate_limit_key(ip_address: str) -> str:
     return f'contact_rate:{ip_address}'
 
 
-def _enforce_rate_limit(ip_address: str) -> None:
-    data = cache.get(_rate_limit_key(ip_address)) or {'count': 0, 'started': None}
-    count = int(data.get('count') or 0)
-    if count >= _RATE_LIMIT:
-        raise RateLimitExceeded('Забагато заявок. Спробуйте пізніше.')
-
-
-def _bump_rate_limit(ip_address: str) -> None:
+def _check_and_bump_rate_limit(ip_address: str) -> None:
+    """Фіксоване вікно: cache.add задає TTL; далі incr без скидання таймера."""
     key = _rate_limit_key(ip_address)
-    data = cache.get(key) or {'count': 0, 'started': timezone.now().isoformat()}
-    count = int(data.get('count') or 0) + 1
-    cache.set(
-        key,
-        {'count': count, 'started': data.get('started')},
-        timeout=_RATE_WINDOW_SECONDS,
-    )
+    if cache.add(key, 1, timeout=_RATE_WINDOW_SECONDS):
+        return
+    try:
+        count = cache.incr(key)
+    except ValueError:
+        cache.set(key, 1, timeout=_RATE_WINDOW_SECONDS)
+        return
+    if count > _RATE_LIMIT:
+        raise RateLimitExceeded('Забагато заявок. Спробуйте пізніше.')

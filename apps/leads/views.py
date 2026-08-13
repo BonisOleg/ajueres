@@ -39,10 +39,9 @@ def _prepare_partner_offers(offers):
 
 
 def _client_ip(request) -> str | None:
-    forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
-    if forwarded:
-        return forwarded.split(',')[0].strip()
-    return request.META.get('REMOTE_ADDR')
+    # Не довіряємо X-Forwarded-For від клієнта (spoof → bypass rate-limit).
+    # Реальний IP має виставляти довірений reverse-proxy у REMOTE_ADDR.
+    return request.META.get('REMOTE_ADDR') or None
 
 
 @require_http_methods(['GET', 'POST'])

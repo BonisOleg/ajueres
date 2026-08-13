@@ -325,6 +325,24 @@ msgstr "you@company.com"
 #: templates/partials/contact_form.html:92
 msgid "Отправить"
 msgstr "Send"
+#: apps/leads/services.py
+msgid "Укажите цель обращения (минимум 5 символов)."
+msgstr "Please describe the purpose of your request (at least 5 characters)."
+#: apps/leads/services.py
+msgid "Имя должно содержать только буквы и быть не короче 2 символов."
+msgstr "Name must contain only letters and be at least 2 characters."
+#: apps/leads/services.py
+msgid "Введите корректный номер телефона в формате +998 (XX) XXX-XX-XX."
+msgstr "Enter a valid phone number in the format +998 (XX) XXX-XX-XX."
+#: apps/leads/services.py
+msgid "Введите корректный адрес электронной почты."
+msgstr "Enter a valid email address."
+#: apps/leads/services.py
+msgid "Максимум 2000 символов."
+msgstr "Maximum 2000 characters."
+#: apps/leads/services.py
+msgid "Максимум 255 символов."
+msgstr "Maximum 255 characters."
 #: templates/partials/contact_success.html:7
 msgid "Спасибо за обращение. Наш менеджер свяжется с вами в ближайшее время."
 msgstr "We will contact you shortly."

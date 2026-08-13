@@ -324,6 +324,24 @@ msgstr "you@company.com"
 #: templates/partials/contact_form.html:92
 msgid "Отправить"
 msgstr "Yuborish"
+#: apps/leads/services.py
+msgid "Укажите цель обращения (минимум 5 символов)."
+msgstr "Murojaat maqsadini kiriting (kamida 5 belgi)."
+#: apps/leads/services.py
+msgid "Имя должно содержать только буквы и быть не короче 2 символов."
+msgstr "Ism faqat harflardan iborat bo‘lishi va kamida 2 belgidan iborat bo‘lishi kerak."
+#: apps/leads/services.py
+msgid "Введите корректный номер телефона в формате +998 (XX) XXX-XX-XX."
+msgstr "Telefon raqamini +998 (XX) XXX-XX-XX formatida kiriting."
+#: apps/leads/services.py
+msgid "Введите корректный адрес электронной почты."
+msgstr "To‘g‘ri elektron pochta manzilini kiriting."
+#: apps/leads/services.py
+msgid "Максимум 2000 символов."
+msgstr "Eng ko‘pi 2000 belgi."
+#: apps/leads/services.py
+msgid "Максимум 255 символов."
+msgstr "Eng ko‘pi 255 belgi."
 #: templates/partials/contact_success.html:7
 msgid "Спасибо за обращение. Наш менеджер свяжется с вами в ближайшее время."
 msgstr "Tez orada siz bilan bog‘lanamiz."

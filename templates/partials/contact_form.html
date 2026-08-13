@@ -2,13 +2,19 @@
 <form class="form"
       method="post"
       action="{% url 'contacts' %}"
+      novalidate
+      data-contact-form
+      data-msg-purpose="{% trans 'Укажите цель обращения (минимум 5 символов).' %}"
+      data-msg-name="{% trans 'Имя должно содержать только буквы и быть не короче 2 символов.' %}"
+      data-msg-phone="{% trans 'Введите корректный номер телефона в формате +998 (XX) XXX-XX-XX.' %}"
+      data-msg-email="{% trans 'Введите корректный адрес электронной почты.' %}"
       hx-post="{% url 'contacts' %}"
       hx-target="#{{ form_root_id|default:'contact-form-root' }}"
       hx-swap="innerHTML">
   {% csrf_token %}
 
   {% if form_errors.non_field %}
-    <p class="form__error">{{ form_errors.non_field }}</p>
+    <p class="form__error form__error--global" role="alert">{{ form_errors.non_field }}</p>
   {% endif %}
 
   <div class="form__honeypot" aria-hidden="true">
@@ -21,15 +27,24 @@
       {% trans 'С какой целью обращаетесь' %} <span class="req" aria-hidden="true">*</span>
     </label>
     <textarea
-      class="form__textarea"
+      class="form__textarea{% if form_errors.purpose %} is-invalid{% endif %}"
       name="purpose"
       id="{% if form_prefix %}id_{{ form_prefix }}_purpose{% else %}id_purpose{% endif %}"
-      required
+      data-field="purpose"
       maxlength="2000"
       rows="{% if form_compact %}2{% else %}3{% endif %}"
+      aria-required="true"
+      aria-invalid="{% if form_errors.purpose %}true{% else %}false{% endif %}"
+      aria-describedby="{% if form_prefix %}id_{{ form_prefix }}_purpose_error{% else %}id_purpose_error{% endif %}"
       placeholder="{% trans 'Например: интересует оптовый прайс на соусы и лапшу' %}"
     >{{ form_data.purpose }}</textarea>
-    {% if form_errors.purpose %}<p class="form__error">{{ form_errors.purpose }}</p>{% endif %}
+    <p
+      class="form__error"
+      id="{% if form_prefix %}id_{{ form_prefix }}_purpose_error{% else %}id_purpose_error{% endif %}"
+      data-error-for="purpose"
+      {% if not form_errors.purpose %}hidden{% endif %}
+      role="alert"
+    >{{ form_errors.purpose }}</p>
   </div>
 
   <div class="form__field">
@@ -37,16 +52,26 @@
       {% trans 'Имя' %} <span class="req" aria-hidden="true">*</span>
     </label>
     <input
-      class="form__input"
+      class="form__input{% if form_errors.name %} is-invalid{% endif %}"
       type="text"
       name="name"
       id="{% if form_prefix %}id_{{ form_prefix }}_name{% else %}id_name{% endif %}"
-      required
+      data-field="name"
       maxlength="255"
+      aria-required="true"
+      aria-invalid="{% if form_errors.name %}true{% else %}false{% endif %}"
+      aria-describedby="{% if form_prefix %}id_{{ form_prefix }}_name_error{% else %}id_name_error{% endif %}"
       placeholder="{% trans 'Ваше имя' %}"
       value="{{ form_data.name }}"
+      autocomplete="name"
     >
-    {% if form_errors.name %}<p class="form__error">{{ form_errors.name }}</p>{% endif %}
+    <p
+      class="form__error"
+      id="{% if form_prefix %}id_{{ form_prefix }}_name_error{% else %}id_name_error{% endif %}"
+      data-error-for="name"
+      {% if not form_errors.name %}hidden{% endif %}
+      role="alert"
+    >{{ form_errors.name }}</p>
   </div>
 
   <div class="form__row">
@@ -55,18 +80,28 @@
         {% trans 'Телефон' %} <span class="req" aria-hidden="true">*</span>
       </label>
       <input
-        class="form__input"
+        class="form__input{% if form_errors.phone %} is-invalid{% endif %}"
         type="tel"
         name="phone"
         id="{% if form_prefix %}id_{{ form_prefix }}_phone{% else %}id_phone{% endif %}"
-        required
-        maxlength="64"
+        data-field="phone"
+        data-phone-mask
+        maxlength="20"
         value="{{ form_data.phone }}"
         inputmode="tel"
         autocomplete="tel"
-        placeholder="+998 __ ___ __ __"
+        aria-required="true"
+        aria-invalid="{% if form_errors.phone %}true{% else %}false{% endif %}"
+        aria-describedby="{% if form_prefix %}id_{{ form_prefix }}_phone_error{% else %}id_phone_error{% endif %}"
+        placeholder="+998 (__) ___-__-__"
       >
-      {% if form_errors.phone %}<p class="form__error">{{ form_errors.phone }}</p>{% endif %}
+      <p
+        class="form__error"
+        id="{% if form_prefix %}id_{{ form_prefix }}_phone_error{% else %}id_phone_error{% endif %}"
+        data-error-for="phone"
+        {% if not form_errors.phone %}hidden{% endif %}
+        role="alert"
+      >{{ form_errors.phone }}</p>
     </div>
 
     <div class="form__field">
@@ -74,22 +109,32 @@
         {% trans 'Электронная почта' %} <span class="req" aria-hidden="true">*</span>
       </label>
       <input
-        class="form__input"
+        class="form__input{% if form_errors.email %} is-invalid{% endif %}"
         type="email"
         name="email"
         id="{% if form_prefix %}id_{{ form_prefix }}_email{% else %}id_email{% endif %}"
-        required
+        data-field="email"
         maxlength="254"
         value="{{ form_data.email }}"
         autocomplete="email"
+        aria-required="true"
+        aria-invalid="{% if form_errors.email %}true{% else %}false{% endif %}"
+        aria-describedby="{% if form_prefix %}id_{{ form_prefix }}_email_error{% else %}id_email_error{% endif %}"
         placeholder="{% trans 'you@company.com' %}"
       >
-      {% if form_errors.email %}<p class="form__error">{{ form_errors.email }}</p>{% endif %}
+      <p
+        class="form__error"
+        id="{% if form_prefix %}id_{{ form_prefix }}_email_error{% else %}id_email_error{% endif %}"
+        data-error-for="email"
+        {% if not form_errors.email %}hidden{% endif %}
+        role="alert"
+      >{{ form_errors.email }}</p>
     </div>
   </div>
 
   <button class="btn btn--primary btn--block form__submit" type="submit" {% btn_style "modal" page="site" section_key="modal" %}>
-    {% trans 'Отправить' %}
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    <span class="form__submit-label">{% trans 'Отправить' %}</span>
+    <span class="form__submit-spinner" hidden aria-hidden="true"></span>
+    <svg class="form__submit-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
   </button>
 </form>

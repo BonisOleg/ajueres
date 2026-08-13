@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 
 from csp.constants import NONE, SELF, UNSAFE_INLINE
+from django.core.exceptions import ImproperlyConfigured
 from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
 
@@ -14,8 +15,13 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY') or get_random_secret_key()
-DEBUG = os.environ.get('DEBUG', 'True').lower() in ('1', 'true', 'yes')
+DEBUG = os.environ.get('DEBUG', 'False').lower() in ('1', 'true', 'yes')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = get_random_secret_key()
+    else:
+        raise ImproperlyConfigured('SECRET_KEY environment variable is required')
 
 # Non-default admin path (security through obscurity). Override via ADMIN_URL.
 _ADMIN_SLUG = (os.environ.get('ADMIN_URL') or 'f7YG0XG1JUr0iUzF').strip().strip('/')
@@ -38,6 +44,10 @@ CSRF_TRUSTED_ORIGINS = [
     for o in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
     if o.strip()
 ]
+if not DEBUG and not CSRF_TRUSTED_ORIGINS:
+    raise ImproperlyConfigured(
+        'CSRF_TRUSTED_ORIGINS is required when DEBUG is False'
+    )
 
 INSTALLED_APPS = [
     'unfold',

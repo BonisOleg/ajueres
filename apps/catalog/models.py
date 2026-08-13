@@ -187,7 +187,7 @@ class Product(TimeStampedModel):
         category = self.category if self.category_id else None
         parts = [
             *_translated_values(self, _SEARCH_TRANSLATED_FIELDS),
-            brand.name if brand else '',
+            *_translated_values(brand, ('name',)),
             *_translated_values(category, ('name',)),
         ]
         return build_search_text(parts)

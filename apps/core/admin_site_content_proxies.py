@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from django.contrib import admin
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -19,9 +20,11 @@ class SiteContentSectionAdmin(SingletonModelAdminMixin, ModelAdmin):
     section_slug: str = ''
 
     def has_module_permission(self, request):
-        return request.user.is_staff
+        return self.has_view_permission(request) or self.has_change_permission(request)
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
+        if not self.has_change_permission(request):
+            raise PermissionDenied
         return site_content_section_view(
             request,
             self.page_slug,

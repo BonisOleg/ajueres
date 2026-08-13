@@ -123,7 +123,8 @@
     border-color 0.22s ease;
 }
 
-.contacts-request .form__submit svg {
+.contacts-request .form__submit svg,
+.contacts-request .form__submit-icon {
   width: 16px;
   height: 16px;
 }
@@ -370,5 +371,12 @@
 
   .contacts-map__iframe {
     height: 320px;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .contacts-request .form__input,
+  .contacts-request .form__textarea {
+    font-size: 16px;
   }
 }

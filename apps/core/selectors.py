@@ -149,7 +149,7 @@ def get_button_styles() -> dict[str, SiteButtonStyle]:
     cached = cache.get(_CACHE_BUTTONS)
     if cached is not None:
         return cached
-    SiteButtonStyle.ensure_defaults()
+    # Defaults лише в seed_site / admin — не INSERT на публічних запитах.
     styles = {obj.role: obj for obj in SiteButtonStyle.objects.all()}
     cache.set(_CACHE_BUTTONS, styles, timeout=_CACHE_THEME_TTL)
     return styles
