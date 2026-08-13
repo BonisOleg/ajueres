@@ -12,7 +12,7 @@ from django.utils.html import format_html
 from modeltranslation.admin import TabbedTranslationAdmin
 from unfold.admin import ModelAdmin
 
-from .admin_site_content_widgets import apply_readable_widget
+from .admin_site_content_widgets import CmsAdminImageWidget, apply_readable_widget
 
 _SAVE_ERRORS = (ValidationError, IntegrityError, ProtectedError, RestrictedError)
 
@@ -35,13 +35,35 @@ def format_admin_save_error(exc: BaseException) -> str:
 
 
 class ImageAcceptMixin:
-    """Unfold image preview requires accept=image/* on the file widget."""
+    """Every ImageField uses a preview widget (uploaded file or fallback URL)."""
 
     def formfield_for_dbfield(self, db_field, request, **kwargs):
+        if isinstance(db_field, models.ImageField):
+            kwargs.setdefault('widget', CmsAdminImageWidget())
         formfield = super().formfield_for_dbfield(db_field, request, **kwargs)
         if formfield is not None and isinstance(db_field, models.ImageField):
+            if not isinstance(formfield.widget, CmsAdminImageWidget):
+                formfield.widget = CmsAdminImageWidget(
+                    attrs=getattr(formfield.widget, 'attrs', None),
+                )
             formfield.widget.attrs.setdefault('accept', 'image/*')
         return formfield
+
+    def get_image_fallback_urls(self, obj) -> dict:
+        return {}
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        if obj is None:
+            return form
+        for name, url in self.get_image_fallback_urls(obj).items():
+            field = form.base_fields.get(name)
+            if field is None or not url:
+                continue
+            widget = field.widget
+            if isinstance(widget, CmsAdminImageWidget):
+                widget.preview_url = url
+        return form
 
 
 class SaveErrorMessageMixin:
@@ -102,16 +124,20 @@ class ImagePreviewMixin:
     preview_field = 'image'
     preview_max_height = 80
 
+    def get_preview_fallback_url(self, obj) -> str:
+        urls = self.get_image_fallback_urls(obj) if hasattr(self, 'get_image_fallback_urls') else {}
+        return urls.get(self.preview_field, '') or ''
+
     def get_image_preview(self, obj):
+        from .admin_site_content_widgets import file_preview_url
+
         field = getattr(obj, self.preview_field, None)
-        if not field:
-            return '—'
-        try:
-            url = field.url
-        except ValueError:
+        url = file_preview_url(field) or self.get_preview_fallback_url(obj)
+        if not url:
             return '—'
         return format_html(
-            '<img src="{}" alt="" style="max-height:{}px;width:auto;border-radius:6px;">',
+            '<img src="{}" alt="" class="admin-image-preview__thumb" '
+            'style="max-height:{}px;width:auto;border-radius:6px;">',
             url,
             self.preview_max_height,
         )

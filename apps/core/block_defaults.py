@@ -144,6 +144,11 @@ BLOCK_CONTENT_TYPES: dict[tuple[str, str], BlockType] = {
     ('about', 'side_image'): 'image',
 }
 
+# static path shown in admin (and on site) until a file is uploaded
+IMAGE_FALLBACKS: dict[tuple[str, str], str] = {
+    ('home', 'hero_image'): 'img/hero-samarkand.png',
+}
+
 INLINE_KEYS = frozenset(
     {
         'hero_eyebrow',

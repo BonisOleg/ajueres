@@ -4,7 +4,8 @@ from django.utils.html import format_html
 from modeltranslation.admin import TranslationTabularInline
 from unfold.admin import TabularInline
 
-from apps.core.admin_utils import ImagePreviewMixin, UnfoldTranslationAdmin
+from apps.core.admin_utils import ImageAcceptMixin, ImagePreviewMixin, UnfoldTranslationAdmin
+from apps.core.templatetags.ajeres_tags import product_image_url
 
 from .models import Brand, Category, Product, ProductFilter
 from .product_filter_defaults import FILTER_SLUGS, filter_icon_static_path
@@ -21,18 +22,12 @@ class CategoryAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
     autocomplete_fields = ('parent',)
 
 
-class ProductInline(TabularInline, TranslationTabularInline):
+class ProductInline(ImageAcceptMixin, TabularInline, TranslationTabularInline):
     model = Product
     extra = 0
     fields = ('name', 'package', 'category', 'image', 'order', 'is_active')
     show_change_link = True
     tab = True
-
-    def formfield_for_dbfield(self, db_field, request, **kwargs):
-        formfield = super().formfield_for_dbfield(db_field, request, **kwargs)
-        if formfield is not None and db_field.name == 'image':
-            formfield.widget.attrs.setdefault('accept', 'image/*')
-        return formfield
 
 
 @admin.register(Brand)
@@ -47,7 +42,8 @@ class BrandAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
 
 
 @admin.register(ProductFilter)
-class ProductFilterAdmin(UnfoldTranslationAdmin):
+class ProductFilterAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
+    preview_field = 'icon'
     list_display = ('icon_preview', 'name', 'slug', 'order', 'is_active')
     list_display_links = ('name',)
     list_editable = ('order', 'is_active')
@@ -73,6 +69,11 @@ class ProductFilterAdmin(UnfoldTranslationAdmin):
             'background:#111;border-radius:50%;">',
             url,
         )
+
+    def get_image_fallback_urls(self, obj):
+        if obj.slug in FILTER_SLUGS:
+            return {'icon': static(filter_icon_static_path(obj.slug))}
+        return {}
 
 
 @admin.register(Product)
@@ -128,6 +129,9 @@ class ProductAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.prefetch_related('extra_filters')
+
+    def get_image_fallback_urls(self, obj):
+        return {'image': product_image_url(obj) or ''}
 
     @admin.display(description='Фильтры')
     def extra_filters_preview(self, obj):

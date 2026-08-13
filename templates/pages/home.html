@@ -17,9 +17,10 @@
 {% block content %}
 <section class="home-hero" {% section_style "home" "hero" %}>
   <div class="home-hero__bg" aria-hidden="true">
+    {% block_image blocks "hero_image" as hero_img %}
     <img
       class="home-hero__img"
-      src="{% static 'img/hero-samarkand.png' %}"
+      src="{% if hero_img %}{{ hero_img.url }}{% else %}{% static 'img/hero-samarkand.png' %}{% endif %}"
       alt=""
       width="1024"
       height="439"

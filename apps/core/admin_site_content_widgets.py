@@ -45,13 +45,31 @@ class CmsAdminTextareaWidget(AdminTextareaWidget):
         super().__init__(attrs=attrs)
 
 
-class CmsAdminImageWidget(UnfoldAdminImageFieldWidget):
-    """Image upload with current-file preview (Unfold requires accept=image/*)."""
+def file_preview_url(value) -> str:
+    if not value:
+        return ''
+    try:
+        return value.url or ''
+    except (AttributeError, ValueError):
+        return ''
 
-    def __init__(self, attrs=None):
+
+class CmsAdminImageWidget(UnfoldAdminImageFieldWidget):
+    """Image upload with a visible preview (uploaded file or static fallback)."""
+
+    template_name = 'admin/widgets/cms_image.html'
+
+    def __init__(self, attrs=None, preview_url=''):
         attrs = dict(attrs or {})
         attrs.setdefault('accept', 'image/*')
+        self.preview_url = preview_url or ''
         super().__init__(attrs=attrs)
+
+    def get_context(self, name, value, attrs):
+        ctx = super().get_context(name, value, attrs)
+        url = file_preview_url(value) or self.preview_url
+        ctx['widget']['preview_url'] = url
+        return ctx
 
 
 class HexColorInputWidget(forms.TextInput):

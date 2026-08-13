@@ -298,3 +298,53 @@ class ProductFilterSelectorsTests(TestCase):
         self.assertRegex(html, r'id="catalog-features"[^>]*\bhidden\b')
         self.assertNotIn('catalog-feature__icon', html)
 
+
+class CatalogAdminImagePreviewTests(TestCase):
+    def setUp(self):
+        from django.contrib.auth import get_user_model
+        from django.urls import reverse
+
+        self.reverse = reverse
+        User = get_user_model()
+        self.user = User.objects.create_superuser(
+            'owner',
+            'owner@ajeres.uz',
+            'OldPass123!',
+        )
+        self.client.force_login(self.user)
+
+    def test_filter_icon_shows_static_fallback_preview(self):
+        ensure_product_filters()
+        filt = ProductFilter.objects.get(slug='natural')
+        response = self.client.get(
+            self.reverse('admin:catalog_productfilter_change', args=[filt.pk]),
+        )
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode()
+        self.assertIn('img/product-filters/natural.png', content)
+        self.assertIn('admin-image-preview', content)
+
+    def test_product_change_form_has_image_preview_widget(self):
+        cat = Category.objects.create(slug='sauces', name='Соусы')
+        brand = Brand.objects.create(
+            slug='sen-soy',
+            name='Sen Soy',
+            logo=_tiny_png(),
+        )
+        product = Product.objects.create(
+            brand=brand,
+            category=cat,
+            slug='sauce-preview',
+            name='Соус',
+            name_ru='Соус',
+            package='235 гр.',
+            image=_tiny_png(),
+        )
+        response = self.client.get(
+            self.reverse('admin:catalog_product_change', args=[product.pk]),
+        )
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode()
+        self.assertIn('admin-image-preview', content)
+        self.assertIn('accept="image/*"', content)
+

@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
+from django.templatetags.static import static
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -19,10 +20,12 @@ from .admin_site_content_widgets import (
     CmsAdminTextareaWidget,
     CmsAdminTextInputWidget,
     HexColorInputWidget,
+    file_preview_url,
 )
 from .block_defaults import (
     BLOCK_DEFAULTS,
     BLOCK_LABELS,
+    IMAGE_FALLBACKS,
     INLINE_KEYS,
     MULTILINE_KEYS,
     block_type,
@@ -111,10 +114,14 @@ class SitePageContentForm(forms.Form):
                     widget=UnfoldBooleanWidget(),
                 )
             elif btype == 'image':
+                fallback = IMAGE_FALLBACKS.get((page, key), '')
+                preview = file_preview_url(block.image)
+                if not preview and fallback:
+                    preview = static(fallback)
                 image_field = forms.ImageField(
                     label=label,
                     required=False,
-                    widget=CmsAdminImageWidget(),
+                    widget=CmsAdminImageWidget(preview_url=preview),
                 )
                 if block.image:
                     image_field.initial = block.image
@@ -150,7 +157,9 @@ class SitePageContentForm(forms.Form):
             image_field = forms.ImageField(
                 label=_('Фоновое изображение'),
                 required=False,
-                widget=CmsAdminImageWidget(),
+                widget=CmsAdminImageWidget(
+                    preview_url=file_preview_url(style_obj.bg_image),
+                ),
                 help_text=_('Картинка поверх цвета. Пусто — только цвет / дефолт.'),
             )
             if style_obj.bg_image:

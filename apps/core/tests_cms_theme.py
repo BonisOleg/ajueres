@@ -257,6 +257,34 @@ class HeaderFooterCmsTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, block.image.url)
         self.assertContains(response, 'accept="image/*"')
+        self.assertContains(response, 'admin-image-preview')
+
+    def test_hero_empty_shows_static_fallback_preview(self):
+        from apps.core.models import SiteBlock
+
+        SiteBlock.objects.filter(page='home', key='hero_image').delete()
+        response = self.client.get(
+            reverse('admin:core_homeherosettings_changelist'),
+            follow=True,
+        )
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode()
+        self.assertIn('img/hero-samarkand.png', content)
+        self.assertIn('admin-image-preview', content)
+
+    def test_home_uses_uploaded_hero_image(self):
+        from django.core.files.uploadedfile import SimpleUploadedFile
+
+        from apps.core.models import SiteBlock
+
+        block, _ = SiteBlock.objects.get_or_create(page='home', key='hero_image')
+        block.image.save(
+            'hero-live.png',
+            SimpleUploadedFile('hero-live.png', _PNG, content_type='image/png'),
+            save=True,
+        )
+        response = self.client.get(reverse('home'))
+        self.assertContains(response, block.image.url)
 
     def test_invalid_save_shows_error_text(self):
         change_url = reverse('admin:core_siteheadersettings_change', args=[1])

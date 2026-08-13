@@ -99,7 +99,8 @@ html.dark .admin-save-error {
   max-width: 18rem;
 }
 
-.site-content-editor .max-w-48 img {
+.site-content-editor .max-w-48 img,
+.site-content-editor .admin-image-preview__img {
   display: block;
   width: 100%;
   height: auto;

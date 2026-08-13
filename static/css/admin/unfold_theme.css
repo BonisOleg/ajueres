@@ -277,3 +277,42 @@ html.dark .admin-save-error {
 .button-style-preview__open:focus-visible {
   background: var(--color-primary-600, #db3f1c);
 }
+
+.admin-image-preview {
+  margin: 0 0 0.75rem;
+  max-width: 22rem;
+}
+
+.admin-image-preview a {
+  display: block;
+}
+
+.admin-image-preview__img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 12rem;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background: #f4efe8;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.admin-image-preview__thumb {
+  display: block;
+  object-fit: contain;
+}
+
+@media (max-width: 767px) {
+  .admin-image-preview {
+    max-width: 100%;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .admin-image-preview__img {
+    max-height: 10rem;
+  }
+}
