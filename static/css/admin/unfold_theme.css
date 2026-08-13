@@ -10,7 +10,13 @@
   --admin-blue-soft: #e2eaff;
 }
 
-.admin-brand-logo,
+.admin-brand-logo {
+  display: flex;
+  align-items: center;
+  flex: none;
+  line-height: 0;
+}
+
 .admin-brand-logo img {
   display: block;
   height: 40px;

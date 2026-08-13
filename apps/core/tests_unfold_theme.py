@@ -37,8 +37,7 @@ class UnfoldThemeConfigTests(SimpleTestCase):
 
     def test_logo_and_favicons_point_to_mark(self):
         logo = site_logo()
-        self.assertIn('favicon.png', logo['light'])
-        self.assertEqual(logo['light'], logo['dark'])
+        self.assertIn('favicon.png', logo)
         hrefs = [item['href'] for item in site_favicons()]
         self.assertTrue(any('favicon.png' in href for href in hrefs))
         self.assertTrue(admin_styles().endswith('css/admin/unfold_theme.css'))
@@ -62,7 +61,8 @@ class UnfoldAdminBrandingTests(TestCase):
         self.assertIn('img/icons/favicon.png', content)
         self.assertIn('css/admin/unfold_theme.css', content)
         self.assertIn('js/admin/unfold_default_light.js', content)
-        self.assertIn('admin-brand-logo', content)
+        self.assertEqual(content.count('class="admin-brand-logo"'), 1)
+        self.assertEqual(content.count('src="/static/img/icons/favicon.png"'), 1)
         self.assertIn('admin-theme-switch', content)
         self.assertNotIn('AJERES — Админ-панель', content)
         self.assertIn('--color-primary-500: rgb(255, 90, 54)', content)

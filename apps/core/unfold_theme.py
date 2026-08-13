@@ -76,12 +76,11 @@ def unfold_colors(request: HttpRequest | None = None) -> dict[str, dict[str, str
     return {name: dict(weights) for name, weights in UNFOLD_COLORS.items()}
 
 
-def site_logo(request: HttpRequest | None = None) -> dict[str, str]:
-    url = static(_LOGO_MARK)
-    return {'light': url, 'dark': url}
+def site_logo(request: HttpRequest | None = None) -> str:
+    return static(_LOGO_MARK)
 
 
-def site_icon(request: HttpRequest | None = None) -> dict[str, str]:
+def site_icon(request: HttpRequest | None = None) -> str:
     return site_logo(request)
 
 

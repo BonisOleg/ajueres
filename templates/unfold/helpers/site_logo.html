@@ -1,10 +1,5 @@
 {% load i18n %}
 
 <a href="{% url "admin:index" %}" class="admin-brand-logo">
-    {% if site_logo.light and site_logo.dark %}
-        <img src="{{ site_logo.dark }}" alt="{% trans 'Home' %}" class="hidden dark:block"/>
-        <img src="{{ site_logo.light }}" alt="{% trans 'Home' %}" class="block dark:hidden" />
-    {% else %}
-        <img src="{{ site_logo }}" alt="{% trans 'Home' %}" />
-    {% endif %}
+    <img src="{{ site_logo }}" alt="{% trans 'Home' %}" width="40" height="40">
 </a>
