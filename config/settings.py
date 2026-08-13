@@ -4,6 +4,7 @@ Env-based config ready for DigitalOcean App Platform / Droplet.
 """
 
 import os
+import sys
 from pathlib import Path
 
 from csp.constants import NONE, SELF, UNSAFE_INLINE
@@ -15,10 +16,21 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+IS_VERCEL = os.environ.get('VERCEL') == '1'
+
+
+def _is_management_command(*names: str) -> bool:
+    args = [a for a in sys.argv[1:] if not a.startswith('-')]
+    return bool(args) and args[0] in names
+
+
+_IS_BUILD_CMD = _is_management_command('collectstatic', 'check')
+
 DEBUG = os.environ.get('DEBUG', 'False').lower() in ('1', 'true', 'yes')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 if not SECRET_KEY:
-    if DEBUG:
+    # collectstatic on Vercel has no runtime secrets; Droplet still requires SECRET_KEY.
+    if DEBUG or IS_VERCEL or _IS_BUILD_CMD:
         SECRET_KEY = get_random_secret_key()
     else:
         raise ImproperlyConfigured('SECRET_KEY environment variable is required')
@@ -44,7 +56,15 @@ CSRF_TRUSTED_ORIGINS = [
     for o in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
     if o.strip()
 ]
-if not DEBUG and not CSRF_TRUSTED_ORIGINS:
+if IS_VERCEL and not CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS = ['https://*.vercel.app']
+    _vercel_url = os.environ.get('VERCEL_URL', '').strip()
+    _vercel_prod = os.environ.get('VERCEL_PROJECT_PRODUCTION_URL', '').strip()
+    if _vercel_url:
+        CSRF_TRUSTED_ORIGINS.append(f'https://{_vercel_url}')
+    if _vercel_prod:
+        CSRF_TRUSTED_ORIGINS.append(f'https://{_vercel_prod}')
+if not DEBUG and not CSRF_TRUSTED_ORIGINS and not _IS_BUILD_CMD:
     raise ImproperlyConfigured(
         'CSRF_TRUSTED_ORIGINS is required when DEBUG is False'
     )
@@ -159,8 +179,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-IS_VERCEL = os.environ.get('VERCEL') == '1'
 
 DATABASE_URL = os.environ.get('DATABASE_URL', '').strip()
 if DATABASE_URL.startswith('postgres'):
