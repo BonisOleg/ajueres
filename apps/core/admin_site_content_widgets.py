@@ -39,11 +39,12 @@ class CmsAdminTextareaWidget(AdminTextareaWidget):
 
 
 class HexColorInputWidget(forms.TextInput):
-    """Text hex field + native color picker (synced via small inline script)."""
+    """Hex field + circular picker; optional HSV wheel for any color."""
 
     template_name = 'admin/widgets/hex_color.html'
 
-    def __init__(self, attrs=None):
+    def __init__(self, attrs=None, *, show_wheel=False):
+        self.show_wheel = show_wheel
         attrs = dict(attrs or {})
         attrs.setdefault('maxlength', '7')
         attrs.setdefault('placeholder', '#FF5A36')
@@ -51,6 +52,11 @@ class HexColorInputWidget(forms.TextInput):
         classes = cms_control_classes(INPUT_CLASSES)
         attrs['class'] = ' '.join([*classes, 'hex-color-input__text'])
         super().__init__(attrs=attrs)
+
+    def get_context(self, name, value, attrs):
+        ctx = super().get_context(name, value, attrs)
+        ctx['widget']['show_wheel'] = self.show_wheel
+        return ctx
 
     class Media:
         css = {'all': ('css/admin/hex_color.css',)}

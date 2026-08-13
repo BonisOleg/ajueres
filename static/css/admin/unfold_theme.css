@@ -127,3 +127,40 @@ html.dark .admin-theme-switch__item:hover {
     transform: translateZ(0);
   }
 }
+
+.button-style-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin-bottom: 0.25rem;
+}
+
+.button-style-preview__label,
+.button-style-preview__hint {
+  margin: 0;
+  color: var(--color-base-600, #3d4757);
+}
+
+.button-style-preview__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow:
+    0 14px 32px rgba(255, 90, 54, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+.button-style-preview__btn--ghost {
+  color: #1b1712;
+  border: 1px solid rgba(27, 23, 18, 0.14);
+  box-shadow:
+    0 10px 24px rgba(20, 36, 64, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}

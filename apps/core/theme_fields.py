@@ -21,8 +21,40 @@ DEFAULT_ACCENT = '#ff5a36'
 DEFAULT_ACCENT_INK = '#db3f1c'
 DEFAULT_ACCENT_SOFT = '#fff0ea'
 DEFAULT_GRADIENT_START = '#ff7a52'
-DEFAULT_GRADIENT_END = '#e04822'
+DEFAULT_GRADIENT_END = '#db3f1c'
 DEFAULT_GRADIENT_ANGLE = 145
+
+# Site button look (.btn--primary / .btn--ghost). Reset target in admin.
+BUTTON_STYLE_DEFAULTS = {
+    'primary': {
+        'fill_type': FILL_GRADIENT,
+        'solid_color': DEFAULT_ACCENT,
+        'gradient_start': DEFAULT_GRADIENT_START,
+        'gradient_end': DEFAULT_GRADIENT_END,
+        'gradient_angle': DEFAULT_GRADIENT_ANGLE,
+    },
+    'secondary': {
+        'fill_type': FILL_SOLID,
+        'solid_color': '#ffffff',
+        'gradient_start': '#ffffff',
+        'gradient_end': '#f3f3f3',
+        'gradient_angle': 180,
+    },
+    'header': {
+        'fill_type': FILL_GRADIENT,
+        'solid_color': DEFAULT_ACCENT,
+        'gradient_start': DEFAULT_GRADIENT_START,
+        'gradient_end': DEFAULT_GRADIENT_END,
+        'gradient_angle': DEFAULT_GRADIENT_ANGLE,
+    },
+    'modal': {
+        'fill_type': FILL_GRADIENT,
+        'solid_color': DEFAULT_ACCENT,
+        'gradient_start': DEFAULT_GRADIENT_START,
+        'gradient_end': DEFAULT_GRADIENT_END,
+        'gradient_angle': DEFAULT_GRADIENT_ANGLE,
+    },
+}
 
 BUTTON_ROLES = (
     ('primary', _('Primary (основная CTA)')),
@@ -87,6 +119,11 @@ def fill_css_background(
         start = normalize_hex(gradient_start) or DEFAULT_GRADIENT_START
         end = normalize_hex(gradient_end) or DEFAULT_GRADIENT_END
         angle = gradient_angle if gradient_angle is not None else DEFAULT_GRADIENT_ANGLE
+        if start == DEFAULT_GRADIENT_START and end == DEFAULT_GRADIENT_END:
+            return (
+                f'linear-gradient({int(angle)}deg, {start} 0%, '
+                f'{DEFAULT_ACCENT} 48%, {end} 100%)'
+            )
         return f'linear-gradient({int(angle)}deg, {start} 0%, {end} 100%)'
     solid = normalize_hex(solid_color)
     if solid:

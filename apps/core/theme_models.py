@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .theme_fields import (
     BUTTON_ROLES,
-    DEFAULT_ACCENT,
+    BUTTON_STYLE_DEFAULTS,
     DEFAULT_GRADIENT_ANGLE,
     DEFAULT_GRADIENT_END,
     DEFAULT_GRADIENT_START,
@@ -53,40 +53,23 @@ class SiteButtonStyle(FillStyleMixin):
         cache.delete(_CACHE_BUTTONS)
         return result
 
+    def apply_site_default(self) -> None:
+        payload = BUTTON_STYLE_DEFAULTS.get(self.role)
+        if not payload:
+            return
+        for field, value in payload.items():
+            setattr(self, field, value)
+
+    def is_site_default(self) -> bool:
+        payload = BUTTON_STYLE_DEFAULTS.get(self.role)
+        if not payload:
+            return False
+        return all(getattr(self, field) == value for field, value in payload.items())
+
     @classmethod
     def ensure_defaults(cls) -> list['SiteButtonStyle']:
-        defaults = {
-            'primary': {
-                'fill_type': FILL_GRADIENT,
-                'solid_color': DEFAULT_ACCENT,
-                'gradient_start': DEFAULT_GRADIENT_START,
-                'gradient_end': DEFAULT_GRADIENT_END,
-                'gradient_angle': DEFAULT_GRADIENT_ANGLE,
-            },
-            'secondary': {
-                'fill_type': 'solid',
-                'solid_color': '#ffffff',
-                'gradient_start': '#ffffff',
-                'gradient_end': '#f3f3f3',
-                'gradient_angle': 180,
-            },
-            'header': {
-                'fill_type': FILL_GRADIENT,
-                'solid_color': DEFAULT_ACCENT,
-                'gradient_start': DEFAULT_GRADIENT_START,
-                'gradient_end': DEFAULT_GRADIENT_END,
-                'gradient_angle': DEFAULT_GRADIENT_ANGLE,
-            },
-            'modal': {
-                'fill_type': FILL_GRADIENT,
-                'solid_color': DEFAULT_ACCENT,
-                'gradient_start': DEFAULT_GRADIENT_START,
-                'gradient_end': DEFAULT_GRADIENT_END,
-                'gradient_angle': DEFAULT_GRADIENT_ANGLE,
-            },
-        }
         result = []
-        for role, payload in defaults.items():
+        for role, payload in BUTTON_STYLE_DEFAULTS.items():
             obj, _ = cls.objects.get_or_create(role=role, defaults=payload)
             result.append(obj)
         return result

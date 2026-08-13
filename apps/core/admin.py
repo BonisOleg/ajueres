@@ -1,7 +1,11 @@
 """Django admin for core: Unfold + CMS proxies + theme styles + i18n tabs."""
 
-from django.contrib import admin
+from django.contrib import admin, messages
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.utils.html import format_html
+from unfold.decorators import action
+from unfold.enums import ActionVariant
 
 from .admin_site_content_proxies import register_site_content_section_admins
 from .admin_site_content_widgets import HexColorInputWidget
@@ -59,9 +63,13 @@ class SiteSettingsAdmin(
 
 @admin.register(SiteButtonStyle)
 class SiteButtonStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
-    list_display = ('role', 'fill_type', 'swatch', 'gradient_angle')
+    list_display = ('role', 'fill_type', 'swatch', 'is_default_display', 'gradient_angle')
     list_filter = ('fill_type',)
     ordering = ('role',)
+    actions = ('reset_selected_to_site_default',)
+    actions_detail = ('reset_to_site_default',)
+    actions_row = ('reset_to_site_default',)
+    change_form_before_template = 'admin/core/button_style_preview.html'
 
     fieldsets = (
         ('Роль', {'fields': ('role',)}),
@@ -75,6 +83,10 @@ class SiteButtonStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
                     'gradient_end',
                     'gradient_angle',
                 ),
+                'description': (
+                    'Дефолт = вид кнопок на сайте. Однотонный — любое цветное колесо. '
+                    '«Сбросить к виду сайта» откатывает правки.'
+                ),
             },
         ),
     )
@@ -86,7 +98,9 @@ class SiteButtonStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
         return False
 
     def formfield_for_dbfield(self, db_field, request, **kwargs):
-        if db_field.name in {'solid_color', 'gradient_start', 'gradient_end'}:
+        if db_field.name == 'solid_color':
+            kwargs['widget'] = HexColorInputWidget(show_wheel=True)
+        elif db_field.name in {'gradient_start', 'gradient_end'}:
             kwargs['widget'] = HexColorInputWidget()
         return super().formfield_for_dbfield(db_field, request, **kwargs)
 
@@ -94,14 +108,51 @@ class SiteButtonStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
     def swatch(self, obj):
         bg = obj.as_css_background(fallback='#ccc')
         return format_html(
-            '<span style="display:inline-block;width:48px;height:18px;'
-            'border-radius:4px;border:1px solid #444;background:{};"></span>',
+            '<span style="display:inline-block;width:28px;height:28px;'
+            'border-radius:50%;border:1px solid #c9c0b4;background:{};"></span>',
             bg,
         )
+
+    @admin.display(description='Вид сайта', boolean=True)
+    def is_default_display(self, obj):
+        return obj.is_site_default()
 
     def changelist_view(self, request, extra_context=None):
         SiteButtonStyle.ensure_defaults()
         return super().changelist_view(request, extra_context)
+
+    @admin.action(description='Сбросить к виду сайта')
+    def reset_selected_to_site_default(self, request, queryset):
+        count = 0
+        for obj in queryset:
+            obj.apply_site_default()
+            obj.save()
+            count += 1
+        self.message_user(
+            request,
+            f'Сброшено к виду сайта: {count}',
+            messages.SUCCESS,
+        )
+
+    @action(
+        description='Сбросить к виду сайта',
+        icon='restart_alt',
+        url_path='reset-to-site-default',
+        variant=ActionVariant.WARNING,
+    )
+    def reset_to_site_default(self, request, object_id):
+        obj = self.get_object(request, object_id)
+        if obj is None:
+            self.message_user(request, 'Стиль не найден.', messages.ERROR)
+            return HttpResponseRedirect(
+                reverse('admin:core_sitebuttonstyle_changelist')
+            )
+        obj.apply_site_default()
+        obj.save()
+        self.message_user(request, 'Стиль возвращён к виду сайта.', messages.SUCCESS)
+        return HttpResponseRedirect(
+            reverse('admin:core_sitebuttonstyle_change', args=[obj.pk])
+        )
 
 
 @admin.register(BlockStyle)

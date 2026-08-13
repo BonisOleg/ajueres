@@ -9,6 +9,9 @@ from .theme_fields import (
     DEFAULT_ACCENT,
     DEFAULT_ACCENT_INK,
     DEFAULT_ACCENT_SOFT,
+    DEFAULT_GRADIENT_ANGLE,
+    DEFAULT_GRADIENT_END,
+    DEFAULT_GRADIENT_START,
     fill_css_background,
 )
 
@@ -36,22 +39,22 @@ def build_theme_root_css(settings_obj, button_styles: dict) -> str:
     role_fallbacks = {
         'primary': fill_css_background(
             fill_type='gradient',
-            gradient_start='#ff7a52',
-            gradient_end=accent_ink or '#e04822',
-            gradient_angle=145,
+            gradient_start=DEFAULT_GRADIENT_START,
+            gradient_end=accent_ink or DEFAULT_GRADIENT_END,
+            gradient_angle=DEFAULT_GRADIENT_ANGLE,
         ),
         'secondary': '#ffffff',
         'header': fill_css_background(
             fill_type='gradient',
-            gradient_start='#ff7a52',
-            gradient_end=accent_ink or '#e04822',
-            gradient_angle=145,
+            gradient_start=DEFAULT_GRADIENT_START,
+            gradient_end=accent_ink or DEFAULT_GRADIENT_END,
+            gradient_angle=DEFAULT_GRADIENT_ANGLE,
         ),
         'modal': fill_css_background(
             fill_type='gradient',
-            gradient_start='#ff7a52',
-            gradient_end=accent_ink or '#e04822',
-            gradient_angle=145,
+            gradient_start=DEFAULT_GRADIENT_START,
+            gradient_end=accent_ink or DEFAULT_GRADIENT_END,
+            gradient_angle=DEFAULT_GRADIENT_ANGLE,
         ),
     }
 

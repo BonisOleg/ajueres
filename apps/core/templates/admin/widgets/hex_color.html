@@ -1,5 +1,15 @@
 {% load i18n %}
-<div class="hex-color-input">
+<div class="hex-color-input{% if widget.show_wheel %} hex-color-input--wheel{% endif %}">
+  {% if widget.show_wheel %}
+    <div class="hex-color-wheel" data-hex-color-wheel role="slider" aria-label="{% trans 'Колір: коло' %}" tabindex="0">
+      <span class="hex-color-wheel__disc" aria-hidden="true"></span>
+      <span class="hex-color-wheel__knob" data-hex-color-knob aria-hidden="true"></span>
+    </div>
+    <label class="hex-color-wheel__value">
+      <span>{% trans 'Яскравість' %}</span>
+      <input type="range" min="8" max="100" value="100" data-hex-color-value>
+    </label>
+  {% endif %}
   <input type="color"
          class="hex-color-input__picker"
          value="{% if widget.value %}{{ widget.value }}{% else %}#ff5a36{% endif %}"

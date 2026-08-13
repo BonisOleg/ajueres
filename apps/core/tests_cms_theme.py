@@ -1,11 +1,13 @@
 """Registry integrity tests for CMS content sections."""
 
+from django.contrib.auth import get_user_model
 from django.test import SimpleTestCase, TestCase
+from django.urls import reverse
 
 from apps.core.block_defaults import BLOCK_DEFAULTS
 from apps.core.cms_proxy_models import SECTION_PROXY_MODELS
 from apps.core.site_content_registry import CONTENT_SECTIONS, all_registry_block_keys
-from apps.core.theme_fields import validate_fill_payload
+from apps.core.theme_fields import fill_css_background, validate_fill_payload
 from apps.core.theme_models import BlockStyle, SiteButtonStyle
 
 
@@ -52,6 +54,15 @@ class ThemeValidationTests(SimpleTestCase):
         )
         self.assertEqual(errors, {})
 
+    def test_site_default_gradient_matches_front(self):
+        css = fill_css_background(
+            fill_type='gradient',
+            gradient_start='#ff7a52',
+            gradient_end='#db3f1c',
+            gradient_angle=145,
+        )
+        self.assertIn('#ff5a36 48%', css)
+
 
 class ThemeSeedTests(TestCase):
     def test_ensure_defaults(self):
@@ -61,8 +72,61 @@ class ThemeSeedTests(TestCase):
         self.assertGreaterEqual(BlockStyle.objects.count(), 19)
         self.assertGreaterEqual(created, 0)
 
+    def test_button_reset_returns_site_default(self):
+        SiteButtonStyle.ensure_defaults()
+        obj = SiteButtonStyle.objects.get(role='primary')
+        self.assertTrue(obj.is_site_default())
+        obj.fill_type = 'solid'
+        obj.solid_color = '#112233'
+        obj.save()
+        self.assertFalse(obj.is_site_default())
+        obj.apply_site_default()
+        obj.save()
+        obj.refresh_from_db()
+        self.assertTrue(obj.is_site_default())
+        self.assertEqual(obj.fill_type, 'gradient')
+        self.assertIn('#ff5a36', obj.as_css_background())
+
     def test_block_defaults_cover_registry(self):
         for page, key in all_registry_block_keys():
             if key.endswith('_image') or key.endswith('_visible'):
                 continue
             self.assertIn((page, key), BLOCK_DEFAULTS)
+
+
+class ButtonStyleAdminTests(TestCase):
+    def setUp(self):
+        User = get_user_model()
+        self.user = User.objects.create_superuser(
+            'owner',
+            'owner@ajeres.uz',
+            'OldPass123!',
+        )
+        self.client.force_login(self.user)
+        SiteButtonStyle.ensure_defaults()
+
+    def test_change_form_has_wheel_and_preview(self):
+        obj = SiteButtonStyle.objects.get(role='secondary')
+        response = self.client.get(
+            reverse('admin:core_sitebuttonstyle_change', args=[obj.pk])
+        )
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode()
+        self.assertIn('hex-color-wheel', content)
+        self.assertIn('button-style-preview', content)
+        self.assertIn('reset-to-site-default', content)
+
+    def test_reset_action_restores_default(self):
+        obj = SiteButtonStyle.objects.get(role='primary')
+        obj.fill_type = 'solid'
+        obj.solid_color = '#000000'
+        obj.save()
+        response = self.client.get(
+            reverse(
+                'admin:core_sitebuttonstyle_reset_to_site_default',
+                args=[obj.pk],
+            )
+        )
+        self.assertEqual(response.status_code, 302)
+        obj.refresh_from_db()
+        self.assertTrue(obj.is_site_default())

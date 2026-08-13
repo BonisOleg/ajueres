@@ -1,0 +1,15 @@
+{% load i18n %}
+{% if original %}
+  <div class="button-style-preview">
+    <p class="button-style-preview__label">{% trans 'Так кнопка виглядає на сайті' %}</p>
+    <span class="button-style-preview__btn{% if original.role == 'secondary' %} button-style-preview__btn--ghost{% endif %}"
+          style="background: {{ original.as_css_background }}">
+      {% trans 'Кнопка' %}
+    </span>
+    {% if original.is_site_default %}
+      <p class="button-style-preview__hint">{% trans 'Зараз — вигляд сайту (дефолт).' %}</p>
+    {% else %}
+      <p class="button-style-preview__hint">{% trans 'Змінено. «Сбросить к виду сайта» поверне дефолт.' %}</p>
+    {% endif %}
+  </div>
+{% endif %}
