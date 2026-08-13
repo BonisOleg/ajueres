@@ -1,5 +1,5 @@
 {% load i18n %}
 
-<a href="{% url "admin:index" %}" class="admin-brand-logo">
-    <img src="{{ site_logo }}" alt="{% trans 'Home' %}" width="40" height="40">
+<a href="{% url 'admin:index' %}" class="admin-brand-logo">
+    <img src="{% firstof site_logo.light site_logo %}" alt="{% trans 'Home' %}" width="40" height="40">
 </a>

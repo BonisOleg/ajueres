@@ -80,10 +80,6 @@ def site_logo(request: HttpRequest | None = None) -> str:
     return static(_LOGO_MARK)
 
 
-def site_icon(request: HttpRequest | None = None) -> str:
-    return site_logo(request)
-
-
 def site_favicons(request: HttpRequest | None = None) -> list[dict[str, str]]:
     return [
         {

@@ -27,7 +27,7 @@ class UnfoldThemeConfigTests(SimpleTestCase):
     def test_settings_wire_callables(self):
         unfold = settings.UNFOLD
         self.assertEqual(unfold['SITE_LOGO'], 'apps.core.unfold_theme.site_logo')
-        self.assertEqual(unfold['SITE_ICON'], 'apps.core.unfold_theme.site_icon')
+        self.assertNotIn('SITE_ICON', unfold)
         self.assertEqual(unfold['SITE_FAVICONS'], 'apps.core.unfold_theme.site_favicons')
         self.assertEqual(unfold['COLORS'], 'apps.core.unfold_theme.unfold_colors')
         self.assertNotIn('THEME', unfold)
@@ -62,7 +62,7 @@ class UnfoldAdminBrandingTests(TestCase):
         self.assertIn('css/admin/unfold_theme.css', content)
         self.assertIn('js/admin/unfold_default_light.js', content)
         self.assertEqual(content.count('class="admin-brand-logo"'), 1)
-        self.assertEqual(content.count('src="/static/img/icons/favicon.png"'), 1)
+        self.assertEqual(content.count('<img src="/static/img/icons/favicon.png"'), 1)
         self.assertIn('admin-theme-switch', content)
         self.assertNotIn('AJERES — Админ-панель', content)
         self.assertIn('--color-primary-500: rgb(255, 90, 54)', content)

@@ -101,7 +101,6 @@ UNFOLD = {
     'SITE_SYMBOL': 'storefront',
     'SITE_URL': '/',
     'SITE_LOGO': 'apps.core.unfold_theme.site_logo',
-    'SITE_ICON': 'apps.core.unfold_theme.site_icon',
     'SITE_FAVICONS': 'apps.core.unfold_theme.site_favicons',
     'BORDER_RADIUS': '10px',
     'COLORS': 'apps.core.unfold_theme.unfold_colors',
