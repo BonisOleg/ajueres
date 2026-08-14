@@ -469,29 +469,7 @@ BRAND_I18N = {
     ),
 }
 
-PRIVACY_DEFAULTS = {
-    'title': 'Политика приватности',
-    'title_ru': 'Политика приватности',
-    'title_uz': 'Maxfiylik siyosati',
-    'title_en': 'Privacy policy',
-    'body': (
-        'ООО «AJERES» обрабатывает персональные данные из формы обратной связи '
-        'только для ответа на обращение и организации сотрудничества. '
-        'Данные не передаются третьим лицам без законных оснований.'
-    ),
-    'body_ru': (
-        'ООО «AJERES» обрабатывает персональные данные из формы обратной связи '
-        'только для ответа на обращение и организации сотрудничества.'
-    ),
-    'body_uz': (
-        '"AJERES" MChJ aloqa formasidagi shaxsiy ma’lumotlarni faqat murojaatga '
-        'javob berish va hamkorlikni tashkil etish uchun qayta ishlaydi.'
-    ),
-    'body_en': (
-        'AJERES LLC processes contact-form personal data only to respond to '
-        'inquiries and arrange cooperation.'
-    ),
-}
+from apps.core.legal_defaults import OFFER_DEFAULTS, PRIVACY_DEFAULTS  # noqa: F401
 
 # Local files live in <project>/content/logos/ (supplier pack).
 BRAND_LOGOS_DIR = Path(__file__).resolve().parents[2] / 'content' / 'logos'
@@ -522,3 +500,17 @@ RETAIL_PARTNERS_SPEC = [
     ('galmart', 'Galmart', 'galmart.png', 7),
     ('carrefour', 'Carrefour', 'carrefour.png', 8),
 ]
+
+STATIC_BRAND_LOGOS_DIR = Path(__file__).resolve().parents[2] / 'static' / 'img' / 'brands'
+STATIC_RETAIL_LOGOS_DIR = Path(__file__).resolve().parents[2] / 'static' / 'img' / 'partners'
+
+BRAND_LOGO_STATIC = {
+    slug: f'img/brands/{logo_file}'
+    for slug, _name, logo_file, _order, _featured in BRANDS_SPEC
+    if logo_file
+}
+RETAIL_LOGO_STATIC = {
+    slug: f'img/partners/{logo_file}'
+    for slug, _name, logo_file, _order in RETAIL_PARTNERS_SPEC
+    if logo_file
+}

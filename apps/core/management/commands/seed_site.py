@@ -21,6 +21,8 @@ from apps.core.import_content_data import (
     BRAND_I18N,
     BRAND_LOGOS_DIR,
     BRANDS_SPEC,
+    STATIC_BRAND_LOGOS_DIR,
+    STATIC_RETAIL_LOGOS_DIR,
     CATEGORIES,
     INACTIVE_CATEGORY_SLUGS,
     PARTNER_ROWS,
@@ -33,7 +35,6 @@ from apps.core.models import (
     AboutSection,
     Advantage,
     CompanyStat,
-    LegalDocument,
     PartnerOffer,
     RetailPartner,
     SiteBlock,
@@ -386,27 +387,24 @@ class Command(BaseCommand):
             partner.name = name
             partner.order = order
             partner.is_active = True
-            path = RETAIL_LOGOS_DIR / logo_file
-            if path.is_file():
+            path = self._logo_source(
+                RETAIL_LOGOS_DIR, STATIC_RETAIL_LOGOS_DIR, logo_file
+            )
+            if path is not None:
                 partner.logo.save(
                     logo_file, ContentFile(path.read_bytes()), save=False
                 )
             partner.save()
 
     def _privacy(self):
-        LegalDocument.objects.get_or_create(
-            slug='privacy',
-            defaults={
-                'title': 'Политика приватности',
-                'body': (
-                    'ООО «AJERES» обрабатывает персональные данные, переданные '
-                    'через форму обратной связи, исключительно для ответа на '
-                    'обращение и организации сотрудничества.\n\n'
-                    'Мы не передаём данные третьим лицам без законных оснований '
-                    'и принимаем меры для защиты информации.'
-                ),
-            },
+        from apps.core.legal_defaults import (
+            OFFER_DEFAULTS,
+            PRIVACY_DEFAULTS,
+            ensure_legal_document,
         )
+
+        ensure_legal_document('privacy', PRIVACY_DEFAULTS)
+        ensure_legal_document('offer', OFFER_DEFAULTS)
 
     def _ensure_image(self, field_file, filename: str):
         if field_file and getattr(field_file, 'name', None):
@@ -452,11 +450,20 @@ class Command(BaseCommand):
             )
             product.image.save(safe_name, ContentFile(path.read_bytes()), save=False)
 
+    def _logo_source(
+        self, content_dir: Path, static_dir: Path, logo_file: str
+    ) -> Path | None:
+        for directory in (content_dir, static_dir):
+            path = directory / logo_file
+            if path.is_file() and path.stat().st_size > 2000:
+                return path
+        return None
+
     def _ensure_brand_logo(self, brand: Brand, logo_file: str | None, force: bool = False):
         if not logo_file:
             return
-        path = BRAND_LOGOS_DIR / logo_file
-        if not path.is_file():
+        path = self._logo_source(BRAND_LOGOS_DIR, STATIC_BRAND_LOGOS_DIR, logo_file)
+        if path is None:
             if force or not brand.logo:
                 self._ensure_image(brand.logo, f'{brand.slug}.png')
             return

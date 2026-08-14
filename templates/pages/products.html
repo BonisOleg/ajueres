@@ -95,8 +95,9 @@
     <div class="catalog-brands__track">
       {% for brand in brands_showcase %}
         <a class="catalog-brands__card" href="{% url 'products' %}?brand={{ brand.slug }}">
-          {% if brand.logo %}
-            <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" loading="lazy" width="180" height="100">
+          {% brand_logo_url brand as brand_img %}
+          {% if brand_img %}
+            <img src="{{ brand_img }}" alt="{{ brand.name }}" loading="lazy" width="180" height="100">
           {% else %}
             <span>{{ brand.name }}</span>
           {% endif %}
@@ -104,8 +105,9 @@
       {% endfor %}
       {% for brand in brands_showcase %}
         <a class="catalog-brands__card" href="{% url 'products' %}?brand={{ brand.slug }}" aria-hidden="true" tabindex="-1">
-          {% if brand.logo %}
-            <img src="{{ brand.logo.url }}" alt="" loading="lazy" width="180" height="100">
+          {% brand_logo_url brand as brand_img %}
+          {% if brand_img %}
+            <img src="{{ brand_img }}" alt="" loading="lazy" width="180" height="100">
           {% else %}
             <span>{{ brand.name }}</span>
           {% endif %}

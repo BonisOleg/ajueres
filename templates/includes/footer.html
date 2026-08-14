@@ -64,6 +64,17 @@
             <span class="site-footer__contact--static">{{ site_settings.address|break_before_street }}</span>
           {% endif %}
         </div>
+        {% if legal_items %}
+          <nav class="site-footer__legal" aria-label="{% trans 'Правовая информация' %}">
+            {% for item in legal_items %}
+              <a
+                class="site-footer__legal-link{% if request.resolver_match.url_name == item.url_name %} is-active{% endif %}"
+                href="{% url item.url_name %}"
+                {% if request.resolver_match.url_name == item.url_name %}aria-current="page"{% endif %}
+              >{{ item.label }}</a>
+            {% endfor %}
+          </nav>
+        {% endif %}
       </div>
     </div>
   </div>

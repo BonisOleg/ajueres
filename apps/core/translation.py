@@ -25,7 +25,7 @@ class SiteBlockTranslationOptions(TranslationOptions):
 
 @register(LegalDocument)
 class LegalDocumentTranslationOptions(TranslationOptions):
-    fields = ('title', 'body')
+    fields = ('title', 'body', 'requisites')
 
 
 @register(Advantage)

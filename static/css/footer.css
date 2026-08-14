@@ -222,6 +222,29 @@
   font-size: 0.875rem;
 }
 
+.site-footer__legal {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.site-footer__legal-link {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  font-weight: 500;
+  color: var(--foot-mut);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-footer__legal-link:hover,
+.site-footer__legal-link:focus-visible,
+.site-footer__legal-link.is-active {
+  color: var(--foot-fg);
+}
+
 @media (max-width: 959px) {
   .site-footer {
     padding: clamp(14px, 2vw, 22px) 0 calc(10px + var(--safe-b));
@@ -245,7 +268,8 @@
   }
 
   /* Mobile: no footer nav — burger menu covers it */
-  .site-footer__col--menu {
+  .site-footer__col--menu,
+  .site-footer__legal {
     display: none;
   }
 

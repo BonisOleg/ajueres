@@ -7,8 +7,10 @@ from django.utils.html import format_html
 from unfold.decorators import action
 from unfold.enums import ActionVariant
 
+from apps.core.templatetags.ajeres_tags import partner_logo_url
+
 from .admin_site_content_proxies import register_site_content_section_admins
-from .admin_site_content_widgets import HexColorInputWidget
+from .admin_site_content_widgets import CmsAdminTextareaWidget, HexColorInputWidget
 from .admin_utils import (
     ImagePreviewMixin,
     ReadableUnfoldFieldsMixin,
@@ -269,7 +271,48 @@ class BlockStyleAdmin(ReadableUnfoldFieldsMixin, ModelAdmin):
 @admin.register(LegalDocument)
 class LegalDocumentAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
     list_display = ('slug', 'title', 'updated_at')
+    list_filter = ('slug',)
     prepopulated_fields = {'slug': ('title',)}
+    fieldsets = (
+        (
+            'Заголовок',
+            {'fields': ('slug', 'title')},
+        ),
+        (
+            'Текст',
+            {
+                'fields': ('body',),
+                'description': 'Полный текст страницы. Языковые вкладки — RU / UZ / EN.',
+            },
+        ),
+        (
+            'Реквизиты',
+            {
+                'fields': ('requisites',),
+                'description': (
+                    'Показываются внизу публичной оферты. '
+                    'Можно оставить пустым и заполнить позже (ИНН, р/с, банк, адрес).'
+                ),
+            },
+        ),
+    )
+
+    def get_readonly_fields(self, request, obj=None):
+        readonly = list(super().get_readonly_fields(request, obj))
+        if obj:
+            return [*readonly, 'slug']
+        return readonly
+
+    def get_prepopulated_fields(self, request, obj=None):
+        if obj:
+            return {}
+        return super().get_prepopulated_fields(request, obj)
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        if db_field.name in {'body', 'requisites'}:
+            rows = 22 if db_field.name == 'body' else 10
+            kwargs['widget'] = CmsAdminTextareaWidget(attrs={'rows': rows})
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
 
 
 @admin.register(Advantage)
@@ -309,6 +352,9 @@ class RetailPartnerAdmin(
     search_fields = ('name', 'slug')
     readonly_fields = ('get_image_preview',)
     preview_field = 'logo'
+
+    def get_image_fallback_urls(self, obj):
+        return {'logo': partner_logo_url(obj) or ''}
 
 
 @admin.register(CaseStudy)

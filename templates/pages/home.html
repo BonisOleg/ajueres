@@ -193,8 +193,9 @@
     <div class="home-brands__track">
       {% for partner in retail_partners %}
         <div class="home-brands__card">
-          {% if partner.logo %}
-            <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" loading="lazy" width="180" height="100">
+          {% partner_logo_url partner as partner_img %}
+          {% if partner_img %}
+            <img src="{{ partner_img }}" alt="{{ partner.name }}" loading="lazy" width="180" height="100">
           {% else %}
             <span>{{ partner.name }}</span>
           {% endif %}
@@ -202,8 +203,9 @@
       {% endfor %}
       {% for brand in brand_showcase %}
         <div class="home-brands__card">
-          {% if brand.logo %}
-            <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" loading="lazy" width="180" height="100">
+          {% brand_logo_url brand as brand_img %}
+          {% if brand_img %}
+            <img src="{{ brand_img }}" alt="{{ brand.name }}" loading="lazy" width="180" height="100">
           {% else %}
             <span>{{ brand.name }}</span>
           {% endif %}
@@ -211,8 +213,9 @@
       {% endfor %}
       {% for partner in retail_partners %}
         <div class="home-brands__card" aria-hidden="true">
-          {% if partner.logo %}
-            <img src="{{ partner.logo.url }}" alt="" loading="lazy" width="180" height="100">
+          {% partner_logo_url partner as partner_img %}
+          {% if partner_img %}
+            <img src="{{ partner_img }}" alt="" loading="lazy" width="180" height="100">
           {% else %}
             <span>{{ partner.name }}</span>
           {% endif %}
@@ -220,8 +223,9 @@
       {% endfor %}
       {% for brand in brand_showcase %}
         <div class="home-brands__card" aria-hidden="true">
-          {% if brand.logo %}
-            <img src="{{ brand.logo.url }}" alt="" loading="lazy" width="180" height="100">
+          {% brand_logo_url brand as brand_img %}
+          {% if brand_img %}
+            <img src="{{ brand_img }}" alt="" loading="lazy" width="180" height="100">
           {% else %}
             <span>{{ brand.name }}</span>
           {% endif %}

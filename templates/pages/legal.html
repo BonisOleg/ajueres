@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{{ document.title }} — AJERES{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/contacts.css' %}">
+<link rel="stylesheet" href="{% static 'css/legal.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="contacts-hero legal-hero" aria-labelledby="legal-title">
+  <div class="contacts-hero__bg" aria-hidden="true"></div>
+  <div class="contacts-hero__fade" aria-hidden="true"></div>
+  <div class="contacts-hero__inner">
+    {% include "includes/breadcrumbs.html" with page="legal" current_label=document.title %}
+    <h1 class="contacts-hero__title" id="legal-title">{{ document.title }}</h1>
+  </div>
+</section>
+
+<article class="legal-page">
+  <div class="legal-page__inner">
+    <div class="legal-page__body">{{ document.body|linebreaksbr }}</div>
+    {% if legal_slug == 'offer' %}
+      <section class="legal-page__requisites" aria-labelledby="legal-requisites-title">
+        <h2 class="legal-page__requisites-title" id="legal-requisites-title">{% trans 'Реквизиты' %}</h2>
+        {% if document.requisites %}
+          <div class="legal-page__requisites-body">{{ document.requisites|linebreaksbr }}</div>
+        {% else %}
+          <p class="legal-page__requisites-placeholder">
+            {% trans 'ИНН, расчётный счёт, банк и юридический адрес можно указать в админке.' %}
+          </p>
+        {% endif %}
+      </section>
+    {% endif %}
+  </div>
+</article>
+{% endblock %}

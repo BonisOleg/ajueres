@@ -5,7 +5,7 @@ from modeltranslation.admin import TranslationTabularInline
 from unfold.admin import TabularInline
 
 from apps.core.admin_utils import ImageAcceptMixin, ImagePreviewMixin, UnfoldTranslationAdmin
-from apps.core.templatetags.ajeres_tags import product_image_url
+from apps.core.templatetags.ajeres_tags import brand_logo_url, product_image_url
 
 from .models import Brand, Category, Product, ProductFilter
 from .product_filter_defaults import FILTER_SLUGS, filter_icon_static_path
@@ -39,6 +39,9 @@ class BrandAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ('name', 'slug')
     inlines = (ProductInline,)
+
+    def get_image_fallback_urls(self, obj):
+        return {'logo': brand_logo_url(obj) or ''}
 
 
 @admin.register(ProductFilter)

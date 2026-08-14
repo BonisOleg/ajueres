@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 
 from apps.catalog import selectors as catalog_selectors
@@ -145,5 +146,24 @@ def about(request):
             'sections': sections,
             'stats': stats,
             **presentation,
+        },
+    )
+
+
+_LEGAL_SLUGS = frozenset({'privacy', 'offer'})
+
+
+def legal_document(request, slug):
+    if slug not in _LEGAL_SLUGS:
+        raise Http404()
+    document = selectors.get_legal_document(slug)
+    if document is None or not (document.body or '').strip():
+        raise Http404()
+    return render(
+        request,
+        'pages/legal.html',
+        {
+            'document': document,
+            'legal_slug': slug,
         },
     )

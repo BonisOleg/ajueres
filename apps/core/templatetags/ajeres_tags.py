@@ -11,6 +11,7 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import check_for_language
 
+from apps.core.import_content_data import BRAND_LOGO_STATIC, RETAIL_LOGO_STATIC
 from apps.core.selectors import get_block_image, get_block_text
 from apps.core.theme_css import button_style_attr, section_style_attr
 from apps.catalog.product_filter_defaults import FILTER_SLUGS, filter_icon_static_path
@@ -60,6 +61,35 @@ def product_image_url(product):
         except ValueError:
             return ''
     return ''
+
+
+def _media_file_url(field) -> str:
+    if not field:
+        return ''
+    try:
+        return field.url or ''
+    except ValueError:
+        return ''
+
+
+@register.simple_tag
+def brand_logo_url(brand):
+    """Static brand logo (Vercel-safe), else uploaded media."""
+    slug = getattr(brand, 'slug', '') or ''
+    static_path = BRAND_LOGO_STATIC.get(slug)
+    if static_path:
+        return static(static_path)
+    return _media_file_url(getattr(brand, 'logo', None))
+
+
+@register.simple_tag
+def partner_logo_url(partner):
+    """Static retail-partner logo (Vercel-safe), else uploaded media."""
+    slug = getattr(partner, 'slug', '') or ''
+    static_path = RETAIL_LOGO_STATIC.get(slug)
+    if static_path:
+        return static(static_path)
+    return _media_file_url(getattr(partner, 'logo', None))
 
 
 @register.simple_tag(takes_context=True)

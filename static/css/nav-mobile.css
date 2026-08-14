@@ -314,6 +314,34 @@
   color: #fff;
 }
 
+.nav-mobile__legal {
+  display: none;
+}
+
+@media (max-width: 959px) {
+  .nav-mobile__legal {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 4px 4px;
+  }
+
+  .nav-mobile__legal a {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    font-weight: 500;
+    color: #5a6575;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-mobile__legal a:hover,
+  .nav-mobile__legal a:focus-visible,
+  .nav-mobile__legal a.is-active {
+    color: var(--ink, #1b1712);
+  }
+}
+
 body.is-nav-open {
   overflow: hidden;
   touch-action: none;

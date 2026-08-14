@@ -108,11 +108,16 @@ class SiteBlock(models.Model):
 
 
 class LegalDocument(TimeStampedModel):
-    """Правові документи. За картою — лише політика приватності."""
+    """Правові документи: privacy і offer."""
 
     slug = models.SlugField('Slug', max_length=64, unique=True)
     title = models.CharField('Заголовок', max_length=255)
     body = models.TextField('Текст', blank=True)
+    requisites = models.TextField(
+        'Реквизиты',
+        blank=True,
+        help_text='Блок внизу публичной оферты. Можно заполнить позже.',
+    )
 
     class Meta:
         verbose_name = 'Правовой документ'

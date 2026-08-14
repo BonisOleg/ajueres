@@ -3,11 +3,13 @@ from django.utils.translation import get_language
 from apps.catalog import selectors as catalog_selectors
 
 from .button_preview import overlay_button_styles
+from .legal_defaults import LEGAL_FALLBACK_TITLES
 from .selectors import (
     get_block_styles,
     get_block_text,
     get_blocks,
     get_button_styles,
+    get_legal_document,
     get_site_settings,
 )
 from .theme_css import build_theme_root_css
@@ -57,4 +59,18 @@ def site_context(request):
             },
         ),
         'nav_categories': list(catalog_selectors.get_categories()[:6]),
+        'legal_items': _legal_items(lang),
     }
+
+
+def _legal_items(lang: str):
+    code = (lang or 'ru')[:2]
+    items = []
+    for slug in ('privacy', 'offer'):
+        doc = get_legal_document(slug)
+        fallbacks = LEGAL_FALLBACK_TITLES[slug]
+        label = (doc.title if doc and (doc.title or '').strip() else None) or fallbacks.get(
+            code, fallbacks['ru']
+        )
+        items.append({'url_name': slug, 'slug': slug, 'label': label})
+    return items

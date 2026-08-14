@@ -30,16 +30,16 @@ from apps.core.import_content_data import (
     INACTIVE_CATEGORY_SLUGS,
     NAME_FIX_BY_IMG,
     PARTNER_ROWS,
-    PRIVACY_DEFAULTS,
     RETAIL_LOGOS_DIR,
     RETAIL_PARTNERS_SPEC,
+    STATIC_BRAND_LOGOS_DIR,
+    STATIC_RETAIL_LOGOS_DIR,
     STAT_ROWS,
 )
 from apps.core.models import (
     AboutSection,
     Advantage,
     CompanyStat,
-    LegalDocument,
     PartnerOffer,
     RetailPartner,
     SiteBlock,
@@ -339,10 +339,14 @@ class Command(BaseCommand):
             keep_ids.append(offer.pk)
         PartnerOffer.objects.exclude(pk__in=keep_ids).update(is_active=False)
 
-        LegalDocument.objects.update_or_create(
-            slug='privacy',
-            defaults=PRIVACY_DEFAULTS,
+        from apps.core.legal_defaults import (
+            OFFER_DEFAULTS,
+            PRIVACY_DEFAULTS,
+            ensure_legal_document,
         )
+
+        ensure_legal_document('privacy', PRIVACY_DEFAULTS)
+        ensure_legal_document('offer', OFFER_DEFAULTS)
 
     def _brands_and_logos(self, force: bool) -> dict[str, Brand]:
         result = {}
@@ -366,12 +370,14 @@ class Command(BaseCommand):
             brand.short_description_en = f'{name_en} brand in the AJERES portfolio'
             if logo_file:
                 local = BRAND_LOGOS_DIR / logo_file
+                if not local.is_file():
+                    local = STATIC_BRAND_LOGOS_DIR / logo_file
                 if local.is_file():
                     ok = self._assign_local(brand.logo, local, logo_file)
                     if ok:
                         self.stdout.write(f'  logo {name}')
                 else:
-                    self.stderr.write(f'  missing logo file {local}')
+                    self.stderr.write(f'  missing logo file {logo_file}')
             brand.save()
             result[slug] = brand
         return result
@@ -387,12 +393,14 @@ class Command(BaseCommand):
             partner.order = order
             partner.is_active = True
             local = RETAIL_LOGOS_DIR / logo_file
+            if not local.is_file():
+                local = STATIC_RETAIL_LOGOS_DIR / logo_file
             if local.is_file():
                 ok = self._assign_local(partner.logo, local, logo_file)
                 if ok:
                     self.stdout.write(f'  retail logo {name}')
             else:
-                self.stderr.write(f'  missing retail logo {local}')
+                self.stderr.write(f'  missing retail logo {logo_file}')
             partner.save()
 
     def _import_products(self, products: list[dict], brands: dict[str, Brand]):

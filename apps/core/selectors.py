@@ -129,8 +129,12 @@ def get_case_studies():
     return CaseStudy.objects.filter(is_active=True).order_by('order', 'id')
 
 
+def get_legal_document(slug: str) -> LegalDocument | None:
+    return LegalDocument.objects.filter(slug=slug).first()
+
+
 def get_privacy_policy() -> LegalDocument | None:
-    return LegalDocument.objects.filter(slug='privacy').first()
+    return get_legal_document('privacy')
 
 
 def invalidate_site_blocks_cache(page: str | None = None) -> None:
