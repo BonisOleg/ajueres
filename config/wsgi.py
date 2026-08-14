@@ -49,8 +49,17 @@ def _bootstrap_vercel() -> None:
         # Always re-seed: idempotent, fills missing stats (e.g. 4th orb).
         call_command('seed_site', verbosity=0)
     else:
-        # Managed Postgres: content seed is optional; admin must exist for the panel.
+        # Managed Postgres: do not run full seed_site (it can overwrite settings).
+        # Legal pages must exist after deploy; migrate data + this ensure.
+        from apps.core.legal_defaults import (
+            OFFER_DEFAULTS,
+            PRIVACY_DEFAULTS,
+            ensure_legal_document,
+        )
+
         ensure_default_superuser()
+        ensure_legal_document('privacy', PRIVACY_DEFAULTS)
+        ensure_legal_document('offer', OFFER_DEFAULTS)
 
 
 try:

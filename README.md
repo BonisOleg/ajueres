@@ -62,6 +62,8 @@ Static і media — Docker volumes (`static_volume`, `media_volume`); nginx ві
 7. Prod: `docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build`
 8. `docker compose exec web python3 manage.py createsuperuser`
 
+Після оновлення коду: `docker compose ... up -d --build` — entrypoint робить `migrate` і `ensure_legal` (сторінки політики/оферти). Повний `seed_site` на проді не запускайте: він може перезаписати налаштування сайту.
+
 Оновлення коду на сервері завжди з `--build` (інакше контейнер лишається на старому image).
 
 ## Контент з live-сайту

@@ -58,6 +58,13 @@ class LegalPagesTests(TestCase):
         doc.refresh_from_db()
         self.assertEqual(doc.body, 'Custom editor text')
 
+    def test_ensure_legal_command(self):
+        LegalDocument.objects.all().delete()
+        call_command('ensure_legal')
+        slugs = set(LegalDocument.objects.values_list('slug', flat=True))
+        self.assertIn('privacy', slugs)
+        self.assertIn('offer', slugs)
+
     def test_seed_creates_both(self):
         LegalDocument.objects.all().delete()
         call_command('seed_site')
