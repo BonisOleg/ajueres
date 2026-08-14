@@ -67,10 +67,13 @@ def _legal_items(lang: str):
     code = (lang or 'ru')[:2]
     items = []
     for slug in ('privacy', 'offer'):
-        doc = get_legal_document(slug)
         fallbacks = LEGAL_FALLBACK_TITLES[slug]
-        label = (doc.title if doc and (doc.title or '').strip() else None) or fallbacks.get(
-            code, fallbacks['ru']
-        )
+        label = fallbacks.get(code, fallbacks['ru'])
+        try:
+            doc = get_legal_document(slug)
+            if doc and (doc.title or '').strip():
+                label = doc.title
+        except Exception:
+            pass
         items.append({'url_name': slug, 'slug': slug, 'label': label})
     return items

@@ -514,3 +514,29 @@ RETAIL_LOGO_STATIC = {
     for slug, _name, logo_file, _order in RETAIL_PARTNERS_SPEC
     if logo_file
 }
+
+
+def _logo_lookup(spec_rows, folder: str, *, has_featured: bool) -> dict[str, str]:
+    lookup: dict[str, str] = {}
+    for row in spec_rows:
+        if has_featured:
+            slug, name, logo_file, _order, _featured = row
+        else:
+            slug, name, logo_file, _order = row
+        if not logo_file:
+            continue
+        path = f'img/{folder}/{logo_file}'
+        stem = Path(logo_file).stem.lower()
+        for key in (
+            slug,
+            slug.replace('-', ''),
+            (name or '').strip().lower(),
+            stem,
+        ):
+            if key:
+                lookup[key] = path
+    return lookup
+
+
+BRAND_LOGO_LOOKUP = _logo_lookup(BRANDS_SPEC, 'brands', has_featured=True)
+RETAIL_LOGO_LOOKUP = _logo_lookup(RETAIL_PARTNERS_SPEC, 'partners', has_featured=False)

@@ -11,7 +11,12 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import check_for_language
 
-from apps.core.import_content_data import BRAND_LOGO_STATIC, RETAIL_LOGO_STATIC
+from apps.core.import_content_data import (
+    BRAND_LOGO_LOOKUP,
+    BRAND_LOGO_STATIC,
+    RETAIL_LOGO_LOOKUP,
+    RETAIL_LOGO_STATIC,
+)
 from apps.core.selectors import get_block_image, get_block_text
 from apps.core.theme_css import button_style_attr, section_style_attr
 from apps.catalog.product_filter_defaults import FILTER_SLUGS, filter_icon_static_path
@@ -72,14 +77,22 @@ def _media_file_url(field) -> str:
         return ''
 
 
-def _static_or_media_logo(slug: str, field, mapping: dict[str, str]) -> str:
-    static_path = mapping.get(slug or '')
+def _static_or_media_logo(obj, mapping: dict[str, str], lookup: dict[str, str]) -> str:
+    slug = getattr(obj, 'slug', '') or ''
+    field = getattr(obj, 'logo', None)
+    static_path = mapping.get(slug)
     if static_path:
         return static(static_path)
-    name = Path(getattr(field, 'name', '') or '').name
-    if name:
+    name = (getattr(obj, 'name', '') or '').strip().lower()
+    file_name = Path(getattr(field, 'name', '') or '').name
+    stem = Path(file_name).stem.lower() if file_name else ''
+    for key in (slug, slug.replace('-', ''), name, stem, file_name.lower()):
+        hit = lookup.get(key)
+        if hit:
+            return static(hit)
+    if file_name:
         for path in mapping.values():
-            if path.endswith(f'/{name}') or path == name:
+            if path.endswith(f'/{file_name}') or path.endswith(f'/{file_name.lower()}'):
                 return static(path)
     return _media_file_url(field)
 
@@ -87,21 +100,13 @@ def _static_or_media_logo(slug: str, field, mapping: dict[str, str]) -> str:
 @register.simple_tag
 def brand_logo_url(brand):
     """Static brand logo (Vercel-safe), else uploaded media."""
-    return _static_or_media_logo(
-        getattr(brand, 'slug', '') or '',
-        getattr(brand, 'logo', None),
-        BRAND_LOGO_STATIC,
-    )
+    return _static_or_media_logo(brand, BRAND_LOGO_STATIC, BRAND_LOGO_LOOKUP)
 
 
 @register.simple_tag
 def partner_logo_url(partner):
     """Static retail-partner logo (Vercel-safe), else uploaded media."""
-    return _static_or_media_logo(
-        getattr(partner, 'slug', '') or '',
-        getattr(partner, 'logo', None),
-        RETAIL_LOGO_STATIC,
-    )
+    return _static_or_media_logo(partner, RETAIL_LOGO_STATIC, RETAIL_LOGO_LOOKUP)
 
 
 @register.simple_tag(takes_context=True)

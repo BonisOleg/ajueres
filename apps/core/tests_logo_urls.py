@@ -10,6 +10,10 @@ class LogoUrlTests(SimpleTestCase):
         url = brand_logo_url(SimpleNamespace(slug='paprichi', logo=None))
         self.assertIn('img/brands/paprichi.jpg', url)
 
+    def test_brand_matches_display_name(self):
+        url = brand_logo_url(SimpleNamespace(slug='custom', name='ЯМЧАН', logo=None))
+        self.assertIn('img/brands/yamchan.png', url)
+
     def test_partner_uses_static_path(self):
         url = partner_logo_url(SimpleNamespace(slug='makro', logo=None))
         self.assertIn('img/partners/makro.png', url)

@@ -165,16 +165,19 @@
         </button>
       </section>
 
-      {% if legal_items %}
       <nav class="nav-mobile__legal" aria-label="{% trans 'Правовая информация' %}">
-        {% for item in legal_items %}
-          <a
-            href="{% url item.url_name %}"
-            {% if request.resolver_match.url_name == item.url_name %}class="is-active" aria-current="page"{% endif %}
-          >{{ item.label }}</a>
-        {% endfor %}
+        {% if legal_items %}
+          {% for item in legal_items %}
+            <a
+              href="{% url item.url_name %}"
+              {% if request.resolver_match.url_name == item.url_name %}class="is-active" aria-current="page"{% endif %}
+            >{{ item.label }}</a>
+          {% endfor %}
+        {% else %}
+          <a href="{% url 'privacy' %}">{% trans 'Политика конфиденциальности' %}</a>
+          <a href="{% url 'offer' %}">{% trans 'Публичная оферта' %}</a>
+        {% endif %}
       </nav>
-      {% endif %}
     </div>
   </div>
 </div>

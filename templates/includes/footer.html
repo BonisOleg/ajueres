@@ -64,8 +64,8 @@
             <span class="site-footer__contact--static">{{ site_settings.address|break_before_street }}</span>
           {% endif %}
         </div>
-        {% if legal_items %}
-          <nav class="site-footer__legal" aria-label="{% trans 'Правовая информация' %}">
+        <nav class="site-footer__legal" aria-label="{% trans 'Правовая информация' %}">
+          {% if legal_items %}
             {% for item in legal_items %}
               <a
                 class="site-footer__legal-link{% if request.resolver_match.url_name == item.url_name %} is-active{% endif %}"
@@ -73,8 +73,11 @@
                 {% if request.resolver_match.url_name == item.url_name %}aria-current="page"{% endif %}
               >{{ item.label }}</a>
             {% endfor %}
-          </nav>
-        {% endif %}
+          {% else %}
+            <a class="site-footer__legal-link" href="{% url 'privacy' %}">{% trans 'Политика конфиденциальности' %}</a>
+            <a class="site-footer__legal-link" href="{% url 'offer' %}">{% trans 'Публичная оферта' %}</a>
+          {% endif %}
+        </nav>
       </div>
     </div>
   </div>

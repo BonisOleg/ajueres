@@ -231,11 +231,12 @@
 }
 
 .site-footer__legal-link {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   line-height: 1.35;
-  font-weight: 500;
-  color: var(--foot-mut);
-  text-decoration: none;
+  font-weight: 600;
+  color: rgba(244, 247, 255, 0.82);
+  text-decoration: underline;
+  text-underline-offset: 3px;
   transition: color 0.2s ease;
 }
 
@@ -267,9 +268,8 @@
     margin-bottom: 12px;
   }
 
-  /* Mobile: no footer nav — burger menu covers it */
-  .site-footer__col--menu,
-  .site-footer__legal {
+  /* Mobile: page nav is in the burger; keep legal links visible */
+  .site-footer__col--menu {
     display: none;
   }
 
