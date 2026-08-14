@@ -247,6 +247,18 @@ LEGAL_FALLBACK_TITLES = {
     },
 }
 
+
+def legal_fallback_title(slug: str, lang: str) -> str:
+    fallbacks = LEGAL_FALLBACK_TITLES[slug]
+    code = (lang or 'ru')[:2]
+    return fallbacks.get(code) or fallbacks['ru']
+
+
+def legal_display_title(slug: str, lang: str, document=None) -> str:
+    if document is not None and (document.title or '').strip():
+        return document.title.strip()
+    return legal_fallback_title(slug, lang)
+
 _TRANSLATED_FIELDS = (
     'title',
     'title_ru',

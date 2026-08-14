@@ -29,10 +29,13 @@ class PreferDefaultLanguageMiddleware:
 
         has_cookie = bool(request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME))
         has_session = False
-        try:
-            has_session = bool(request.session.get(translation.LANGUAGE_SESSION_KEY))
-        except Exception:
-            has_session = False
+        session_key = getattr(translation, 'LANGUAGE_SESSION_KEY', None)
+        session = getattr(request, 'session', None)
+        if session_key and session is not None:
+            try:
+                has_session = bool(session.get(session_key))
+            except (AttributeError, KeyError, RuntimeError):
+                has_session = False
 
         if not has_cookie and not has_session:
             request.META['HTTP_ACCEPT_LANGUAGE'] = self.default

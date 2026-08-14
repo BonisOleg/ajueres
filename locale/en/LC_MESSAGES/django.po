@@ -347,6 +347,39 @@ msgstr "Maximum 255 characters."
 msgid "Спасибо за обращение. Наш менеджер свяжется с вами в ближайшее время."
 msgstr "We will contact you shortly."
 
+#: apps/core/seo.py
+msgid ""
+"AJERES — импорт и дистрибуция продуктов питания в Узбекистане. "
+"Эксклюзивные бренды, логистика и вывод производителей на рынок. Свяжитесь с нами."
+msgstr ""
+"AJERES is a food importer and distributor in Uzbekistan. "
+"Exclusive brands, logistics, and bringing producers to market. Get in touch."
+#: apps/core/seo.py
+msgid ""
+"Каталог продуктов питания AJERES: соусы, снеки и бренды для ритейла "
+"в Узбекистане. Ассортимент дистрибьютора для партнёров и магазинов."
+msgstr ""
+"AJERES food catalog: sauces, snacks, and brands for retail in Uzbekistan. "
+"Distributor assortment for partners and stores."
+#: apps/core/seo.py
+msgid ""
+"О компании AJERES: дистрибьютор продуктов питания в Узбекистане с 2018 года. "
+"Импорт, логистика, продажи и развитие международных брендов."
+msgstr ""
+"About AJERES: a food distributor in Uzbekistan since 2018. "
+"Import, logistics, sales, and international brand development."
+#: apps/core/seo.py
+msgid ""
+"Контакты AJERES в Узбекистане: телефон, адрес и форма заявки для ритейла "
+"и производителей. Свяжитесь с дистрибьютором продуктов питания."
+msgstr ""
+"AJERES contacts in Uzbekistan: phone, address, and inquiry form for retail "
+"and producers. Contact the food distributor."
+#: apps/core/seo.py
+msgid "Официальный документ AJERES. Дистрибьютор продуктов питания в Узбекистане."
+msgstr "Official AJERES document. Food distributor in Uzbekistan."
+
+
 #~ msgid "Контент скоро появится."
 #~ msgstr "Content coming soon."
 

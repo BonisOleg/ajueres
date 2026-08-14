@@ -2,11 +2,14 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import include, path
 
 from apps.core.media_static import redirect_brand_logo, redirect_partner_logo
+from apps.core.seo import robots_txt
+from apps.core.sitemaps import SITEMAPS
 
 
 def _strip_default_lang(request, subpath=''):
@@ -18,6 +21,8 @@ def _strip_default_lang(request, subpath=''):
 
 urlpatterns = [
     path('healthz/', lambda request: HttpResponse('ok', content_type='text/plain')),
+    path('robots.txt', robots_txt, name='robots_txt'),
+    path('sitemap.xml', sitemap, {'sitemaps': SITEMAPS}, name='sitemap'),
     path('i18n/', include('django.conf.urls.i18n')),
     path(settings.ADMIN_URL, admin.site.urls),
     path('ru/', _strip_default_lang),

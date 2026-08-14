@@ -10,6 +10,32 @@ from apps.core import selectors as core_selectors
 from .services import RateLimitExceeded, submit_contact_inquiry
 
 
+def _flatten_validation_errors(exc: ValidationError) -> dict:
+    if getattr(exc, 'error_dict', None):
+        return {
+            field: (errs[0] if isinstance(errs, list) else errs)
+            for field, errs in exc.message_dict.items()
+        }
+    error_messages = getattr(exc, 'messages', None) or [str(exc)]
+    return {'non_field': error_messages[0]}
+
+
+def _htmx_form_context(is_modal_form: bool) -> dict:
+    if is_modal_form:
+        return {
+            'form_prefix': 'modal',
+            'form_root_id': 'contact-modal-form-root',
+        }
+    return {'form_compact': True}
+
+
+def _contact_error_response(request, context, *, is_htmx: bool, is_modal_form: bool, status: int):
+    if is_htmx:
+        context.update(_htmx_form_context(is_modal_form))
+        return render(request, 'partials/contact_form.html', context, status=status)
+    return render(request, 'pages/contacts.html', context, status=status)
+
+
 def _prepare_partner_offers(offers):
     """Structure exact CMS copy for visual lists without rewriting it."""
     for offer in offers:
@@ -80,38 +106,25 @@ def contacts(request):
             language=get_language(),
         )
     except ValidationError as exc:
-        context['form_errors'] = {
-            field: (errs[0] if isinstance(errs, list) else errs)
-            for field, errs in exc.message_dict.items()
-        }
-        if is_htmx:
-            if is_modal_form:
-                context.update({
-                    'form_prefix': 'modal',
-                    'form_root_id': 'contact-modal-form-root',
-                })
-            else:
-                context.update({
-                    'form_compact': True,
-                })
-            return render(request, 'partials/contact_form.html', context, status=400)
-        return render(request, 'pages/contacts.html', context, status=400)
+        context['form_errors'] = _flatten_validation_errors(exc)
+        return _contact_error_response(
+            request,
+            context,
+            is_htmx=is_htmx,
+            is_modal_form=is_modal_form,
+            status=400,
+        )
     except RateLimitExceeded:
         context['form_errors'] = {
             'non_field': _('Слишком много заявок. Попробуйте позже.'),
         }
-        if is_htmx:
-            if is_modal_form:
-                context.update({
-                    'form_prefix': 'modal',
-                    'form_root_id': 'contact-modal-form-root',
-                })
-            else:
-                context.update({
-                    'form_compact': True,
-                })
-            return render(request, 'partials/contact_form.html', context, status=429)
-        return render(request, 'pages/contacts.html', context, status=429)
+        return _contact_error_response(
+            request,
+            context,
+            is_htmx=is_htmx,
+            is_modal_form=is_modal_form,
+            status=429,
+        )
 
     if is_htmx:
         return render(request, 'partials/contact_success.html')

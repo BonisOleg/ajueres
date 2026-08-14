@@ -1,9 +1,11 @@
+from django.db import DatabaseError
 from django.utils.translation import get_language
 
 from apps.catalog import selectors as catalog_selectors
 
 from .button_preview import overlay_button_styles
-from .legal_defaults import LEGAL_FALLBACK_TITLES
+from .legal_defaults import legal_display_title
+from .seo import build_seo_context
 from .selectors import (
     get_block_styles,
     get_block_text,
@@ -21,7 +23,9 @@ def site_context(request):
     button_styles, button_preview = overlay_button_styles(request, get_button_styles())
     block_styles = get_block_styles()
     site_blocks = get_blocks('site')
+    seo = build_seo_context(request, settings_obj)
     return {
+        **seo,
         'site_settings': settings_obj,
         'button_styles': button_styles,
         'button_preview': button_preview,
@@ -67,13 +71,16 @@ def _legal_items(lang: str):
     code = (lang or 'ru')[:2]
     items = []
     for slug in ('privacy', 'offer'):
-        fallbacks = LEGAL_FALLBACK_TITLES[slug]
-        label = fallbacks.get(code, fallbacks['ru'])
+        document = None
         try:
-            doc = get_legal_document(slug)
-            if doc and (doc.title or '').strip():
-                label = doc.title
-        except Exception:
-            pass
-        items.append({'url_name': slug, 'slug': slug, 'label': label})
+            document = get_legal_document(slug)
+        except DatabaseError:
+            document = None
+        items.append(
+            {
+                'url_name': slug,
+                'slug': slug,
+                'label': legal_display_title(slug, code, document),
+            }
+        )
     return items

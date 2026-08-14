@@ -346,6 +346,39 @@ msgstr "Eng ko‘pi 255 belgi."
 msgid "Спасибо за обращение. Наш менеджер свяжется с вами в ближайшее время."
 msgstr "Tez orada siz bilan bog‘lanamiz."
 
+#: apps/core/seo.py
+msgid ""
+"AJERES — импорт и дистрибуция продуктов питания в Узбекистане. "
+"Эксклюзивные бренды, логистика и вывод производителей на рынок. Свяжитесь с нами."
+msgstr ""
+"AJERES — O‘zbekistonda oziq-ovqat importi va distribyutsiyasi. "
+"Eksklyuziv brendlar, logistika va ishlab chiqaruvchilarni bozorga chiqarish. Biz bilan bog‘laning."
+#: apps/core/seo.py
+msgid ""
+"Каталог продуктов питания AJERES: соусы, снеки и бренды для ритейла "
+"в Узбекистане. Ассортимент дистрибьютора для партнёров и магазинов."
+msgstr ""
+"AJERES oziq-ovqat katalogi: souslar, snaklar va chakana savdo brendlari "
+"O‘zbekistonda. Hamkorlar va do‘konlar uchun distribyutor assortimenti."
+#: apps/core/seo.py
+msgid ""
+"О компании AJERES: дистрибьютор продуктов питания в Узбекистане с 2018 года. "
+"Импорт, логистика, продажи и развитие международных брендов."
+msgstr ""
+"AJERES haqida: 2018-yildan O‘zbekistonda oziq-ovqat distribyutori. "
+"Import, logistika, savdo va xalqaro brendlarni rivojlantirish."
+#: apps/core/seo.py
+msgid ""
+"Контакты AJERES в Узбекистане: телефон, адрес и форма заявки для ритейла "
+"и производителей. Свяжитесь с дистрибьютором продуктов питания."
+msgstr ""
+"AJERES kontaktlari O‘zbekistonda: telefon, manzil va chakana savdo hamda "
+"ishlab chiqaruvchilar uchun so‘rov shakli. Oziq-ovqat distribyutori bilan bog‘laning."
+#: apps/core/seo.py
+msgid "Официальный документ AJERES. Дистрибьютор продуктов питания в Узбекистане."
+msgstr "AJERES rasmiy hujjati. O‘zbekistonda oziq-ovqat distribyutori."
+
+
 #~ msgid "Контент скоро появится."
 #~ msgstr "Kontent tez orada paydo bo‘ladi."
 

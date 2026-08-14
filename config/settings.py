@@ -7,7 +7,7 @@ import os
 import sys
 from pathlib import Path
 
-from csp.constants import NONE, SELF, UNSAFE_INLINE
+from csp.constants import NONE, NONCE, SELF, UNSAFE_INLINE
 from django.core.exceptions import ImproperlyConfigured
 from django.core.management.utils import get_random_secret_key
 from dotenv import load_dotenv
@@ -97,6 +97,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'csp',
     'apps.core',
     'apps.catalog',
@@ -159,10 +160,11 @@ MIDDLEWARE = [
 # CSP: style-src дозволяє 'unsafe-inline' через CSS custom properties у шаблонах
 # (home hero-stats --i/--rev) та JS element.style у каруселі. script-src суворий.
 CONTENT_SECURITY_POLICY = {
-    'EXCLUDE_URL_PREFIXES': [f'/{ADMIN_URL}'],
+    # ADMIN_URL already has a trailing slash; prefix must match /{slug}/…
+    'EXCLUDE_URL_PREFIXES': [f'{ADMIN_PATH_PREFIX}/'],
     'DIRECTIVES': {
         'default-src': [SELF],
-        'script-src': [SELF],
+        'script-src': [SELF, NONCE],
         'style-src': [SELF, UNSAFE_INLINE, 'https://fonts.googleapis.com'],
         'font-src': [SELF, 'https://fonts.gstatic.com', 'data:'],
         'img-src': [SELF, 'data:', 'blob:'],
@@ -286,6 +288,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Catalog
 CATALOG_PER_PAGE = int(os.environ.get('CATALOG_PER_PAGE', '72'))
+
+PUBLIC_SITE_URL = (os.environ.get('PUBLIC_SITE_URL') or 'https://ajeres.uz').strip()
 
 # Security (production)
 # SECURE_SSL_REDIRECT=False у Docker до SSL (інакше healthcheck 301 → unhealthy)
