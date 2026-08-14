@@ -68,7 +68,7 @@ def _home_context():
             blocks, 'advantages_visible', bool(advantages)
         ),
         'show_brands': _section_enabled(
-            blocks, 'brands_visible', bool(retail_partners)
+            blocks, 'brands_visible', bool(retail_partners or brand_showcase)
         ),
         'show_cases': _section_enabled(blocks, 'cases_visible', bool(cases)),
         'advantages': advantages,
@@ -157,6 +157,15 @@ def legal_document(request, slug):
     if slug not in _LEGAL_SLUGS:
         raise Http404()
     document = selectors.get_legal_document(slug)
+    if document is None or not (document.body or '').strip():
+        from apps.core.legal_defaults import (
+            OFFER_DEFAULTS,
+            PRIVACY_DEFAULTS,
+            ensure_legal_document,
+        )
+
+        defaults = PRIVACY_DEFAULTS if slug == 'privacy' else OFFER_DEFAULTS
+        document, _ = ensure_legal_document(slug, defaults)
     if document is None or not (document.body or '').strip():
         raise Http404()
     return render(

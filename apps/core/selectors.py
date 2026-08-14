@@ -108,15 +108,19 @@ def get_partner_offers():
 
 
 def get_retail_partners() -> list[RetailPartner]:
-    """Покупці (ритейл) для блоку «Наши партнёры» на головній — лише з логотипом."""
+    """Покупці (ритейл) для блоку «Наши партнёры» — media або static slug."""
+    from apps.core.import_content_data import RETAIL_LOGO_STATIC
+
     cached_ids = cache.get(_CACHE_RETAIL)
-    base = RetailPartner.objects.filter(is_active=True).exclude(logo='').order_by(
-        'order', 'name'
-    )
+    base = RetailPartner.objects.filter(is_active=True).order_by('order', 'name')
     if cached_ids is not None:
         by_id = {p.pk: p for p in base.filter(pk__in=cached_ids)}
         return [by_id[pk] for pk in cached_ids if pk in by_id]
-    partners = [p for p in base if p.logo]
+    partners = [
+        p
+        for p in base
+        if p.logo or (getattr(p, 'slug', '') in RETAIL_LOGO_STATIC)
+    ]
     cache.set(_CACHE_RETAIL, [p.pk for p in partners], timeout=_CACHE_RETAIL_TTL)
     return partners
 

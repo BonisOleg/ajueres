@@ -46,24 +46,41 @@ ALLOWED_HOSTS = [
     h.strip()
     for h in os.environ.get(
         'ALLOWED_HOSTS',
-        'localhost,127.0.0.1,testserver,.vercel.app',
+        'localhost,127.0.0.1,testserver,.vercel.app,ajeres.uz,www.ajeres.uz',
     ).split(',')
     if h.strip()
 ]
+if IS_VERCEL:
+    for _host in (
+        '.vercel.app',
+        'ajeres.uz',
+        'www.ajeres.uz',
+        os.environ.get('VERCEL_URL', '').strip(),
+        os.environ.get('VERCEL_PROJECT_PRODUCTION_URL', '').strip(),
+    ):
+        if _host and _host not in ALLOWED_HOSTS:
+            ALLOWED_HOSTS.append(_host)
 
 CSRF_TRUSTED_ORIGINS = [
     o.strip()
     for o in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
     if o.strip()
 ]
-if IS_VERCEL and not CSRF_TRUSTED_ORIGINS:
-    CSRF_TRUSTED_ORIGINS = ['https://*.vercel.app']
+if IS_VERCEL:
+    _vercel_csrf = [
+        'https://*.vercel.app',
+        'https://ajeres.uz',
+        'https://www.ajeres.uz',
+    ]
     _vercel_url = os.environ.get('VERCEL_URL', '').strip()
     _vercel_prod = os.environ.get('VERCEL_PROJECT_PRODUCTION_URL', '').strip()
     if _vercel_url:
-        CSRF_TRUSTED_ORIGINS.append(f'https://{_vercel_url}')
+        _vercel_csrf.append(f'https://{_vercel_url}')
     if _vercel_prod:
-        CSRF_TRUSTED_ORIGINS.append(f'https://{_vercel_prod}')
+        _vercel_csrf.append(
+            _vercel_prod if _vercel_prod.startswith('http') else f'https://{_vercel_prod}'
+        )
+    CSRF_TRUSTED_ORIGINS = list(dict.fromkeys(CSRF_TRUSTED_ORIGINS + _vercel_csrf))
 if not DEBUG and not CSRF_TRUSTED_ORIGINS and not _IS_BUILD_CMD:
     raise ImproperlyConfigured(
         'CSRF_TRUSTED_ORIGINS is required when DEBUG is False'
@@ -249,7 +266,7 @@ STORAGES = {
     'staticfiles': {
         'BACKEND': (
             'django.contrib.staticfiles.storage.StaticFilesStorage'
-            if DEBUG
+            if DEBUG or IS_VERCEL
             else 'whitenoise.storage.CompressedStaticFilesStorage'
         ),
     },
@@ -257,6 +274,10 @@ STORAGES = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = (Path('/tmp') / 'ajeres-media') if IS_VERCEL else (BASE_DIR / 'media')
+
+# Vercel function has no persistent STATIC_ROOT; serve from STATICFILES_DIRS.
+if IS_VERCEL:
+    WHITENOISE_USE_FINDERS = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -268,7 +289,10 @@ CATALOG_PER_PAGE = int(os.environ.get('CATALOG_PER_PAGE', '72'))
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     USE_X_FORWARDED_HOST = True
-    SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'True').lower() in (
+    SECURE_SSL_REDIRECT = os.environ.get(
+        'SECURE_SSL_REDIRECT',
+        'False' if IS_VERCEL else 'True',
+    ).lower() in (
         '1',
         'true',
         'yes',

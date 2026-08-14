@@ -50,20 +50,12 @@ def _bootstrap_vercel() -> None:
         call_command('seed_site', verbosity=0)
     else:
         # Managed Postgres: do not run full seed_site (it can overwrite settings).
-        # Legal pages must exist after deploy; migrate data + this ensure.
-        from apps.core.legal_defaults import (
-            OFFER_DEFAULTS,
-            PRIVACY_DEFAULTS,
-            ensure_legal_document,
-        )
-
         ensure_default_superuser()
-        ensure_legal_document('privacy', PRIVACY_DEFAULTS)
-        ensure_legal_document('offer', OFFER_DEFAULTS)
+
+    call_command('ensure_legal', verbosity=0)
 
 
 try:
     _bootstrap_vercel()
-except Exception:
-    # Avoid crashing import-time detection; first request may retry.
-    pass
+except Exception as exc:
+    print(f'Vercel bootstrap failed: {exc}', flush=True)

@@ -14,6 +14,15 @@ class LogoUrlTests(SimpleTestCase):
         url = partner_logo_url(SimpleNamespace(slug='makro', logo=None))
         self.assertIn('img/partners/makro.png', url)
 
+    def test_partner_maps_media_filename(self):
+        url = partner_logo_url(
+            SimpleNamespace(
+                slug='unknown-partner',
+                logo=SimpleNamespace(name='core/retail_partners/uzum.png', url=''),
+            )
+        )
+        self.assertIn('img/partners/uzum.png', url)
+
 
 class MediaLogoRedirectTests(TestCase):
     def test_partner_media_redirects_to_static(self):

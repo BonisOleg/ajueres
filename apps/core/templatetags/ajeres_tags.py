@@ -72,24 +72,36 @@ def _media_file_url(field) -> str:
         return ''
 
 
+def _static_or_media_logo(slug: str, field, mapping: dict[str, str]) -> str:
+    static_path = mapping.get(slug or '')
+    if static_path:
+        return static(static_path)
+    name = Path(getattr(field, 'name', '') or '').name
+    if name:
+        for path in mapping.values():
+            if path.endswith(f'/{name}') or path == name:
+                return static(path)
+    return _media_file_url(field)
+
+
 @register.simple_tag
 def brand_logo_url(brand):
     """Static brand logo (Vercel-safe), else uploaded media."""
-    slug = getattr(brand, 'slug', '') or ''
-    static_path = BRAND_LOGO_STATIC.get(slug)
-    if static_path:
-        return static(static_path)
-    return _media_file_url(getattr(brand, 'logo', None))
+    return _static_or_media_logo(
+        getattr(brand, 'slug', '') or '',
+        getattr(brand, 'logo', None),
+        BRAND_LOGO_STATIC,
+    )
 
 
 @register.simple_tag
 def partner_logo_url(partner):
     """Static retail-partner logo (Vercel-safe), else uploaded media."""
-    slug = getattr(partner, 'slug', '') or ''
-    static_path = RETAIL_LOGO_STATIC.get(slug)
-    if static_path:
-        return static(static_path)
-    return _media_file_url(getattr(partner, 'logo', None))
+    return _static_or_media_logo(
+        getattr(partner, 'slug', '') or '',
+        getattr(partner, 'logo', None),
+        RETAIL_LOGO_STATIC,
+    )
 
 
 @register.simple_tag(takes_context=True)

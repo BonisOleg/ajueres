@@ -31,10 +31,10 @@ class LegalPagesTests(TestCase):
             title='Other',
             body='Text',
         )
-        response = self.client.get('/ru/legal/other/')
+        response = self.client.get('/legal/other/')
         self.assertEqual(response.status_code, 404)
 
-    def test_empty_body_404(self):
+    def test_empty_body_is_refilled(self):
         LegalDocument.objects.filter(slug='privacy').update(
             body='',
             body_ru='',
@@ -42,7 +42,19 @@ class LegalPagesTests(TestCase):
             body_en='',
         )
         response = self.client.get(reverse('privacy'))
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Политика конфиденциальности')
+
+    def test_default_language_legal_urls(self):
+        privacy = self.client.get('/privacy/')
+        offer = self.client.get('/offer/')
+        self.assertEqual(privacy.status_code, 200)
+        self.assertEqual(offer.status_code, 200)
+
+    def test_ru_prefix_redirects_to_unprefixed(self):
+        response = self.client.get('/ru/privacy/')
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], '/privacy/')
 
     def test_home_has_legal_links(self):
         response = self.client.get(reverse('home'))
@@ -64,6 +76,9 @@ class LegalPagesTests(TestCase):
         slugs = set(LegalDocument.objects.values_list('slug', flat=True))
         self.assertIn('privacy', slugs)
         self.assertIn('offer', slugs)
+        from apps.core.models import RetailPartner
+
+        self.assertTrue(RetailPartner.objects.filter(slug='korzinka').exists())
 
     def test_seed_creates_both(self):
         LegalDocument.objects.all().delete()
