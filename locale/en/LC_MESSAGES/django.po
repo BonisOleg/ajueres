@@ -269,6 +269,13 @@ msgstr "Filter"
 #: templates/pages/products.html:54 templates/pages/products.html:67
 msgid "Категории"
 msgstr "Categories"
+#: templates/partials/catalog_brand_filter.html:7
+#: templates/partials/catalog_brand_filter.html:17
+msgid "Бренд"
+msgstr "Brand"
+#: templates/partials/catalog_brand_filter.html:19
+msgid "Все бренды"
+msgstr "All brands"
 #: templates/pages/products.html:74
 msgid "Все"
 msgstr "All"

@@ -85,6 +85,9 @@ EN = {
         "Filter by category or search by name. Brands are listed below the catalog."
     ),
     "Категории": "Categories",
+    "Бренд": "Brand",
+    "Все бренды": "All brands",
+    "Свойства": "Properties",
     "Все": "All",
     "Поиск": "Search",
     "Поиск товаров…": "Search products…",
@@ -232,6 +235,9 @@ UZ = {
         "Kategoriya bo‘yicha filtrlang yoki nom bo‘yicha qidiring. Katalog ostida — brendlar."
     ),
     "Категории": "Kategoriyalar",
+    "Бренд": "Brend",
+    "Все бренды": "Barcha brendlar",
+    "Свойства": "Xususiyatlar",
     "Все": "Hammasi",
     "Поиск": "Qidiruv",
     "Поиск товаров…": "Mahsulotlarni qidirish…",
