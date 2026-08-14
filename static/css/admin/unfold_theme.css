@@ -305,6 +305,37 @@ html.dark .admin-save-error {
   object-fit: contain;
 }
 
+.admin-filter-icon-preview {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  background: #f4efe8;
+  border-radius: 50%;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@media (max-width: 1023px) {
+  .admin-filter-icon-preview {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 767px) {
+  .admin-filter-icon-preview {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .admin-filter-icon-preview {
+    -webkit-transform: translateZ(0);
+  }
+}
+
 @media (max-width: 767px) {
   .admin-image-preview {
     max-width: 100%;

@@ -68,8 +68,7 @@ class ProductFilterAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
             return '—'
         return format_html(
             '<img src="{}" alt="" width="40" height="40" '
-            'style="width:40px;height:40px;object-fit:contain;'
-            'background:#111;border-radius:50%;">',
+            'class="admin-filter-icon-preview">',
             url,
         )
 
