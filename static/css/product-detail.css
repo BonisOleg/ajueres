@@ -46,7 +46,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
 }
 
 .pdp__title {
@@ -107,11 +107,13 @@
 }
 
 .pdp__desc {
-  margin: 4px 0 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  margin: 22px 0 0;
+  max-width: min(38ch, 100%);
+  font-size: 1.125rem;
+  line-height: 1.8;
   color: #3d4757;
   overflow-wrap: anywhere;
+  text-wrap: pretty;
 }
 
 @media (min-width: 768px) {
@@ -131,6 +133,13 @@
 
   .pdp__filters {
     gap: 12px;
+  }
+
+  .pdp__desc {
+    margin-top: 28px;
+    max-width: 36ch;
+    font-size: 1.2rem;
+    line-height: 1.85;
   }
 }
 
