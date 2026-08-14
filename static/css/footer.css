@@ -5,7 +5,7 @@
   position: relative;
   overflow: hidden;
   color: var(--foot-fg);
-  padding: clamp(16px, 2.5vw, 24px) 0 calc(10px + var(--safe-b));
+  padding: clamp(10px, 1.6vw, 14px) 0 calc(8px + var(--safe-b));
   margin: 0;
   background-color: var(--foot-ink);
   background-image: none;
@@ -64,7 +64,7 @@
 .site-footer__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(16px, 2.5vw, 28px);
+  gap: clamp(10px, 1.8vw, 16px);
   align-items: start;
 }
 
@@ -77,13 +77,13 @@
   align-items: center;
   gap: 10px;
   line-height: 0;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   color: var(--foot-fg);
 }
 
 .site-footer__brand .logo__img,
 .logo__img--footer {
-  height: 38px;
+  height: 32px;
   width: auto;
   max-width: min(180px, 56vw);
   object-fit: contain;
@@ -93,16 +93,16 @@
 
 .site-footer__text {
   font-size: 0.875rem;
-  line-height: 1.5;
+  line-height: 1.35;
   color: var(--foot-mut);
-  margin: 0 0 16px;
+  margin: 0 0 8px;
   max-width: 36ch;
 }
 
 .site-footer__credit {
   margin: 0;
   font-size: 0.8125rem;
-  line-height: 1.45;
+  line-height: 1.3;
   color: rgba(255, 255, 255, 0.38);
 }
 
@@ -126,9 +126,9 @@
 }
 
 .site-footer__copy {
-  margin: 12px 0 0;
+  margin: 4px 0 0;
   font-size: 0.8125rem;
-  line-height: 1.4;
+  line-height: 1.3;
   color: rgba(255, 255, 255, 0.34);
 }
 
@@ -138,11 +138,11 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--foot-mut);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .site-footer__col--menu {
-  padding: 16px 16px 14px;
+  padding: 10px 12px 8px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -153,21 +153,21 @@
 
 .site-footer__col--menu .site-footer__label {
   color: rgba(255, 255, 255, 0.72);
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 .site-footer__nav,
 .site-footer__contacts {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .site-footer__col--menu .site-footer__link {
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.3;
-  padding: 10px 12px;
+  padding: 6px 10px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid transparent;
@@ -187,7 +187,7 @@
 .site-footer__link,
 .site-footer__contact {
   font-size: 0.9375rem;
-  line-height: 1.35;
+  line-height: 1.25;
   color: var(--foot-fg);
   transition: color 0.2s ease;
 }
@@ -218,54 +218,55 @@
 
 .site-footer__contact--static {
   color: var(--foot-mut);
-  line-height: 1.45;
+  line-height: 1.3;
   font-size: 0.875rem;
 }
 
 .site-footer__legal {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  margin-top: auto;
-  padding-top: 12px;
+  gap: 2px;
+  margin-top: 8px;
+  padding-top: 0;
 }
 
 .site-footer__legal-link {
-  font-size: 0.875rem;
-  line-height: 1.35;
-  font-weight: 600;
-  color: rgba(244, 247, 255, 0.82);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 0.2s ease;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.38);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.25s ease;
 }
 
 .site-footer__legal-link:hover,
 .site-footer__legal-link:focus-visible,
 .site-footer__legal-link.is-active {
-  color: var(--foot-fg);
+  color: rgba(244, 247, 255, 0.85);
+  outline: none;
 }
 
 @media (max-width: 959px) {
   .site-footer {
-    padding: clamp(14px, 2vw, 22px) 0 calc(10px + var(--safe-b));
+    padding: clamp(10px, 1.6vw, 14px) 0 calc(8px + var(--safe-b));
   }
 
   .site-footer__skyline {
     width: min(96vw, 520px);
     max-width: min(96vw, 520px);
     height: auto;
-    min-height: clamp(200px, 48vw, 280px);
+    min-height: clamp(120px, 32vw, 180px);
     aspect-ratio: 2 / 1;
   }
 
   .site-footer__grid {
-    gap: 14px;
+    gap: 10px;
   }
 
   .site-footer__text {
     max-width: none;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 
   /* Mobile: page nav is in the burger; keep legal links visible */
@@ -274,7 +275,7 @@
   }
 
   .site-footer__copy {
-    margin-top: 10px;
+    margin-top: 4px;
     font-size: 0.75rem;
   }
 }

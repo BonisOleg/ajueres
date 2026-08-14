@@ -2,7 +2,7 @@
 
 @media (min-width: 960px) {
   .site-footer {
-    padding: clamp(16px, 2.2vw, 24px) 0 clamp(12px, 2vw, 20px);
+    padding: clamp(10px, 1.4vw, 14px) 0 clamp(8px, 1.2vw, 12px);
   }
 
   .site-footer__skyline {
@@ -11,16 +11,16 @@
 
   .site-footer__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(28px, 4vw, 48px);
-    align-items: stretch;
+    gap: clamp(16px, 2.4vw, 28px);
+    align-items: start;
   }
 
   .site-footer__col {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 18px;
-    min-height: 100%;
+    gap: 6px;
+    min-height: 0;
     box-sizing: border-box;
   }
 
@@ -29,21 +29,21 @@
   }
 
   .site-footer__brand {
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
 
   .site-footer__text {
     margin: 0;
     max-width: none;
-    flex: 1 1 auto;
+    flex: 0 0 auto;
   }
 
   .site-footer__credit {
-    margin-top: 18px;
+    margin-top: 8px;
   }
 
   .site-footer__copy {
-    margin-top: 8px;
+    margin-top: 4px;
   }
 
   .site-footer__label {
@@ -67,15 +67,15 @@
 
   .site-footer__nav,
   .site-footer__contacts {
-    gap: 14px;
-    flex: 1 1 auto;
-    justify-content: space-between;
+    gap: 4px;
+    flex: 0 0 auto;
+    justify-content: flex-start;
   }
 
   .site-footer__col--menu .site-footer__link {
     font-weight: 600;
     font-size: 1rem;
-    line-height: 1.35;
+    line-height: 1.25;
     padding: 0;
     border-radius: 0;
     background: transparent;
