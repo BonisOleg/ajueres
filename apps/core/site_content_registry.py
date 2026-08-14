@@ -85,18 +85,18 @@ CONTENT_SECTIONS: tuple[ContentSection, ...] = (
         style_section_key='footer',
         blocks=(
             ('site', 'tagline'),
-            ('site', 'credit'),
             ('site', 'copyright'),
             ('site', 'menu_label'),
             ('site', 'contacts_label'),
         ),
         field_groups=(
-            FieldGroup('Тексты', ('tagline', 'credit', 'copyright')),
+            FieldGroup('Тексты', ('tagline', 'copyright')),
             FieldGroup('Заголовки колонок', ('menu_label', 'contacts_label')),
         ),
         description=(
             'Существующие подписи подвала. Пункты меню берутся из «Шапки». '
-            'Новые кнопки добавить нельзя. Фон — цвет или картинка ниже.'
+            'Новые кнопки добавить нельзя. Строка «Разработано студией PrometeyLabs» '
+            'зафиксирована в шаблоне и не редактируется. Фон — цвет или картинка ниже.'
         ),
     ),
     ContentSection(

@@ -84,7 +84,6 @@ BLOCK_DEFAULTS: dict[tuple[str, str], str] = {
     ('site', 'cta'): 'Связаться',
     ('site', 'cta_mobile'): 'Связаться с нами',
     ('site', 'tagline'): 'Дистрибьютор продуктов питания в Республике Узбекистан',
-    ('site', 'credit'): 'Разработано студией',
     ('site', 'copyright'): 'Все права защищены.',
     ('site', 'menu_label'): 'Меню',
     ('site', 'contacts_label'): 'Контакты',
@@ -133,7 +132,6 @@ BLOCK_LABELS: dict[tuple[str, str], str] = {
     ('site', 'cta'): 'Кнопка «Связаться»',
     ('site', 'cta_mobile'): 'Кнопка в мобильном меню',
     ('site', 'tagline'): 'Подвал — описание',
-    ('site', 'credit'): 'Подвал — «Разработано»',
     ('site', 'copyright'): 'Подвал — копирайт',
     ('site', 'menu_label'): 'Подвал — заголовок меню',
     ('site', 'contacts_label'): 'Подвал — заголовок контактов',
@@ -175,7 +173,6 @@ INLINE_KEYS = frozenset(
         'nav_mega_label',
         'nav_mega_all',
         'cta_mobile',
-        'credit',
         'copyright',
         'menu_label',
         'contacts_label',
@@ -193,6 +190,9 @@ MULTILINE_KEYS = frozenset(
         'tagline',
     }
 )
+
+
+LOCKED_CMS_BLOCKS = frozenset({('site', 'credit')})
 
 
 def is_visibility_key(key: str) -> bool:

@@ -243,7 +243,6 @@ class Command(BaseCommand):
                 'tagline',
                 'Дистрибьютор продуктов питания в Республике Узбекистан',
             ),
-            ('site', 'credit', 'Разработано студией'),
             ('site', 'copyright', 'Все права защищены.'),
             ('site', 'menu_label', 'Меню'),
             ('site', 'contacts_label', 'Контакты'),

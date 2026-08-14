@@ -183,11 +183,6 @@ BLOCK_I18N: dict[tuple[str, str], dict[str, str]] = {
         'uz': 'O‘zbekiston Respublikasida oziq-ovqat mahsulotlari distribyutori',
         'en': 'Food distributor in the Republic of Uzbekistan',
     },
-    ('site', 'credit'): {
-        'ru': 'Разработано студией',
-        'uz': 'Studiya tomonidan ishlab chiqilgan',
-        'en': 'Designed by',
-    },
     ('site', 'copyright'): {
         'ru': 'Все права защищены.',
         'uz': 'Barcha huquqlar himoyalangan.',

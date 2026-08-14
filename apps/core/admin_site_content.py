@@ -27,6 +27,7 @@ from .block_defaults import (
     BLOCK_LABELS,
     IMAGE_FALLBACKS,
     INLINE_KEYS,
+    LOCKED_CMS_BLOCKS,
     MULTILINE_KEYS,
     block_type,
     is_visibility_key,
@@ -60,6 +61,8 @@ def _truthy(raw: str) -> bool:
 def load_section_blocks(section) -> dict[tuple[str, str], SiteBlock]:
     result: dict[tuple[str, str], SiteBlock] = {}
     for page, key in section.blocks:
+        if (page, key) in LOCKED_CMS_BLOCKS:
+            continue
         default_text = BLOCK_DEFAULTS.get((page, key), '')
         defaults = {'text_html': default_text}
         # Prefill default language column when modeltranslation is active.
@@ -99,6 +102,8 @@ class SitePageContentForm(forms.Form):
             )
 
         for page, key in section.blocks:
+            if (page, key) in LOCKED_CMS_BLOCKS:
+                continue
             if section.visibility_key and key == section.visibility_key:
                 continue
             block = blocks_map[(page, key)]
@@ -187,6 +192,8 @@ class SitePageContentForm(forms.Form):
             block.save()
 
         for page, key in section.blocks:
+            if (page, key) in LOCKED_CMS_BLOCKS:
+                continue
             if section.visibility_key and key == section.visibility_key:
                 continue
             block = self.blocks_map[(page, key)]

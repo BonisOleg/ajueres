@@ -223,6 +223,7 @@ class HeaderFooterCmsTests(TestCase):
         self.assertEqual(response.status_code, 200)
         content = response.content.decode()
         self.assertIn('block__site__tagline__text_html_ru', content)
+        self.assertNotIn('block__site__credit__', content)
         self.assertIn('style_bg_image', content)
 
     def test_home_uses_cms_nav_label(self):
