@@ -578,6 +578,7 @@ class Command(BaseCommand):
                 product.package = package
                 product.order = int(row.get('order') or 0)
                 product.is_active = True
+                description_ru = row.get('description_ru') or row.get('description') or ''
                 for field, value in (
                     ('name_ru', name_ru),
                     ('name_en', name_en),
@@ -585,9 +586,13 @@ class Command(BaseCommand):
                     ('package_ru', package),
                     ('package_en', row.get('package_en') or package),
                     ('package_uz', row.get('package_uz') or package),
+                    ('description', description_ru),
+                    ('description_ru', description_ru),
+                    ('description_en', row.get('description_en') or ''),
+                    ('description_uz', row.get('description_uz') or ''),
                 ):
-                    if value and hasattr(product, field):
-                        setattr(product, field, value)
+                    if hasattr(product, field):
+                        setattr(product, field, value or '')
                 # On Vercel UI serves static/img/catalog; skip heavy media copies.
                 if not getattr(settings, 'IS_VERCEL', False):
                     self._ensure_product_image(

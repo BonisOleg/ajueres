@@ -11,7 +11,11 @@
     "category": "noodles",
     "order": 0,
     "image": "sen-soy-somen-noodle-300-1.png",
-    "static_image": "sen-soy-253860885e.webp"
+    "static_image": "sen-soy-253860885e.webp",
+    "description": "Пшеничная лапша Somen, длинная, очень ровная и тонкая, в сыром виде напоминает натянутые и застывшие белые нити. Подается отварной, тушеной или пассерованной с маслом и соевым соусом, обычно в горячем виде. Используется как гарнир к овощным или мясным салатам и в разнообразных горячих супах.",
+    "description_ru": "Пшеничная лапша Somen, длинная, очень ровная и тонкая, в сыром виде напоминает натянутые и застывшие белые нити. Подается отварной, тушеной или пассерованной с маслом и соевым соусом, обычно в горячем виде. Используется как гарнир к овощным или мясным салатам и в разнообразных горячих супах.",
+    "description_en": "Somen wheat noodles are long, very smooth and thin, and when raw they resemble taut, frozen white threads. Served boiled, stewed, or sautéed with butter and soy sauce, usually hot. It's used as a side dish for vegetable or meat salads and in a variety of hot soups.",
+    "description_uz": "Somen bug‘doy lapshasi — uzun, juda tekis va yupqa bo‘lib, xom holatda tortilgan va qotib qolgan oq iplarga o‘xshaydi. U qaynatilgan, dimlangan yoki yog‘ va soya sousi bilan qovurib tayyorlangan holda, odatda issiq tarzda tortiladi. Sabzavotli yoki go‘shtli salatlarga garnir sifatida, shuningdek, turli xil issiq sho‘rvalarda ishlatiladi."
   },
   {
     "slug": "sen-soy-sweet-chili-sauce-260-2",
@@ -25,7 +29,11 @@
     "category": "sauces",
     "order": 1,
     "image": "sen-soy-sweet-chili-sauce-260-2.png",
-    "static_image": "sen-soy-76404c59ae.webp"
+    "static_image": "sen-soy-76404c59ae.webp",
+    "description": "Соус «Сладкий ЧИЛИ» марки Sen Soy – густая смесь томатов, сладкой паприки с имбирно-пряными нотками. Соус придает мясу, птице и рыбе легкий экзотический аромат. Предназначен для макания, также его можно добавлять при мариновании мяса.",
+    "description_ru": "Соус «Сладкий ЧИЛИ» марки Sen Soy – густая смесь томатов, сладкой паприки с имбирно-пряными нотками. Соус придает мясу, птице и рыбе легкий экзотический аромат. Предназначен для макания, также его можно добавлять при мариновании мяса.",
+    "description_en": "Sen Soy Sweet Chili Sauce is a thick mixture of tomatoes and sweet paprika with ginger and spicy notes. The sauce gives meat, poultry, and fish a light exotic aroma. It is intended for dipping, but can also be added when marinating meat.",
+    "description_uz": "Sen Soy brendining «Shirin CHILI» sousi — pomidor, shirin bulg‘or qalampiri va zanjabil hamda xushbo‘y ziravorlarning o‘ziga xos ta’mini uyg‘unlashtirgan quyuq sous. Sous go‘sht, parranda go‘shti va baliqqa yengil ekzotik xushbo‘ylik beradi. Sous mahsulotlarni botirib iste’mol qilish uchun mo‘ljallangan, shuningdek, go‘shtni marinadlash jarayonida ham qo‘shish mumkin."
   },
   {
     "slug": "sen-soy-sriracha-sauce-310-3",
@@ -39,7 +47,11 @@
     "category": "sauces",
     "order": 2,
     "image": "sen-soy-sriracha-sauce-310-3.png",
-    "static_image": "sen-soy-62eb414b9c.webp"
+    "static_image": "sen-soy-62eb414b9c.webp",
+    "description": "Острый чили соус Sriracha («Чили Шрирача») – фаворит тайской, вьетнамской и мексиканской кухни, отличный компонент для блюд, приготовленных на огне (барбекю) и картофеля фри, для обжарки сыра тофу, куриных крылышек, морепродуктов. Острый чили соус Sriracha можно использовать как соус для макания и приготовления и можно добавлять при мариновании, например при приготовлении капусты по-корейски.",
+    "description_ru": "Острый чили соус Sriracha («Чили Шрирача») – фаворит тайской, вьетнамской и мексиканской кухни, отличный компонент для блюд, приготовленных на огне (барбекю) и картофеля фри, для обжарки сыра тофу, куриных крылышек, морепродуктов. Острый чили соус Sriracha можно использовать как соус для макания и приготовления и можно добавлять при мариновании, например при приготовлении капусты по-корейски.",
+    "description_en": "Sriracha hot chili sauce is a favorite product in Thai, Vietnamese and Mexican cuisine, an excellent component for dishes cooked on fire (barbecue) and French fries, for frying tofu, chicken wings, seafood. Sriracha hot chili sauce can be used for dipping and cooking, added to marinades, for example, when making Korean-style cabbage. The sauce will be appreciated not only by fans of exotic Asian cuisine, but also by admirers of Mexican and Caucasian cuisine. Sriracha hot chili sauce can be used also to make a number of cocktails. Achchiq chili sousi Sriracha («Chili Sriracha») — Tailand, Vetnam va Meksika oshxonalarining sevimli souslaridan biri.",
+    "description_uz": "U olovda pishiriladigan taomlar (barbekyu) va fri kartoshkasi, tofu pishlog‘i, tovuq qanotlari hamda dengiz mahsulotlarini qovurishda ajoyib qo‘shimcha hisoblanadi. Achchiq chili sousi Sriracha mahsulotlarni botirib iste’mol qilish, shuningdek, taomlarni tayyorlashda ishlatilishi mumkin. Sousni marinadlash jarayonida ham qo‘shish mumkin, masalan, koreyscha karam tayyorlashda."
   },
   {
     "slug": "sen-soy-sushi-nori-28-4",
@@ -53,7 +65,11 @@
     "category": "seaweed",
     "order": 3,
     "image": "sen-soy-sushi-nori-28-4.png",
-    "static_image": "sen-soy-4c46b120af.webp"
+    "static_image": "sen-soy-4c46b120af.webp",
+    "description": "Нори — это особый вид морских водорослей с широкими, плотными листьями, используемый в японской кухне для приготовления роллов. В них заворачивают кусочки рыбы, риса, овощей и других ингредиентов. Нори собирают несколько раз. Нори первого урожая имеет самую плотную структуру, богаты вкусом и питательными веществами, а также наиболее эластичны. Благодаря этим свойствам, они наиболее удобны для заворачивания роллов. Это самый дорогой вид нори, который называют «золотым».",
+    "description_ru": "Нори — это особый вид морских водорослей с широкими, плотными листьями, используемый в японской кухне для приготовления роллов. В них заворачивают кусочки рыбы, риса, овощей и других ингредиентов. Нори собирают несколько раз. Нори первого урожая имеет самую плотную структуру, богаты вкусом и питательными веществами, а также наиболее эластичны. Благодаря этим свойствам, они наиболее удобны для заворачивания роллов. Это самый дорогой вид нори, который называют «золотым».",
+    "description_en": "Nori is a specific seaweed with wide dense leaves which Japanese cooks use to make rolls – they wrap pieces of fish with some rice, vegetables, etc. in them. Nori is harvested a few times. The first harvest nori have the highest density; it is rich in flavor and wholesome elements and the most elastic which makes it the most convenient for wrapping rolls. This is the most valuable nori which is referred to as GOLD.",
+    "description_uz": "Nori — yapon oshxonasida rulolar tayyorlash uchun ishlatiladigan, keng va zich barglarga ega bo‘lgan maxsus dengiz o‘ti. Unga baliq bo‘laklari, guruch, sabzavotlar va boshqa masalliqlar o‘raladi. Nori bir necha marta hosil qilib olinadi. Birinchi hosildan olingan nori eng zich tuzilishga ega bo‘lib, ta’mi va foydali elementlarga boy hamda eng elastik hisoblanadi. Shu xususiyatlari tufayli u rulolarni o‘rash uchun eng qulay hisoblanadi. Bu eng qimmatbaho nori turi bo‘lib, GOLD (Oltin) deb ataladi."
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-original-45-5",
@@ -67,7 +83,11 @@
     "category": "chips",
     "order": 4,
     "image": "sen-soy-seaweed-nori-chips-original-45-5.png",
-    "static_image": "sen-soy-efe11dce03.webp"
+    "static_image": "sen-soy-efe11dce03.webp",
+    "description": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_ru": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_en": "Nori chips are a popular Korean light snack made from seaweed. A perfect choice for those who value their health and maintain a slim figure. Crispy nori sheets, fried in sesame oil, perfectly satisfy hunger while preserving all the exceptional properties of seaweed.",
+    "description_uz": "Nori chips — dengiz o‘tidan tayyorlangan mashhur koreyscha yengil gazak. Sog‘lig‘iga e’tibor beradigan va qomatini saqlashga intiladiganlar uchun ajoyib tanlov. Kunjut yog‘ida qovurilgan qarsildoq nori barglari dengiz o‘tining barcha foydali xususiyatlarini saqlagan holda ochlikni yaxshi qondiradi."
   },
   {
     "slug": "sen-soy-hot-chili-sauce-260-6",
@@ -81,7 +101,11 @@
     "category": "sauces",
     "order": 5,
     "image": "sen-soy-hot-chili-sauce-260-6.png",
-    "static_image": "sen-soy-0eb1b152b2.webp"
+    "static_image": "sen-soy-0eb1b152b2.webp",
+    "description": "Соус « Жгучий ЧИЛИ» марки Sen Soy – насыщенный вкус сочных томатов и жгучего перца. Соус предназначен для макания, также его можно добавлять при мариновании мяса; он придает приятную жгучесть блюду и подчеркивает аромат мяса.",
+    "description_ru": "Соус « Жгучий ЧИЛИ» марки Sen Soy – насыщенный вкус сочных томатов и жгучего перца. Соус предназначен для макания, также его можно добавлять при мариновании мяса; он придает приятную жгучесть блюду и подчеркивает аромат мяса.",
+    "description_en": "Hot CHILI Sauce by Sen Soy Premium has an intense taste of juicy tomatoes and hot pepper. The sauce is used for dipping or added when marinating meat; it gives pleasant pungency to the dish and emphasizes the flavor of meat.",
+    "description_uz": "Sen Soy brendining «Juda achchiq CHILI» sousi — shirali pomidorlar va achchiq qalampirning boy va to‘yingan ta’miga ega sous. Sous mahsulotlarni botirib iste’mol qilish uchun mo‘ljallangan, shuningdek, go‘shtni marinadlash jarayonida ham qo‘shish mumkin. U taomga yoqimli achchiqlik beradi va go‘shtning xushbo‘y hidini yanada ta’kidlaydi."
   },
   {
     "slug": "sen-soy-soy-sauce-classic-250-7",
@@ -95,7 +119,11 @@
     "category": "sauces",
     "order": 6,
     "image": "sen-soy-soy-sauce-classic-250-7.png",
-    "static_image": "sen-soy-bf294156d7.webp"
+    "static_image": "sen-soy-bf294156d7.webp",
+    "description": "Соевый соус изготовлен методом естественного брожения. Этот соус, без преувеличения, является основой вкуса всех блюд восточной и азиатской кухни. Классический соевый соус в меру солёный и в меру густой, универсален в использовании и подходит к любым продуктам. Соус придает ароматные нотки аутентичной восточной экзотики даже самым привычным продуктам и блюдам. Использование этого соуса позволяет сократить потребление соли, что актуально для приверженцев здорового питания.",
+    "description_ru": "Соевый соус изготовлен методом естественного брожения. Этот соус, без преувеличения, является основой вкуса всех блюд восточной и азиатской кухни. Классический соевый соус в меру солёный и в меру густой, универсален в использовании и подходит к любым продуктам. Соус придает ароматные нотки аутентичной восточной экзотики даже самым привычным продуктам и блюдам. Использование этого соуса позволяет сократить потребление соли, что актуально для приверженцев здорового питания.",
+    "description_en": "Soy sauce is made using natural fermentation. This sauce is, without exaggeration, the basis of the flavor of all Eastern and Asian dishes. Classic soy sauce is moderately salty and moderately thick, versatile in use and suitable for any food. The sauce adds aromatic notes of authentic Eastern exoticism even to the most familiar products and dishes. Using this sauce allows you to reduce salt intake, which is important for those who are committed to healthy eating.",
+    "description_uz": "Soya sousi tabiiy fermentatsiya usuli yordamida tayyorlanadi. Bu sous, mubolag‘asiz, barcha Sharq va Osiyo taomlarining ta’m asosidir. Klassik soya sousi me’yorida sho‘r va o‘rtacha quyuqlikka ega bo‘lib, universal qo‘llaniladi hamda har qanday taom uchun mos keladi. Sous hatto eng tanish mahsulot va taomlarga ham haqiqiy Sharqona ekzotikaning o‘ziga xos xushbo‘y notalarini beradi. Ushbu sousdan foydalanish tuz iste’molini kamaytirishga yordam beradi, bu esa sog‘lom ovqatlanishga amal qiladiganlar uchun ayniqsa muhimdir."
   },
   {
     "slug": "sen-soy-soy-sauce-dark-220-8",
@@ -109,7 +137,11 @@
     "category": "sauces",
     "order": 7,
     "image": "sen-soy-soy-sauce-dark-220-8.png",
-    "static_image": "sen-soy-5b4c2409ec.webp"
+    "static_image": "sen-soy-5b4c2409ec.webp",
+    "description": "Соевый соус Тёмный готовится методом естественного брожения и подвергается самой длительной выдержке по сравнению с другими соевыми соусами линейки Sen Soy. Имеет тягучую консистенцию и яркий вкус с лёгкими нотками карамели. Он экономичен в использовании за счет насыщенного вкуса и аромата. Подходит для мяса, рыбы, морепродуктов, овощей, риса и лапши. Придает готовым блюдам естественный, насыщенный блеск. Соус придает ароматные нотки аутентичной восточной экзотики даже самым привычным продуктам и блюдам. Использование этого соуса позволяет сократить потребление соли, что актуально для приверженцев здорового питания.",
+    "description_ru": "Соевый соус Тёмный готовится методом естественного брожения и подвергается самой длительной выдержке по сравнению с другими соевыми соусами линейки Sen Soy. Имеет тягучую консистенцию и яркий вкус с лёгкими нотками карамели. Он экономичен в использовании за счет насыщенного вкуса и аромата. Подходит для мяса, рыбы, морепродуктов, овощей, риса и лапши. Придает готовым блюдам естественный, насыщенный блеск. Соус придает ароматные нотки аутентичной восточной экзотики даже самым привычным продуктам и блюдам. Использование этого соуса позволяет сократить потребление соли, что актуально для приверженцев здорового питания.",
+    "description_en": "Dark soy sauce is prepared using natural fermentation and undergoes the longest ageing process compared to other soy sauces in the Sen Soy range. It has a thick consistency and a bright flavour with light notes of caramel. It is economical to use due to its rich flavour and aroma. Suitable for meat, fish, seafood, vegetables, rice and noodles. Gives cooked dishes a natural, rich shine. The sauce adds aromatic notes of authentic Eastern exoticism to even the most familiar foods and dishes. Using this sauce allows you to reduce your salt intake, which is important for those who are committed to healthy eating.",
+    "description_uz": "Sen Soy To‘q rangli soya sousi tabiiy fermentatsiya usuli yordamida tayyorlanadi va boshqa soya souslariga nisbatan eng uzoq muddat davomida yetiltiriladi. U quyuq va cho‘ziluvchan konsistensiyaga ega bo‘lib, yengil karamel notalari bilan ajralib turadigan yorqin ta’mga ega. O‘zining to‘yingan ta’mi va xushbo‘yligi tufayli undan foydalanish tejamkor. Go‘sht, baliq, dengiz mahsulotlari, sabzavotlar, guruch va lapsha bilan juda mos keladi. Tayyor taomlarga tabiiy va to‘yingan yaltiroqlik beradi. Sous hatto eng tanish mahsulot va taomlarga ham haqiqiy Sharqona ekzotikaning o‘ziga xos xushbo‘y notalarini beradi. Ushbu sousdan foydalanish tuz iste’molini kamaytirishga yordam beradi, bu esa sog‘lom ovqatlanishga amal qiladiganlar uchun ayniqsa muhimdir."
   },
   {
     "slug": "sen-soy-sweet-chili-mango-sauce-320-9",
@@ -123,7 +155,11 @@
     "category": "sauces",
     "order": 8,
     "image": "sen-soy-sweet-chili-mango-sauce-320-9.png",
-    "static_image": "sen-soy-4d718815cd.webp"
+    "static_image": "sen-soy-4d718815cd.webp",
+    "description": "Соус Чили Манго Сэн Сой Премиум гармонично сочетает в себе остроту и выраженную фруктовую сладость. Это идеальная заправка для неповторимых тайских салатов с птицей и фруктами. Соус Чили Манго придаст изысканности даже простым блюдам из риса, овощей и птицы, превратив их в настоящий тайских деликатес. Обычно такой соус подают к столу в специальной соуснице и обмакивают в него кусочки кушанья.",
+    "description_ru": "Соус Чили Манго Сэн Сой Премиум гармонично сочетает в себе остроту и выраженную фруктовую сладость. Это идеальная заправка для неповторимых тайских салатов с птицей и фруктами. Соус Чили Манго придаст изысканности даже простым блюдам из риса, овощей и птицы, превратив их в настоящий тайских деликатес. Обычно такой соус подают к столу в специальной соуснице и обмакивают в него кусочки кушанья.",
+    "description_en": "Sen Soy Premium Chili Mango Sauce provides an accord of pungency and distinct fruity sweetness. It is a perfect dressing for unrivaled Thai salads with poultry and fruit. Chili Mango Sauce makes even simple rice, vegetable or poultry dishes exquisite, turning them into real Thai dainties.",
+    "description_uz": "Sen Soy Premium Chili Mango sousi achchiqlik va yaqqol mevali shirinlikni uyg‘un tarzda birlashtiradi. Bu parranda go‘shti va mevalar qo‘shilgan o‘ziga xos tay salatlari uchun ideal sous hisoblanadi. Chili Mango sousi hatto guruch, sabzavotlar va parranda go‘shtidan tayyorlangan oddiy taomlarga ham nafis ta’m bag‘ishlab, ularni haqiqiy tay delikatesiga aylantiradi. Odatda bunday sous dasturxonga maxsus sous idishida tortiladi va taom bo‘laklari unga botirib iste’mol qilinadi."
   },
   {
     "slug": "sen-soy-teriyaki-sweet-sauce-320-10",
@@ -137,7 +173,11 @@
     "category": "sauces",
     "order": 9,
     "image": "sen-soy-teriyaki-sweet-sauce-320-10.png",
-    "static_image": "sen-soy-78d2925cd4.webp"
+    "static_image": "sen-soy-78d2925cd4.webp",
+    "description": "Соус «Терияки Сладкий» — насыщенный, густой соус для приготовления аутентичных японских блюд из мяса, овощей или морепродуктов. Соевый соус, красное вино и пряности придают привычным продуктам особый аромат, легкую сладость и пикантность.",
+    "description_ru": "Соус «Терияки Сладкий» — насыщенный, густой соус для приготовления аутентичных японских блюд из мяса, овощей или морепродуктов. Соевый соус, красное вино и пряности придают привычным продуктам особый аромат, легкую сладость и пикантность.",
+    "description_en": "Sweet Teriyaki Sauce is a rich, thick sauce for preparing authentic Japanese dishes made with meat, vegetables, or seafood. Soy sauce, red wine, and spices give familiar foods a special aroma, light sweetness, and piquancy.",
+    "description_uz": "«Shirin Teriyaki» sousi — go‘sht, sabzavot yoki dengiz mahsulotlaridan haqiqiy yapon taomlarini tayyorlash uchun mo‘ljallangan, to‘yingan ta’mga ega quyuq sous. Soya sousi, qizil vino va xushbo‘y ziravorlar odatiy mahsulotlarga o‘ziga xos xushbo‘ylik, yengil shirinlik va yoqimli achchiqlik beradi."
   },
   {
     "slug": "sen-soy-unagi-sauce-320-11",
@@ -151,7 +191,11 @@
     "category": "sauces",
     "order": 10,
     "image": "sen-soy-unagi-sauce-320-11.png",
-    "static_image": "sen-soy-feb55be35a.webp"
+    "static_image": "sen-soy-feb55be35a.webp",
+    "description": "Соус Унаги является традиционным для японской кухни. Унаги имеет достаточно густую консистенцию и сладко-соленый вкус с копчеными нотками. Традиционно используется для приготовления угря, а также отлично дополняет другие рыбные блюда японской кухни. Часто соус \"\"Унаги\"\" применяют в качестве маринада и для приготовления блюд на гриле, что придаёт пикантный оттенок их вкусу.",
+    "description_ru": "Соус Унаги является традиционным для японской кухни. Унаги имеет достаточно густую консистенцию и сладко-соленый вкус с копчеными нотками. Традиционно используется для приготовления угря, а также отлично дополняет другие рыбные блюда японской кухни. Часто соус \"\"Унаги\"\" применяют в качестве маринада и для приготовления блюд на гриле, что придаёт пикантный оттенок их вкусу.",
+    "description_en": "Unagi sauce is traditional in Japanese cuisine. Unagi has a fairly thick consistency and a sweet-salty flavor with smoky notes. It's traditionally used for cooking eel and also makes a great complement to other Japanese fish dishes. Unagi sauce is often used as a marinade and for grilled dishes, adding a piquant touch. Unagi sousi — yapon oshxonasining an’anaviy souslaridan biridir.",
+    "description_uz": "Unagi yetarlicha quyuq konsistensiyaga ega bo‘lib, yengil dudlangan notalarga ega shirin-sho‘r ta’mi bilan ajralib turadi. An’anaviy ravishda ugor baliğini tayyorlashda ishlatiladi, shuningdek, yapon oshxonasining boshqa baliqli taomlarini ham ajoyib tarzda to‘ldiradi. Ko‘pincha «Unagi» sousi marinad sifatida va grilda taom tayyorlashda ham qo‘llaniladi, bu esa taom ta’miga o‘ziga xos yoqimli va nafis ohang beradi."
   },
   {
     "slug": "sen-soy-soy-sauce-classic-1l-12",
@@ -165,7 +209,11 @@
     "category": "sauces",
     "order": 11,
     "image": "sen-soy-soy-sauce-classic-1l-12.png",
-    "static_image": "sen-soy-f329cd047a.webp"
+    "static_image": "sen-soy-f329cd047a.webp",
+    "description": "Соевый соус изготовлен методом естественного брожения. Этот соус, без преувеличения, является основой вкуса всех блюд восточной и азиатской кухни. Классический соевый соус в меру солёный и в меру густой, универсален в использовании и подходит к любым продуктам. Соус придает ароматные нотки аутентичной восточной экзотики даже самым привычным продуктам и блюдам. Использование этого соуса позволяет сократить потребление соли, что актуально для приверженцев здорового питания.",
+    "description_ru": "Соевый соус изготовлен методом естественного брожения. Этот соус, без преувеличения, является основой вкуса всех блюд восточной и азиатской кухни. Классический соевый соус в меру солёный и в меру густой, универсален в использовании и подходит к любым продуктам. Соус придает ароматные нотки аутентичной восточной экзотики даже самым привычным продуктам и блюдам. Использование этого соуса позволяет сократить потребление соли, что актуально для приверженцев здорового питания.",
+    "description_en": "Soy sauce is made by natural fermentation. This sauce is, without exaggeration, the foundation of the flavor of all Eastern and Asian cuisines. Classic soy sauce is moderately salty and moderately thick, versatile, and goes well with any food. The sauce imparts aromatic notes of authentic Eastern exoticism to even the most familiar foods and dishes. Using this sauce allows you to reduce your salt intake, which is important for those who adhere to a healthy diet.",
+    "description_uz": "Soya sousi tabiiy fermentatsiya usuli yordamida tayyorlanadi. Bu sous, mubolag‘asiz, barcha Sharq va Osiyo taomlarining ta’m asosidir. Klassik soya sousi me’yorida sho‘r va o‘rtacha quyuqlikka ega bo‘lib, universal qo‘llaniladi hamda har qanday mahsulot bilan mos keladi. Sous hatto eng tanish mahsulot va taomlarga ham haqiqiy Sharqona ekzotikaning o‘ziga xos xushbo‘y notalarini beradi. Ushbu sousdan foydalanish tuz iste’molini kamaytirishga yordam beradi, bu esa sog‘lom ovqatlanishga amal qiladiganlar uchun ayniqsa muhimdir."
   },
   {
     "slug": "sen-soy-udon-noodle-300-13",
@@ -179,7 +227,11 @@
     "category": "noodles",
     "order": 12,
     "image": "sen-soy-udon-noodle-300-13.png",
-    "static_image": "sen-soy-f363478d89.webp"
+    "static_image": "sen-soy-f363478d89.webp",
+    "description": "Крупная, толстая и плоская лапша Udon очень вкусна в супе мисо, а также в поджаренном виде как гарнир к сашими и другим блюдам из морепродуктов. Может подаваться как холодной, так и горячей. Японцы считают, что в холодном виде эта лапша освежает в жаркую погоду, а горячая лапша удон лучше всего согреет и насытит в холода.",
+    "description_ru": "Крупная, толстая и плоская лапша Udon очень вкусна в супе мисо, а также в поджаренном виде как гарнир к сашими и другим блюдам из морепродуктов. Может подаваться как холодной, так и горячей. Японцы считают, что в холодном виде эта лапша освежает в жаркую погоду, а горячая лапша удон лучше всего согреет и насытит в холода.",
+    "description_en": "Big, thick and flat noodles Udon is very delicious in miso soup as well as when fried as a side dish for sashimi and other seafood dishes. It can be served either cold or hot. The Japanese believe that these noodles provide refreshment when eaten cold in hot weather while hot udon noodles are the best thing to get warm and sated when it is cold.",
+    "description_uz": "Katta, qalin va yassi Udon lapshasi miso sho‘rvasida juda mazali, shuningdek, qovurilgan holda sashimi va boshqa dengiz mahsulotlaridan tayyorlangan taomlarga garnir sifatida ham ajoyib mos keladi. Udonni ham sovuq, ham issiq holda tortish mumkin. Yaponlar sovuq holda bu lapsha issiq havoda tetiklashtiradi, issiq Udon esa sovuq kunlarda eng yaxshi isitib, to‘ydiradi, deb hisoblashadi."
   },
   {
     "slug": "sen-soy-egg-noodle-300-14",
@@ -193,7 +245,11 @@
     "category": "noodles",
     "order": 13,
     "image": "sen-soy-egg-noodle-300-14.png",
-    "static_image": "sen-soy-d7a412c170.webp"
+    "static_image": "sen-soy-d7a412c170.webp",
+    "description": "Японская яичная лапша Egg Noodles прекрасно сочетается с мясом птицы или говядиной, с морепродуктами и любыми овощами. Ее часто добавляют в супы и различные бульоны. Она может быть отварной или поджаренной во фритюре, прекрасно справляется с ролью основы сложных блюд, например, жаркого и запеканок.",
+    "description_ru": "Японская яичная лапша Egg Noodles прекрасно сочетается с мясом птицы или говядиной, с морепродуктами и любыми овощами. Ее часто добавляют в супы и различные бульоны. Она может быть отварной или поджаренной во фритюре, прекрасно справляется с ролью основы сложных блюд, например, жаркого и запеканок.",
+    "description_en": "Japanese egg noodles pair perfectly with poultry or beef, seafood, and any vegetables. They are often added to soups and various broths. They can be boiled or deep-fried, and they make a wonderful base for complex dishes, such as roasts and casseroles.",
+    "description_uz": "Yaponcha tuxumli lapsha Egg Noodles parranda go‘shti yoki mol go‘shti, dengiz mahsulotlari hamda turli xil sabzavotlar bilan juda yaxshi uyg‘unlashadi. U ko‘pincha sho‘rvalar va turli xil bulyonlarga qo‘shiladi. Uni qaynatilgan yoki frityurda qovurilgan holda iste’mol qilish mumkin. Shuningdek, u qovurma taomlar va zapekankalar kabi murakkab taomlar uchun ajoyib asos bo‘lib xizmat qiladi."
   },
   {
     "slug": "sen-soy-rice-vermicelli-noodle-300-15",
@@ -207,7 +263,11 @@
     "category": "noodles",
     "order": 14,
     "image": "sen-soy-rice-vermicelli-noodle-300-15.png",
-    "static_image": "sen-soy-c635ca3761.webp"
+    "static_image": "sen-soy-c635ca3761.webp",
+    "description": "Рисовая лапша, названная по-европейски Rice Vermicelli, представляет собой классическую рисовую японскую вермишель. Белоснежная и прозрачная, с нежным и мягким вкусом, она лучше всего подходит к морепродуктам. Эта вермишель хороша в разнообразных салатах и супах, а также в дополнение к блюдам из мяса и птицы.",
+    "description_ru": "Рисовая лапша, названная по-европейски Rice Vermicelli, представляет собой классическую рисовую японскую вермишель. Белоснежная и прозрачная, с нежным и мягким вкусом, она лучше всего подходит к морепродуктам. Эта вермишель хороша в разнообразных салатах и супах, а также в дополнение к блюдам из мяса и птицы.",
+    "description_en": "Rice Vermicelli is a classic Japanese pasta. It is white and translucent, has a delicate flavor and is the best to go with seafood. The vermicelli is good in various salads and soups and as a complement to meat and poultry dishes. Yevropa uslubida Rice Vermicelli deb ataladigan guruchli lapsha klassik yapon guruch vermishelidir.",
+    "description_uz": "Oppoq va shaffof, nozik hamda mayin ta’mga ega bo‘lgan ushbu vermishel dengiz mahsulotlari bilan ayniqsa yaxshi mos keladi. U turli xil salatlar va sho‘rvalarda, shuningdek, go‘sht va parranda go‘shtidan tayyorlangan taomlarga qo‘shimcha sifatida juda mos keladi."
   },
   {
     "slug": "sen-soy-fo-kho-noodle-200-16",
@@ -221,7 +281,11 @@
     "category": "noodles",
     "order": 15,
     "image": "sen-soy-fo-kho-noodle-200-16.png",
-    "static_image": "sen-soy-11d039ca81.webp"
+    "static_image": "sen-soy-11d039ca81.webp",
+    "description": "Рисовая лапша в изящной упаковке похожей на шкатулку в восточном стиле, станет деликатесным гарниром к мясу или птице, к морепродуктам или овощам. Эта нежная лапша прекрасна и сама по себе, особенно в сочетании с соевым соусом. Она незаменима для приготовления восточных блюд, ведь именно такую лапшу используют искусные кулинары Китая, Японии, Индонезии, Вьетнама и Тайланда.",
+    "description_ru": "Рисовая лапша в изящной упаковке похожей на шкатулку в восточном стиле, станет деликатесным гарниром к мясу или птице, к морепродуктам или овощам. Эта нежная лапша прекрасна и сама по себе, особенно в сочетании с соевым соусом. Она незаменима для приготовления восточных блюд, ведь именно такую лапшу используют искусные кулинары Китая, Японии, Индонезии, Вьетнама и Тайланда.",
+    "description_en": "Rice noodles PHO in an elegant pack which resembles an oriental jewellery box are a dainty side dish for meat, poultry, seafood or vegetables. These tender noodles are excellent by themselves, especially in combination with soy sauce. It is indispensable when cooking oriental food as it the noodles used by skillful cooks in China, Japan, Indonesia, Vietnam and Thailand.",
+    "description_uz": "Sharqona uslubdagi qutichaga o‘xshash nafis qadoqdagi guruchli lapsha go‘sht yoki parranda go‘shti, dengiz mahsulotlari yoki sabzavotlar uchun ajoyib va nafis garnir bo‘ladi. Bu nozik lapsha o‘z holicha ham juda mazali, ayniqsa soya sousi bilan uyg‘unlikda. U Sharqona taomlarni tayyorlash uchun ajralmas mahsulot hisoblanadi, chunki aynan shunday lapshadan Xitoy, Yaponiya, Indoneziya, Vetnam va Tailandning mohir oshpazlari foydalanadilar."
   },
   {
     "slug": "sen-soy-tom-yum-soup-base-80-17",
@@ -235,7 +299,11 @@
     "category": "sauces",
     "order": 16,
     "image": "sen-soy-tom-yum-soup-base-80-17.png",
-    "static_image": "sen-soy-d501e684ff.webp"
+    "static_image": "sen-soy-d501e684ff.webp",
+    "description": "Суп Том ям становится приятным открытием для всех, кто знакомиться с тайской кухней. Ароматный остро-кисло-сладкий суп с креветками и грибами тайцы подают в кафе и ресторанах, готовят дома и даже продают с маленьких лотков прямо на улице. Том ям считается одним из самых популярных супов в мире, наряду с вьетнамским Фо и японским Мисо. Суп бывает разной остроты. Тайцы едят жгучий и обжигающий Том ям, туристам же предлагают более мягкий вариант. Суп вариться на основе кокосового молока, с добавлением традиционных тайских приправ лемонграсса и тамаринда, именно они придают супу необычайную свежесть и мягкую кислинку.",
+    "description_ru": "Суп Том ям становится приятным открытием для всех, кто знакомиться с тайской кухней. Ароматный остро-кисло-сладкий суп с креветками и грибами тайцы подают в кафе и ресторанах, готовят дома и даже продают с маленьких лотков прямо на улице. Том ям считается одним из самых популярных супов в мире, наряду с вьетнамским Фо и японским Мисо. Суп бывает разной остроты. Тайцы едят жгучий и обжигающий Том ям, туристам же предлагают более мягкий вариант. Суп вариться на основе кокосового молока, с добавлением традиционных тайских приправ лемонграсса и тамаринда, именно они придают супу необычайную свежесть и мягкую кислинку.",
+    "description_en": "Tom yum soup is a delightful discovery for anyone new to Thai cuisine. This aromatic, sweet, and sour soup with shrimp and mushrooms is served in cafes and restaurants, prepared at home, and even sold from small street vendors. Tom yum is considered one of the most popular soups in the world, alongside Vietnamese pho and Japanese miso. The soup comes in varying degrees of spiciness. Thais enjoy a fiery, piquant tom yum, while tourists are offered a milder version. The soup is made with coconut milk and traditional Thai spices, lemongrass and tamarind, which give it an exceptional freshness and a mild sourness.",
+    "description_uz": "Tom yam sho‘rvasi tay oshxonasi bilan tanishayotganlar uchun yoqimli kashfiyot bo‘ladi. Qisqichbaqalar va qo‘ziqorinlar qo‘shilgan xushbo‘y, achchiq-nordon-shirin sho‘rva tayliklar tomonidan kafe va restoranlarda tortiladi, uy sharoitida tayyorlanadi, hatto ko‘chalardagi kichik rastalarda ham sotiladi. Tom yam vetnamcha Fo va yaponcha Miso sho‘rvalari qatori dunyodagi eng mashhur sho‘rvalardan biri hisoblanadi. Sho‘rvaning achchiqlik darajasi turlicha bo‘lishi mumkin. Tayliklar juda achchiq Tom yamni iste’mol qiladilar, sayyohlarga esa yumshoqroq varianti taklif etiladi. Sho‘rva kokos suti asosida tayyorlanib, unga an’anaviy tay ziravorlari — limon o‘ti (lemongrass) va tamarind qo‘shiladi. Aynan ular sho‘rvaga o‘ziga xos yangilik va yoqimli, mayin nordonlik baxsh etadi."
   },
   {
     "slug": "sen-soy-rice-paper-100-18",
@@ -249,7 +317,11 @@
     "category": "rice-paper",
     "order": 17,
     "image": "sen-soy-rice-paper-100-18.png",
-    "static_image": "sen-soy-bb4896d47f.webp"
+    "static_image": "sen-soy-bb4896d47f.webp",
+    "description": "Рисовая бумага - это продукт, который обязательно полюбится ценителям восточной кухни. Рисовая бумага напоминает русский блинчик, в который заворачивают начинку. Но вместе с тем это тонкое полупрозрачное тесто, состоящее всего лишь из риса и воды. Этот уникальный диетический продукт не содержит жиров и сахара.",
+    "description_ru": "Рисовая бумага - это продукт, который обязательно полюбится ценителям восточной кухни. Рисовая бумага напоминает русский блинчик, в который заворачивают начинку. Но вместе с тем это тонкое полупрозрачное тесто, состоящее всего лишь из риса и воды. Этот уникальный диетический продукт не содержит жиров и сахара.",
+    "description_en": "Rice paper is a product which will be definitely loved by oriental cuisine fans. Rice paper resembles a Russian pancake which is used to wrap some stuffing. However, it is also a thin semi-translucent dough which consists of only rice and water. This unique dietary product does not contain any fats or sugar.",
+    "description_uz": "Guruch qog‘ozi — Sharqona oshxona taomlarini qadrlaydiganlar albatta sevib qoladigan mahsulot. Guruch qog‘ozi ichiga turli xil nachinkalar o‘raladigan ruscha blinchikka o‘xshaydi. Shu bilan birga, u atigi guruch va suvdan tayyorlanadigan yupqa, yarim shaffof xamir hisoblanadi. Bu noyob parhezbop mahsulot tarkibida yog‘ va shakar mavjud emas."
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-kimchi-45-19",
@@ -263,7 +335,11 @@
     "category": "chips",
     "order": 18,
     "image": "sen-soy-seaweed-nori-chips-kimchi-45-19.png",
-    "static_image": "sen-soy-06acf35e15.webp"
+    "static_image": "sen-soy-06acf35e15.webp",
+    "description": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_ru": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_en": "Nori chips are a popular Korean light snack made from seaweed. A perfect choice for those who value their health and maintain a slim figure. Crispy nori sheets, fried in sesame oil, perfectly satisfy hunger while preserving all the exceptional properties of seaweed.",
+    "description_uz": "Nori chips — dengiz o‘tidan tayyorlangan mashhur koreyscha yengil gazak. Sog‘lig‘iga e’tibor beradigan va qomatini saqlashga intiladiganlar uchun ajoyib tanlov. Kunjut yog‘ida qovurilgan qarsildoq nori barglari dengiz o‘tining barcha foydali xususiyatlarini saqlagan holda ochlikni yaxshi qondiradi."
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-olive-45-20",
@@ -277,7 +353,11 @@
     "category": "chips",
     "order": 19,
     "image": "sen-soy-seaweed-nori-chips-olive-45-20.png",
-    "static_image": "sen-soy-217a8f6460.webp"
+    "static_image": "sen-soy-217a8f6460.webp",
+    "description": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_ru": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_en": "Nori chips are a popular Korean light snack made from seaweed. A perfect choice for those who value their health and maintain a slim figure. Crispy nori sheets, fried in sesame oil, perfectly satisfy hunger while preserving all the exceptional properties of seaweed.",
+    "description_uz": "Nori chips — dengiz o‘tidan tayyorlangan mashhur koreyscha yengil gazak. Sog‘lig‘iga e’tibor beradigan va qomatini saqlashga intiladiganlar uchun ajoyib tanlov. Kunjut yog‘ida qovurilgan qarsildoq nori barglari dengiz o‘tining barcha foydali xususiyatlarini saqlagan holda ochlikni yaxshi qondiradi."
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-tom-yum-45-21",
@@ -291,7 +371,11 @@
     "category": "chips",
     "order": 20,
     "image": "sen-soy-seaweed-nori-chips-tom-yum-45-21.png",
-    "static_image": "sen-soy-b1d4bb5c4f.webp"
+    "static_image": "sen-soy-b1d4bb5c4f.webp",
+    "description": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_ru": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_en": "Nori chips are a popular Korean light snack made from seaweed. A perfect choice for those who value their health and maintain a slim figure. Crispy nori sheets, fried in sesame oil, perfectly satisfy hunger while preserving all the exceptional properties of seaweed.",
+    "description_uz": "Nori chips — dengiz o‘tidan tayyorlangan mashhur koreyscha yengil gazak. Sog‘lig‘iga e’tibor beradigan va qomatini saqlashga intiladiganlar uchun ajoyib tanlov. Kunjut yog‘ida qovurilgan qarsildoq nori barglari dengiz o‘tining barcha foydali xususiyatlarini saqlagan holda ochlikni yaxshi qondiradi."
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-teriyaki-45-22",
@@ -305,7 +389,11 @@
     "category": "chips",
     "order": 21,
     "image": "sen-soy-seaweed-nori-chips-teriyaki-45-22.png",
-    "static_image": "sen-soy-ffd8d05469.webp"
+    "static_image": "sen-soy-ffd8d05469.webp",
+    "description": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_ru": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_en": "Nori chips are a popular Korean light snack made from seaweed. A perfect choice for those who value their health and maintain a slim figure. Crispy nori sheets, fried in sesame oil, perfectly satisfy hunger while preserving all the exceptional properties of seaweed.",
+    "description_uz": "Nori chips — dengiz o‘tidan tayyorlangan mashhur koreyscha yengil gazak. Sog‘lig‘iga e’tibor beradigan va qomatini saqlashga intiladiganlar uchun ajoyib tanlov. Kunjut yog‘ida qovurilgan qarsildoq nori barglari dengiz o‘tining barcha foydali xususiyatlarini saqlagan holda ochlikni yaxshi qondiradi."
   },
   {
     "slug": "sen-soy-seaweed-nori-chips-wasabi-45-23",
@@ -319,7 +407,11 @@
     "category": "chips",
     "order": 22,
     "image": "sen-soy-seaweed-nori-chips-wasabi-45-23.png",
-    "static_image": "sen-soy-eb31e0e7f1.webp"
+    "static_image": "sen-soy-eb31e0e7f1.webp",
+    "description": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_ru": "Чипсы «Нори» - популярная корейская легкая закуска из морской водоросли. Продукт для тех, кто трепетно относится к своему здоровью и заботится о стройной фигуре. Хрустящие пластинки нори, обжаренные на кунжутном масле, прекрасно утоляют голод и сохраняют все исключительные свойства морских водорослей.",
+    "description_en": "Nori chips are a popular Korean light snack made from seaweed. A perfect choice for those who value their health and maintain a slim figure. Crispy nori sheets, fried in sesame oil, perfectly satisfy hunger while preserving all the exceptional properties of seaweed.",
+    "description_uz": "Nori chips — dengiz o‘tidan tayyorlangan mashhur koreyscha yengil gazak. Sog‘lig‘iga e’tibor beradigan va qomatini saqlashga intiladiganlar uchun ajoyib tanlov. Kunjut yog‘ida qovurilgan qarsildoq nori barglari dengiz o‘tining barcha foydali xususiyatlarini saqlagan holda ochlikni yaxshi qondiradi."
   },
   {
     "slug": "sen-soy-oyster-sauce-310-24",
@@ -333,7 +425,11 @@
     "category": "sauces",
     "order": 23,
     "image": "sen-soy-oyster-sauce-310-24.png",
-    "static_image": "sen-soy-1bf55afb4f.webp"
+    "static_image": "sen-soy-1bf55afb4f.webp",
+    "description": "Устричный соус — один из популярных азиатских соусов, ароматный вкус которого прекрасно подчеркивает вкус мясных, рыбных и овощных блюд.",
+    "description_ru": "Устричный соус — один из популярных азиатских соусов, ароматный вкус которого прекрасно подчеркивает вкус мясных, рыбных и овощных блюд.",
+    "description_en": "Oyster sauce is one of the popular Asian sauces, the aromatic flavor of which perfectly enhances the taste of meat, fish and vegetable dishes.",
+    "description_uz": "Ustritsa sousi — mashhur Osiyo souslaridan biri bo‘lib, uning xushbo‘y va o‘ziga xos ta’mi go‘sht, baliq hamda sabzavotlardan tayyorlangan taomlarning ta’mini ajoyib tarzda ochib beradi."
   },
   {
     "slug": "sen-soy-sweet-chili-sauce-320-25",
@@ -347,7 +443,11 @@
     "category": "sauces",
     "order": 24,
     "image": "sen-soy-sweet-chili-sauce-320-25.png",
-    "static_image": "sen-soy-7156134da6.webp"
+    "static_image": "sen-soy-7156134da6.webp",
+    "description": "В соусе Чили Свит Сэн Сой Премиум идеально сбалансированы экстремальные вкусы – сладкий и жгуче-острый. Искусные тайские повара сочетают такой соус с морепродуктами, птицей и даже фруктами",
+    "description_ru": "В соусе Чили Свит Сэн Сой Премиум идеально сбалансированы экстремальные вкусы – сладкий и жгуче-острый. Искусные тайские повара сочетают такой соус с морепродуктами, птицей и даже фруктами",
+    "description_en": "Chili Sweet Sen Soy Premium sauce perfectly balances extreme flavors—sweet and savory. Skilled Thai chefs pair this sauce with seafood, poultry, and even fruits.",
+    "description_uz": "Sen Soy Premium Chili Sweet sousida shirinlik va o‘tkir-achchiq ta’m kabi qarama-qarshi ta’mlar mukammal uyg‘unlashgan. Mahoratli tay oshpazlari bunday sousni dengiz mahsulotlari, parranda go‘shti va hatto mevalar bilan ham uyg‘unlashtiradilar."
   },
   {
     "slug": "sen-soy-chili-pineapple-sauce-320-26",
@@ -361,7 +461,11 @@
     "category": "sauces",
     "order": 25,
     "image": "sen-soy-chili-pineapple-sauce-320-26.png",
-    "static_image": "sen-soy-4021d71f01.webp"
+    "static_image": "sen-soy-4021d71f01.webp",
+    "description": "Кисло-сладкий ананас и острый жгучий чили составляют в Тайском соусе Чили Ананас Sen Soy неповторимый букет вкуса, который прекрасно сочетается с самыми разнообразными продуктами – начиная от лосося и заканчивая сладкими фруктами.",
+    "description_ru": "Кисло-сладкий ананас и острый жгучий чили составляют в Тайском соусе Чили Ананас Sen Soy неповторимый букет вкуса, который прекрасно сочетается с самыми разнообразными продуктами – начиная от лосося и заканчивая сладкими фруктами.",
+    "description_en": "Sweet and sour pineapple and spicy chili create a unique bouquet of flavors in Sen Soy Thai Chili Pineapple Sauce that pairs perfectly with a wide variety of foods, from salmon to sweet fruits.",
+    "description_uz": "Sen Soy Thai Chili Pineapple sousida shirin-nordon ananas va achchiq chili qalampirining uyg‘unligi o‘ziga xos ta’m guldastasini yaratadi. Ushbu sous losos baliğidan tortib shirin mevalargacha bo‘lgan turli xil mahsulotlar bilan ajoyib tarzda mos keladi."
   },
   {
     "slug": "sen-soy-rice-vinegar-220-27",
@@ -375,7 +479,11 @@
     "category": "sauces",
     "order": 26,
     "image": "sen-soy-rice-vinegar-220-27.png",
-    "static_image": "sen-soy-785c9ba171.webp"
+    "static_image": "sen-soy-785c9ba171.webp",
+    "description": "Белый рисовый уксус Сэн Сой Премиум – необходимая составляющая рецептуры знаменитых японских суши. Он используется для ароматизации риса и для маринования морепродуктов.",
+    "description_ru": "Белый рисовый уксус Сэн Сой Премиум – необходимая составляющая рецептуры знаменитых японских суши. Он используется для ароматизации риса и для маринования морепродуктов.",
+    "description_en": "Sen Soy Premium White Rice Vinegar is an essential ingredient in the famous Japanese sushi recipe. It is used to flavor rice and marinate seafood. Sen Soy Premium Oq guruch sirkasi — mashhur yapon sushi taomini tayyorlash retseptining ajralmas tarkibiy qismidir.",
+    "description_uz": "U guruchga xushbo‘y ta’m berish va dengiz mahsulotlarini marinadlash uchun ishlatiladi."
   },
   {
     "slug": "sen-soy-spicy-soy-sauce-250-28",
@@ -389,7 +497,11 @@
     "category": "sauces",
     "order": 27,
     "image": "sen-soy-spicy-soy-sauce-250-28.png",
-    "static_image": "sen-soy-dd421c638c.webp"
+    "static_image": "sen-soy-dd421c638c.webp",
+    "description": "Этот соус имеет яркий и разноплановый вкусовой букет, который придает насыщенный восточный колорит любому блюду. Тонкий аромат свежего ананасового сока, нотка имбиря, чеснок и лук создают поистине уникальную вкусовую композицию, которая прекрасно подчеркивает своеобразие блюд из мяса, птицы, рыбы, овощей и морепродуктов.",
+    "description_ru": "Этот соус имеет яркий и разноплановый вкусовой букет, который придает насыщенный восточный колорит любому блюду. Тонкий аромат свежего ананасового сока, нотка имбиря, чеснок и лук создают поистине уникальную вкусовую композицию, которая прекрасно подчеркивает своеобразие блюд из мяса, птицы, рыбы, овощей и морепродуктов.",
+    "description_en": "This sauce boasts a vibrant and multifaceted flavor profile that adds a rich oriental flair to any dish. The subtle aroma of fresh pineapple juice, a hint of ginger, garlic, and onion create a truly unique flavor profile that perfectly complements meat, poultry, fish, vegetables, and seafood dishes.",
+    "description_uz": "Ushbu sous har qanday taomga boy Sharqona ruh bag‘ishlaydigan yorqin va rang-barang ta’m uyg‘unligiga ega. Yangi ananas sharbatining nozik xushbo‘yligi, zanjabil, sarimsoq va piyozning o‘ziga xos ta’mi go‘sht, parranda go‘shti, baliq, sabzavotlar va dengiz mahsulotlaridan tayyorlangan taomlarning o‘ziga xosligini ajoyib tarzda ta’kidlaydigan noyob ta’m kompozitsiyasini yaratadi."
   },
   {
     "slug": "sen-soy-light-soy-sauce-250-29",
@@ -403,7 +515,11 @@
     "category": "sauces",
     "order": 28,
     "image": "sen-soy-light-soy-sauce-250-29.png",
-    "static_image": "sen-soy-0266bd892c.webp"
+    "static_image": "sen-soy-0266bd892c.webp",
+    "description": "Лёгкий соевый соус подойдет тонким ценителям восточных блюд. Он менее солёный по сравнению с обычными соевыми соусами и изящно оттеняет естественный вкус и аромат любимых продуктов.",
+    "description_ru": "Лёгкий соевый соус подойдет тонким ценителям восточных блюд. Он менее солёный по сравнению с обычными соевыми соусами и изящно оттеняет естественный вкус и аромат любимых продуктов.",
+    "description_en": "This light soy sauce is perfect for connoisseurs of oriental dishes. It's less salty than regular soy sauces and subtly enhances the natural flavors and aromas of your favorite foods.",
+    "description_uz": "Ushbu yengil soya sousi Sharqona taomlarning nozik ta’mini qadrlaydiganlar uchun juda mos keladi. U odatiy soya souslariga qaraganda kamroq sho‘r bo‘lib, sevimli mahsulotlaringizning tabiiy ta’mi va xushbo‘y hidini nafis tarzda yanada ochib beradi."
   },
   {
     "slug": "sen-soy-wok-sauce-310-30",
@@ -417,7 +533,11 @@
     "category": "sauces",
     "order": 29,
     "image": "sen-soy-wok-sauce-310-30.png",
-    "static_image": "sen-soy-70ff92e95e.webp"
+    "static_image": "sen-soy-70ff92e95e.webp",
+    "description": "Соус «Вок» для обжаривания лапши — идеальная основа для блюд из лапши, приготовленных на «Вок» или обычной сковороде. Добавляя к лапше только этот соус, Вы уже получаете готовое ресторанное блюдо, даже без дополнительных ингредиентов.",
+    "description_ru": "Соус «Вок» для обжаривания лапши — идеальная основа для блюд из лапши, приготовленных на «Вок» или обычной сковороде. Добавляя к лапше только этот соус, Вы уже получаете готовое ресторанное блюдо, даже без дополнительных ингредиентов.",
+    "description_en": "Wok-fried noodle sauce is the perfect base for noodle dishes cooked in a wok or a regular frying pan. By adding just this sauce to the noodles, you'll have a ready-made restaurant-quality dish, even without additional ingredients.",
+    "description_uz": "Lapshani qovurish uchun mo‘ljallangan «Wok» sousi — «Wok»da yoki oddiy tovada tayyorlanadigan qovurilgan lapsha taomlari uchun ideal asosdir. Lapshaga faqat ushbu sousni qo‘shishning o‘zi kifoya — hatto qo‘shimcha masalliqlarsiz ham restorandagidek tayyor taomga ega bo‘lasiz."
   },
   {
     "slug": "yamchan-hot-chili-sauce-200-31",
@@ -431,7 +551,11 @@
     "category": "sauces",
     "order": 30,
     "image": "yamchan-hot-chili-sauce-200-31.png",
-    "static_image": "yamchan-d3147bdd2d.webp"
+    "static_image": "yamchan-d3147bdd2d.webp",
+    "description": "Соус жгучий чили - это традиционный тайский соус, который готовится из свежих и ароматных ингредиентов. Он обладает ярким и насыщенным вкусом, который отлично подходит для блюд из мяса, рыбы и овощей.",
+    "description_ru": "Соус жгучий чили - это традиционный тайский соус, который готовится из свежих и ароматных ингредиентов. Он обладает ярким и насыщенным вкусом, который отлично подходит для блюд из мяса, рыбы и овощей.",
+    "description_en": "Hot chili sauce is a traditional Thai sauce made with fresh, aromatic ingredients. It has a vibrant, rich flavor that pairs perfectly with meat, fish, and vegetable dishes.",
+    "description_uz": "Achchiq Chili sousi — yangi va xushbo‘y masalliqlardan tayyorlanadigan an’anaviy tay sousidir. U go‘sht, baliq va sabzavotlardan tayyorlangan taomlar bilan juda yaxshi mos keladigan yorqin va to‘yingan ta’mga ega."
   },
   {
     "slug": "yamchan-sweet-chili-sauce-200-32",
@@ -445,7 +569,11 @@
     "category": "sauces",
     "order": 31,
     "image": "yamchan-sweet-chili-sauce-200-32.png",
-    "static_image": "yamchan-adbe44c8ca.webp"
+    "static_image": "yamchan-adbe44c8ca.webp",
+    "description": "Соус Ямчан Чили сладкий - это традиционный тайский соус, который готовится из свежих и ароматных ингредиентов. Соус Ямчан чили сладкий содержит много специй, в том числе перец чили, чеснок, имбирь и лемонграсс.",
+    "description_ru": "Соус Ямчан Чили сладкий - это традиционный тайский соус, который готовится из свежих и ароматных ингредиентов. Соус Ямчан чили сладкий содержит много специй, в том числе перец чили, чеснок, имбирь и лемонграсс.",
+    "description_en": "Sweet Yamchan Chili Sauce is a traditional Thai sauce made with fresh and flavorful ingredients. Sweet Yamchan Chili Sauce contains a variety of spices, including chili pepper, garlic, ginger, and lemongrass.",
+    "description_uz": "Yamchan Chili Sweet sousi — yangi va xushbo‘y masalliqlardan tayyorlanadigan an’anaviy tay sousidir. Yamchan Chili Sweet sousi tarkibida ko‘plab ziravorlar, jumladan, chili qalampiri, sarimsoq, zanjabil va limon o‘ti (lemongrass) mavjud."
   },
   {
     "slug": "yamchan-classic-soy-sauce-200-33",
@@ -459,7 +587,11 @@
     "category": "sauces",
     "order": 32,
     "image": "yamchan-classic-soy-sauce-200-33.png",
-    "static_image": "yamchan-185a557721.webp"
+    "static_image": "yamchan-185a557721.webp",
+    "description": "Соус соевый ЯМЧАН Классический изготовлен из лучших сортов сои путем естественной ферментации. Он придаст особенную изысканность Вашему блюду. YAMCHAN",
+    "description_ru": "Соус соевый ЯМЧАН Классический изготовлен из лучших сортов сои путем естественной ферментации. Он придаст особенную изысканность Вашему блюду. YAMCHAN",
+    "description_en": "Classic Soy Sauce is made from the finest soybeans using natural fermentation. It will add a special touch of sophistication to your dish.",
+    "description_uz": "Yamchan Klassik soya sousi eng yaxshi soya navlaridan tabiiy fermentatsiya usuli orqali tayyorlanadi. U taomingizga o‘ziga xos nafislik va boy ta’m bag‘ishlaydi."
   },
   {
     "slug": "yamchan-teriyaki-soy-sauce-200-34",
@@ -473,7 +605,11 @@
     "category": "sauces",
     "order": 33,
     "image": "yamchan-teriyaki-soy-sauce-200-34.png",
-    "static_image": "yamchan-2165dee5b8.webp"
+    "static_image": "yamchan-2165dee5b8.webp",
+    "description": "С соевым соусом терияки блюдо получается сочным, нежным и очень вкусным. Также эти соусы отлично подходят для суши, салата, курицы и жарки мяса.",
+    "description_ru": "С соевым соусом терияки блюдо получается сочным, нежным и очень вкусным. Также эти соусы отлично подходят для суши, салата, курицы и жарки мяса.",
+    "description_en": "Teriyaki soy sauce makes the dish juicy, tender, and delicious. These sauces are also great for sushi, salads, chicken, and stir-fries.",
+    "description_uz": "Teriyaki soya sousi bilan tayyorlangan taom shirali, mayin va juda mazali bo‘ladi. Ushbu sous sushi, salatlar, tovuq go‘shti hamda go‘shtni qovurish uchun ham juda mos keladi."
   },
   {
     "slug": "sen-soy-sweet-and-sour-sauce-260-35",
@@ -487,7 +623,11 @@
     "category": "sauces",
     "order": 34,
     "image": "sen-soy-sweet-and-sour-sauce-260-35.png",
-    "static_image": "sen-soy-faed7efc4b.webp"
+    "static_image": "sen-soy-faed7efc4b.webp",
+    "description": "Прекрасно подходит для мяса и птицы. Мягкий пряный вкус с выраженными фруктовыми нотками, в сочетании с нежной мякотью обжаренного мяса, создает неповторимо яркую вкусовую композицию. С этим соусом можно из самых простых продуктов приготовить изысканное блюдо – аппетитное, ароматное и экзотичное.",
+    "description_ru": "Прекрасно подходит для мяса и птицы. Мягкий пряный вкус с выраженными фруктовыми нотками, в сочетании с нежной мякотью обжаренного мяса, создает неповторимо яркую вкусовую композицию. С этим соусом можно из самых простых продуктов приготовить изысканное блюдо – аппетитное, ароматное и экзотичное.",
+    "description_en": "Perfect for meat and poultry. The mild, spicy flavor with pronounced fruity notes, combined with the tender flesh of seared meat, creates a uniquely vibrant flavor profile. With this sauce, you can create an exquisite dish from the simplest ingredients—appetizing, aromatic, and exotic.",
+    "description_uz": "Go‘sht va parranda go‘shti uchun juda mos keladi. Mevali notalari yaqqol seziladigan mayin va xushbo‘y ta’m qovurilgan go‘shtning nozik ta’mi bilan uyg‘unlashib, o‘ziga xos yorqin ta’m kompozitsiyasini yaratadi. Ushbu sous yordamida eng oddiy mahsulotlardan ham nafis, ishtahaochar, xushbo‘y va ekzotik taom tayyorlash mumkin."
   },
   {
     "slug": "sen-soy-soy-sauce-for-sushi-220-36",
@@ -501,7 +641,11 @@
     "category": "sauces",
     "order": 35,
     "image": "sen-soy-soy-sauce-for-sushi-220-36.png",
-    "static_image": "sen-soy-8438080a5e.webp"
+    "static_image": "sen-soy-8438080a5e.webp",
+    "description": "Соевый соус «Суши и сашими» – соус для самой популярной традиционной линейки блюд паназиатской кухни: суши, роллов и сашими. Производится методом натурального брожения и изготовлен по специально разработанной рецептуре азиатских технологов и рестораторов с учётом особенностей японской кухни. \"",
+    "description_ru": "Соевый соус «Суши и сашими» – соус для самой популярной традиционной линейки блюд паназиатской кухни: суши, роллов и сашими. Производится методом натурального брожения и изготовлен по специально разработанной рецептуре азиатских технологов и рестораторов с учётом особенностей японской кухни. \"",
+    "description_en": "Sushi and Sashimi\" soy sauce is a sauce for the most popular traditional dishes of Pan-Asian cuisine: sushi, rolls, and sashimi. It is produced using a natural fermentation method and crafted according to a specially developed recipe by Asian technologists and restaurateurs, taking into account the specific characteristics of Japanese cuisine.",
+    "description_uz": "«Sushi va sashimi» soya sousi — panosiyoat oshxonasining eng mashhur an’anaviy taomlari: sushi, roll va sashimi uchun mo‘ljallangan sous. U tabiiy fermentatsiya usuli orqali tayyorlanadi va yapon oshxonasining o‘ziga xos xususiyatlari hisobga olingan holda osiyolik texnologlar va restoran mutaxassislari tomonidan maxsus ishlab chiqilgan retsept asosida tayyorlanadi."
   },
   {
     "slug": "sen-soy-teriyaki-sauce-with-sesame-320-37",
@@ -515,7 +659,11 @@
     "category": "sauces",
     "order": 36,
     "image": "sen-soy-teriyaki-sauce-with-sesame-320-37.png",
-    "static_image": "sen-soy-e7675c7124.webp"
+    "static_image": "sen-soy-e7675c7124.webp",
+    "description": "Японский соус «Терияки с кунжутом» с уникальной рецептурой содержит кунжутные семена для придания особенного азиатского колорита блюдам. Этот соус прекрасно дополнит вкус готовых блюд, а также станет отличной основой для маринования мяса и рыбы.",
+    "description_ru": "Японский соус «Терияки с кунжутом» с уникальной рецептурой содержит кунжутные семена для придания особенного азиатского колорита блюдам. Этот соус прекрасно дополнит вкус готовых блюд, а также станет отличной основой для маринования мяса и рыбы.",
+    "description_en": "Japanese Teriyaki Sesame Sauce features a unique recipe that includes sesame seeds to add a distinctive Asian flavor to dishes. This sauce perfectly complements the flavor of prepared dishes and also makes an excellent base for marinating meat and fish.",
+    "description_uz": "Kunjutli Teriyaki yapon sousi o‘ziga xos retsepti asosida tayyorlanib, taomlarga alohida Osiyo ta’mini beruvchi kunjut urug‘larini o‘z ichiga oladi. Ushbu sous tayyor taomlarning ta’mini ajoyib tarzda to‘ldiradi, shuningdek, go‘sht va baliqni marinadlash uchun ham mukammal asos bo‘lib xizmat qiladi."
   },
   {
     "slug": "sen-soy-tom-yum-noodle-soup-65-38",
@@ -529,7 +677,11 @@
     "category": "noodles",
     "order": 37,
     "image": "sen-soy-tom-yum-noodle-soup-65-38.png",
-    "static_image": "sen-soy-55616fe131.webp"
+    "static_image": "sen-soy-55616fe131.webp",
+    "description": "Эта лапша принесет подлинный вкус Вьетнама прямо на вашу кухню, позволяя вам насладиться восхитительным вкусом супа Том Ям с креветками всего за несколько минут. Лапша пропитана ярким и пикантным вкусом креветок, а также терпким и пряным ароматом, создавая по-настоящему нежное и сытное блюдо.",
+    "description_ru": "Эта лапша принесет подлинный вкус Вьетнама прямо на вашу кухню, позволяя вам насладиться восхитительным вкусом супа Том Ям с креветками всего за несколько минут. Лапша пропитана ярким и пикантным вкусом креветок, а также терпким и пряным ароматом, создавая по-настоящему нежное и сытное блюдо.",
+    "description_en": "These noodles bring the authentic flavor of Vietnam right to your kitchen, allowing you to enjoy the delicious taste of Tom Yum shrimp soup in just a few minutes. The noodles are infused with the bright and savory flavor of the shrimp, as well as the tart and spicy aroma, creating a truly tender and satisfying dish.",
+    "description_uz": "Ushbu lapsha haqiqiy Vyetnam ta’mini to‘g‘ridan-to‘g‘ri oshxonangizga olib keladi va bir necha daqiqada qisqichbaqalar qo‘shilgan mazali Tom Yam sho‘rvasidan bahramand bo‘lish imkonini beradi. Lapsha qisqichbaqalarning yorqin va o‘ziga xos ta’mi, shuningdek, yoqimli taxir va ziravorli xushbo‘ylik bilan uyg‘unlashgan bo‘lib, chinakam mayin va to‘yimli taomni yaratadi."
   },
   {
     "slug": "sen-soy-ramen-noodle-soup-65-39",
@@ -543,7 +695,11 @@
     "category": "noodles",
     "order": 38,
     "image": "sen-soy-ramen-noodle-soup-65-39.png",
-    "static_image": "sen-soy-78c0321998.webp"
+    "static_image": "sen-soy-78c0321998.webp",
+    "description": "Корейский суп-лапша Рамен сочетает остроту и пикантность перца чили и аромат креветок, придавая супу насыщенный морской вкус. Зелень и овощи добавляют блюду нотки свежести, делая его еще более аппетитным.",
+    "description_ru": "Корейский суп-лапша Рамен сочетает остроту и пикантность перца чили и аромат креветок, придавая супу насыщенный морской вкус. Зелень и овощи добавляют блюду нотки свежести, делая его еще более аппетитным.",
+    "description_en": "Korean ramen noodle soup combines the spiciness and pungency of chili peppers with the aroma of shrimp, giving the soup a rich, seafood-inspired flavor. Herbs and vegetables add a touch of freshness, making it even more appetizing.",
+    "description_uz": "Koreyscha Ramen sho‘rva-lapshasi chili qalampirining achchiqligi va o‘tkir ta’mini qisqichbaqalarning xushbo‘y hidi bilan uyg‘unlashtirib, sho‘rvaga boy dengiz mahsulotlari ta’mini beradi. Ko‘katlar va sabzavotlar esa taomga yangilik baxsh etib, uni yanada ishtahaochar qiladi."
   },
   {
     "slug": "paprichi-sweet-and-sour-sauce-320-40",
@@ -557,7 +713,11 @@
     "category": "sauces",
     "order": 39,
     "image": "paprichi-sweet-and-sour-sauce-320-40.png",
-    "static_image": "paprichi-8ea22a8e12.webp"
+    "static_image": "paprichi-8ea22a8e12.webp",
+    "description": "Соус «Кисло-сладкий» - классический образец китайской кухни. Подходит для макания мясных и рыбных блюд, спринг-роллов, блинчиков, пельменей, колбасных изделий, запечённых овощей.",
+    "description_ru": "Соус «Кисло-сладкий» - классический образец китайской кухни. Подходит для макания мясных и рыбных блюд, спринг-роллов, блинчиков, пельменей, колбасных изделий, запечённых овощей.",
+    "description_en": "Sweet and sour sauce is a classic Chinese dish. It's perfect for dipping meat and fish dishes, spring rolls, pancakes, dumplings, sausages, and baked vegetables.",
+    "description_uz": "«Nordon-shirin» sousi — Xitoy oshxonasining klassik namunalaridan biridir. U go‘sht va baliqdan tayyorlangan taomlar, spring-rollar, blinchiklar, chuchvaralar, kolbasa mahsulotlari hamda pechda pishirilgan sabzavotlarni unga botirib iste’mol qilish uchun juda mos keladi."
   },
   {
     "slug": "paprichi-barbecue-sauce-320-41",
@@ -571,7 +731,11 @@
     "category": "sauces",
     "order": 40,
     "image": "paprichi-barbecue-sauce-320-41.png",
-    "static_image": "paprichi-0964fe5e74.webp"
+    "static_image": "paprichi-0964fe5e74.webp",
+    "description": "Соус «Для Барбекю» - образец американской кухни. Соус «Для барбекю» – это действительно уникальный соус, удачно сочетающий в себе целый букет компонентов, которые только улучшат вкус блюд приготовленных на гриле или скроет недостатки. В состав соуса входят натуральные томаты, маринованные огурцы, апельсин, острый и сладкий перец, кусочки чеснока и пряности.",
+    "description_ru": "Соус «Для Барбекю» - образец американской кухни. Соус «Для барбекю» – это действительно уникальный соус, удачно сочетающий в себе целый букет компонентов, которые только улучшат вкус блюд приготовленных на гриле или скроет недостатки. В состав соуса входят натуральные томаты, маринованные огурцы, апельсин, острый и сладкий перец, кусочки чеснока и пряности.",
+    "description_en": "Barbecue Sauce is a true example of American cuisine. Barbecue Sauce is a truly unique sauce, successfully combining a whole host of ingredients that enhance the flavor of grilled dishes or conceal any imperfections. The sauce includes natural tomatoes, pickles, orange, hot and sweet peppers, garlic, and spices.",
+    "description_uz": "«Barbekyu uchun» sous — Amerika oshxonasining namunasi. «Barbekyu uchun» sous — taomlar ta’mini yanada yaxshilaydigan yoki grilda tayyorlangan taomlarning kamchiliklarini yashiradigan, bir-biriga uyg‘unlashgan turli xil masalliqlardan tashkil topgan chinakam noyob sousdir. Sous tarkibiga tabiiy pomidor, marinadlangan bodring, apelsin, achchiq va shirin qalampir, sarimsoq bo‘lakchalari hamda ziravorlar kiradi."
   },
   {
     "slug": "paprichi-barbecue-sauce-320-42",
@@ -585,7 +749,11 @@
     "category": "sauces",
     "order": 41,
     "image": "paprichi-barbecue-sauce-320-42.png",
-    "static_image": "paprichi-a89109ed73.webp"
+    "static_image": "paprichi-a89109ed73.webp",
+    "description": "Соус «Шашлычный» – образец национальной грузинской кухни. Соус создан в соответствии с традициями грузинской кухни. Подходит для мяса, рыбы и птицы, приготовленных на огне.",
+    "description_ru": "Соус «Шашлычный» – образец национальной грузинской кухни. Соус создан в соответствии с традициями грузинской кухни. Подходит для мяса, рыбы и птицы, приготовленных на огне.",
+    "description_en": "Shashlik Sauce – a classic example of Georgian cuisine. Created in accordance with traditional Georgian cuisine, this sauce is suitable for grilled meat, fish, and poultry.",
+    "description_uz": "«Shashlik uchun» sous — gruzin milliy oshxonasining namunasi. Sous gruzin oshxonasi an’analariga muvofiq tayyorlangan. Olovda pishirilgan go‘sht, baliq va parranda go‘shti uchun mos keladi."
   },
   {
     "slug": "paprichi-sweet-and-spicy-sauce-320-43",
@@ -599,7 +767,11 @@
     "category": "sauces",
     "order": 42,
     "image": "paprichi-sweet-and-spicy-sauce-320-43.png",
-    "static_image": "paprichi-c3db40bb4f.webp"
+    "static_image": "paprichi-c3db40bb4f.webp",
+    "description": "Соус «Остро-сладкий» - образец китайской кухни. Это лучший выбор любителей острой азиатской кухни. Для этого соуса используются натуральные продукты: свежий имбирь, острый перец чили, свежие овощи (лук, сладкий перец), пряности.",
+    "description_ru": "Соус «Остро-сладкий» - образец китайской кухни. Это лучший выбор любителей острой азиатской кухни. Для этого соуса используются натуральные продукты: свежий имбирь, острый перец чили, свежие овощи (лук, сладкий перец), пряности.",
+    "description_en": "Sweet and Hot Sauce is a classic example of Chinese cuisine. It's the perfect choice for lovers of spicy Asian cuisine. This sauce uses natural ingredients: fresh ginger, hot chili peppers, fresh vegetables (onions, bell peppers), and spices.",
+    "description_uz": "«Achchiq-shirin» sous — Xitoy oshxonasining namunasi. Bu achchiq Osiyo taomlarini sevuvchilar uchun eng yaxshi tanlovdir. Ushbu sousni tayyorlashda tabiiy mahsulotlardan foydalaniladi: yangi zanjabil, achchiq chili qalampiri, yangi sabzavotlar (piyoz, shirin qalampir) va ziravorlar."
   },
   {
     "slug": "riceup-rice-chips-barbecue-60",
@@ -613,7 +785,11 @@
     "category": "chips",
     "order": 43,
     "image": "riceup-rice-chips-barbecue-60.png",
-    "static_image": "riceup-434c7e3abb.webp"
+    "static_image": "riceup-434c7e3abb.webp",
+    "description": "Каждый хрустящий кусочек наполнен пикантным сочетанием насыщенного, острого вкуса барбекю. Идеально подходят для любителей перекусов, ищущих вкусный и одновременно полезный вариант, эти чипсы станут вашим идеальным выбором для перекуса без чувства вины. Утолите свою тягу к сладкому полезным способом!",
+    "description_ru": "Каждый хрустящий кусочек наполнен пикантным сочетанием насыщенного, острого вкуса барбекю. Идеально подходят для любителей перекусов, ищущих вкусный и одновременно полезный вариант, эти чипсы станут вашим идеальным выбором для перекуса без чувства вины. Утолите свою тягу к сладкому полезным способом!",
+    "description_en": "Indulge in the smoky delight of our barbecue-flavoured brown rice chips! Each crunchy bite bursts with a savoury blend of rich, tangy barbecue goodness. Perfect for snack lovers seeking a tasty yet healthier option, these chips are your go-to for guilt-free munching. Satisfy your cravings the wholesome way!",
+    "description_uz": "Har bir qarsildoq bo‘lak barbekyuning to‘yimli va achchiq ta’mlarini uyg‘unlashtirgan o‘ziga xos mazaga boy. Mazali va ayni paytda foydali gazak izlayotganlar uchun juda mos ushbu chipslar aybdorlik hissisiz tamaddi qilishning ideal tanlovidir. Shirinlikka bo‘lgan ishtiyoqingizni foydali usulda qondiring!"
   },
   {
     "slug": "riceup-rice-chips-cheese-60",
@@ -627,7 +803,11 @@
     "category": "chips",
     "order": 44,
     "image": "riceup-rice-chips-cheese-60.png",
-    "static_image": "riceup-c01af5ae27.webp"
+    "static_image": "riceup-c01af5ae27.webp",
+    "description": "Каждая чипсина восхитительно хрустит, покрытая сливочным, насыщенным сырным вкусом, перед которым просто невозможно устоять. Идеально подходит для тех, кто хочет вкусной и в то же время полезной закуски. Насладитесь идеальным балансом удовольствия без чувства вины и сырного наслаждения!",
+    "description_ru": "Каждая чипсина восхитительно хрустит, покрытая сливочным, насыщенным сырным вкусом, перед которым просто невозможно устоять. Идеально подходит для тех, кто хочет вкусной и в то же время полезной закуски. Насладитесь идеальным балансом удовольствия без чувства вины и сырного наслаждения!",
+    "description_en": "Each chip offers a delightful crunch, coated in a creamy, rich cheese taste that’s simply irresistible. Ideal for those craving a delicious yet healthier snack option. Indulge in the perfect balance of guilt-free pleasure and cheesy goodness!",
+    "description_uz": "Har bir chips bo‘lagi qaymoqli, to‘yimli va o‘ziga xos pishloq ta’mi bilan qoplangan bo‘lib, uning qarsildoq mazasi shunchaki qarshilik qilib bo‘lmaydigan darajada yoqimlidir. Mazali va ayni paytda foydali gazakni xohlaydiganlar uchun juda mos tanlov. Aybdorlik hissisiz huzur-halovat va pishloqning ajoyib ta’mi uyg‘unligidan bahramand bo‘ling!"
   },
   {
     "slug": "riceup-rice-chips-hot-chili-60",
@@ -641,7 +821,11 @@
     "category": "chips",
     "order": 45,
     "image": "riceup-rice-chips-hot-chili-60.png",
-    "static_image": "riceup-bce41beaae.webp"
+    "static_image": "riceup-bce41beaae.webp",
+    "description": "Острый вкус: чипсы из коричневого риса с перцем чили! Почувствуйте насыщенный острый вкус чили, искусно смешанный с дымным ароматом, на наших хрустящих чипсах из коричневого риса. Эта пряная, полная вкуса закуска станет неотразимым лакомством для тех, кто жаждет острого, но в то же время полезного угощения.",
+    "description_ru": "Острый вкус: чипсы из коричневого риса с перцем чили! Почувствуйте насыщенный острый вкус чили, искусно смешанный с дымным ароматом, на наших хрустящих чипсах из коричневого риса. Эта пряная, полная вкуса закуска станет неотразимым лакомством для тех, кто жаждет острого, но в то же время полезного угощения.",
+    "description_en": "Fiery Kick: Chili Pepper Brown Rice Chips! Experience the bold heat of chili, expertly blended with a smoky depth, on our crunchy brown rice chips. This spicy, flavor-packed snack delivers an irresistible punch for those craving a fiery yet wholesome treat. Achchiq ta’m: chili qalampirli jigarrang guruch chipslari!",
+    "description_uz": "Qarsildoq jigarrang guruch chipslarida dudlangan xushbo‘y hid bilan mahorat bilan uyg‘unlashtirilgan chilining boy va achchiq ta’mini his qiling. Mazaga boy, xushbo‘y va achchiq ushbu gazak achchiq, ammo ayni paytda foydali yegulikni xohlaydiganlar uchun beqiyos tanlovdir."
   },
   {
     "slug": "riceup-rice-chips-ketchup-60",
@@ -655,7 +839,11 @@
     "category": "chips",
     "order": 46,
     "image": "riceup-rice-chips-ketchup-60.png",
-    "static_image": "riceup-f1fbfe846e.webp"
+    "static_image": "riceup-f1fbfe846e.webp",
+    "description": "Чипсы из коричневого риса со вкусом кетчупа! Насладитесь знакомым кисло-сладким вкусом кетчупа на наших хрустящих чипсах из коричневого риса. Эти чипсы — гармоничное сочетание приятного вкуса и полезной закуски, предлагающее оригинальный и приятный вариант для тех, кто ищет одновременно изысканный и питательный перекус.",
+    "description_ru": "Чипсы из коричневого риса со вкусом кетчупа! Насладитесь знакомым кисло-сладким вкусом кетчупа на наших хрустящих чипсах из коричневого риса. Эти чипсы — гармоничное сочетание приятного вкуса и полезной закуски, предлагающее оригинальный и приятный вариант для тех, кто ищет одновременно изысканный и питательный перекус.",
+    "description_en": "Ketchup Flavor Brown Rice Chips! Relish the familiar, tangy-sweet taste of ketchup on our crispy brown rice chips. These chips are a harmonious blend of comforting taste and healthy snacking, offering a distinctive and enjoyable twist for anyone seeking a snack that’s both indulgent and nourishing. Ketchup ta’mli jigarrang guruch chipslari!",
+    "description_uz": "Qarsildoq jigarrang guruch chipslarimizda ketchupning tanish shirin-nordon ta’midan bahramand bo‘ling. Ushbu chipslar yoqimli ta’m va foydali gazakning uyg‘un kombinatsiyasi bo‘lib, bir vaqtning o‘zida nafis va to‘yimli gazak izlayotganlar uchun o‘ziga xos va mazali tanlovdir."
   },
   {
     "slug": "riceup-rice-chips-sea-salt-60",
@@ -669,7 +857,11 @@
     "category": "chips",
     "order": 47,
     "image": "riceup-rice-chips-sea-salt-60.png",
-    "static_image": "riceup-2f51e0d345.webp"
+    "static_image": "riceup-2f51e0d345.webp",
+    "description": "Рисовые чипсы с морской солью! Насладитесь классическим, чистым вкусом морской соли в наших хрустящих рисовых чипсах. Идеальное сочетание легкости и вкуса, эти чипсы — полезный и безвредный способ утолить вашу тягу к соленым закускам.",
+    "description_ru": "Рисовые чипсы с морской солью! Насладитесь классическим, чистым вкусом морской соли в наших хрустящих рисовых чипсах. Идеальное сочетание легкости и вкуса, эти чипсы — полезный и безвредный способ утолить вашу тягу к соленым закускам.",
+    "description_en": "Sea Salt Brown Rice Chips! Savour the classic, clean taste of sea salt on our crispy brown rice chips. A perfect balance of lightness and flavor, these chips offer a wholesome, guilt-free way to indulge in your salty snack cravings. Dengiz tuzi ta’mli guruch chipslari!",
+    "description_uz": "Qarsildoq guruch chipslarimizda dengiz tuzining klassik va sof ta’midan bahramand bo‘ling. Yengillik va yoqimli ta’mning mukammal uyg‘unligi bo‘lgan ushbu chipslar sho‘r gazaklarga bo‘lgan ishtiyoqingizni qondirishning foydali va zararsiz usulidir."
   },
   {
     "slug": "riceup-rice-chips-sour-cream-onion-60",
@@ -683,7 +875,11 @@
     "category": "chips",
     "order": 48,
     "image": "riceup-rice-chips-sour-cream-onion-60.png",
-    "static_image": "riceup-1385dd6ada.webp"
+    "static_image": "riceup-1385dd6ada.webp",
+    "description": "Чипсы из коричневого риса со сметаной и луком! Погрузитесь в мир вкусной закуски, в которой полезный коричневый рис прекрасно сочетается с классическим пикантным вкусом сметаны и лука.",
+    "description_ru": "Чипсы из коричневого риса со сметаной и луком! Погрузитесь в мир вкусной закуски, в которой полезный коричневый рис прекрасно сочетается с классическим пикантным вкусом сметаны и лука.",
+    "description_en": "Brown Rice Chips in Sour Cream and Onion! Dive into a snack that brilliantly blends wholesome brown rice with the classic tang of sour cream and onion. Smetana va piyoz ta’mli jigarrang guruch chipslari!",
+    "description_uz": "Foydali jigarrang guruchning smetana va piyozning klassik, o‘ziga xos ta’mi bilan ajoyib uyg‘unlashgan mazali gazaklar olamiga sho‘ng‘ing."
   },
   {
     "slug": "riceup-tortilla-black-olives-60",
@@ -697,7 +893,11 @@
     "category": "chips",
     "order": 49,
     "image": "riceup-tortilla-black-olives-60.png",
-    "static_image": "riceup-1794d40610.webp"
+    "static_image": "riceup-1794d40610.webp",
+    "description": "Насладитесь средиземноморским сочетанием вкусов в наших кукурузных чипсах с черными оливками и вялеными помидорами! Содержащие на 50% меньше жира, чем обычные чипсы, они предлагают освежающий и полезный перекус без чувства вины. Каждый хрустящий кусочек дарит пикантное сочетание насыщенных оливок и терпких помидоров — идеальное решение для непринужденного, но при этом полезного для здоровья лакомства.",
+    "description_ru": "Насладитесь средиземноморским сочетанием вкусов в наших кукурузных чипсах с черными оливками и вялеными помидорами! Содержащие на 50% меньше жира, чем обычные чипсы, они предлагают освежающий и полезный перекус без чувства вины. Каждый хрустящий кусочек дарит пикантное сочетание насыщенных оливок и терпких помидоров — идеальное решение для непринужденного, но при этом полезного для здоровья лакомства.",
+    "description_en": "Delight in the Mediterranean fusion of our Black Olives and Sundried Tomatoes Tortilla Chips! With 50% less fat than standard chips, they offer a guilt-free, zesty snack experience. Each crisp bite delivers a savory blend of rich olives and tangy tomatoes, perfect for a casually sophisticated, health-conscious treat.",
+    "description_uz": "Qora zaytun va quritilgan pomidor ta’mli makkajo‘xori chipslari! Makkajo‘xori chipslarimizdagi O‘rta yer dengizi ta’mlarining ajoyib uyg‘unligidan bahramand bo‘ling! Oddiy chipslarga qaraganda 50% kam yog‘ saqlagan ushbu chipslar aybdorlik hissisiz yengil va foydali gazakni taklif etadi. Har bir qarsildoq bo‘lak to‘q zaytunning boy va quritilgan pomidorning o‘ziga xos, nordon ta’mini uyg‘unlashtiradi — bemalol tanovul qilish va sog‘lom turmush tarzini birlashtirgan ideal gazak."
   },
   {
     "slug": "riceup-tortilla-nacho-cheese-60",
@@ -711,7 +911,11 @@
     "category": "chips",
     "order": 50,
     "image": "riceup-tortilla-nacho-cheese-60.png",
-    "static_image": "riceup-d44ab1685e.webp"
+    "static_image": "riceup-d44ab1685e.webp",
+    "description": "Попробуйте наши острые чипсы со вкусом сыра начо и сочных халапеньо! Содержащие на 50% меньше жира, чем обычные чипсы, они станут более здоровым способом утолить вашу тягу к острому. Каждый чипс наполнен сливочным сыром и пикантным вкусом халапеньо — идеальное сочетание для смелого, полезного и невероятно вкусного перекуса.",
+    "description_ru": "Попробуйте наши острые чипсы со вкусом сыра начо и сочных халапеньо! Содержащие на 50% меньше жира, чем обычные чипсы, они станут более здоровым способом утолить вашу тягу к острому. Каждый чипс наполнен сливочным сыром и пикантным вкусом халапеньо — идеальное сочетание для смелого, полезного и невероятно вкусного перекуса.",
+    "description_en": "Experience the fiery delight of our Nacho Cheese and Juicy Jalapeños Tortilla Chips! With 50% less fat than usual chips, they’re a healthier way to indulge your spicy cravings. Each chip bursts with creamy cheese and a kick of jalapeño, perfect for a bold, guilt-free, and casually delicious snacking adventure.",
+    "description_uz": "Nacho pishlog‘i va shirali jalapeno ta’mli achchiq chipslar! Achchiq ta’mga bo‘lgan ishtiyoqingizni qondirishning yanada foydali usulini sinab ko‘ring! Oddiy chipslarga qaraganda 50% kam yog‘ saqlaydigan ushbu chipslar har bir bo‘lagida qaymoqli pishloq va o‘ziga xos achchiq jalapeno ta’mini uyg‘unlashtiradi. Dadil, foydali va nihoyatda mazali gazak uchun mukammal tanlov!"
   },
   {
     "slug": "riceup-tortilla-salt-60",
@@ -725,7 +929,11 @@
     "category": "chips",
     "order": 51,
     "image": "riceup-tortilla-salt-60.png",
-    "static_image": "riceup-9b82bf0654.webp"
+    "static_image": "riceup-9b82bf0654.webp",
+    "description": "Хрустите нашими полезными солеными кукурузными чипсами! Содержащие на 50% меньше жира, чем обычные чипсы, они обладают легкой, хрустящей текстурой и идеальным количеством соли. Идеально подходят для макания в соус или для употребления прямо из упаковки. Наслаждайтесь вкусным и непринужденным перекусом с каждым полезным кусочком!",
+    "description_ru": "Хрустите нашими полезными солеными кукурузными чипсами! Содержащие на 50% меньше жира, чем обычные чипсы, они обладают легкой, хрустящей текстурой и идеальным количеством соли. Идеально подходят для макания в соус или для употребления прямо из упаковки. Наслаждайтесь вкусным и непринужденным перекусом с каждым полезным кусочком!",
+    "description_en": "Crunch into our healthier Salted Tortilla Chips! With 50% less fat than average chips, they offer a light, crispy texture and just the right touch of salt. Perfect for guilt-free dipping or savoring straight from the bag. Enjoy a delicious, casual snacking experience with every wholesome bite!",
+    "description_uz": "Foydali sho‘r makkajo‘xori chipslarimizning qarsildoq ta’midan bahramand bo‘ling! Oddiy chipslarga qaraganda 50% kam yog‘ saqlaydigan ushbu chipslar yengil, qarsildoq tuzilishga va me’yoridagi sho‘r ta’mga ega. Sousga botirib yeyish yoki to‘g‘ridan-to‘g‘ri qadoqdan iste’mol qilish uchun juda mos. Har bir foydali bo‘lagidan mazali va bemalol gazaklanish zavqini his qiling!"
   },
   {
     "slug": "riceup-tortilla-sour-cream-onion-60",
@@ -739,7 +947,11 @@
     "category": "chips",
     "order": 52,
     "image": "riceup-tortilla-sour-cream-onion-60.png",
-    "static_image": "riceup-0659e7527f.webp"
+    "static_image": "riceup-0659e7527f.webp",
+    "description": "Погрузитесь в сливочно-пикантный мир наших кукурузных чипсов со сметаной и зеленым луком! Наслаждайтесь на 50% меньшим содержанием жира без ущерба для вкуса. Каждая чипса сочетает в себе нежность сметаны и свежую остроту зеленого лука, создавая восхитительный и полезный для здоровья перекус. Идеально подходит для легкого, но ароматного перекуса!",
+    "description_ru": "Погрузитесь в сливочно-пикантный мир наших кукурузных чипсов со сметаной и зеленым луком! Наслаждайтесь на 50% меньшим содержанием жира без ущерба для вкуса. Каждая чипса сочетает в себе нежность сметаны и свежую остроту зеленого лука, создавая восхитительный и полезный для здоровья перекус. Идеально подходит для легкого, но ароматного перекуса!",
+    "description_en": "Dive into the creamy, tangy world of our Sour Cream and Green Onion Tortilla Chips! Enjoy 50% less fat without sacrificing taste. Each chip combines the smoothness of sour cream and the fresh zing of green onion, creating a delightful, health-conscious snacking experience. Perfect for a light yet flavorful bite!",
+    "description_uz": "Smetana va ko‘k piyoz ta’mli makkajo‘xori chipslari! Makkajo‘xori chipslarimizning qaymoqsimon va o‘ziga xos ta’mlar olamiga sho‘ng‘ing! Ta’mga putur yetkazmagan holda 50% kam yog‘ miqdoridan bahramand bo‘ling. Har bir chips bo‘lagi mayin smetana ta’mi va ko‘k piyozning yangi, o‘tkir ta’mini uyg‘unlashtirib, mazali va foydali gazakni taqdim etadi. Yengil, ammo xushbo‘y gazak uchun ideal tanlov!"
   },
   {
     "slug": "riceup-tortilla-texas-bbq-60",
@@ -753,7 +965,11 @@
     "category": "chips",
     "order": 53,
     "image": "riceup-tortilla-texas-bbq-60.png",
-    "static_image": "riceup-2e839ec740.webp"
+    "static_image": "riceup-2e839ec740.webp",
+    "description": "Насладитесь ярким, дымным вкусом наших чипсов из тортильи в техасском стиле с барбекю! Содержащие на 50% меньше жира, чем обычные чипсы, они дарят насыщенный вкус без чувства вины. Каждая чипса – это идеальное сочетание острой и сладкой приправы барбекю, предлагающее более здоровый и вкусный перекус. Получите свою порцию барбекю легким способом!",
+    "description_ru": "Насладитесь ярким, дымным вкусом наших чипсов из тортильи в техасском стиле с барбекю! Содержащие на 50% меньше жира, чем обычные чипсы, они дарят насыщенный вкус без чувства вины. Каждая чипса – это идеальное сочетание острой и сладкой приправы барбекю, предлагающее более здоровый и вкусный перекус. Получите свою порцию барбекю легким способом!",
+    "description_en": "Savor the bold, smoky taste of our Texas Style Barbecue Tortilla Chips! With 50% less fat than regular chips, they pack a flavorful punch without the guilt. Each chip is a perfect blend of spicy, sweet barbecue seasoning, offering a healthier, casually delicious snacking adventure. Get your BBQ fix, the lighter way! Barbekyu uslubidagi Texascha tortilla chipslari!",
+    "description_uz": "Texas uslubidagi barbekyuning yorqin va dudlangan ta’midan bahramand bo‘ling! Oddiy chipslarga qaraganda 50% kam yog‘ saqlaydigan ushbu chipslar aybdorlik hissisiz boy va to‘yingan ta’mni taqdim etadi. Har bir chips bo‘lagi achchiq va shirin barbekyu ziravorlarining mukammal uyg‘unligidan iborat bo‘lib, foydali va mazali gazak uchun ajoyib tanlovdir. Barbekyu ta’mini yengil usulda his qiling!"
   },
   {
     "slug": "riceup-tortilla-yellow-cheddar-60",
@@ -767,7 +983,11 @@
     "category": "chips",
     "order": 54,
     "image": "riceup-tortilla-yellow-cheddar-60.png",
-    "static_image": "riceup-35e9096af4.webp"
+    "static_image": "riceup-35e9096af4.webp",
+    "description": "Побалуйте себя восхитительным сырным вкусом наших кукурузных чипсов со вкусом желтого чеддера! Легкие, но при этом ароматные, эти чипсы содержат на 50% меньше жира, что делает их идеальным перекусом без чувства вины. Каждый хрустящий кусочек наполнен насыщенным пикантным вкусом желтого чеддера, идеально подходящим для непринужденного, вкусного и полезного перекуса.",
+    "description_ru": "Побалуйте себя восхитительным сырным вкусом наших кукурузных чипсов со вкусом желтого чеддера! Легкие, но при этом ароматные, эти чипсы содержат на 50% меньше жира, что делает их идеальным перекусом без чувства вины. Каждый хрустящий кусочек наполнен насыщенным пикантным вкусом желтого чеддера, идеально подходящим для непринужденного, вкусного и полезного перекуса.",
+    "description_en": "Indulge in the cheesy goodness of our Yellow Cheddar Flavored Tortilla Chips! Light yet flavorful, these chips have 50% less fat, offering a guilt-free snacking delight. Each crunchy bite is packed with the rich, savory taste of yellow cheddar, perfect for a casual, delicious, and healthier chip experience.",
+    "description_uz": "Sariq cheddar ta’mli makkajo‘xori chipslari! Makkajo‘xori chipslarimizning ajoyib pishloqli ta’midan bahramand bo‘ling! Yengil, ammo xushbo‘y ushbu chipslar 50% kam yog‘ saqlaydi, bu esa ularni aybdorlik hissisiz gazaklanish uchun ideal tanlovga aylantiradi. Har bir qarsildoq bo‘lak sariq cheddar pishlog‘ining boy va o‘ziga xos ta’mi bilan to‘yingan bo‘lib, bemalol, mazali va foydali gazak uchun juda mos keladi."
   },
   {
     "slug": "krambals-bruschetta-tomato-mozzarella",
@@ -781,7 +1001,11 @@
     "category": "bruschetta",
     "order": 55,
     "image": "krambals-bruschetta-tomato-mozzarella.png",
-    "static_image": "krambals-2c519f0d4f.webp"
+    "static_image": "krambals-2c519f0d4f.webp",
+    "description": "Хрустящие, золотистые ломтики настоящего хлеба чиабатта. Созревшие на солнце помидоры в сочетании со свежей моцареллой. Классическое и неповторимое сочетание.",
+    "description_ru": "Хрустящие, золотистые ломтики настоящего хлеба чиабатта. Созревшие на солнце помидоры в сочетании со свежей моцареллой. Классическое и неповторимое сочетание.",
+    "description_en": "Crispy, golden slices of authentic ciabatta bread. Sun-ripened tomatoes, paired with fresh mozzarella. A timeless and genuine match.",
+    "description_uz": "Qarsildoq, tillarang haqiqiy ciabatta non bo‘laklari. Quyoshda pishib yetilgan pomidorlar yangi mozzarella pishlog‘i bilan uyg‘unlashib, klassik va betakror ta’mni yaratadi."
   },
   {
     "slug": "krambals-bruschetta-green-olives",
@@ -795,7 +1019,11 @@
     "category": "bruschetta",
     "order": 56,
     "image": "krambals-bruschetta-green-olives.png",
-    "static_image": "krambals-7304f849e4.webp"
+    "static_image": "krambals-7304f849e4.webp",
+    "description": "Хрустящие золотистые ломтики настоящего хлеба чиабатта. Яркие зеленые оливки, приправленные морской солью.",
+    "description_ru": "Хрустящие золотистые ломтики настоящего хлеба чиабатта. Яркие зеленые оливки, приправленные морской солью.",
+    "description_en": "Crispy, golden slices of authentic ciabatta bread. Punchy green olives, lifted by touch of sea salt.",
+    "description_uz": "Qarsildoq, tillarang haqiqiy ciabatta non bo‘laklari. Dengiz tuzi bilan ziravorlangan yorqin yashil zaytunlar bilan uyg‘unlashgan ajoyib ta’m."
   },
   {
     "slug": "krambals-bruschetta-creamy-cheese",
@@ -809,7 +1037,11 @@
     "category": "bruschetta",
     "order": 57,
     "image": "krambals-bruschetta-creamy-cheese.png",
-    "static_image": "krambals-15e81cc0bc.webp"
+    "static_image": "krambals-15e81cc0bc.webp",
+    "description": "Хрустящие, золотистые ломтики настоящего хлеба чиабатта. Ароматные и сливочные, как расплавленный сыр, с насыщенным, полным вкусом.",
+    "description_ru": "Хрустящие, золотистые ломтики настоящего хлеба чиабатта. Ароматные и сливочные, как расплавленный сыр, с насыщенным, полным вкусом.",
+    "description_en": "Crispy, golden slices of authentic ciabatta bread. Savory and creamy like melted cheese, with a rich, full-bodied taste.",
+    "description_uz": "Qarsildoq, tillarang haqiqiy ciabatta non bo‘laklari. Eritilgan pishloqdek xushbo‘y va qaymoqsimon, boy va to‘yingan ta’mga ega."
   },
   {
     "slug": "krambals-bruschetta-garden-grill",
@@ -823,7 +1055,11 @@
     "category": "bruschetta",
     "order": 58,
     "image": "krambals-bruschetta-garden-grill.png",
-    "static_image": "krambals-258c4813fe.webp"
+    "static_image": "krambals-258c4813fe.webp",
+    "description": "Хрустящие, золотистые ломтики настоящего хлеба чиабатта. Овощи, приготовленные на гриле, с аутентичным вкусом и легким привкусом копчения.",
+    "description_ru": "Хрустящие, золотистые ломтики настоящего хлеба чиабатта. Овощи, приготовленные на гриле, с аутентичным вкусом и легким привкусом копчения.",
+    "description_en": "Crispy, golden slices of authentic ciabatta bread. Grilled fresh vegetables with an authentic taste and a hint of smokiness.",
+    "description_uz": "Qarsildoq, tillarang haqiqiy ciabatta non bo‘laklari. Haqiqiy ta’mga ega, grilda tayyorlangan sabzavotlar va yengil dudlangan xushbo‘y hidning ajoyib uyg‘unligi."
   },
   {
     "slug": "krambals-bruschetta-forest-mushrooms",
@@ -837,7 +1073,11 @@
     "category": "bruschetta",
     "order": 59,
     "image": "krambals-bruschetta-forest-mushrooms.png",
-    "static_image": "krambals-95d6759071.webp"
+    "static_image": "krambals-95d6759071.webp",
+    "description": "Хрустящие, золотистые ломтики настоящего хлеба чиабатта. Землистый аромат диких грибов, насыщенный вкус которых уравновешивается нежностью сливочного масла.",
+    "description_ru": "Хрустящие, золотистые ломтики настоящего хлеба чиабатта. Землистый аромат диких грибов, насыщенный вкус которых уравновешивается нежностью сливочного масла.",
+    "description_en": "Crispy, golden slices of authentic ciabatta bread. Earthy wild mushrooms, their intense flavor balanced by the delicacy of butter.",
+    "description_uz": "Qarsildoq, tillarang haqiqiy ciabatta non bo‘laklari. Yovvoyi qo‘ziqorinlarning o‘ziga xos yer hidi va boy ta’mi mayin va qaymoqsimon sariyog‘ning nozik ta’mi bilan uyg‘unlashadi."
   },
   {
     "slug": "huligan-pretzel-crush-cheese-65",
@@ -851,7 +1091,11 @@
     "category": "crush",
     "order": 60,
     "image": "huligan-pretzel-crush-cheese-65.png",
-    "static_image": "huligan-1172bfadba.webp"
+    "static_image": "huligan-1172bfadba.webp",
+    "description": "Откройте для себя снеки Huligan — хрустящие кусочки кренделя. Сырный, сливочный, тающий во рту. Стоит попробовать, кусочек за кусочком.",
+    "description_ru": "Откройте для себя снеки Huligan — хрустящие кусочки кренделя. Сырный, сливочный, тающий во рту. Стоит попробовать, кусочек за кусочком.",
+    "description_en": "Discover Huligan snacks - crispy pretzel bites. Cheesy, creamy, melting. Makes it all worth it, piece after piece.",
+    "description_uz": "Huligan gazaklarini kashf eting — qarsildoq pretzel bo‘lakchalari. Pishloqli, qaymoqsimon va og‘izda eriydigan ajoyib ta’m. Har bir bo‘lagidan bahramand bo‘lishga arziydi!"
   },
   {
     "slug": "huligan-pretzel-crush-honey-mustard-65",
@@ -865,7 +1109,11 @@
     "category": "crush",
     "order": 61,
     "image": "huligan-pretzel-crush-honey-mustard-65.png",
-    "static_image": "huligan-cd5535d43f.webp"
+    "static_image": "huligan-cd5535d43f.webp",
+    "description": "Откройте для себя снеки Huligan — хрустящие кусочки кренделя. Мед и горчица — сочетание, которое поражает все чувства.",
+    "description_ru": "Откройте для себя снеки Huligan — хрустящие кусочки кренделя. Мед и горчица — сочетание, которое поражает все чувства.",
+    "description_en": "Discover Huligan snacks - crispy pretzel bites. Honey & Mustard, a pairing that is blowing all senses.",
+    "description_uz": "Huligan gazaklarini kashf eting — qarsildoq pretzel bo‘lakchalari. Asal va xantal — barcha his-tuyg‘ularni o‘ziga rom etadigan ajoyib uyg‘unlik."
   },
   {
     "slug": "huligan-pretzel-crush-jalapeno-65",
@@ -879,7 +1127,11 @@
     "category": "crush",
     "order": 62,
     "image": "huligan-pretzel-crush-jalapeno-65.png",
-    "static_image": "huligan-04d792e450.webp"
+    "static_image": "huligan-04d792e450.webp",
+    "description": "Откройте для себя закуски Huligan — хрустящие кусочки кренделя. Известный и по-настоящему взрывной вкус для самых взыскательных любителей острых ощущений.",
+    "description_ru": "Откройте для себя закуски Huligan — хрустящие кусочки кренделя. Известный и по-настоящему взрывной вкус для самых взыскательных любителей острых ощущений.",
+    "description_en": "Discover Huligan snacks - crispy pretzel bites. A renowned and truly explosive flavor for the most demanding fiery flavors lovers.",
+    "description_uz": "Huligan gazaklarini kashf eting — qarsildoq krendel bo‘lakchalari. Eng talabchan va o‘zgacha ta’mni sevuvchilar uchun mashhur va chinakam yorqin ta’m!"
   },
   {
     "slug": "huligan-pretzel-crush-siracha-65",
@@ -893,6 +1145,10 @@
     "category": "crush",
     "order": 63,
     "image": "huligan-pretzel-crush-siracha-65.png",
-    "static_image": "huligan-462c9fd65b.webp"
+    "static_image": "huligan-462c9fd65b.webp",
+    "description": "Откройте для себя закуски Huligan — хрустящие кусочки кренделя. Невероятно острый, но по-прежнему ароматный, вот и знаменитый соус Шрирача.",
+    "description_ru": "Откройте для себя закуски Huligan — хрустящие кусочки кренделя. Невероятно острый, но по-прежнему ароматный, вот и знаменитый соус Шрирача.",
+    "description_en": "Discover Huligan snacks - crispy pretzel bites. Addictively chili, still flavorful, here comes the famous Sriracha sauce.",
+    "description_uz": "Huligan gazaklarini kashf eting — qarsildoq krendel bo‘lakchalari. Chiliga o‘ch qiladigan darajada achchiq, ammo nihoyatda mazali — mashhur Sriracha sousi!"
   }
 ]
