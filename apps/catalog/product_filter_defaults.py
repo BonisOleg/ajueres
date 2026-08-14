@@ -41,7 +41,7 @@ PRODUCT_FILTERS = (
     {
         'slug': 'popped-never-fried',
         'order': 60,
-        'name_ru': 'Открыли и никогда не жареные',
+        'name_ru': 'Открытые и никогда не жареные',
         'name_en': 'Popped and never fried',
         'name_uz': 'Portlatilgan, qovurilmagan',
     },
@@ -55,7 +55,7 @@ PRODUCT_FILTERS = (
     {
         'slug': 'whole-grain',
         'order': 80,
-        'name_ru': 'Цельнозерновое',
+        'name_ru': 'Цельно зерновое',
         'name_en': 'Whole grain',
         'name_uz': 'Butun don',
     },

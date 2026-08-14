@@ -17,8 +17,8 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-  padding-left: max(var(--space), env(safe-area-inset-left, 0px));
-  padding-right: max(var(--space), env(safe-area-inset-right, 0px));
+  padding-left: max(28px, env(safe-area-inset-left, 0px));
+  padding-right: max(28px, env(safe-area-inset-right, 0px));
 }
 
 .pdp__media {
@@ -107,13 +107,12 @@
 }
 
 .pdp__desc {
-  margin: 18px 0 0;
-  max-width: min(46ch, 100%);
-  font-size: 1.05rem;
-  line-height: 1.65;
+  margin: 14px 0 0;
+  max-width: 100%;
+  font-size: 0.9375rem;
+  line-height: 1.5;
   color: #3d4757;
   overflow-wrap: anywhere;
-  text-wrap: pretty;
 }
 
 @media (min-width: 768px) {
@@ -121,6 +120,8 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
     align-items: start;
     gap: 32px 40px;
+    padding-left: max(var(--space), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--space), env(safe-area-inset-right, 0px));
   }
 
   .pdp__info {
@@ -136,10 +137,9 @@
   }
 
   .pdp__desc {
-    margin-top: 20px;
-    max-width: 44ch;
-    font-size: 1.08rem;
-    line-height: 1.68;
+    margin-top: 16px;
+    font-size: 0.9375rem;
+    line-height: 1.48;
   }
 }
 
