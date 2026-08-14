@@ -25,7 +25,7 @@ class CategoryAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
 class ProductInline(ImageAcceptMixin, TabularInline, TranslationTabularInline):
     model = Product
     extra = 0
-    fields = ('name', 'package', 'category', 'image', 'order', 'is_active')
+    fields = ('name', 'package', 'category', 'image', 'is_active')
     show_change_link = True
     tab = True
 
@@ -111,7 +111,6 @@ class ProductAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
                     'package',
                     'description',
                     'image',
-                    'order',
                     'is_active',
                 ),
             },
