@@ -8,6 +8,7 @@ from apps.catalog.product_filter_defaults import (
 )
 from apps.catalog.selectors import (
     get_brands_for_showcase,
+    get_product,
     get_product_filters,
     get_products,
     group_by_brand,
@@ -79,6 +80,16 @@ class CatalogSelectorsTests(TestCase):
         self.assertEqual(qs.count(), 3)
         self.assertEqual(get_products(category_slug='chips').count(), 0)
         self.assertEqual(get_products(q='Sen').count(), 3)
+
+    def test_get_product_by_slug(self):
+        found = get_product('sauce-0')
+        self.assertIsNotNone(found)
+        self.assertEqual(found.slug, 'sauce-0')
+        missing = Product.objects.get(slug='sauce-1')
+        missing.is_active = False
+        missing.save(update_fields=['is_active'])
+        self.assertIsNone(get_product('sauce-1'))
+        self.assertIsNone(get_product('nope'))
 
     def test_search_is_case_insensitive_for_cyrillic(self):
         self.assertEqual(get_products(q='чили').count(), 3)

@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.http import Http404
 from django.shortcuts import render
 from django.views.decorators.http import require_GET
 
@@ -79,3 +80,12 @@ def products(request):
         else 'pages/products.html'
     )
     return render(request, template, ctx)
+
+
+@require_GET
+def product_detail(request, slug):
+    product = selectors.get_product(slug)
+    if product is None:
+        raise Http404()
+    request.catalog_product = product
+    return render(request, 'pages/product_detail.html', {'product': product})

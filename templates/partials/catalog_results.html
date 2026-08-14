@@ -42,7 +42,7 @@
       <h2 class="product-group__title">{{ brand.name }}</h2>
       <div class="product-grid">
         {% for product in products %}
-          <article class="product-card">
+          <a class="product-card" href="{% url 'product_detail' product.slug %}">
             <div class="product-card__media">
               {% product_image_url product as img_url %}
               {% if img_url %}
@@ -54,7 +54,7 @@
               <h3 class="product-card__name">{{ product.name }}</h3>
               <div class="product-card__package">{{ product.package }}</div>
             </div>
-          </article>
+          </a>
         {% endfor %}
       </div>
     </section>

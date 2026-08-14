@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 
 from django.conf import settings
 from django.http import HttpResponse
-from django.urls import translate_url
+from django.urls import reverse, translate_url
 from django.utils.translation import get_language, gettext as _
 
 NOINDEX_QUERY_KEYS = frozenset({'page', 'q', 'category', 'brand', 'feature'})
@@ -145,6 +145,27 @@ def page_meta(url_name: str | None, document=None) -> tuple[str, str]:
     )
 
 
+def product_page_meta(product) -> tuple[str, str]:
+    name = (getattr(product, 'name', None) or '').strip()
+    brand = ''
+    if getattr(product, 'brand', None) is not None:
+        brand = (product.brand.name or '').strip()
+    package = (getattr(product, 'package', None) or '').strip()
+    title_parts = [part for part in (name, brand) if part]
+    title = ' — '.join([*title_parts, 'AJERES']) if title_parts else 'AJERES'
+    raw = ' '.join((getattr(product, 'description', None) or '').split())
+    if raw:
+        description = raw[:157] + '…' if len(raw) > 160 else raw
+    else:
+        bits = [part for part in (brand, name, package) if part]
+        description = '. '.join(bits)
+        if description:
+            description = f'{description}. AJERES'
+        else:
+            description = _('Дистрибьютор продуктов питания в Узбекистане')
+    return title, description
+
+
 def _postal_address(settings_obj) -> dict | None:
     street = ' '.join((settings_obj.address or '').split())
     if not street:
@@ -187,7 +208,7 @@ def _breadcrumb_label(url_name: str | None, document=None) -> str:
     return labels.get(url_name or '', '')
 
 
-def json_ld_graph(request, settings_obj, document=None) -> str:
+def json_ld_graph(request, settings_obj, document=None, product=None) -> str:
     url_name = getattr(getattr(request, 'resolver_match', None), 'url_name', None)
     canonical = canonical_url(request)
     org = _organization(settings_obj)
@@ -219,7 +240,53 @@ def json_ld_graph(request, settings_obj, document=None) -> str:
         if address:
             local['address'] = address
         graph.append(local)
-    if url_name and url_name != 'home':
+    if url_name == 'product_detail' and product is not None:
+        lang = get_language() or settings.LANGUAGE_CODE
+        catalog_path = _strip_default_lang_prefix(reverse('products'), lang)
+        if not catalog_path.startswith('/'):
+            catalog_path = f'/{catalog_path}'
+        product_node: dict = {
+            '@type': 'Product',
+            'name': product.name,
+            'url': canonical,
+        }
+        desc = ' '.join((product.description or '').split())
+        if desc:
+            product_node['description'] = desc
+        if getattr(product, 'brand', None) is not None:
+            product_node['brand'] = {'@type': 'Brand', 'name': product.brand.name}
+        from apps.core.templatetags.ajeres_tags import product_image_url
+
+        image = product_image_url(product)
+        if image:
+            product_node['image'] = absolute_media_or_static(image)
+        graph.append(product_node)
+        graph.append(
+            {
+                '@type': 'BreadcrumbList',
+                'itemListElement': [
+                    {
+                        '@type': 'ListItem',
+                        'position': 1,
+                        'name': _('Главная'),
+                        'item': f'{public_site_url()}/',
+                    },
+                    {
+                        '@type': 'ListItem',
+                        'position': 2,
+                        'name': _('Каталог'),
+                        'item': f'{public_site_url()}{catalog_path}',
+                    },
+                    {
+                        '@type': 'ListItem',
+                        'position': 3,
+                        'name': product.name,
+                        'item': canonical,
+                    },
+                ],
+            }
+        )
+    elif url_name and url_name != 'home':
         current_name = _breadcrumb_label(url_name, document)
         if current_name:
             graph.append(
@@ -249,15 +316,25 @@ def json_ld_graph(request, settings_obj, document=None) -> str:
 def build_seo_context(request, settings_obj) -> dict:
     url_name = getattr(getattr(request, 'resolver_match', None), 'url_name', None)
     document = None
+    product = getattr(request, 'catalog_product', None)
     if url_name in ('privacy', 'offer'):
         from .selectors import get_legal_document
 
         document = get_legal_document(url_name)
-    title, description = page_meta(url_name, document)
+    if url_name == 'product_detail' and product is not None:
+        title, description = product_page_meta(product)
+    else:
+        title, description = page_meta(url_name, document)
     lang = (get_language() or settings.LANGUAGE_CODE)[:2]
     from django.templatetags.static import static
 
     og_image = absolute_media_or_static(static(OG_IMAGE_PATH))
+    if url_name == 'product_detail' and product is not None:
+        from apps.core.templatetags.ajeres_tags import product_image_url
+
+        product_img = product_image_url(product)
+        if product_img:
+            og_image = absolute_media_or_static(product_img)
     noindex = catalog_query_noindex(request)
     return {
         'seo_title': title,
@@ -274,7 +351,9 @@ def build_seo_context(request, settings_obj) -> dict:
         'seo_og_image': og_image,
         'seo_og_image_width': OG_IMAGE_WIDTH,
         'seo_og_image_height': OG_IMAGE_HEIGHT,
-        'seo_json_ld': json_ld_graph(request, settings_obj, document),
+        'seo_json_ld': json_ld_graph(
+            request, settings_obj, document, product=product
+        ),
     }
 
 

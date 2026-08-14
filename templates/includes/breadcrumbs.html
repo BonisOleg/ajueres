@@ -10,6 +10,12 @@
         <a class="breadcrumbs__link" href="{% url 'home' %}">{% trans 'Главная' %}</a>
         <span class="breadcrumbs__sep" aria-hidden="true">→</span>
       </li>
+      {% if parent_url and parent_label %}
+      <li class="breadcrumbs__item">
+        <a class="breadcrumbs__link" href="{{ parent_url }}">{{ parent_label }}</a>
+        <span class="breadcrumbs__sep" aria-hidden="true">→</span>
+      </li>
+      {% endif %}
       <li class="breadcrumbs__item">
         <span class="breadcrumbs__current" aria-current="page">
           {% if current_label %}

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 from .search import build_search_text
 
@@ -171,6 +172,9 @@ class Product(TimeStampedModel):
 
     def __str__(self):
         return f'{self.brand.name} — {self.name} ({self.package})'
+
+    def get_absolute_url(self) -> str:
+        return reverse('product_detail', args=[self.slug])
 
     def is_snack(self) -> bool:
         category = self.category if self.category_id else None

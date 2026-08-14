@@ -231,6 +231,14 @@ def get_products(
     return qs
 
 
+def get_product(slug: str) -> Product | None:
+    """Публічний товар за slug або None (404 на view)."""
+    slug = (slug or '').strip()
+    if not slug:
+        return None
+    return get_products().filter(slug=slug).first()
+
+
 def build_product_search_q(query: str) -> Q | None:
     """
     Кожне слово запиту має входити в `Product.search_text` (AND).

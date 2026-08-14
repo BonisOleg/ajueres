@@ -41,4 +41,37 @@ class StaticI18nSitemap(Sitemap):
         return getattr(doc, 'updated_at', None)
 
 
-SITEMAPS = {'static': StaticI18nSitemap}
+class ProductI18nSitemap(Sitemap):
+    changefreq = 'weekly'
+    priority = 0.6
+
+    def get_protocol(self, protocol=None):
+        return urlparse(public_site_url()).scheme or 'https'
+
+    def get_domain(self, site=None):
+        return urlparse(public_site_url()).netloc
+
+    def items(self):
+        from django.conf import settings
+
+        from apps.catalog.selectors import get_products
+
+        products = list(get_products())
+        return [
+            (lang, product)
+            for lang, _label in settings.LANGUAGES
+            for product in products
+        ]
+
+    def location(self, item):
+        lang, product = item
+        with translation.override(lang):
+            path = reverse('product_detail', args=[product.slug])
+        return _strip_default_lang_prefix(path, lang)
+
+    def lastmod(self, item):
+        _lang, product = item
+        return getattr(product, 'updated_at', None)
+
+
+SITEMAPS = {'static': StaticI18nSitemap, 'products': ProductI18nSitemap}

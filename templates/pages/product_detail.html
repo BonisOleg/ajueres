@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load i18n static ajeres_tags %}
+
+{% block title %}{{ seo_title }}{% endblock %}
+{% block meta_description %}{{ seo_description }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/contacts.css' %}">
+<link rel="stylesheet" href="{% static 'css/product-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="contacts-hero catalog-hero pdp-hero" aria-labelledby="pdp-title">
+  <div class="contacts-hero__inner">
+    {% trans 'Каталог' as catalog_label %}
+    {% url 'products' as products_url %}
+    {% include "includes/breadcrumbs.html" with parent_url=products_url parent_label=catalog_label current_label=product.name %}
+  </div>
+</section>
+
+<article class="pdp">
+  <div class="container pdp__grid">
+    <div class="pdp__media">
+      {% product_image_url product as img_url %}
+      {% if img_url %}
+        <img src="{{ img_url }}" alt="{{ product.name }}" width="640" height="640">
+      {% endif %}
+    </div>
+    <div class="pdp__info">
+      <h1 class="pdp__title" id="pdp-title">{{ product.name }}</h1>
+      <p class="pdp__meta">
+        <span>{{ product.brand.name }}</span>
+        {% if product.package %}
+          <span class="pdp__meta-sep" aria-hidden="true">·</span>
+          <span>{{ product.package }}</span>
+        {% endif %}
+      </p>
+      {% with filters=product.extra_filters.all %}
+        {% if filters %}
+          <ul class="pdp__filters">
+            {% for item in filters %}
+              <li class="pdp__filter">
+                <span class="pdp__check" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <span>{{ item.name }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      {% if product.description %}
+        <div class="pdp__desc">{{ product.description|linebreaksbr }}</div>
+      {% endif %}
+    </div>
+  </div>
+</article>
+{% endblock %}
