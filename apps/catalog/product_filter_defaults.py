@@ -1,85 +1,190 @@
-"""Ідемпотентний seed додаткових фільтрів товару (іконки зі static)."""
+"""Ідемпотентний seed фільтрів товару (іконки зі static, різні набори по брендах)."""
 
 from __future__ import annotations
 
 PRODUCT_FILTERS = (
     {
-        'slug': 'natural',
+        'slug': 'natural-product',
         'order': 10,
-        'name_ru': 'Натуральные ингредиенты',
-        'name_en': 'Natural ingredients',
-        'name_uz': 'Tabiiy ingredientlar',
+        'name_ru': 'Натуральный продукт',
+        'name_en': 'Natural product',
+        'name_uz': 'Tabiiy mahsulot',
+    },
+    {
+        'slug': 'gmo-free',
+        'order': 20,
+        'name_ru': 'Без ГМО',
+        'name_en': 'Non-GMO',
+        'name_uz': 'GMOsiz',
     },
     {
         'slug': 'palm-oil-free',
-        'order': 20,
+        'order': 30,
         'name_ru': 'Без пальмового масла',
         'name_en': 'Palm oil free',
         'name_uz': 'Palma yog‘isiz',
     },
     {
-        'slug': 'no-preservatives',
-        'order': 30,
-        'name_ru': 'Без консервантов',
-        'name_en': 'No preservatives',
-        'name_uz': 'Konservantsiz',
+        'slug': 'healthy-snack',
+        'order': 40,
+        'name_ru': 'Полезный снэк',
+        'name_en': 'Healthy snack',
+        'name_uz': 'Foydali gazak',
     },
     {
-        'slug': 'cruelty-free',
-        'order': 40,
-        'name_ru': 'Без тестов на животных',
-        'name_en': 'Cruelty-free',
-        'name_uz': 'Hayvonlarda sinovsiz',
+        'slug': 'sugar-free',
+        'order': 50,
+        'name_ru': 'Без сахара',
+        'name_en': 'No sugar',
+        'name_uz': 'Shakarsiz',
+    },
+    {
+        'slug': 'popped-never-fried',
+        'order': 60,
+        'name_ru': 'Открыли и никогда не жареные',
+        'name_en': 'Popped and never fried',
+        'name_uz': 'Portlatilgan, qovurilmagan',
+    },
+    {
+        'slug': 'all-natural',
+        'order': 70,
+        'name_ru': 'Все натуральное',
+        'name_en': 'All natural',
+        'name_uz': 'To‘liq tabiiy',
+    },
+    {
+        'slug': 'whole-grain',
+        'order': 80,
+        'name_ru': 'Цельнозерновое',
+        'name_en': 'Whole grain',
+        'name_uz': 'Butun don',
     },
     {
         'slug': 'gluten-free',
-        'order': 50,
+        'order': 90,
         'name_ru': 'Без глютена',
         'name_en': 'Gluten-free',
         'name_uz': 'Glutensiz',
     },
     {
-        'slug': 'certified',
-        'order': 60,
-        'name_ru': 'Сертифицировано',
-        'name_en': 'Certified',
-        'name_uz': 'Sertifikatlangan',
+        'slug': 'no-preservatives',
+        'order': 100,
+        'name_ru': 'Без консервантов',
+        'name_en': 'No preservatives',
+        'name_uz': 'Konservantsiz',
     },
     {
-        'slug': 'recyclable',
-        'order': 70,
-        'name_ru': 'Перерабатываемая упаковка',
-        'name_en': 'Recyclable',
-        'name_uz': 'Qayta ishlanadigan',
+        'slug': 'no-msg',
+        'order': 110,
+        'name_ru': 'Без глутамата натрия',
+        'name_en': 'No MSG',
+        'name_uz': 'Natriy glutamatsiz',
     },
     {
-        'slug': 'natural-origin',
-        'order': 80,
-        'name_ru': 'Натуральное происхождение',
-        'name_en': 'Natural origin',
-        'name_uz': 'Tabiiy kelib chiqish',
+        'slug': 'less-fat-60',
+        'order': 120,
+        'name_ru': 'На 60% меньше жира',
+        'name_en': '60% less fat',
+        'name_uz': '60% kam yog‘',
+    },
+    {
+        'slug': 'popped-method',
+        'order': 130,
+        'name_ru': 'Взрывной способ приготовления',
+        'name_en': 'Popped, not fried',
+        'name_uz': 'Portlatib tayyorlangan',
+    },
+    {
+        'slug': 'rich-in-fiber',
+        'order': 140,
+        'name_ru': 'Богаты клетчаткой',
+        'name_en': 'Rich in fiber',
+        'name_uz': 'Tola moddasiga boy',
+    },
+    {
+        'slug': 'natural-yeast',
+        'order': 150,
+        'name_ru': 'Собственные натуральные дрожжи',
+        'name_en': 'Natural yeast',
+        'name_uz': 'Tabiiy xamirturush',
+    },
+    {
+        'slug': 'slow-fermentation',
+        'order': 160,
+        'name_ru': 'Медленное брожение',
+        'name_en': 'Slow fermentation',
+        'name_uz': 'Sekin fermentatsiya',
+    },
+    {
+        'slug': 'natural-flavors',
+        'order': 170,
+        'name_ru': 'Натуральные ароматизаторы',
+        'name_en': 'Natural flavors',
+        'name_uz': 'Tabiiy aromatizatorlar',
+    },
+    {
+        'slug': 'natural-colors',
+        'order': 180,
+        'name_ru': 'Натуральные красители',
+        'name_en': 'Natural colors',
+        'name_uz': 'Tabiiy bo‘yoqlar',
+    },
+    {
+        'slug': 'sourdough',
+        'order': 190,
+        'name_ru': 'На закваске',
+        'name_en': 'Sourdough',
+        'name_uz': 'Xamiruvala asosida',
     },
 )
 
 FILTER_SLUGS = {row['slug'] for row in PRODUCT_FILTERS}
 
-# slug товару → фільтри (add, не знімає інші призначення з адмінки)
-PRODUCT_FILTER_ASSIGNMENTS = {
-    'sen-soy-rice-paper-100-18': (
-        'gluten-free',
-        'palm-oil-free',
-        'no-preservatives',
-        'natural',
-    ),
-    'sen-soy-sushi-nori-28-4': (
-        'gluten-free',
-        'palm-oil-free',
-        'no-preservatives',
-        'natural',
-    ),
-    'sen-soy-rice-vermicelli-noodle-300-15': ('gluten-free',),
-    'sen-soy-fo-kho-noodle-200-16': ('gluten-free',),
-    'sen-soy-rice-vinegar-220-27': ('gluten-free',),
+SEN_SOY_FILTERS = (
+    'natural-product',
+    'gmo-free',
+    'palm-oil-free',
+    'healthy-snack',
+    'sugar-free',
+)
+RICEUP_CHIPS_FILTERS = (
+    'popped-never-fried',
+    'all-natural',
+    'whole-grain',
+    'gluten-free',
+    'gmo-free',
+    'no-preservatives',
+    'no-msg',
+)
+RICEUP_TORTILLA_FILTERS = (
+    'less-fat-60',
+    'popped-method',
+    'rich-in-fiber',
+    'gluten-free',
+    'gmo-free',
+    'no-msg',
+    'no-preservatives',
+)
+KRAMBALS_FILTERS = (
+    'natural-yeast',
+    'slow-fermentation',
+    'natural-flavors',
+    'natural-colors',
+    'palm-oil-free',
+    'no-preservatives',
+)
+HULIGAN_FILTERS = (
+    'sourdough',
+    'palm-oil-free',
+    'no-preservatives',
+    'no-msg',
+)
+
+BRAND_FILTER_SLUGS: dict[str, tuple[str, ...]] = {
+    'sen-soy': SEN_SOY_FILTERS,
+    'riceup': tuple(dict.fromkeys((*RICEUP_CHIPS_FILTERS, *RICEUP_TORTILLA_FILTERS))),
+    'krambals': KRAMBALS_FILTERS,
+    'huligan': HULIGAN_FILTERS,
 }
 
 
@@ -87,13 +192,26 @@ def filter_icon_static_path(slug: str) -> str:
     return f'img/product-filters/{slug}.png'
 
 
+def filters_for_product(product) -> tuple[str, ...]:
+    brand = getattr(product, 'brand', None)
+    brand_slug = getattr(brand, 'slug', '') or ''
+    product_slug = getattr(product, 'slug', '') or ''
+    if brand_slug == 'riceup':
+        if product_slug.startswith('riceup-tortilla-'):
+            return RICEUP_TORTILLA_FILTERS
+        return RICEUP_CHIPS_FILTERS
+    return BRAND_FILTER_SLUGS.get(brand_slug, ())
+
+
 def ensure_product_filters() -> int:
-    """Створює 8 фільтрів, не перезаписує вже змінені назви."""
+    """Створює/оновлює фільтри; старі generic — деактивує."""
     from .models import ProductFilter
 
     created = 0
+    keep = set()
     for row in PRODUCT_FILTERS:
-        _, was_created = ProductFilter.objects.get_or_create(
+        keep.add(row['slug'])
+        obj, was_created = ProductFilter.objects.get_or_create(
             slug=row['slug'],
             defaults={
                 'name': row['name_ru'],
@@ -106,11 +224,20 @@ def ensure_product_filters() -> int:
         )
         if was_created:
             created += 1
+            continue
+        obj.name = row['name_ru']
+        obj.name_ru = row['name_ru']
+        obj.name_en = row['name_en']
+        obj.name_uz = row['name_uz']
+        obj.order = row['order']
+        obj.is_active = True
+        obj.save()
+    ProductFilter.objects.exclude(slug__in=keep).update(is_active=False)
     return created
 
 
 def ensure_product_filter_assignments() -> int:
-    """Призначає фільтри за slug; ідемпотентно, не знімає ручні."""
+    """Призначає набір фільтрів бренду; ідемпотентно."""
     from .models import Product, ProductFilter
 
     ensure_product_filters()
@@ -119,16 +246,13 @@ def ensure_product_filter_assignments() -> int:
         for item in ProductFilter.objects.filter(slug__in=FILTER_SLUGS)
     }
     updated = 0
-    for product_slug, filter_slugs in PRODUCT_FILTER_ASSIGNMENTS.items():
-        product = Product.objects.filter(slug=product_slug).first()
-        if product is None:
-            continue
-        to_add = [filters[slug] for slug in filter_slugs if slug in filters]
-        if not to_add:
-            continue
+    for product in Product.objects.select_related('brand'):
+        slugs = filters_for_product(product)
+        to_set = [filters[slug] for slug in slugs if slug in filters]
         before = set(product.extra_filters.values_list('pk', flat=True))
-        product.extra_filters.add(*to_add)
-        after = set(product.extra_filters.values_list('pk', flat=True))
-        if after != before:
-            updated += 1
+        after = {item.pk for item in to_set}
+        if before == after:
+            continue
+        product.extra_filters.set(to_set)
+        updated += 1
     return updated

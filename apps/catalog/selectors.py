@@ -172,11 +172,19 @@ def selection_includes_snacks(
     return any(slug in snacks for slug in selected)
 
 
-def get_product_filters() -> list[ProductFilter]:
-    """Активні додаткові фільтри для ряду іконок у каталозі."""
-    return list(
-        ProductFilter.objects.filter(is_active=True).order_by('order', 'name')
-    )
+def get_product_filters(*, brand_slug: str | None = None) -> list[ProductFilter]:
+    """Фільтри каталогу: лише для вибраного бренду, у фіксованому порядку."""
+    from .product_filter_defaults import BRAND_FILTER_SLUGS
+
+    brand = (brand_slug or '').strip()
+    slugs = BRAND_FILTER_SLUGS.get(brand)
+    if not slugs:
+        return []
+    found = {
+        item.slug: item
+        for item in ProductFilter.objects.filter(is_active=True, slug__in=slugs)
+    }
+    return [found[slug] for slug in slugs if slug in found]
 
 
 def get_products(
@@ -217,8 +225,6 @@ def get_products(
 
     features = parse_category_slugs(extra_filter_slugs)
     if features:
-        snacks_slugs = get_snacks_slugs()
-        qs = qs.exclude(category__slug__in=snacks_slugs)
         qs = qs.filter(
             extra_filters__slug__in=features,
             extra_filters__is_active=True,

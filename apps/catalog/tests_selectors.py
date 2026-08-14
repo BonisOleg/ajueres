@@ -236,7 +236,7 @@ class ProductFilterSelectorsTests(TestCase):
         self.gluten.is_active = False
         self.gluten.save()
         self.assertEqual(get_products(extra_filter_slugs=['gluten-free']).count(), 0)
-        names = [item.slug for item in get_product_filters()]
+        names = [item.slug for item in get_product_filters(brand_slug='sen-soy')]
         self.assertNotIn('gluten-free', names)
 
     def test_ensure_seed_is_idempotent(self):
@@ -264,22 +264,36 @@ class ProductFilterSelectorsTests(TestCase):
         self.assertEqual(second, 0)
         self.assertEqual(
             slugs,
-            {'gluten-free', 'palm-oil-free', 'no-preservatives', 'natural'},
+            {
+                'natural-product',
+                'gmo-free',
+                'palm-oil-free',
+                'healthy-snack',
+                'sugar-free',
+            },
         )
 
-    def test_catalog_page_shows_assigned_badge(self):
+    def test_catalog_page_hides_filters_without_brand(self):
         from django.urls import reverse
 
         ensure_product_filters()
         gf = ProductFilter.objects.get(slug='gluten-free')
         self.with_gluten.extra_filters.add(gf)
         response = self.client.get(reverse('products'))
+        html = response.content.decode()
+        self.assertRegex(html, r'id="catalog-features"[^>]*\bhidden\b')
+        self.assertNotIn('catalog-feature__icon', html)
+
+    def test_catalog_page_shows_brand_filter_icons(self):
+        from django.urls import reverse
+
+        ensure_product_filters()
+        response = self.client.get(reverse('products'), {'brand': 'sen-soy'})
         self.assertContains(response, 'catalog-features')
         self.assertContains(response, 'catalog-feature__icon')
-        self.assertNotContains(response, 'product-card__badge')
-        self.assertContains(response, gf.name)
+        self.assertContains(response, 'natural-product')
 
-    def test_feature_filter_excludes_snacks(self):
+    def test_feature_filter_includes_snacks(self):
         snacks = Category.objects.create(slug='snacks', name='Снеки', order=10)
         chips = Category.objects.create(
             slug='chips', name='Чипсы', parent=snacks, order=0
@@ -296,8 +310,7 @@ class ProductFilterSelectorsTests(TestCase):
         )
         snack.extra_filters.add(self.gluten)
         qs = get_products(extra_filter_slugs=['gluten-free'])
-        self.assertEqual(list(qs), [self.with_gluten])
-        self.assertNotIn(snack, qs)
+        self.assertEqual(set(qs), {self.with_gluten, snack})
 
     def test_snacks_category_hides_general_feature_row(self):
         from django.urls import reverse
@@ -326,13 +339,13 @@ class CatalogAdminImagePreviewTests(TestCase):
 
     def test_filter_icon_shows_static_fallback_preview(self):
         ensure_product_filters()
-        filt = ProductFilter.objects.get(slug='natural')
+        filt = ProductFilter.objects.get(slug='natural-product')
         response = self.client.get(
             self.reverse('admin:catalog_productfilter_change', args=[filt.pk]),
         )
         self.assertEqual(response.status_code, 200)
         content = response.content.decode()
-        self.assertIn('img/product-filters/natural.png', content)
+        self.assertIn('img/product-filters/natural-product.png', content)
         self.assertIn('admin-image-preview', content)
 
     def test_product_change_form_has_image_preview_widget(self):
