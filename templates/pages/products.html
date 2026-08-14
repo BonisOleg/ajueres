@@ -59,14 +59,17 @@
           </div>
         </div>
 
-        <form class="catalog-search"
+        <div class="catalog-toolbar">
+          {% include "partials/catalog_brand_filter.html" %}
+
+          <form class="catalog-search"
               method="get"
               action="{% url 'products' %}"
               hx-get="{% url 'products' %}"
               hx-trigger="keyup changed delay:300ms from:input[name=q], search"
               hx-target="#catalog-results"
               hx-push-url="true"
-              hx-include="#catalog-search-filters">
+              hx-include="#catalog-search-filters, #catalog-brand">
           <div id="catalog-search-filters">
             {% include "partials/catalog_search_filters.html" %}
           </div>
@@ -76,6 +79,7 @@
           <label class="sr-only" for="catalog-q">{% trans 'Поиск' %}</label>
           <input id="catalog-q" type="search" name="q" value="{{ search_q }}" placeholder="{% trans 'Поиск товаров…' %}" autocomplete="off">
         </form>
+        </div>
 
         {% include "partials/catalog_feature_filters.html" %}
       </div>

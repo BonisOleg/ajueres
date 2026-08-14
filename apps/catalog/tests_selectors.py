@@ -268,10 +268,61 @@ class ProductFilterSelectorsTests(TestCase):
                 'natural-product',
                 'gmo-free',
                 'palm-oil-free',
-                'healthy-snack',
                 'sugar-free',
             },
         )
+
+    def test_filters_for_product_types(self):
+        from apps.catalog.product_filter_defaults import filters_for_product
+
+        somen = Product.objects.create(
+            brand=self.brand,
+            category=self.cat,
+            slug='sen-soy-somen-noodle-300-1',
+            name='Лапша «Somen»',
+            name_ru='Лапша «Somen»',
+            package='300 гр.',
+            package_ru='300 гр.',
+            image=_tiny_png(),
+        )
+        chili = Product.objects.create(
+            brand=self.brand,
+            category=self.cat,
+            slug='sen-soy-sweet-chili-sauce-260-2',
+            name='Соус «Сладкий Чили»',
+            name_ru='Соус «Сладкий Чили»',
+            package='260 гр.',
+            package_ru='260 гр.',
+            image=_tiny_png(),
+        )
+        riceup = Brand.objects.create(slug='riceup', name='RiceUP')
+        chips_cat = Category.objects.create(slug='chips', name='Чипсы')
+        rice_chip = Product.objects.create(
+            brand=riceup,
+            category=chips_cat,
+            slug='riceup-rice-chips-sea-salt-60',
+            name='Рисовые чипсы «Морская Соль»',
+            name_ru='Рисовые чипсы «Морская Соль»',
+            package='60 гр.',
+            package_ru='60 гр.',
+            image=_tiny_png(),
+        )
+        tortilla = Product.objects.create(
+            brand=riceup,
+            category=chips_cat,
+            slug='riceup-tortilla-salt-60',
+            name='Тортилья-чипсы «С Солью»',
+            name_ru='Тортилья-чипсы «С Солью»',
+            package='60 гр.',
+            package_ru='60 гр.',
+            image=_tiny_png(),
+        )
+        self.assertEqual(filters_for_product(somen), ('palm-oil-free',))
+        self.assertEqual(filters_for_product(chili), ())
+        self.assertIn('popped-never-fried', filters_for_product(rice_chip))
+        self.assertNotIn('less-fat-60', filters_for_product(rice_chip))
+        self.assertIn('less-fat-60', filters_for_product(tortilla))
+        self.assertNotIn('whole-grain', filters_for_product(tortilla))
 
     def test_catalog_page_hides_filters_without_brand(self):
         from django.urls import reverse
@@ -292,6 +343,19 @@ class ProductFilterSelectorsTests(TestCase):
         self.assertContains(response, 'catalog-features')
         self.assertContains(response, 'catalog-feature__icon')
         self.assertContains(response, 'natural-product')
+
+    def test_catalog_brand_dropdown_filters(self):
+        from django.urls import reverse
+
+        ensure_product_filters()
+        all_page = self.client.get(reverse('products'))
+        self.assertContains(all_page, 'id="catalog-brand"')
+        self.assertContains(all_page, 'Все бренды')
+        self.assertNotContains(all_page, 'catalog-feature__icon')
+        filtered = self.client.get(reverse('products'), {'brand': 'sen-soy'})
+        self.assertContains(filtered, 'selected')
+        self.assertContains(filtered, 'value="sen-soy"')
+        self.assertContains(filtered, 'catalog-feature__icon')
 
     def test_feature_filter_includes_snacks(self):
         snacks = Category.objects.create(slug='snacks', name='Снеки', order=10)

@@ -12,6 +12,9 @@ def _catalog_context(request):
     )
     snacks_slugs = selectors.get_snacks_slugs()
     brand = (request.GET.get('brand') or '').strip() or None
+    brands = selectors.get_brands_for_showcase(featured_only=False)
+    if brand and brand not in {item.slug for item in brands}:
+        brand = None
     features_selected = selectors.parse_category_slugs(
         request.GET.getlist('feature')
     )
@@ -57,6 +60,7 @@ def _catalog_context(request):
         'show_general_features': bool(brand),
         'snacks_slugs': snacks_slugs,
         'active_brand': brand,
+        'catalog_brands': brands,
         'search_q': selectors.normalize_search_query(q) or (q or '').strip(),
         'brands_showcase': selectors.get_brands_for_showcase(featured_only=True),
         'total_count': page_obj.paginator.count,

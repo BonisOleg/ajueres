@@ -1,0 +1,24 @@
+{% load i18n %}
+<div
+  id="catalog-brand-filter"
+  class="catalog-brand"
+  {% if oob %}hx-swap-oob="true"{% endif %}
+>
+  <label class="catalog-brand__label" for="catalog-brand">{% trans 'Бренд' %}</label>
+  <select
+    id="catalog-brand"
+    class="catalog-brand__select"
+    name="brand"
+    hx-get="{% url 'products' %}"
+    hx-target="#catalog-results"
+    hx-push-url="true"
+    hx-indicator="#catalog-results"
+    hx-include="#catalog-q, #catalog-search-filters-cats"
+    aria-label="{% trans 'Бренд' %}"
+  >
+    <option value="">{% trans 'Все бренды' %}</option>
+    {% for item in catalog_brands %}
+      <option value="{{ item.slug }}"{% if item.slug == active_brand %} selected{% endif %}>{{ item.name }}</option>
+    {% endfor %}
+  </select>
+</div>
