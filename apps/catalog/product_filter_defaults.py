@@ -182,6 +182,8 @@ HULIGAN_FILTERS = (
 
 BRAND_FILTER_SLUGS: dict[str, tuple[str, ...]] = {
     'sen-soy': SEN_SOY_FILTERS,
+    'paprichi': SEN_SOY_FILTERS,
+    'yamchan': SEN_SOY_FILTERS,
     'riceup': tuple(dict.fromkeys((*RICEUP_CHIPS_FILTERS, *RICEUP_TORTILLA_FILTERS))),
     'krambals': KRAMBALS_FILTERS,
     'huligan': HULIGAN_FILTERS,
@@ -199,53 +201,17 @@ def _text(product) -> str:
 
 
 def filters_for_product(product) -> tuple[str, ...]:
-    """Лише фільтри, які відповідають типу SKU (не весь бренд на кожен товар)."""
+    """Набір іконок/тегів за брендом (RiceUP — окремо чипси vs тортильї)."""
     brand = getattr(product, 'brand', None)
     brand_slug = getattr(brand, 'slug', '') or ''
-    category = getattr(product, 'category', None)
-    cat = getattr(category, 'slug', '') or ''
     blob = _text(product)
 
     if brand_slug == 'riceup':
         if 'tortilla' in blob:
             return RICEUP_TORTILLA_FILTERS
-        if 'rice-chips' in blob or 'рисовые чипсы' in blob:
-            return RICEUP_CHIPS_FILTERS
-        return ()
+        return RICEUP_CHIPS_FILTERS
 
-    if brand_slug == 'krambals':
-        return KRAMBALS_FILTERS
-
-    if brand_slug == 'huligan':
-        return HULIGAN_FILTERS
-
-    if brand_slug != 'sen-soy':
-        return ()
-
-    is_nori_chip = cat == 'chips' or 'nori-chips' in blob or 'chips-nori' in blob or 'чипсы нори' in blob
-    is_sushi_nori = cat == 'seaweed' or 'sushi-nori' in blob or 'суши нори' in blob
-    is_rice_paper = cat == 'rice-paper' or 'rice-paper' in blob or 'рисова' in blob or 'рисовая бумага' in blob
-    is_rice_noodle = (
-        'vermicelli' in blob
-        or 'fo-kho' in blob
-        or 'fo - kho' in blob
-        or 'рисовая лапша' in blob
-    )
-    is_wheat_noodle = any(
-        token in blob for token in ('somen', 'udon', 'egg-noodle', 'egg noodle', 'egg noodles')
-    )
-
-    if is_nori_chip:
-        return ('natural-product', 'gmo-free', 'palm-oil-free', 'healthy-snack')
-    if is_sushi_nori:
-        return ('natural-product', 'gmo-free', 'palm-oil-free')
-    if is_rice_paper:
-        return ('natural-product', 'gmo-free', 'palm-oil-free', 'sugar-free')
-    if is_rice_noodle:
-        return ('gmo-free', 'palm-oil-free')
-    if is_wheat_noodle:
-        return ('palm-oil-free',)
-    return ()
+    return BRAND_FILTER_SLUGS.get(brand_slug, ())
 
 
 def ensure_product_filters() -> int:

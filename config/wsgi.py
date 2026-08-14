@@ -51,6 +51,13 @@ def _bootstrap_vercel() -> None:
     else:
         # Managed Postgres: do not run full seed_site (it can overwrite settings).
         ensure_default_superuser()
+        from apps.catalog.product_filter_defaults import (
+            ensure_product_filter_assignments,
+            ensure_product_filters,
+        )
+
+        ensure_product_filters()
+        ensure_product_filter_assignments()
 
     call_command('ensure_legal', verbosity=0)
 

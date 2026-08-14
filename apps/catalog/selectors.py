@@ -174,17 +174,25 @@ def selection_includes_snacks(
 
 def get_product_filters(*, brand_slug: str | None = None) -> list[ProductFilter]:
     """Фільтри каталогу: лише для вибраного бренду, у фіксованому порядку."""
-    from .product_filter_defaults import BRAND_FILTER_SLUGS
+    from .product_filter_defaults import BRAND_FILTER_SLUGS, ensure_product_filters
 
     brand = (brand_slug or '').strip()
     slugs = BRAND_FILTER_SLUGS.get(brand)
     if not slugs:
         return []
-    found = {
-        item.slug: item
-        for item in ProductFilter.objects.filter(is_active=True, slug__in=slugs)
-    }
-    return [found[slug] for slug in slugs if slug in found]
+
+    def _ordered() -> list[ProductFilter]:
+        found = {
+            item.slug: item
+            for item in ProductFilter.objects.filter(is_active=True, slug__in=slugs)
+        }
+        return [found[slug] for slug in slugs if slug in found]
+
+    rows = _ordered()
+    if len(rows) < len(slugs):
+        ensure_product_filters()
+        rows = _ordered()
+    return rows
 
 
 def get_products(
@@ -242,7 +250,32 @@ def get_product(slug: str) -> Product | None:
     slug = (slug or '').strip()
     if not slug:
         return None
-    return get_products().filter(slug=slug).first()
+    product = get_products().filter(slug=slug).first()
+    if product is not None:
+        _ensure_product_extra_filters(product)
+    return product
+
+
+def _ensure_product_extra_filters(product: Product) -> None:
+    """Якщо теги порожні — підставити набір бренду (самолікування пропущеного seed)."""
+    from .product_filter_defaults import FILTER_SLUGS, ensure_product_filters, filters_for_product
+
+    if product.extra_filters.exists():
+        return
+    slugs = filters_for_product(product)
+    if not slugs:
+        return
+    ensure_product_filters()
+    filters = {
+        item.slug: item
+        for item in ProductFilter.objects.filter(slug__in=FILTER_SLUGS)
+    }
+    to_set = [filters[item] for item in slugs if item in filters]
+    if to_set:
+        product.extra_filters.set(to_set)
+        cache = getattr(product, '_prefetched_objects_cache', None)
+        if cache is not None:
+            cache.pop('extra_filters', None)
 
 
 def build_product_search_q(query: str) -> Q | None:

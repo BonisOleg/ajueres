@@ -45,6 +45,14 @@ class ProductDetailViewTests(TestCase):
         self.assertContains(response, 'class="pdp__media"')
         self.assertContains(response, f'href="{reverse("products")}"')
 
+    def test_pdp_fills_brand_filters_when_empty(self):
+        self.product.extra_filters.clear()
+        response = self.client.get(
+            reverse('product_detail', args=[self.product.slug])
+        )
+        self.assertContains(response, 'class="pdp__check"')
+        self.assertContains(response, 'Натуральный продукт')
+
     def test_inactive_product_404(self):
         self.product.is_active = False
         self.product.save(update_fields=['is_active'])

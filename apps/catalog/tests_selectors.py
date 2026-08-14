@@ -268,6 +268,7 @@ class ProductFilterSelectorsTests(TestCase):
                 'natural-product',
                 'gmo-free',
                 'palm-oil-free',
+                'healthy-snack',
                 'sugar-free',
             },
         )
@@ -317,8 +318,15 @@ class ProductFilterSelectorsTests(TestCase):
             package_ru='60 гр.',
             image=_tiny_png(),
         )
-        self.assertEqual(filters_for_product(somen), ('palm-oil-free',))
-        self.assertEqual(filters_for_product(chili), ())
+        sen_soy = (
+            'natural-product',
+            'gmo-free',
+            'palm-oil-free',
+            'healthy-snack',
+            'sugar-free',
+        )
+        self.assertEqual(filters_for_product(somen), sen_soy)
+        self.assertEqual(filters_for_product(chili), sen_soy)
         self.assertIn('popped-never-fried', filters_for_product(rice_chip))
         self.assertNotIn('less-fat-60', filters_for_product(rice_chip))
         self.assertIn('less-fat-60', filters_for_product(tortilla))
@@ -341,6 +349,15 @@ class ProductFilterSelectorsTests(TestCase):
         ensure_product_filters()
         response = self.client.get(reverse('products'), {'brand': 'sen-soy'})
         self.assertContains(response, 'catalog-features')
+        self.assertContains(response, 'catalog-feature__icon')
+        self.assertContains(response, 'natural-product')
+
+    def test_catalog_page_shows_paprichi_filter_icons(self):
+        from django.urls import reverse
+
+        Brand.objects.create(slug='paprichi', name='Папричи', logo=_tiny_png())
+        ensure_product_filters()
+        response = self.client.get(reverse('products'), {'brand': 'paprichi'})
         self.assertContains(response, 'catalog-feature__icon')
         self.assertContains(response, 'natural-product')
 
