@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from django.conf import settings
+from django.core.exceptions import RequestDataTooBig, TooManyFieldsSent
 from django.utils import translation
 
 
@@ -62,3 +63,24 @@ class AdminForceRussianMiddleware:
                 translation.activate(previous)
             else:
                 translation.deactivate()
+
+
+class AdminUploadLimitMiddleware:
+    """Explain oversized admin uploads instead of a blank 400/413 page."""
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        try:
+            return self.get_response(request)
+        except (RequestDataTooBig, TooManyFieldsSent):
+            if not _is_admin_path(request.path):
+                raise
+            from django.contrib import messages
+            from django.http import HttpResponseRedirect
+
+            from .admin_guidelines import UPLOAD_TOO_LARGE_REQUEST
+
+            messages.error(request, UPLOAD_TOO_LARGE_REQUEST)
+            return HttpResponseRedirect(request.get_full_path())

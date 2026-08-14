@@ -98,7 +98,7 @@
             {{ field.label_tag }}
             {{ field }}
             {% if field.help_text %}
-              <p class="text-font-subtle-light dark:text-font-subtle-dark text-sm">{{ field.help_text }}</p>
+              <p class="admin-field-hint">{{ field.help_text }}</p>
             {% endif %}
             {% if field.errors %}<div class="text-red-600">{{ field.errors }}</div>{% endif %}
           </div>
@@ -115,6 +115,9 @@
                 <div class="site-content-editor__field">
                   {{ field.label_tag }}
                   {{ field }}
+                  {% if field.help_text %}
+                    <p class="admin-field-hint">{{ field.help_text }}</p>
+                  {% endif %}
                   {% if field.errors %}<div class="text-red-600">{{ field.errors }}</div>{% endif %}
                 </div>
               {% empty %}
@@ -133,7 +136,7 @@
         <h2 class="site-content-editor__fieldset-title text-font-important-light dark:text-font-important-dark font-semibold">
           Фон секции
         </h2>
-        <p class="text-font-subtle-light dark:text-font-subtle-dark text-sm">
+        <p class="admin-field-hint">
           Цвет или картинка. Пустые поля — вид сайта по умолчанию.
         </p>
         {% for field in style_fields %}
@@ -141,7 +144,7 @@
             {{ field.label_tag }}
             {{ field }}
             {% if field.help_text %}
-              <p class="text-font-subtle-light dark:text-font-subtle-dark text-sm">{{ field.help_text }}</p>
+              <p class="admin-field-hint">{{ field.help_text }}</p>
             {% endif %}
             {% if field.errors %}<div class="text-red-600">{{ field.errors }}</div>{% endif %}
           </div>

@@ -5,7 +5,7 @@ from __future__ import annotations
 from django import forms
 from django.conf import settings
 from django.contrib import messages
-from django.core.exceptions import ValidationError
+from django.core.exceptions import SuspiciousFileOperation, ValidationError
 from django.db import IntegrityError
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
@@ -13,6 +13,7 @@ from django.templatetags.static import static
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+from .admin_guidelines import apply_image_guidelines, apply_text_guidelines
 from .admin_utils import format_admin_save_error
 
 from .admin_site_content_widgets import (
@@ -128,6 +129,7 @@ class SitePageContentForm(forms.Form):
                     required=False,
                     widget=CmsAdminImageWidget(preview_url=preview),
                 )
+                apply_image_guidelines(image_field, field_name='image', cms_key=key)
                 if block.image:
                     image_field.initial = block.image
                 self.fields[_field_name(page, key, 'image')] = image_field
@@ -144,12 +146,14 @@ class SitePageContentForm(forms.Form):
                     initial = getattr(block, attr, None)
                     if initial is None:
                         initial = block.text_html if lang == 'ru' else ''
-                    self.fields[_field_name(page, key, attr)] = forms.CharField(
+                    text_field = forms.CharField(
                         label=f'{label} [{CMS_LANG_LABELS.get(lang, lang.upper())}]',
                         required=False,
                         initial=initial or '',
                         widget=widget,
                     )
+                    apply_text_guidelines(text_field, field_name=key, cms_key=key)
+                    self.fields[_field_name(page, key, attr)] = text_field
 
         if style_obj is not None:
             self.fields['style_bg_color'] = forms.CharField(
@@ -165,8 +169,8 @@ class SitePageContentForm(forms.Form):
                 widget=CmsAdminImageWidget(
                     preview_url=file_preview_url(style_obj.bg_image),
                 ),
-                help_text=_('Картинка поверх цвета. Пусто — только цвет / дефолт.'),
             )
+            apply_image_guidelines(image_field, field_name='bg_image')
             if style_obj.bg_image:
                 image_field.initial = style_obj.bg_image
             self.fields['style_bg_image'] = image_field
@@ -265,7 +269,7 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
         if form.is_valid():
             try:
                 form.save()
-            except (ValidationError, IntegrityError, OSError, ValueError) as exc:
+            except (ValidationError, IntegrityError, OSError, ValueError, SuspiciousFileOperation) as exc:
                 messages.error(request, format_admin_save_error(exc))
             else:
                 messages.success(request, _('Контент секции сохранён.'))

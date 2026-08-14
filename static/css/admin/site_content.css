@@ -58,6 +58,19 @@ html.dark .admin-save-error {
 .site-content-editor__field {
   display: grid;
   gap: 0.35rem;
+  max-width: 100%;
+}
+
+.admin-field-hint {
+  margin: 0.15rem 0 0;
+  max-width: 36rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--color-font-subtle-light, #6b635a);
+}
+
+html.dark .admin-field-hint {
+  color: var(--color-font-subtle-dark, #b8aea3);
 }
 
 .site-content-editor__fieldset-title {

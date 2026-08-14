@@ -61,7 +61,7 @@ class CmsAdminImageWidget(UnfoldAdminImageFieldWidget):
 
     def __init__(self, attrs=None, preview_url=''):
         attrs = dict(attrs or {})
-        attrs.setdefault('accept', 'image/*')
+        attrs.setdefault('accept', 'image/jpeg,image/png,image/webp,image/gif')
         self.preview_url = preview_url or ''
         super().__init__(attrs=attrs)
 

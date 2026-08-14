@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
+from django import forms
 from django.contrib import messages
-from django.core.exceptions import ValidationError
+from django.core.exceptions import SuspiciousFileOperation, ValidationError
 from django.db import IntegrityError, models
 from django.db.models.deletion import ProtectedError, RestrictedError
 from django.http import HttpResponseRedirect
@@ -12,12 +13,28 @@ from django.utils.html import format_html
 from modeltranslation.admin import TabbedTranslationAdmin
 from unfold.admin import ModelAdmin
 
+from .admin_guidelines import (
+    apply_image_guidelines,
+    apply_text_guidelines,
+    friendly_upload_exception,
+)
 from .admin_site_content_widgets import CmsAdminImageWidget, apply_readable_widget
 
-_SAVE_ERRORS = (ValidationError, IntegrityError, ProtectedError, RestrictedError)
+_SAVE_ERRORS = (
+    ValidationError,
+    IntegrityError,
+    ProtectedError,
+    RestrictedError,
+    SuspiciousFileOperation,
+    OSError,
+    ValueError,
+)
 
 
 def format_admin_save_error(exc: BaseException) -> str:
+    mapped = friendly_upload_exception(exc)
+    if mapped:
+        return mapped
     if isinstance(exc, ValidationError):
         if getattr(exc, 'message_dict', None):
             parts = []
@@ -31,7 +48,7 @@ def format_admin_save_error(exc: BaseException) -> str:
         msgs = getattr(exc, 'messages', None)
         if msgs:
             return '; '.join(str(msg) for msg in msgs)
-    return str(exc) or 'Ошибка сохранения.'
+    return str(exc) or 'Ошибка сохранения. Проверьте поля и загруженные файлы.'
 
 
 class ImageAcceptMixin:
@@ -46,7 +63,12 @@ class ImageAcceptMixin:
                 formfield.widget = CmsAdminImageWidget(
                     attrs=getattr(formfield.widget, 'attrs', None),
                 )
-            formfield.widget.attrs.setdefault('accept', 'image/*')
+            formfield.widget.attrs.setdefault('accept', 'image/jpeg,image/png,image/webp,image/gif')
+            apply_image_guidelines(formfield, field_name=db_field.name)
+        elif formfield is not None and isinstance(
+            formfield, (forms.CharField, forms.EmailField)
+        ):
+            apply_text_guidelines(formfield, field_name=db_field.name)
         return formfield
 
     def get_image_fallback_urls(self, obj) -> dict:

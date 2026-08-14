@@ -153,6 +153,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'apps.core.middleware.AdminUploadLimitMiddleware',
 ]
 
 # CSP: style-src дозволяє 'unsafe-inline' через CSS custom properties у шаблонах
@@ -261,7 +262,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STORAGES = {
     'default': {
-        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+        'BACKEND': 'apps.core.webp_storage.WebPFileSystemStorage',
     },
     'staticfiles': {
         'BACKEND': (
@@ -274,6 +275,8 @@ STORAGES = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = (Path('/tmp') / 'ajeres-media') if IS_VERCEL else (BASE_DIR / 'media')
+DATA_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024 + 512 * 1024
+FILE_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024
 
 # Vercel function has no persistent STATIC_ROOT; serve from STATICFILES_DIRS.
 if IS_VERCEL:

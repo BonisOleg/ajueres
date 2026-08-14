@@ -346,5 +346,5 @@ class CatalogAdminImagePreviewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         content = response.content.decode()
         self.assertIn('admin-image-preview', content)
-        self.assertIn('accept="image/*"', content)
+        self.assertIn('accept="image/jpeg,image/png,image/webp,image/gif"', content)
 

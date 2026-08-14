@@ -213,7 +213,7 @@ class HeaderFooterCmsTests(TestCase):
         self.assertIn('block__site__nav_home__text_html_ru', content)
         self.assertIn('style_bg_color', content)
         self.assertIn('style_bg_image', content)
-        self.assertIn('accept="image/*"', content)
+        self.assertIn('accept="image/jpeg,image/png,image/webp,image/gif"', content)
 
     def test_footer_admin_has_texts(self):
         response = self.client.get(
@@ -257,7 +257,7 @@ class HeaderFooterCmsTests(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, block.image.url)
-        self.assertContains(response, 'accept="image/*"')
+        self.assertContains(response, 'accept="image/jpeg,image/png,image/webp,image/gif"')
         self.assertContains(response, 'admin-image-preview')
 
     def test_hero_empty_shows_static_fallback_preview(self):

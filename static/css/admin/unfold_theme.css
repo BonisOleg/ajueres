@@ -347,3 +347,13 @@ html.dark .admin-save-error {
     max-height: 10rem;
   }
 }
+
+.aligned .help,
+div.help,
+.helptext,
+p.help {
+  max-width: min(36rem, 100%);
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
