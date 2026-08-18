@@ -18,9 +18,10 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 8px;
+  column-gap: 8px;
+  row-gap: 2.85rem;
   margin: 0;
-  /* Reserve space under icons so hover/long-press label stays inside the block */
+  /* Reserve space under last row for hover/long-press label */
   padding: 0 0 2.85rem;
   list-style: none;
   overflow: visible;
@@ -36,8 +37,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 67px;
-  height: 67px;
+  width: 74px;
+  height: 74px;
   padding: 6px;
   border-radius: 16px;
   background: transparent;
@@ -59,7 +60,7 @@
   top: calc(100% + 6px);
   bottom: auto;
   z-index: 6;
-  max-width: 5.75rem;
+  max-width: 6.25rem;
   padding: 0;
   border-radius: 0;
   background: transparent;
@@ -83,8 +84,8 @@
 
 .product-group__badge img {
   display: block;
-  width: 55px;
-  height: 55px;
+  width: 62px;
+  height: 62px;
   object-fit: contain;
   pointer-events: none;
 }
@@ -148,9 +149,11 @@
   }
 
   .product-group__badges {
-    gap: 10px;
+    column-gap: 10px;
+    /* Enough vertical room for 3-line labels between wrapped icon rows */
+    row-gap: 3.25rem;
     width: 100%;
-    padding-bottom: 2.6rem;
+    padding-bottom: 3.25rem;
   }
 
   .product-group__badge {
@@ -167,6 +170,7 @@
 
   .product-group__badge[data-tooltip]::after {
     font-size: 0.6875rem;
+    line-height: 1.2;
     max-width: 4.75rem;
     top: calc(100% + 4px);
   }
@@ -174,25 +178,25 @@
 
 @media (min-width: 768px) and (max-width: 1099px) {
   .product-group__badge {
-    width: 63px;
-    height: 63px;
+    width: 70px;
+    height: 70px;
   }
 
   .product-group__badge img {
-    width: 50px;
-    height: 50px;
+    width: 58px;
+    height: 58px;
   }
 }
 
 @media (min-width: 1100px) {
   .product-group__badge {
-    width: 76px;
-    height: 76px;
+    width: 84px;
+    height: 84px;
   }
 
   .product-group__badge img {
-    width: 63px;
-    height: 63px;
+    width: 70px;
+    height: 70px;
   }
 }
 
@@ -213,8 +217,8 @@
 
 @supports (-webkit-touch-callout: none) {
   .product-group__badge {
-    min-width: 67px;
-    min-height: 67px;
+    min-width: 74px;
+    min-height: 74px;
   }
 
   @media (max-width: 767px) {

@@ -417,11 +417,11 @@
 .catalog-stage .product-group__title {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(2rem, 3.8vw, 2.75rem);
-  line-height: 1.12;
+  font-size: clamp(2.35rem, 4.6vw, 3.25rem);
+  line-height: 1.1;
   letter-spacing: -0.03em;
   margin: 0;
-  padding: 0.12em 0.05em 0.12em 0;
+  padding: 0.14em 0.06em 0.14em 0;
   border-bottom: none;
   color: #1b2430;
   font-style: normal;
@@ -439,9 +439,9 @@
   }
 
   .catalog-stage .product-group__title {
-    font-size: clamp(1.85rem, 7.2vw, 2.15rem);
-    line-height: 1.15;
-    padding: 0.18em 0.1em 0.18em 0;
+    font-size: clamp(2.2rem, 8.5vw, 2.55rem);
+    line-height: 1.12;
+    padding: 0.2em 0.1em 0.2em 0;
   }
 }
 
@@ -480,6 +480,13 @@
 
 .catalog-stage .product-card__brand {
   color: var(--c-green);
+}
+
+@media (max-width: 767px) {
+  .catalog-stage .product-card__brand {
+    font-size: 0.82rem;
+    margin-bottom: 6px;
+  }
 }
 
 .catalog-stage .empty-state {
