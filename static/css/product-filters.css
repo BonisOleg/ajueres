@@ -190,39 +190,49 @@
   }
 }
 
-/* Tablet / desktop: brand + icons stay on one row */
+/* Tablet / desktop: larger icons, still one row with the brand */
 @media (min-width: 768px) {
+  .product-group__head {
+    gap: 10px 8px;
+    /* Use leftover right padding of the catalog panel */
+    margin-right: calc(8px - clamp(14px, 2.4vw, 28px));
+  }
+
+  .product-group__badges {
+    column-gap: 3px;
+  }
+
   .product-group__badge {
-    flex-shrink: 1;
-    width: clamp(48px, 5.2vw, 68px);
-    height: clamp(48px, 5.2vw, 68px);
-    min-width: 44px;
-    min-height: 44px;
-    padding: 3px;
+    flex: 0 1 auto;
+    width: clamp(58px, 6.8vw, 82px);
+    height: clamp(58px, 6.8vw, 82px);
+    min-width: 52px;
+    min-height: 52px;
+    padding: 2px;
   }
 
   .product-group__badge img {
-    width: 88%;
-    height: 88%;
-    max-width: 58px;
-    max-height: 58px;
+    width: 92%;
+    height: 92%;
+    max-width: 74px;
+    max-height: 74px;
   }
 
   .product-group__badge[data-tooltip]::after {
     font-size: 0.5625rem;
-    max-width: 4.75rem;
+    max-width: 5rem;
   }
 }
 
 @media (min-width: 1100px) {
   .product-group__badge {
-    width: clamp(56px, 4.2vw, 72px);
-    height: clamp(56px, 4.2vw, 72px);
+    width: clamp(68px, 5.8vw, 84px);
+    height: clamp(68px, 5.8vw, 84px);
   }
 
   .product-group__badge img {
-    max-width: 62px;
-    max-height: 62px;
+    max-width: 76px;
+    max-height: 76px;
   }
 }
 
