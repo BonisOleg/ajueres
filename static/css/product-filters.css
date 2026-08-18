@@ -31,33 +31,36 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
+  width: 67px;
+  height: 67px;
   padding: 6px;
   border-radius: 16px;
   background: transparent;
   cursor: default;
   -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
   transition:
     transform 0.22s ease,
     background 0.22s ease,
     box-shadow 0.22s ease;
 }
 
+/* Plain-text tooltip: no background block */
 .product-group__badge[data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
   left: 50%;
-  bottom: calc(100% + 8px);
+  bottom: calc(100% + 6px);
   z-index: 5;
-  max-width: min(220px, 70vw);
-  padding: 6px 10px;
-  border-radius: 8px;
-  background: rgba(28, 36, 48, 0.92);
-  color: #fff;
+  max-width: min(220px, 72vw);
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #1b2430;
   font-family: var(--font-sans, system-ui, sans-serif);
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.25;
   letter-spacing: 0.01em;
   text-align: center;
@@ -65,38 +68,17 @@
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transform: translateX(-50%) translateY(4px);
+  transform: translateX(-50%) translateY(3px);
   transition:
-    opacity 0.18s ease,
-    transform 0.18s ease,
-    visibility 0.18s ease;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-}
-
-.product-group__badge[data-tooltip]::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% + 2px);
-  z-index: 5;
-  width: 8px;
-  height: 8px;
-  background: rgba(28, 36, 48, 0.92);
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(-50%) translateY(4px) rotate(45deg);
-  transition:
-    opacity 0.18s ease,
-    transform 0.18s ease,
-    visibility 0.18s ease;
+    opacity 0.16s ease,
+    transform 0.16s ease,
+    visibility 0.16s ease;
 }
 
 .product-group__badge img {
   display: block;
-  width: 52px;
-  height: 52px;
+  width: 55px;
+  height: 55px;
   object-fit: contain;
   pointer-events: none;
 }
@@ -113,6 +95,7 @@
   transform: scale(0.96);
 }
 
+/* Desktop / fine pointer: show label on hover */
 @media (hover: hover) and (pointer: fine) {
   .product-group__badge:hover {
     background: rgba(22, 58, 114, 0.08);
@@ -120,15 +103,10 @@
     box-shadow: 0 10px 20px -14px rgba(20, 36, 64, 0.55);
   }
 
-  .product-group__badge[data-tooltip]:hover::after,
-  .product-group__badge[data-tooltip]:hover::before {
+  .product-group__badge[data-tooltip]:hover::after {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
-  }
-
-  .product-group__badge[data-tooltip]:hover::before {
-    transform: translateX(-50%) translateY(0) rotate(45deg);
   }
 }
 
@@ -137,15 +115,21 @@
   outline-offset: 2px;
 }
 
-.product-group__badge[data-tooltip]:focus-visible::after,
-.product-group__badge[data-tooltip]:focus-visible::before {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
+@media (hover: hover) and (pointer: fine) {
+  .product-group__badge[data-tooltip]:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
-.product-group__badge[data-tooltip]:focus-visible::before {
-  transform: translateX(-50%) translateY(0) rotate(45deg);
+/* Touch: label only while long-press class is set */
+@media (hover: none), (pointer: coarse) {
+  .product-group__badge[data-tooltip].is-tooltip-open::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
 }
 
 @media (max-width: 767px) {
@@ -155,44 +139,42 @@
   }
 
   .product-group__badge {
-    width: 52px;
-    height: 52px;
+    width: 57px;
+    height: 57px;
   }
 
   .product-group__badge img {
-    width: 42px;
-    height: 42px;
+    width: 46px;
+    height: 46px;
   }
 
   .product-group__badge[data-tooltip]::after {
     font-size: 0.6875rem;
-    padding: 5px 8px;
     max-width: min(180px, 78vw);
-    white-space: normal;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1099px) {
   .product-group__badge {
-    width: 60px;
-    height: 60px;
+    width: 63px;
+    height: 63px;
   }
 
   .product-group__badge img {
-    width: 48px;
-    height: 48px;
+    width: 50px;
+    height: 50px;
   }
 }
 
 @media (min-width: 1100px) {
   .product-group__badge {
-    width: 72px;
-    height: 72px;
+    width: 76px;
+    height: 76px;
   }
 
   .product-group__badge img {
-    width: 60px;
-    height: 60px;
+    width: 63px;
+    height: 63px;
   }
 }
 
@@ -201,8 +183,7 @@
     transition: none;
   }
 
-  .product-group__badge[data-tooltip]::after,
-  .product-group__badge[data-tooltip]::before {
+  .product-group__badge[data-tooltip]::after {
     transition: none;
   }
 
@@ -214,7 +195,7 @@
 
 @supports (-webkit-touch-callout: none) {
   .product-group__badge {
-    min-width: 52px;
-    min-height: 52px;
+    min-width: 57px;
+    min-height: 57px;
   }
 }

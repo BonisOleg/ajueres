@@ -124,4 +124,62 @@
 
   document.addEventListener('DOMContentLoaded', initCatalogFilters);
   document.body.addEventListener('htmx:afterSwap', syncFilterButtonState);
+
+  /* Badge label: long-press only on touch / coarse pointers */
+  (function initBadgeLongPressTooltip() {
+    var DELAY_MS = 480;
+    var timer = 0;
+    var openBadge = null;
+    var coarseMq = window.matchMedia('(hover: none), (pointer: coarse)');
+
+    function isTouchUi() {
+      return coarseMq.matches;
+    }
+
+    function closeTooltip() {
+      if (timer) {
+        window.clearTimeout(timer);
+        timer = 0;
+      }
+      if (openBadge) {
+        openBadge.classList.remove('is-tooltip-open');
+        openBadge = null;
+      }
+    }
+
+    function onTouchStart(evt) {
+      if (!isTouchUi()) return;
+      var t = evt.target;
+      if (!t || !t.closest) return;
+      var badge = t.closest('.product-group__badge[data-tooltip]');
+      closeTooltip();
+      if (!badge) return;
+      timer = window.setTimeout(function () {
+        timer = 0;
+        openBadge = badge;
+        badge.classList.add('is-tooltip-open');
+      }, DELAY_MS);
+    }
+
+    function onTouchMove() {
+      if (timer) {
+        window.clearTimeout(timer);
+        timer = 0;
+      }
+    }
+
+    document.addEventListener('touchstart', onTouchStart, { passive: true });
+    document.addEventListener('touchmove', onTouchMove, { passive: true });
+    document.addEventListener('touchend', closeTooltip, { passive: true });
+    document.addEventListener('touchcancel', closeTooltip, { passive: true });
+    document.addEventListener('scroll', closeTooltip, { passive: true, capture: true });
+
+    document.addEventListener('contextmenu', function (evt) {
+      if (!isTouchUi()) return;
+      var t = evt.target;
+      if (t && t.closest && t.closest('.product-group__badge[data-tooltip]')) {
+        evt.preventDefault();
+      }
+    });
+  })();
 })();
