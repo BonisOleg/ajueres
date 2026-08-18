@@ -7,7 +7,7 @@
   gap: 12px 18px;
   margin-bottom: 18px;
   overflow: visible;
-  padding-top: 2px;
+  padding-top: 4px;
 }
 
 .product-group__badges {
@@ -46,13 +46,14 @@
     box-shadow 0.22s ease;
 }
 
-/* Plain-text tooltip: no background block */
+/* Plain-text tooltip under the icon */
 .product-group__badge[data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
   left: 50%;
-  bottom: calc(100% + 6px);
-  z-index: 5;
+  top: calc(100% + 6px);
+  bottom: auto;
+  z-index: 6;
   max-width: min(220px, 72vw);
   padding: 0;
   border-radius: 0;
@@ -68,7 +69,7 @@
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transform: translateX(-50%) translateY(3px);
+  transform: translateX(-50%) translateY(-3px);
   transition:
     opacity 0.16s ease,
     transform 0.16s ease,
@@ -95,7 +96,6 @@
   transform: scale(0.96);
 }
 
-/* Desktop / fine pointer: show label on hover */
 @media (hover: hover) and (pointer: fine) {
   .product-group__badge:hover {
     background: rgba(22, 58, 114, 0.08);
@@ -108,14 +108,7 @@
     visibility: visible;
     transform: translateX(-50%) translateY(0);
   }
-}
 
-.product-group__badge:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--c-green, #2f7d4a) 70%, transparent);
-  outline-offset: 2px;
-}
-
-@media (hover: hover) and (pointer: fine) {
   .product-group__badge[data-tooltip]:focus-visible::after {
     opacity: 1;
     visibility: visible;
@@ -123,7 +116,11 @@
   }
 }
 
-/* Touch: label only while long-press class is set */
+.product-group__badge:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--c-green, #2f7d4a) 70%, transparent);
+  outline-offset: 2px;
+}
+
 @media (hover: none), (pointer: coarse) {
   .product-group__badge[data-tooltip].is-tooltip-open::after {
     opacity: 1;
@@ -134,23 +131,34 @@
 
 @media (max-width: 767px) {
   .product-group__head {
-    gap: 10px 12px;
-    margin-bottom: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-top: 0;
+  }
+
+  .product-group__badges {
+    gap: 10px;
+    width: 100%;
   }
 
   .product-group__badge {
-    width: 57px;
-    height: 57px;
+    width: 76px;
+    height: 76px;
+    padding: 4px;
+    border-radius: 18px;
   }
 
   .product-group__badge img {
-    width: 46px;
-    height: 46px;
+    width: 68px;
+    height: 68px;
   }
 
   .product-group__badge[data-tooltip]::after {
     font-size: 0.6875rem;
-    max-width: min(180px, 78vw);
+    max-width: min(160px, 42vw);
+    top: calc(100% + 4px);
   }
 }
 
@@ -195,7 +203,14 @@
 
 @supports (-webkit-touch-callout: none) {
   .product-group__badge {
-    min-width: 57px;
-    min-height: 57px;
+    min-width: 67px;
+    min-height: 67px;
+  }
+
+  @media (max-width: 767px) {
+    .product-group__badge {
+      min-width: 76px;
+      min-height: 76px;
+    }
   }
 }
