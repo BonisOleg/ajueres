@@ -3,26 +3,28 @@
 .product-group__head {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px 18px;
   margin-bottom: 12px;
   overflow: visible;
   padding-top: 4px;
+  /* Label space under the icon row (not inside badges — keeps brand/icons aligned) */
+  padding-bottom: 2.85rem;
 }
 
 .product-group__head .product-group__title {
   align-self: center;
+  line-height: 1;
 }
 
 .product-group__badges {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  flex-wrap: nowrap;
+  align-items: center;
   column-gap: 8px;
-  row-gap: 2.85rem;
+  row-gap: 0;
   margin: 0;
-  /* Reserve space under last row for hover/long-press label */
-  padding: 0 0 2.85rem;
+  padding: 0;
   list-style: none;
   overflow: visible;
 }
@@ -142,6 +144,7 @@
     gap: 14px;
     margin-bottom: 14px;
     padding-top: 0;
+    padding-bottom: 0;
   }
 
   .product-group__head .product-group__title {
@@ -149,8 +152,10 @@
   }
 
   .product-group__badges {
+    flex-wrap: wrap;
+    align-items: flex-start;
     column-gap: 10px;
-    /* Enough vertical room for 3-line labels between wrapped icon rows */
+    /* Room for 3-line labels between wrapped icon rows */
     row-gap: 3.25rem;
     width: 100%;
     padding-bottom: 3.25rem;
@@ -176,7 +181,21 @@
   }
 }
 
+/* If icons wrap on tablet, keep rows spaced for labels */
 @media (min-width: 768px) and (max-width: 1099px) {
+  .product-group__badges {
+    flex-wrap: wrap;
+    row-gap: 2.85rem;
+  }
+
+  .product-group__head {
+    padding-bottom: 0;
+  }
+
+  .product-group__badges {
+    padding-bottom: 2.85rem;
+  }
+
   .product-group__badge {
     width: 70px;
     height: 70px;
