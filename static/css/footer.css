@@ -106,11 +106,15 @@
   color: rgba(255, 255, 255, 0.38);
 }
 
-.site-footer__credit-link {
+.site-footer__credit-link,
+.site-footer__credit-name {
   color: rgba(255, 255, 255, 0.48);
   font-weight: 600;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+.site-footer__credit-link {
   transition:
     color 0.25s ease,
     text-shadow 0.25s ease;
