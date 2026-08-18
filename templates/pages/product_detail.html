@@ -35,20 +35,6 @@
           <span>{{ product.package }}</span>
         {% endif %}
       </p>
-      {% with filters=product.extra_filters.all %}
-        {% if filters %}
-          <ul class="pdp__filters">
-            {% for item in filters %}
-              <li class="pdp__filter">
-                <span class="pdp__check" aria-hidden="true">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-                <span>{{ item.name }}</span>
-              </li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-      {% endwith %}
       {% if product.description %}
         <div class="pdp__desc">{{ product.description|linebreaksbr }}</div>
       {% endif %}

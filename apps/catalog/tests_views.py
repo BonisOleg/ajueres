@@ -45,18 +45,20 @@ class ProductDetailViewTests(TestCase):
         self.assertContains(response, 'Соус Чили')
         self.assertContains(response, 'Sen Soy')
         self.assertContains(response, '235 гр.')
-        self.assertContains(response, 'Без глютена')
         self.assertContains(response, 'Острый соус для блюд.')
         self.assertContains(response, 'class="pdp__media"')
         self.assertContains(response, f'href="{reverse("products")}"')
+        self.assertNotContains(response, 'class="pdp__check"')
+        self.assertNotContains(response, 'class="pdp__filters"')
 
-    def test_pdp_fills_brand_filters_when_empty(self):
+    def test_pdp_hides_extra_filters_list(self):
         self.product.extra_filters.clear()
         response = self.client.get(
             reverse('product_detail', args=[self.product.slug])
         )
-        self.assertContains(response, 'class="pdp__check"')
-        self.assertContains(response, 'Натуральный продукт')
+        self.assertNotContains(response, 'class="pdp__check"')
+        self.assertNotContains(response, 'Натуральный продукт')
+        self.assertContains(response, 'Острый соус для блюд.')
 
     def test_inactive_product_404(self):
         self.product.is_active = False

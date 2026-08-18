@@ -4,15 +4,15 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px 14px;
-  margin-bottom: 14px;
+  gap: 12px 18px;
+  margin-bottom: 18px;
 }
 
 .product-group__badges {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -22,10 +22,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 4px;
-  border-radius: 12px;
+  width: 64px;
+  height: 64px;
+  padding: 6px;
+  border-radius: 16px;
   background: transparent;
   cursor: default;
   -webkit-tap-highlight-color: transparent;
@@ -37,14 +37,14 @@
 
 .product-group__badge img {
   display: block;
-  width: 32px;
-  height: 32px;
+  width: 52px;
+  height: 52px;
   object-fit: contain;
   pointer-events: none;
 }
 
 .product-group__badge-fallback {
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
@@ -70,42 +70,42 @@
 
 @media (max-width: 767px) {
   .product-group__head {
-    gap: 8px 10px;
-    margin-bottom: 12px;
+    gap: 10px 12px;
+    margin-bottom: 14px;
   }
 
   .product-group__badge {
-    width: 36px;
-    height: 36px;
+    width: 52px;
+    height: 52px;
   }
 
   .product-group__badge img {
-    width: 28px;
-    height: 28px;
+    width: 42px;
+    height: 42px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1099px) {
   .product-group__badge {
-    width: 42px;
-    height: 42px;
+    width: 60px;
+    height: 60px;
   }
 
   .product-group__badge img {
-    width: 34px;
-    height: 34px;
+    width: 48px;
+    height: 48px;
   }
 }
 
 @media (min-width: 1100px) {
   .product-group__badge {
-    width: 44px;
-    height: 44px;
+    width: 72px;
+    height: 72px;
   }
 
   .product-group__badge img {
-    width: 36px;
-    height: 36px;
+    width: 60px;
+    height: 60px;
   }
 }
 
@@ -122,7 +122,7 @@
 
 @supports (-webkit-touch-callout: none) {
   .product-group__badge {
-    min-width: 36px;
-    min-height: 36px;
+    min-width: 52px;
+    min-height: 52px;
   }
 }
