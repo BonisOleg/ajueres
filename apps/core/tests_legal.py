@@ -25,6 +25,14 @@ class LegalPagesTests(TestCase):
         self.assertContains(offer, 'Реквизиты')
         self.assertContains(offer, 'ИНН:')
 
+    def test_offer_requisites_heading_translated(self):
+        en = self.client.get('/en/offer/')
+        uz = self.client.get('/uz/offer/')
+        self.assertContains(en, 'Requisites')
+        self.assertNotContains(en, 'Реквизиты')
+        self.assertContains(uz, 'Rekvizitlar')
+        self.assertNotContains(uz, 'Реквизиты')
+
     def test_unknown_slug_404(self):
         LegalDocument.objects.create(
             slug='other',

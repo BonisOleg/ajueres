@@ -76,7 +76,7 @@
 }
 
 .pdp__desc {
-  margin: 16px 0 0;
+  margin: 28px 0 0;
   max-width: 100%;
   font-size: 1.125rem;
   line-height: 1.55;
@@ -102,7 +102,7 @@
   }
 
   .pdp__desc {
-    margin-top: 18px;
+    margin-top: 34px;
     font-size: 1.1875rem;
     line-height: 1.58;
   }

@@ -392,6 +392,9 @@ msgstr "Chips"
 #: apps/core/i18n_content.py templates/partials/catalog_results.html
 msgid "Тортильи"
 msgstr "Tortillas"
+#: templates/pages/legal.html
+msgid "Реквизиты"
+msgstr "Requisites"
 
 
 #~ msgid "Контент скоро появится."
