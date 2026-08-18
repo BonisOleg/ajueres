@@ -8,8 +8,8 @@
   margin-bottom: 12px;
   overflow: visible;
   padding-top: 4px;
-  /* Label space under the icon row (not inside badges — keeps brand/icons aligned) */
-  padding-bottom: 2.85rem;
+  /* Label space under the icon row (single-line tip) */
+  padding-bottom: 1.35rem;
 }
 
 .product-group__head .product-group__title {
@@ -54,34 +54,32 @@
     box-shadow 0.22s ease;
 }
 
-/* Plain-text tooltip under the icon — clipped to badge width */
+/* Plain-text tooltip under the icon — single line, no orphan letters */
 .product-group__badge[data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(100% + 6px);
+  left: 50%;
+  right: auto;
+  top: calc(100% + 4px);
   bottom: auto;
   z-index: 6;
-  width: 100%;
-  max-width: 100%;
+  width: max-content;
+  max-width: none;
   padding: 0;
   border-radius: 0;
   background: transparent;
   color: #1b2430;
   font-family: var(--font-sans, system-ui, sans-serif);
-  font-size: 0.75rem;
+  font-size: 0.625rem;
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0.01em;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
   text-align: center;
-  white-space: pre-line;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  white-space: nowrap;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-3px);
+  transform: translateX(-50%) translateY(-2px);
   transition:
     opacity 0.16s ease,
     transform 0.16s ease,
@@ -118,13 +116,13 @@
   .product-group__badge[data-tooltip]:hover::after {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
 
   .product-group__badge[data-tooltip]:focus-visible::after {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
 }
 
@@ -137,7 +135,7 @@
   .product-group__badge[data-tooltip].is-tooltip-open::after {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
 }
 
@@ -159,10 +157,10 @@
     flex-wrap: wrap;
     align-items: flex-start;
     column-gap: 10px;
-    /* Room for 3-line labels between wrapped icon rows */
-    row-gap: 3.25rem;
+    /* Single-line tip under each icon */
+    row-gap: 1.45rem;
     width: 100%;
-    padding-bottom: 3.25rem;
+    padding-bottom: 1.45rem;
   }
 
   .product-group__badge {
@@ -178,9 +176,9 @@
   }
 
   .product-group__badge[data-tooltip]::after {
-    font-size: 0.625rem;
-    line-height: 1.2;
-    top: calc(100% + 4px);
+    font-size: 0.5rem;
+    letter-spacing: -0.02em;
+    top: calc(100% + 3px);
   }
 }
 
@@ -188,15 +186,12 @@
 @media (min-width: 768px) and (max-width: 1099px) {
   .product-group__badges {
     flex-wrap: wrap;
-    row-gap: 2.85rem;
+    row-gap: 1.35rem;
+    padding-bottom: 1.35rem;
   }
 
   .product-group__head {
     padding-bottom: 0;
-  }
-
-  .product-group__badges {
-    padding-bottom: 2.85rem;
   }
 
   .product-group__badge {
@@ -207,6 +202,10 @@
   .product-group__badge img {
     width: 58px;
     height: 58px;
+  }
+
+  .product-group__badge[data-tooltip]::after {
+    font-size: 0.5625rem;
   }
 }
 
