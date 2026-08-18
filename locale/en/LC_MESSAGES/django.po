@@ -243,7 +243,7 @@ msgid "Построить маршрут"
 msgstr "Get directions"
 #: templates/pages/contacts.html:146
 msgid "Карта AJERES"
-msgstr "AJERES Catalog"
+msgstr "AJERES map"
 
 #: templates/pages/home.html:4
 msgid "Дистрибьютор продуктов питания"
@@ -385,6 +385,13 @@ msgstr ""
 #: apps/core/seo.py
 msgid "Официальный документ AJERES. Дистрибьютор продуктов питания в Узбекистане."
 msgstr "Official AJERES document. Food distributor in Uzbekistan."
+
+#: apps/core/i18n_content.py templates/partials/catalog_results.html
+msgid "Чипсы"
+msgstr "Chips"
+#: apps/core/i18n_content.py templates/partials/catalog_results.html
+msgid "Тортильи"
+msgstr "Tortillas"
 
 
 #~ msgid "Контент скоро появится."

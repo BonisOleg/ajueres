@@ -189,6 +189,8 @@ BRAND_FILTER_SLUGS: dict[str, tuple[str, ...]] = {
     'huligan': HULIGAN_FILTERS,
 }
 
+SNACK_BADGE_BRANDS = frozenset({'sen-soy', 'riceup', 'krambals', 'huligan'})
+
 
 def filter_icon_static_path(slug: str) -> str:
     return f'img/product-filters/{slug}.png'
@@ -200,17 +202,25 @@ def _text(product) -> str:
     return f'{slug} {name}'
 
 
+def riceup_line(product) -> str:
+    """'' | 'chips' | 'tortilla' — підгрупа RiceUP у каталозі."""
+    brand = getattr(product, 'brand', None)
+    if getattr(brand, 'slug', '') != 'riceup':
+        return ''
+    if 'tortilla' in _text(product):
+        return 'tortilla'
+    return 'chips'
+
+
 def filters_for_product(product) -> tuple[str, ...]:
     """Набір іконок/тегів за брендом (RiceUP — окремо чипси vs тортильї)."""
     brand = getattr(product, 'brand', None)
     brand_slug = getattr(brand, 'slug', '') or ''
-    blob = _text(product)
-
-    if brand_slug == 'riceup':
-        if 'tortilla' in blob:
-            return RICEUP_TORTILLA_FILTERS
+    line = riceup_line(product)
+    if line == 'tortilla':
+        return RICEUP_TORTILLA_FILTERS
+    if line == 'chips':
         return RICEUP_CHIPS_FILTERS
-
     return BRAND_FILTER_SLUGS.get(brand_slug, ())
 
 

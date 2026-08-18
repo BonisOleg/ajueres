@@ -1,129 +1,128 @@
-/* Extra product feature filters under catalog chips. */
+/* Brand property badges next to snack group titles. */
 
-.catalog-features {
-  margin-top: 12px;
-  grid-column: 1 / -1;
-  width: 100%;
-}
-
-.catalog-features[hidden] {
-  display: none;
-}
-
-.catalog-features__title {
-  margin: 0 0 10px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #6b7380;
-}
-
-.catalog-features__row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(108px, 1fr));
-  gap: 12px 16px;
-  width: 100%;
-  padding: 2px 0 4px;
-}
-
-.catalog-feature {
+.product-group__head {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
-  min-width: 0;
-  width: 100%;
-  padding: 4px 4px 8px;
-  text-decoration: none;
-  color: #1b2430;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+  gap: 10px 14px;
+  margin-bottom: 14px;
+}
+
+.product-group__badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.product-group__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 4px;
   border-radius: 12px;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.catalog-feature__icon {
-  width: 64px;
-  height: 64px;
-  max-width: 100%;
-  display: block;
-  object-fit: contain;
   background: transparent;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
-.catalog-feature__label {
-  width: 100%;
+.product-group__badge img {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.product-group__badge-fallback {
   font-size: 0.625rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  line-height: 1.2;
   text-align: center;
-  line-height: 1.3;
-  overflow-wrap: normal;
-  word-break: normal;
-  -webkit-hyphens: none;
-  hyphens: none;
-  hyphenate-limit-chars: 100 100 100;
 }
 
-.catalog-feature:active {
-  transform: scale(0.97);
+.product-group__badge:active {
+  background: rgba(22, 58, 114, 0.1);
+  transform: scale(0.96);
 }
 
-.catalog-feature.is-active {
-  background: rgba(22, 58, 114, 0.08);
-  color: #163a72;
+@media (hover: hover) and (pointer: fine) {
+  .product-group__badge:hover {
+    background: rgba(22, 58, 114, 0.08);
+    transform: translateY(-2px) scale(1.08);
+    box-shadow: 0 10px 20px -14px rgba(20, 36, 64, 0.55);
+  }
+}
+
+.product-group__badge:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--c-green, #2f7d4a) 70%, transparent);
+  outline-offset: 2px;
 }
 
 @media (max-width: 767px) {
-  .catalog-features {
-    margin-top: 10px;
+  .product-group__head {
+    gap: 8px 10px;
+    margin-bottom: 12px;
   }
 
-  .catalog-features__row {
-    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
-    gap: 12px 10px;
+  .product-group__badge {
+    width: 36px;
+    height: 36px;
   }
 
-  .catalog-feature__icon {
-    width: 60px;
-    height: 60px;
+  .product-group__badge img {
+    width: 28px;
+    height: 28px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1099px) {
-  .catalog-features__row {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 14px 16px;
+  .product-group__badge {
+    width: 42px;
+    height: 42px;
   }
-}
 
-@media (min-width: 768px) {
-  .catalog-feature:hover {
-    color: #163a72;
+  .product-group__badge img {
+    width: 34px;
+    height: 34px;
   }
 }
 
 @media (min-width: 1100px) {
-  .catalog-feature__icon {
-    width: 68px;
-    height: 68px;
+  .product-group__badge {
+    width: 44px;
+    height: 44px;
+  }
+
+  .product-group__badge img {
+    width: 36px;
+    height: 36px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .catalog-feature {
+  .product-group__badge {
     transition: none;
   }
 
-  .catalog-feature:active {
+  .product-group__badge:active,
+  .product-group__badge:hover {
     transform: none;
   }
 }
 
 @supports (-webkit-touch-callout: none) {
-  .catalog-feature__label {
-    font-size: 0.6875rem;
+  .product-group__badge {
+    min-width: 36px;
+    min-height: 36px;
   }
 }

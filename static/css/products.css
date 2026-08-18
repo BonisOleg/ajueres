@@ -83,7 +83,11 @@
 }
 
 .catalog-filters {
-  margin-bottom: 14px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
 }
 
 .catalog-filter-btn {
@@ -229,6 +233,10 @@
 @media (max-width: 767px) {
   .catalog-filter-btn {
     display: inline-flex;
+    width: auto;
+    flex: 0 0 auto;
+    min-width: 108px;
+    padding-inline: 14px;
   }
 
   .catalog-filters__backdrop {
@@ -333,6 +341,9 @@
   .catalog-filters__panel {
     position: static;
     width: auto;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 196px);
     padding: 0;
     background: transparent;
     box-shadow: none;
@@ -355,46 +366,9 @@
   }
 }
 
-.catalog-toolbar {
-  display: grid;
-  grid-template-columns: minmax(132px, 200px) minmax(0, 1fr);
-  align-items: center;
-  gap: 10px 12px;
-  margin-bottom: 8px;
-}
-
-.catalog-brand {
-  display: flex;
-  align-items: stretch;
-  min-width: 0;
-}
-
-.catalog-brand__select {
-  width: 100%;
-  min-height: 50px;
-  padding: 10px 40px 10px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(30, 36, 48, 0.1);
-  background-color: rgba(255, 255, 255, 0.78);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%236b7380' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  background-size: 12px 8px;
-  color: #1b2430;
-  font-size: 16px;
-  font-weight: 600;
-  -webkit-appearance: none;
-  appearance: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.catalog-brand__select:focus {
-  outline: none;
-  border-color: color-mix(in srgb, var(--c-green) 45%, transparent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-green) 16%, transparent);
-}
-
 .catalog-stage .catalog-search {
+  flex: 1 1 180px;
+  min-width: 0;
   margin-bottom: 0;
 }
 
@@ -445,7 +419,7 @@
   font-weight: 600;
   font-size: clamp(1.25rem, 2.2vw, 1.55rem);
   letter-spacing: -0.02em;
-  margin-bottom: 14px;
+  margin: 0;
   padding-bottom: 0;
   border-bottom: none;
   color: #1b2430;
@@ -501,9 +475,13 @@
     gap: 18px;
   }
 
-  .catalog-toolbar {
-    grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+  .catalog-filters {
     gap: 12px 16px;
+  }
+
+  .catalog-stage .catalog-search {
+    flex: 1 1 200px;
+    max-width: 360px;
   }
 }
 
@@ -530,8 +508,7 @@
 }
 
 @supports (-webkit-touch-callout: none) {
-  .catalog-stage .catalog-search input,
-  .catalog-brand__select {
+  .catalog-stage .catalog-search input {
     font-size: 16px;
   }
 }

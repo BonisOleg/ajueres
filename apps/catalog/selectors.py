@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from collections import OrderedDict
-from typing import Iterable
+from typing import Iterable, NamedTuple
 
 from django.core.cache import cache
 from django.core.paginator import EmptyPage, Page, PageNotAnInteger, Paginator
@@ -78,6 +78,66 @@ def get_categories() -> list[Category]:
         .prefetch_related(_children_prefetch())
         .order_by('order', 'name')
     )
+
+
+def category_family_maps(
+    categories: Iterable[Category] | None = None,
+) -> tuple[dict[str, str], dict[str, list[str]]]:
+    """parent_of[child]=parent, children_of[parent]=[child, …] з коренів фільтра."""
+    roots = list(categories) if categories is not None else get_categories()
+    parent_of: dict[str, str] = {}
+    children_of: dict[str, list[str]] = {}
+    for cat in roots:
+        kids = [child.slug for child in cat.children.all()]
+        if not kids:
+            continue
+        children_of[cat.slug] = kids
+        for kid in kids:
+            parent_of[kid] = cat.slug
+    return parent_of, children_of
+
+
+def toggle_category_selection(
+    selected: Iterable[str] | str | None,
+    slug: str | None,
+    *,
+    categories: Iterable[Category] | None = None,
+    parent_of: dict[str, str] | None = None,
+    children_of: dict[str, list[str]] | None = None,
+) -> list[str]:
+    """
+    Toggle категорії без «батько + дитина»:
+    дитина замінює батька і сестер; вимкнення останньої дитини повертає батька.
+    Корені лишаються OR multi-select.
+    """
+    current = parse_category_slugs(selected)
+    target = (slug or '').strip()
+    if not target:
+        return current
+    if parent_of is None or children_of is None:
+        parent_of, children_of = category_family_maps(categories)
+
+    parent = parent_of.get(target)
+    siblings = list(children_of.get(parent, [])) if parent else []
+    kids = list(children_of.get(target, []))
+
+    if target in current:
+        remaining = [item for item in current if item != target]
+        if (
+            parent
+            and parent not in remaining
+            and not any(sib in remaining for sib in siblings)
+        ):
+            remaining.append(parent)
+        return remaining
+
+    drop: set[str] = set(kids)
+    if parent:
+        drop.add(parent)
+        drop.update(siblings)
+    remaining = [item for item in current if item not in drop]
+    remaining.append(target)
+    return remaining
 
 
 def parse_category_slugs(raw_values: Iterable[str] | str | None) -> list[str]:
@@ -308,6 +368,75 @@ def paginate_products(
         return paginator.page(1)
     except EmptyPage:
         return paginator.page(paginator.num_pages or 1)
+
+
+class CatalogProductGroup(NamedTuple):
+    brand: Brand
+    products: list[Product]
+    kind: str
+    badges: tuple[ProductFilter, ...]
+
+
+def _product_is_snack(product: Product, snacks_slugs: set[str]) -> bool:
+    category = getattr(product, 'category', None)
+    if category is None:
+        return False
+    if category.slug in snacks_slugs:
+        return True
+    parent = getattr(category, 'parent', None)
+    return bool(parent and parent.slug in snacks_slugs)
+
+
+def _badges_for_product(product: Product) -> tuple[ProductFilter, ...]:
+    from .product_filter_defaults import SNACK_BADGE_BRANDS, filters_for_product
+
+    brand_slug = getattr(getattr(product, 'brand', None), 'slug', '') or ''
+    if brand_slug not in SNACK_BADGE_BRANDS:
+        return ()
+    slugs = filters_for_product(product)
+    if not slugs:
+        return ()
+    found = {
+        item.slug: item
+        for item in product.extra_filters.all()
+        if getattr(item, 'is_active', True)
+    }
+    ordered = tuple(found[slug] for slug in slugs if slug in found)
+    if len(ordered) == len(slugs):
+        return ordered
+    fallback = {
+        item.slug: item
+        for item in ProductFilter.objects.filter(is_active=True, slug__in=slugs)
+    }
+    return tuple(fallback[slug] for slug in slugs if slug in fallback)
+
+
+def group_catalog_products(
+    products: Iterable[Product],
+    *,
+    snacks_slugs: set[str] | None = None,
+) -> list[CatalogProductGroup]:
+    """Групи каталогу: бренд, RiceUP чипси/тортильї окремо, значки лише для снеків."""
+    from .product_filter_defaults import riceup_line
+
+    snacks = snacks_slugs if snacks_slugs is not None else get_snacks_slugs()
+    buckets: OrderedDict[tuple[int, str], list[Product]] = OrderedDict()
+    for product in products:
+        kind = riceup_line(product)
+        buckets.setdefault((product.brand_id, kind), []).append(product)
+
+    groups: list[CatalogProductGroup] = []
+    for items in buckets.values():
+        show_badges = all(_product_is_snack(item, snacks) for item in items)
+        groups.append(
+            CatalogProductGroup(
+                brand=items[0].brand,
+                products=items,
+                kind=riceup_line(items[0]),
+                badges=_badges_for_product(items[0]) if show_badges else (),
+            )
+        )
+    return groups
 
 
 def group_by_brand(products: Iterable[Product]) -> OrderedDict[Brand, list[Product]]:

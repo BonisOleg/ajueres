@@ -11,22 +11,11 @@ def _catalog_context(request):
         request.GET.getlist('category')
     )
     snacks_slugs = selectors.get_snacks_slugs()
-    brand = (request.GET.get('brand') or '').strip() or None
-    brands = selectors.get_brands_for_showcase(featured_only=False)
-    if brand and brand not in {item.slug for item in brands}:
-        brand = None
-    features_selected = selectors.parse_category_slugs(
-        request.GET.getlist('feature')
-    )
-    if not brand:
-        features_selected = []
     q = request.GET.get('q')
     page = request.GET.get('page', 1)
 
     products_qs = selectors.get_products(
         category_slugs=categories_selected,
-        extra_filter_slugs=features_selected,
-        brand_slug=brand,
         q=q,
     )
     page_obj = selectors.paginate_products(
@@ -34,7 +23,10 @@ def _catalog_context(request):
         page=page,
         per_page=getattr(settings, 'CATALOG_PER_PAGE', selectors.CATALOG_PER_PAGE),
     )
-    grouped = selectors.group_by_brand(page_obj.object_list)
+    grouped = selectors.group_catalog_products(
+        page_obj.object_list,
+        snacks_slugs=snacks_slugs,
+    )
 
     resolved_cats, _ = selectors.resolve_categories_filter(categories_selected)
     active_parent_slugs: list[str] = []
@@ -55,12 +47,9 @@ def _catalog_context(request):
         'active_category': categories_selected[0] if categories_selected else None,
         'active_parent_slugs': active_parent_slugs,
         'active_parent_slug': active_parent_slugs[0] if active_parent_slugs else None,
-        'active_features': features_selected,
-        'product_filters': selectors.get_product_filters(brand_slug=brand),
-        'show_general_features': bool(brand),
+        'active_features': [],
         'snacks_slugs': snacks_slugs,
-        'active_brand': brand,
-        'catalog_brands': brands,
+        'active_brand': '',
         'search_q': selectors.normalize_search_query(q) or (q or '').strip(),
         'brands_showcase': selectors.get_brands_for_showcase(featured_only=True),
         'total_count': page_obj.paginator.count,

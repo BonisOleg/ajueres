@@ -2,9 +2,7 @@
 
 {% if hx_oob %}
   {% include "partials/catalog_chips.html" with oob=True %}
-  {% include "partials/catalog_feature_filters.html" with oob=True %}
   {% include "partials/catalog_search_filters.html" with oob=True %}
-  {% include "partials/catalog_brand_filter.html" with oob=True %}
   {% include "partials/catalog_filter_badge.html" with oob=True %}
 {% endif %}
 
@@ -38,11 +36,31 @@
     </p>
   {% endif %}
 
-  {% for brand, products in grouped_products.items %}
+  {% for group in grouped_products %}
     <section class="product-group">
-      <h2 class="product-group__title">{{ brand.name }}</h2>
+      <div class="product-group__head">
+        <h2 class="product-group__title">
+          {{ group.brand.name }}{% if group.kind == 'chips' %} · {% trans 'Чипсы' %}{% elif group.kind == 'tortilla' %} · {% trans 'Тортильи' %}{% endif %}
+        </h2>
+        {% if group.badges %}
+          <ul class="product-group__badges">
+            {% for item in group.badges %}
+              {% filter_icon_url item as icon_url %}
+              <li>
+                <span class="product-group__badge" title="{{ item.name }}">
+                  {% if icon_url %}
+                    <img src="{{ icon_url }}" alt="{{ item.name }}" width="40" height="40" loading="lazy" decoding="async">
+                  {% else %}
+                    <span class="product-group__badge-fallback">{{ item.name }}</span>
+                  {% endif %}
+                </span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
       <div class="product-grid">
-        {% for product in products %}
+        {% for product in group.products %}
           <a class="product-card" href="{% url 'product_detail' product.slug %}">
             <div class="product-card__media">
               {% product_image_url product as img_url %}
@@ -51,7 +69,7 @@
               {% endif %}
             </div>
             <div class="product-card__body">
-              <div class="product-card__brand">{{ brand.name }}</div>
+              <div class="product-card__brand">{{ group.brand.name }}</div>
               <h3 class="product-card__name">{{ product.name }}</h3>
               <div class="product-card__package">{{ product.package }}</div>
             </div>

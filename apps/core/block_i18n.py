@@ -138,6 +138,103 @@ BLOCK_I18N: dict[tuple[str, str], dict[str, str]] = {
         'uz': 'Biz bilan bog‘laning',
         'en': 'Contact us',
     },
+    ('contacts', 'intro'): {
+        'ru': (
+            'Команда ООО «AJERES» всегда открыта для новых партнерств и '
+            'готова обсудить возможности сотрудничества.\n\n'
+            'Если вы являетесь производителем продуктов питания, '
+            'представителем торговой сети или заинтересованы в развитии '
+            'вашего бренда на рынке Узбекистана, свяжитесь с нами.\n\n'
+            'Мы ответим на все вопросы, подготовим коммерческое предложение '
+            'и предложим оптимальную стратегию выхода на рынок.'
+        ),
+        'uz': (
+            '«AJERES» MChJ jamoasi har doim yangi hamkorliklar uchun ochiq '
+            'va siz bilan hamkorlik imkoniyatlarini muhokama qilishga tayyor.\n\n'
+            'Agar siz oziq-ovqat mahsulotlari ishlab chiqaruvchisi, savdo '
+            'tarmog‘i vakili yoki brendingizni O‘zbekiston bozorida '
+            'rivojlantirishni rejalashtirayotgan bo‘lsangiz, biz bilan '
+            'bog‘laning.\n\n'
+            'Biz barcha savollaringizga javob beramiz, tijorat taklifini '
+            'tayyorlaymiz va O‘zbekiston bozoriga kirishning eng maqbul '
+            'strategiyasini taklif etamiz.'
+        ),
+        'en': (
+            'The AJERES LLC team is always open to new partnerships and '
+            'ready to discuss cooperation opportunities.\n\n'
+            'If you are a food producer, a retail chain representative, '
+            'or interested in growing your brand on the Uzbekistan market, '
+            'get in touch with us.\n\n'
+            'We will answer all questions, prepare a commercial proposal, '
+            'and suggest the best market-entry strategy.'
+        ),
+    },
+    ('contacts', 'partners_title'): {
+        'ru': 'Сотрудничество',
+        'uz': 'Hamkorlik',
+        'en': 'Partnership',
+    },
+    ('contacts', 'form_title'): {
+        'ru': 'Отправить нам запрос',
+        'uz': 'Bizga so‘rov yuboring',
+        'en': 'Send us a request',
+    },
+    ('contacts', 'form_lead'): {
+        'ru': (
+            'Команда ООО «AJERES» всегда открыта для новых партнерств и '
+            'готова обсудить возможности сотрудничества.\n\n'
+            'Если вы являетесь производителем продуктов питания, '
+            'представителем торговой сети или заинтересованы в развитии '
+            'вашего бренда на рынке Узбекистана, свяжитесь с нами.\n\n'
+            'Мы ответим на все вопросы, подготовим коммерческое предложение '
+            'и предложим оптимальную стратегию выхода на рынок.'
+        ),
+        'uz': (
+            '«AJERES» MChJ jamoasi har doim yangi hamkorliklar uchun ochiq '
+            'va siz bilan hamkorlik imkoniyatlarini muhokama qilishga tayyor.\n\n'
+            'Agar siz oziq-ovqat mahsulotlari ishlab chiqaruvchisi, savdo '
+            'tarmog‘i vakili yoki brendingizni O‘zbekiston bozorida '
+            'rivojlantirishni rejalashtirayotgan bo‘lsangiz, biz bilan '
+            'bog‘laning.\n\n'
+            'Biz barcha savollaringizga javob beramiz, tijorat taklifini '
+            'tayyorlaymiz va O‘zbekiston bozoriga kirishning eng maqbul '
+            'strategiyasini taklif etamiz.'
+        ),
+        'en': (
+            'The AJERES LLC team is always open to new partnerships and '
+            'ready to discuss cooperation opportunities.\n\n'
+            'If you are a food producer, a retail chain representative, '
+            'or interested in growing your brand on the Uzbekistan market, '
+            'get in touch with us.\n\n'
+            'We will answer all questions, prepare a commercial proposal, '
+            'and suggest the best market-entry strategy.'
+        ),
+    },
+    ('contacts', 'map_title'): {
+        'ru': 'Наш офис в Ташкенте',
+        'uz': 'Toshkentdagi ofisimiz',
+        'en': 'Our office in Tashkent',
+    },
+    ('contacts', 'phone_note'): {
+        'ru': 'Пн–Сб, 9:00–18:00',
+        'uz': 'Du–Sh, 9:00–18:00',
+        'en': 'Mon–Sat, 9:00–18:00',
+    },
+    ('contacts', 'email_note'): {
+        'ru': 'Отвечаем в течение дня',
+        'uz': 'Kun davomida javob beramiz',
+        'en': 'We reply within a day',
+    },
+    ('contacts', 'wholesale_title'): {
+        'ru': 'Оптовые поставки',
+        'uz': 'Ulgurji yetkazib berish',
+        'en': 'Wholesale supply',
+    },
+    ('contacts', 'wholesale_text'): {
+        'ru': 'Отгрузка со склада в Ташкенте и доставка по региону.',
+        'uz': 'Toshkent omboridan jo‘natish va mintaqa bo‘ylab yetkazib berish.',
+        'en': 'Shipment from the Tashkent warehouse and delivery across the region.',
+    },
     ('site', 'nav_home'): {
         'ru': 'Главная',
         'uz': 'Bosh sahifa',

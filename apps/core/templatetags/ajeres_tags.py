@@ -20,6 +20,7 @@ from apps.core.import_content_data import (
 from apps.core.selectors import get_block_image, get_block_text
 from apps.core.theme_css import button_style_attr, section_style_attr
 from apps.catalog.product_filter_defaults import FILTER_SLUGS, filter_icon_static_path
+from apps.catalog.selectors import toggle_category_selection
 
 register = template.Library()
 
@@ -211,7 +212,8 @@ def catalog_filter_url(
     page=None,
 ):
     """
-    URL каталогу зі збереженням brand/q/feature і toggle category (OR multi-select).
+    URL каталогу зі збереженням brand/q/feature і toggle category.
+    Корені — OR multi-select; дитина замінює батька (Чипсы/Брускетта/Краш).
     clear_categories=True — «Все».
     """
     categories = list(context.get('active_categories') or [])
@@ -223,10 +225,11 @@ def catalog_filter_url(
         categories = []
     elif toggle_category:
         slug = str(toggle_category).strip()
-        if slug in categories:
-            categories = [item for item in categories if item != slug]
-        elif slug:
-            categories = [*categories, slug]
+        categories = toggle_category_selection(
+            categories,
+            slug,
+            categories=context.get('categories'),
+        )
         now_on = slug in categories
         snacks = set(context.get('snacks_slugs') or ())
         if now_on and slug in snacks:

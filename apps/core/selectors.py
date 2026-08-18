@@ -59,16 +59,34 @@ def get_blocks(page: str) -> dict[str, SiteBlock]:
 
 
 def get_block_text(blocks: dict[str, SiteBlock], key: str, default: str = '') -> str:
-    """Текст блоку для поточної мови (modeltranslation). Fallback — gettext default."""
+    """Текст блоку для поточної мови. Порожній uz/en не падає на російський fallback."""
     from django.utils.translation import gettext as _
 
+    from .block_i18n import BLOCK_I18N
+
     block = blocks.get(key) if blocks else None
+    lang = (get_language() or 'ru').split('-')[0]
     if block is None:
         return _(default) if default else ''
-    text = (block.text_html or '').strip()
-    if text:
-        return text
-    return _(default) if default else ''
+
+    ru = (getattr(block, 'text_html_ru', None) or '').strip()
+    if not ru:
+        ru = (block.text_html or '').strip()
+    localized = (getattr(block, f'text_html_{lang}', None) or '').strip()
+
+    if lang == 'ru':
+        return localized or ru or (_(default) if default else '')
+
+    if localized and localized != ru:
+        return localized
+
+    seeded = BLOCK_I18N.get((block.page, key), {}).get(lang, '')
+    if seeded:
+        return seeded
+    source = ru or default
+    if source:
+        return _(source)
+    return ''
 
 
 def get_block_image(blocks: dict[str, SiteBlock], key: str):

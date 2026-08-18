@@ -340,17 +340,34 @@ class ProductFilterSelectorsTests(TestCase):
         self.with_gluten.extra_filters.add(gf)
         response = self.client.get(reverse('products'))
         html = response.content.decode()
-        self.assertRegex(html, r'id="catalog-features"[^>]*\bhidden\b')
+        self.assertNotIn('id="catalog-features"', html)
         self.assertNotIn('catalog-feature__icon', html)
+        self.assertNotIn('id="catalog-brand"', html)
 
-    def test_catalog_page_shows_brand_filter_icons(self):
+    def test_catalog_page_shows_snack_brand_badges(self):
         from django.urls import reverse
 
+        snacks = Category.objects.create(slug='snacks', name='Снеки', order=10)
+        chips = Category.objects.create(
+            slug='chips', name='Чипсы', parent=snacks, order=0
+        )
+        Product.objects.create(
+            brand=self.brand,
+            category=chips,
+            slug='nori-chips',
+            name='Чипсы нори',
+            name_ru='Чипсы нори',
+            package='4,5 гр.',
+            image=_tiny_png(),
+        )
         ensure_product_filters()
-        response = self.client.get(reverse('products'), {'brand': 'sen-soy'})
-        self.assertContains(response, 'catalog-features')
-        self.assertContains(response, 'catalog-feature__icon')
+        ensure_product_filter_assignments()
+        response = self.client.get(reverse('products'), {'category': 'snacks'})
+        html = response.content.decode()
+        self.assertContains(response, 'product-group__badge')
         self.assertContains(response, 'natural-product')
+        self.assertNotIn('catalog-feature__icon', html)
+        self.assertNotRegex(html, r'<a[^>]*class="[^"]*product-group__badge')
 
     def test_catalog_page_shows_paprichi_filter_icons(self):
         from django.urls import reverse
@@ -358,21 +375,20 @@ class ProductFilterSelectorsTests(TestCase):
         Brand.objects.create(slug='paprichi', name='Папричи', logo=_tiny_png())
         ensure_product_filters()
         response = self.client.get(reverse('products'), {'brand': 'paprichi'})
-        self.assertContains(response, 'catalog-feature__icon')
-        self.assertContains(response, 'natural-product')
+        self.assertNotContains(response, 'catalog-feature__icon')
+        self.assertNotContains(response, 'id="catalog-brand"')
 
     def test_catalog_brand_dropdown_filters(self):
         from django.urls import reverse
 
         ensure_product_filters()
         all_page = self.client.get(reverse('products'))
-        self.assertContains(all_page, 'id="catalog-brand"')
-        self.assertContains(all_page, 'Все бренды')
-        self.assertNotContains(all_page, 'catalog-feature__icon')
-        filtered = self.client.get(reverse('products'), {'brand': 'sen-soy'})
-        self.assertContains(filtered, 'selected')
-        self.assertContains(filtered, 'value="sen-soy"')
-        self.assertContains(filtered, 'catalog-feature__icon')
+        self.assertNotContains(all_page, 'id="catalog-brand"')
+        self.assertNotContains(all_page, 'Все бренды')
+        self.assertContains(all_page, 'catalog-search')
+        self.assertContains(all_page, 'data-catalog-filters')
+        ignored = self.client.get(reverse('products'), {'brand': 'chester'})
+        self.assertContains(ignored, 'Соус')
 
     def test_feature_filter_includes_snacks(self):
         snacks = Category.objects.create(slug='snacks', name='Снеки', order=10)
@@ -400,7 +416,7 @@ class ProductFilterSelectorsTests(TestCase):
         Category.objects.create(slug='snacks', name='Снеки', order=10)
         response = self.client.get(reverse('products'), {'category': 'snacks'})
         html = response.content.decode()
-        self.assertRegex(html, r'id="catalog-features"[^>]*\bhidden\b')
+        self.assertNotIn('id="catalog-features"', html)
         self.assertNotIn('catalog-feature__icon', html)
 
 

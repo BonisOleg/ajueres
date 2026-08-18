@@ -2,6 +2,11 @@ from django.test import TestCase
 from django.urls import reverse
 
 from apps.catalog.models import Brand, Category, Product, ProductFilter
+from apps.catalog.product_filter_defaults import (
+    ensure_product_filter_assignments,
+    ensure_product_filters,
+)
+from apps.catalog.selectors import toggle_category_selection
 from apps.catalog.tests_selectors import _tiny_png
 from apps.core.models import SiteSettings
 
@@ -92,3 +97,124 @@ class ProductDetailViewTests(TestCase):
         dumped = json.dumps(data)
         self.assertNotIn('AggregateRating', dumped)
         self.assertNotIn('Offer', dumped)
+
+
+class CatalogSubcategoryChipTests(TestCase):
+    def setUp(self):
+        SiteSettings.load()
+        self.snacks = Category.objects.create(slug='snacks', name='Снеки', order=10)
+        self.chips = Category.objects.create(
+            slug='chips', name='Чипсы', parent=self.snacks, order=0
+        )
+        self.bruschetta = Category.objects.create(
+            slug='bruschetta', name='Брускетта', parent=self.snacks, order=1
+        )
+        self.crush = Category.objects.create(
+            slug='crush', name='Краш', parent=self.snacks, order=2
+        )
+        self.brand = Brand.objects.create(
+            slug='sen-soy',
+            name='Sen Soy',
+            logo=_tiny_png(),
+        )
+        self.chip_product = Product.objects.create(
+            brand=self.brand,
+            category=self.chips,
+            slug='nori-chips',
+            name='Чипсы нори',
+            name_ru='Чипсы нори',
+            package='4,5 гр.',
+            image=_tiny_png(),
+        )
+        self.crush_product = Product.objects.create(
+            brand=self.brand,
+            category=self.crush,
+            slug='pretzel-crush',
+            name='Pretzel Crush',
+            name_ru='Pretzel Crush',
+            package='65 гр.',
+            image=_tiny_png(),
+        )
+        self.family = [self.snacks]
+
+    def test_toggle_child_replaces_parent(self):
+        self.assertEqual(
+            toggle_category_selection(
+                ['snacks'], 'chips', categories=self.family
+            ),
+            ['chips'],
+        )
+        self.assertEqual(
+            toggle_category_selection(
+                ['chips'], 'bruschetta', categories=self.family
+            ),
+            ['bruschetta'],
+        )
+        self.assertEqual(
+            toggle_category_selection(
+                ['chips'], 'chips', categories=self.family
+            ),
+            ['snacks'],
+        )
+
+    def test_snacks_page_child_chip_drops_parent(self):
+        html = self.client.get(
+            reverse('products'), {'category': 'snacks'}
+        ).content.decode()
+        self.assertIn('category=chips', html)
+        self.assertNotIn('category=snacks&amp;category=chips', html)
+        self.assertNotIn('category=snacks&category=chips', html)
+
+    def test_child_chip_filters_products(self):
+        response = self.client.get(reverse('products'), {'category': 'chips'})
+        self.assertContains(response, 'Чипсы нори')
+        self.assertNotContains(response, 'Pretzel Crush')
+        html = response.content.decode()
+        self.assertRegex(html, r'chip--sub is-active[^>]*>Чипсы')
+        self.assertIn('category=snacks', html)
+
+
+class CatalogSnackBadgeTests(TestCase):
+    def setUp(self):
+        SiteSettings.load()
+        self.snacks = Category.objects.create(slug='snacks', name='Снеки', order=10)
+        self.chips = Category.objects.create(
+            slug='chips', name='Чипсы', parent=self.snacks, order=0
+        )
+        self.riceup = Brand.objects.create(
+            slug='riceup',
+            name='RICEUP',
+            logo=_tiny_png(),
+        )
+
+    def test_riceup_splits_chips_and_tortilla_badges(self):
+        Product.objects.create(
+            brand=self.riceup,
+            category=self.chips,
+            slug='riceup-rice-chips-sea-salt-60',
+            name='Rice chips',
+            name_ru='Рисовые чипсы',
+            package='60 гр.',
+            image=_tiny_png(),
+        )
+        Product.objects.create(
+            brand=self.riceup,
+            category=self.chips,
+            slug='riceup-tortilla-chips-salt-60',
+            name='Tortilla chips',
+            name_ru='Тортилья-чипсы',
+            package='60 гр.',
+            image=_tiny_png(),
+        )
+        ensure_product_filters()
+        ensure_product_filter_assignments()
+        html = self.client.get(
+            reverse('products'), {'category': 'snacks'}
+        ).content.decode()
+        self.assertIn('RICEUP', html)
+        self.assertIn('Чипсы', html)
+        self.assertIn('Тортильи', html)
+        self.assertIn('popped-never-fried', html)
+        self.assertIn('less-fat-60', html)
+        self.assertIn('product-group__badge', html)
+        self.assertNotIn('id="catalog-brand"', html)

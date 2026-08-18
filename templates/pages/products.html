@@ -57,10 +57,6 @@
 
             {% include "partials/catalog_chips.html" %}
           </div>
-        </div>
-
-        <div class="catalog-toolbar">
-          {% include "partials/catalog_brand_filter.html" %}
 
           <form class="catalog-search"
               method="get"
@@ -68,8 +64,7 @@
               hx-get="{% url 'products' %}"
               hx-trigger="keyup changed delay:300ms from:input[name=q], search"
               hx-target="#catalog-results"
-              hx-push-url="true"
-              hx-include="#catalog-search-filters, #catalog-brand">
+              hx-push-url="true">
           <div id="catalog-search-filters">
             {% include "partials/catalog_search_filters.html" %}
           </div>
@@ -80,8 +75,6 @@
           <input id="catalog-q" type="search" name="q" value="{{ search_q }}" placeholder="{% trans 'Поиск товаров…' %}" autocomplete="off">
         </form>
         </div>
-
-        {% include "partials/catalog_feature_filters.html" %}
       </div>
 
       <div id="catalog-results" class="catalog-panel__results">
@@ -99,7 +92,7 @@
   <div class="catalog-brands__mask">
     <div class="catalog-brands__track">
       {% for brand in brands_showcase %}
-        <a class="catalog-brands__card" href="{% url 'products' %}?brand={{ brand.slug }}">
+        <a class="catalog-brands__card" href="{% url 'products' %}">
           {% brand_logo_url brand as brand_img %}
           {% if brand_img %}
             <img src="{{ brand_img }}" alt="{{ brand.name }}" loading="lazy" width="180" height="100">
@@ -109,7 +102,7 @@
         </a>
       {% endfor %}
       {% for brand in brands_showcase %}
-        <a class="catalog-brands__card" href="{% url 'products' %}?brand={{ brand.slug }}" aria-hidden="true" tabindex="-1">
+        <a class="catalog-brands__card" href="{% url 'products' %}" aria-hidden="true" tabindex="-1">
           {% brand_logo_url brand as brand_img %}
           {% if brand_img %}
             <img src="{{ brand_img }}" alt="" loading="lazy" width="180" height="100">
