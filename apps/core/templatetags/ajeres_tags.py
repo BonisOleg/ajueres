@@ -202,12 +202,42 @@ def filter_icon_url(product_filter):
     return ''
 
 
+# Explicit 2-line breaks for long tips (no single-letter orphans).
+_BADGE_TOOLTIP_LINES = {
+    'popped-never-fried': {
+        'ru': 'Открытые и никогда\nне жареные',
+        'en': 'Popped and never\nfried',
+        'uz': 'Portlatilgan,\nqovurilmagan',
+    },
+    'popped-method': {
+        'ru': 'Взрывной способ\nприготовления',
+        'en': 'Popped,\nnot fried',
+    },
+    'natural-yeast': {
+        'ru': 'Собственные натуральные\nдрожжи',
+    },
+    'no-msg': {
+        'ru': 'Без глутамата\nнатрия',
+    },
+}
+
+
+def _tooltip_attr_value(text: str) -> str:
+    """Escape for HTML attr; keep line breaks as &#10; for CSS attr()+pre-line."""
+    return mark_safe(escape(text).replace('\n', '&#10;'))
+
+
 @register.simple_tag
 def filter_badge_tooltip(product_filter):
-    """Localized filter name for badge tooltip (single line)."""
+    """Localized badge tip; long names get a safe 2-line break."""
     from django.utils.translation import get_language
 
+    slug = getattr(product_filter, 'slug', '') or ''
     lang = (get_language() or 'ru')[:2]
+    lined = _BADGE_TOOLTIP_LINES.get(slug, {})
+    text = lined.get(lang) or lined.get('ru')
+    if text:
+        return _tooltip_attr_value(text)
     for attr in (f'name_{lang}', 'name', 'name_ru'):
         value = getattr(product_filter, attr, None)
         if value:

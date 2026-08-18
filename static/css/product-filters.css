@@ -8,8 +8,8 @@
   margin-bottom: 12px;
   overflow: visible;
   padding-top: 4px;
-  /* Label space under the icon row (single-line tip) */
-  padding-bottom: 1.35rem;
+  /* Label space under the icon row (up to 2 lines) */
+  padding-bottom: 1.85rem;
 }
 
 .product-group__head .product-group__title {
@@ -54,7 +54,7 @@
     box-shadow 0.22s ease;
 }
 
-/* Plain-text tooltip under the icon — single line, no orphan letters */
+/* Plain-text tooltip under the icon — centered, capped width */
 .product-group__badge[data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
@@ -64,7 +64,7 @@
   bottom: auto;
   z-index: 6;
   width: max-content;
-  max-width: none;
+  max-width: 6.5rem;
   padding: 0;
   border-radius: 0;
   background: transparent;
@@ -75,7 +75,10 @@
   line-height: 1.15;
   letter-spacing: -0.015em;
   text-align: center;
-  white-space: nowrap;
+  white-space: pre-line;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
@@ -157,10 +160,10 @@
     flex-wrap: wrap;
     align-items: flex-start;
     column-gap: 10px;
-    /* Single-line tip under each icon */
-    row-gap: 1.45rem;
+    /* Room for 2-line tip under icons */
+    row-gap: 2rem;
     width: 100%;
-    padding-bottom: 1.45rem;
+    padding-bottom: 2rem;
   }
 
   .product-group__badge {
@@ -176,8 +179,8 @@
   }
 
   .product-group__badge[data-tooltip]::after {
-    font-size: 0.5rem;
-    letter-spacing: -0.02em;
+    font-size: 0.5625rem;
+    max-width: 5.25rem;
     top: calc(100% + 3px);
   }
 }
@@ -186,8 +189,8 @@
 @media (min-width: 768px) and (max-width: 1099px) {
   .product-group__badges {
     flex-wrap: wrap;
-    row-gap: 1.35rem;
-    padding-bottom: 1.35rem;
+    row-gap: 1.85rem;
+    padding-bottom: 1.85rem;
   }
 
   .product-group__head {
