@@ -47,9 +47,14 @@
             {% for item in group.badges %}
               {% filter_icon_url item as icon_url %}
               <li>
-                <span class="product-group__badge" title="{{ item.name }}">
+                <span
+                  class="product-group__badge"
+                  data-tooltip="{{ item.name }}"
+                  aria-label="{{ item.name }}"
+                  tabindex="0"
+                >
                   {% if icon_url %}
-                    <img src="{{ icon_url }}" alt="{{ item.name }}" width="72" height="72" loading="lazy" decoding="async">
+                    <img src="{{ icon_url }}" alt="" width="72" height="72" loading="lazy" decoding="async">
                   {% else %}
                     <span class="product-group__badge-fallback">{{ item.name }}</span>
                   {% endif %}

@@ -219,4 +219,5 @@ class CatalogSnackBadgeTests(TestCase):
         self.assertIn('popped-never-fried', html)
         self.assertIn('less-fat-60', html)
         self.assertIn('product-group__badge', html)
+        self.assertIn('data-tooltip=', html)
         self.assertNotIn('id="catalog-brand"', html)
