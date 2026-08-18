@@ -42,8 +42,19 @@
 }
 
 .legal-page__requisites-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   font-size: 0.9375rem;
   line-height: 1.6;
+}
+
+.legal-page__requisites-row {
+  margin: 0;
+}
+
+.legal-page__requisites-key {
+  font-weight: 700;
 }
 
 .legal-page__requisites-placeholder {

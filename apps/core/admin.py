@@ -10,6 +10,7 @@ from unfold.enums import ActionVariant
 from apps.core.templatetags.ajeres_tags import partner_logo_url
 
 from .admin_site_content_proxies import register_site_content_section_admins
+from .admin_requisites_widget import RequisitesRowsWidget
 from .admin_site_content_widgets import CmsAdminTextareaWidget, HexColorInputWidget
 from .admin_utils import (
     ImagePreviewMixin,
@@ -290,8 +291,8 @@ class LegalDocumentAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
             {
                 'fields': ('requisites',),
                 'description': (
-                    'Показываются внизу публичной оферты. '
-                    'Можно оставить пустым и заполнить позже (ИНН, р/с, банк, адрес).'
+                    'Строки внизу публичной оферты: подпись и значение. '
+                    'Можно удалить строку или добавить новую.'
                 ),
             },
         ),
@@ -309,9 +310,11 @@ class LegalDocumentAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
         return super().get_prepopulated_fields(request, obj)
 
     def formfield_for_dbfield(self, db_field, request, **kwargs):
-        if db_field.name in {'body', 'requisites'}:
-            rows = 22 if db_field.name == 'body' else 10
-            kwargs['widget'] = CmsAdminTextareaWidget(attrs={'rows': rows})
+        name = db_field.name
+        if name == 'body' or name.startswith('body_'):
+            kwargs['widget'] = CmsAdminTextareaWidget(attrs={'rows': 22})
+        elif name == 'requisites' or name.startswith('requisites_'):
+            kwargs['widget'] = RequisitesRowsWidget()
         return super().formfield_for_dbfield(db_field, request, **kwargs)
 
 

@@ -24,14 +24,35 @@ class LegalPagesTests(TestCase):
         self.assertContains(offer, 'Публичная оферта')
         self.assertContains(offer, 'Реквизиты')
         self.assertContains(offer, 'ИНН:')
+        self.assertContains(offer, 'Банк:')
+
+    def test_deleted_requisites_row_is_hidden(self):
+        doc = LegalDocument.objects.get(slug='offer')
+        doc.requisites = [
+            {'label': 'ИНН', 'value': '123'},
+            {'label': 'Банк', 'value': ''},
+        ]
+        doc.requisites_ru = doc.requisites
+        doc.save()
+        offer = self.client.get(reverse('offer'))
+        self.assertContains(offer, 'ИНН:')
+        self.assertContains(offer, '123')
+        self.assertContains(offer, 'Банк:')
+        self.assertNotContains(offer, 'р/с:')
+        self.assertNotContains(offer, 'Адрес:')
 
     def test_offer_requisites_heading_translated(self):
-        en = self.client.get('/en/offer/')
-        uz = self.client.get('/uz/offer/')
-        self.assertContains(en, 'Requisites')
-        self.assertNotContains(en, 'Реквизиты')
-        self.assertContains(uz, 'Rekvizitlar')
-        self.assertNotContains(uz, 'Реквизиты')
+        from django.utils import translation
+
+        try:
+            en = self.client.get('/en/offer/')
+            uz = self.client.get('/uz/offer/')
+            self.assertContains(en, 'Requisites')
+            self.assertNotContains(en, 'Реквизиты')
+            self.assertContains(uz, 'Rekvizitlar')
+            self.assertNotContains(uz, 'Реквизиты')
+        finally:
+            translation.activate('ru')
 
     def test_unknown_slug_404(self):
         LegalDocument.objects.create(

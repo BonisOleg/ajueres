@@ -193,7 +193,7 @@ TEXT_LIMITS: dict[str, TextLimit] = {
         allow_newlines=True,
         max_word=80,
     ),
-    'requisites': TextLimit(2000, 'Реквизиты, по одному полю на строку.', allow_newlines=True),
+    'requisites': TextLimit(2000, 'Каждая строка — отдельное поле. Пустую можно удалить.'),
     'value': TextLimit(12, 'До 12 символов (цифра или «200+»).'),
     'label': TextLimit(40, 'До 40 символов, одна строка под цифрой.'),
     'metric': TextLimit(32, 'До 32 символов.'),

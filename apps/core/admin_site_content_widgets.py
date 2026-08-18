@@ -101,7 +101,12 @@ def apply_readable_widget(widget) -> None:
     """Keep text widgets on Unfold light-readable input classes."""
     from django.forms.widgets import CheckboxInput, ClearableFileInput, Select
 
-    if isinstance(widget, (CheckboxInput, ClearableFileInput, Select, HexColorInputWidget)):
+    from .admin_requisites_widget import RequisitesRowsWidget
+
+    if isinstance(
+        widget,
+        (CheckboxInput, ClearableFileInput, Select, HexColorInputWidget, RequisitesRowsWidget),
+    ):
         return
     if isinstance(widget, forms.Textarea):
         widget.attrs['class'] = ' '.join(cms_control_classes(TEXTAREA_CLASSES))

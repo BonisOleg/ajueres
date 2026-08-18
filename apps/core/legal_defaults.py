@@ -1,25 +1,11 @@
 """Default legal copy for privacy and public offer (RU / UZ / EN)."""
 
 from apps.core.models import LegalDocument
+from apps.core.requisites import REQUISITES_EN, REQUISITES_RU, REQUISITES_UZ, rows_from_pairs
 
-REQUISITES_HINT_RU = (
-    'ИНН:\n'
-    'р/с:\n'
-    'Банк:\n'
-    'Адрес:'
-)
-REQUISITES_HINT_UZ = (
-    'STIR:\n'
-    'Hisob raqami:\n'
-    'Bank:\n'
-    'Manzil:'
-)
-REQUISITES_HINT_EN = (
-    'TIN:\n'
-    'Account:\n'
-    'Bank:\n'
-    'Address:'
-)
+REQUISITES_HINT_RU = rows_from_pairs(REQUISITES_RU)
+REQUISITES_HINT_UZ = rows_from_pairs(REQUISITES_UZ)
+REQUISITES_HINT_EN = rows_from_pairs(REQUISITES_EN)
 
 PRIVACY_DEFAULTS = {
     'title': 'Политика конфиденциальности',
@@ -113,10 +99,10 @@ PRIVACY_DEFAULTS = {
         'The current version is published on this page. By continuing to use the '
         'site you confirm that you have read this policy.'
     ),
-    'requisites': '',
-    'requisites_ru': '',
-    'requisites_uz': '',
-    'requisites_en': '',
+    'requisites': [],
+    'requisites_ru': [],
+    'requisites_uz': [],
+    'requisites_en': [],
 }
 PRIVACY_DEFAULTS['body_ru'] = PRIVACY_DEFAULTS['body']
 
@@ -285,6 +271,10 @@ _STALE_PRIVACY_BODY_MARKERS = (
 
 
 def _is_blank_or_stale(slug: str, key: str, current) -> bool:
+    if key.startswith('requisites'):
+        from apps.core.requisites import normalize_requisites
+
+        return not normalize_requisites(current)
     text = '' if current is None else str(current).strip()
     if not text:
         return True

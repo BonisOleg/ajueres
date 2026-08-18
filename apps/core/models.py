@@ -113,11 +113,18 @@ class LegalDocument(TimeStampedModel):
     slug = models.SlugField('Slug', max_length=64, unique=True)
     title = models.CharField('Заголовок', max_length=255)
     body = models.TextField('Текст', blank=True)
-    requisites = models.TextField(
+    requisites = models.JSONField(
         'Реквизиты',
         blank=True,
-        help_text='Блок внизу публичной оферты. Можно заполнить позже.',
+        default=list,
+        help_text='Отдельные строки: подпись и значение. Пустую строку можно удалить.',
     )
+
+    @property
+    def requisites_rows(self) -> list[dict[str, str]]:
+        from .requisites import visible_requisites_rows
+
+        return visible_requisites_rows(self.requisites)
 
     class Meta:
         verbose_name = 'Правовой документ'

@@ -25,8 +25,15 @@
     {% if legal_slug == 'offer' %}
       <section class="legal-page__requisites" aria-labelledby="legal-requisites-title">
         <h2 class="legal-page__requisites-title" id="legal-requisites-title">{% trans 'Реквизиты' %}</h2>
-        {% if document.requisites %}
-          <div class="legal-page__requisites-body">{{ document.requisites|linebreaksbr }}</div>
+        {% if document.requisites_rows %}
+          <div class="legal-page__requisites-body">
+            {% for row in document.requisites_rows %}
+              <p class="legal-page__requisites-row">
+                {% if row.label %}<span class="legal-page__requisites-key">{{ row.label }}:</span>{% endif %}
+                {% if row.value %} <span class="legal-page__requisites-val">{{ row.value }}</span>{% endif %}
+              </p>
+            {% endfor %}
+          </div>
         {% else %}
           <p class="legal-page__requisites-placeholder">
             {% trans 'ИНН, расчётный счёт, банк и юридический адрес можно указать в админке.' %}
