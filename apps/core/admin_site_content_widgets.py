@@ -108,7 +108,13 @@ def apply_readable_widget(widget) -> None:
         (CheckboxInput, ClearableFileInput, Select, HexColorInputWidget, RequisitesRowsWidget),
     ):
         return
+
+    extra: list[str] = []
     if isinstance(widget, forms.Textarea):
-        widget.attrs['class'] = ' '.join(cms_control_classes(TEXTAREA_CLASSES))
+        extra = cms_control_classes(TEXTAREA_CLASSES)
     elif isinstance(widget, forms.TextInput):
-        widget.attrs['class'] = ' '.join(cms_control_classes(INPUT_CLASSES))
+        extra = cms_control_classes(INPUT_CLASSES)
+    if not extra:
+        return
+    existing = str(widget.attrs.get('class') or '').split()
+    widget.attrs['class'] = ' '.join(dict.fromkeys([*extra, *existing]))

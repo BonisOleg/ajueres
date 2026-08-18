@@ -32,7 +32,9 @@ class UnfoldThemeConfigTests(SimpleTestCase):
         self.assertEqual(unfold['COLORS'], 'apps.core.unfold_theme.unfold_colors')
         self.assertNotIn('THEME', unfold)
         self.assertIn('apps.core.unfold_theme.admin_styles', unfold['STYLES'])
+        self.assertIn('apps.core.unfold_theme.admin_lang_tabs_styles', unfold['STYLES'])
         self.assertIn('apps.core.unfold_theme.admin_scripts', unfold['SCRIPTS'])
+        self.assertIn('apps.core.unfold_theme.admin_lang_tabs_scripts', unfold['SCRIPTS'])
         self.assertNotEqual(unfold.get('SITE_HEADER'), 'AJERES — Админ-панель')
 
     def test_logo_and_favicons_point_to_mark(self):
@@ -61,8 +63,26 @@ class UnfoldAdminBrandingTests(TestCase):
         self.assertIn('img/icons/favicon.png', content)
         self.assertIn('css/admin/unfold_theme.css', content)
         self.assertIn('js/admin/unfold_default_light.js', content)
+        self.assertIn('css/admin/lang_field_tabs.css', content)
+        self.assertIn('js/admin/lang_field_tabs.js', content)
         self.assertEqual(content.count('class="admin-brand-logo"'), 1)
         self.assertEqual(content.count('<img src="/static/img/icons/favicon.png"'), 1)
         self.assertIn('admin-theme-switch', content)
         self.assertNotIn('AJERES — Админ-панель', content)
         self.assertIn('--color-primary-500: rgb(255, 90, 54)', content)
+
+    def test_translated_admin_form_has_language_widgets(self):
+        from apps.core.legal_defaults import OFFER_DEFAULTS, ensure_legal_document
+        from apps.core.models import LegalDocument
+
+        ensure_legal_document('offer', OFFER_DEFAULTS)
+        doc = LegalDocument.objects.get(slug='offer')
+        response = self.client.get(
+            reverse('admin:core_legaldocument_change', args=[doc.pk])
+        )
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode()
+        self.assertIn('mt-field-title-ru', content)
+        self.assertIn('mt-field-title-uz', content)
+        self.assertIn('mt-field-title-en', content)
+        self.assertIn('js/admin/lang_field_tabs.js', content)

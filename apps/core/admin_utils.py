@@ -10,7 +10,7 @@ from django.db.models.deletion import ProtectedError, RestrictedError
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils.html import format_html
-from modeltranslation.admin import TabbedTranslationAdmin
+from modeltranslation.admin import TranslationAdmin
 from unfold.admin import ModelAdmin
 
 from .admin_guidelines import (
@@ -130,9 +130,9 @@ class UnfoldTranslationAdmin(
     SaveErrorMessageMixin,
     ImageAcceptMixin,
     ModelAdmin,
-    TabbedTranslationAdmin,
+    TranslationAdmin,
 ):
-    """Unfold ModelAdmin + modeltranslation language tabs (MRO: Unfold first)."""
+    """Unfold ModelAdmin + modeltranslation fields (per-field ru/uz/en tabs)."""
 
 
 class SingletonModelAdminMixin:

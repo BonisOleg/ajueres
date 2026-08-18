@@ -77,10 +77,23 @@ html.dark .admin-field-hint {
   margin: 0 0 0.25rem;
 }
 
-.cms-lang-tabs {
+.cms-lang-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 1rem;
+}
+
+.cms-lang-field__head {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+}
+
+.cms-lang-field__label {
+  font-weight: 700;
 }
 
 .cms-lang-tabs__btn {

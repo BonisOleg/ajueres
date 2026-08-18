@@ -147,7 +147,7 @@ class SitePageContentForm(forms.Form):
                     if initial is None:
                         initial = block.text_html if lang == 'ru' else ''
                     text_field = forms.CharField(
-                        label=f'{label} [{CMS_LANG_LABELS.get(lang, lang.upper())}]',
+                        label=label,
                         required=False,
                         initial=initial or '',
                         widget=widget,
@@ -288,7 +288,7 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
 
     for group in section.field_groups:
         shared_fields = []
-        lang_fields: dict[str, list] = {lang: [] for lang in CMS_LANGS}
+        text_rows = []
         for key in group.keys:
             image_name = _field_name(section.page_slug, key, 'image')
             visible_name = _field_name(section.page_slug, key, 'visible')
@@ -299,24 +299,30 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
                 shared_fields.append(form[visible_name])
                 used_names.add(visible_name)
             else:
+                langs = []
                 for lang in CMS_LANGS:
                     name = _field_name(section.page_slug, key, f'text_html_{lang}')
                     if name in form.fields:
-                        lang_fields[lang].append(form[name])
+                        langs.append(
+                            {
+                                'code': lang,
+                                'label': CMS_LANG_LABELS.get(lang, lang.upper()),
+                                'field': form[name],
+                            }
+                        )
                         used_names.add(name)
+                if langs:
+                    text_rows.append(
+                        {
+                            'label': BLOCK_LABELS.get((section.page_slug, key), key),
+                            'langs': langs,
+                        }
+                    )
         grouped_fields.append(
             {
                 'title': group.title,
                 'shared_fields': shared_fields,
-                'lang_panels': [
-                    {
-                        'code': lang,
-                        'label': CMS_LANG_LABELS.get(lang, lang.upper()),
-                        'fields': lang_fields[lang],
-                    }
-                    for lang in CMS_LANGS
-                ],
-                'has_langs': any(lang_fields.values()),
+                'text_rows': text_rows,
             }
         )
 
@@ -332,8 +338,7 @@ def site_content_section_view(request, page_slug: str, section_slug: str, model_
             {
                 'title': _('Прочее'),
                 'shared_fields': leftover,
-                'lang_panels': [],
-                'has_langs': False,
+                'text_rows': [],
             }
         )
 

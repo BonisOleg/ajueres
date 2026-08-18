@@ -124,5 +124,13 @@ def admin_styles(request: HttpRequest | None = None) -> str:
     return static('css/admin/unfold_theme.css')
 
 
+def admin_lang_tabs_styles(request: HttpRequest | None = None) -> str:
+    return static('css/admin/lang_field_tabs.css')
+
+
 def admin_scripts(request: HttpRequest | None = None) -> str:
     return static('js/admin/unfold_default_light.js')
+
+
+def admin_lang_tabs_scripts(request: HttpRequest | None = None) -> str:
+    return static('js/admin/lang_field_tabs.js')

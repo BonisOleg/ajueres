@@ -122,8 +122,14 @@ UNFOLD = {
     'SITE_FAVICONS': 'apps.core.unfold_theme.site_favicons',
     'BORDER_RADIUS': '10px',
     'COLORS': 'apps.core.unfold_theme.unfold_colors',
-    'STYLES': ['apps.core.unfold_theme.admin_styles'],
-    'SCRIPTS': ['apps.core.unfold_theme.admin_scripts'],
+    'STYLES': [
+        'apps.core.unfold_theme.admin_styles',
+        'apps.core.unfold_theme.admin_lang_tabs_styles',
+    ],
+    'SCRIPTS': [
+        'apps.core.unfold_theme.admin_scripts',
+        'apps.core.unfold_theme.admin_lang_tabs_scripts',
+    ],
     'SIDEBAR': {
         'show_search': True,
         'command_search': True,
