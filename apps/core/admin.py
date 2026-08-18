@@ -317,27 +317,27 @@ class LegalDocumentAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
 
 @admin.register(Advantage)
 class AdvantageAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
-    list_display = ('title', 'order', 'is_active')
-    list_editable = ('order', 'is_active')
+    list_display = ('title', 'is_active')
+    list_editable = ('is_active',)
 
 
 @admin.register(CompanyStat)
 class CompanyStatAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
-    list_display = ('value', 'label', 'order', 'is_active')
-    list_editable = ('order', 'is_active')
+    list_display = ('value', 'label', 'is_active')
+    list_editable = ('is_active',)
 
 
 @admin.register(AboutSection)
 class AboutSectionAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
-    list_display = ('section_key', 'title', 'order', 'is_active')
-    list_editable = ('order', 'is_active')
+    list_display = ('section_key', 'title', 'is_active')
+    list_editable = ('is_active',)
     prepopulated_fields = {'section_key': ('title',)}
 
 
 @admin.register(PartnerOffer)
 class PartnerOfferAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
-    list_display = ('title', 'order', 'is_active')
-    list_editable = ('order', 'is_active')
+    list_display = ('title', 'is_active')
+    list_editable = ('is_active',)
 
 
 @admin.register(RetailPartner)
@@ -346,8 +346,8 @@ class RetailPartnerAdmin(
     ReadableUnfoldFieldsMixin,
     UnfoldTranslationAdmin,
 ):
-    list_display = ('name', 'slug', 'order', 'is_active', 'get_image_preview')
-    list_editable = ('order', 'is_active')
+    list_display = ('name', 'slug', 'is_active', 'get_image_preview')
+    list_editable = ('is_active',)
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ('name', 'slug')
     readonly_fields = ('get_image_preview',)
@@ -359,8 +359,8 @@ class RetailPartnerAdmin(
 
 @admin.register(CaseStudy)
 class CaseStudyAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
-    list_display = ('title', 'metric', 'order', 'is_active')
-    list_editable = ('order', 'is_active')
+    list_display = ('title', 'metric', 'is_active')
+    list_editable = ('is_active',)
 
 
 register_site_content_section_admins()

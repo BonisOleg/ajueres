@@ -103,7 +103,30 @@ class SaveErrorMessageMixin:
             raise
 
 
+class HideOrderAdminMixin:
+    """Keep model.order for site sorting; hide it in Unfold admin."""
+
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        editable = getattr(self, 'list_editable', ()) or ()
+        self.list_editable = tuple(name for name in editable if name != 'order')
+
+    def get_list_display(self, request):
+        return tuple(
+            name for name in super().get_list_display(request) if name != 'order'
+        )
+
+    def get_exclude(self, request, obj=None):
+        excluded = list(super().get_exclude(request, obj) or ())
+        if 'order' not in excluded:
+            names = {field.name for field in self.model._meta.fields}
+            if 'order' in names:
+                excluded.append('order')
+        return excluded or None
+
+
 class UnfoldTranslationAdmin(
+    HideOrderAdminMixin,
     SaveErrorMessageMixin,
     ImageAcceptMixin,
     ModelAdmin,

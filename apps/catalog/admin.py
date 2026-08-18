@@ -13,9 +13,9 @@ from .product_filter_defaults import FILTER_SLUGS, filter_icon_static_path
 
 @admin.register(Category)
 class CategoryAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
-    list_display = ('name', 'slug', 'parent', 'order', 'is_active', 'get_image_preview')
+    list_display = ('name', 'slug', 'parent', 'is_active', 'get_image_preview')
     readonly_fields = ('get_image_preview',)
-    list_editable = ('order', 'is_active')
+    list_editable = ('is_active',)
     list_filter = ('parent', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ('name', 'slug')
@@ -32,10 +32,10 @@ class ProductInline(ImageAcceptMixin, TabularInline, TranslationTabularInline):
 
 @admin.register(Brand)
 class BrandAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
-    list_display = ('name', 'slug', 'order', 'is_featured', 'is_active', 'get_image_preview')
+    list_display = ('name', 'slug', 'is_featured', 'is_active', 'get_image_preview')
     readonly_fields = ('get_image_preview',)
     preview_field = 'logo'
-    list_editable = ('order', 'is_featured', 'is_active')
+    list_editable = ('is_featured', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ('name', 'slug')
     inlines = (ProductInline,)
@@ -47,9 +47,9 @@ class BrandAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
 @admin.register(ProductFilter)
 class ProductFilterAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
     preview_field = 'icon'
-    list_display = ('icon_preview', 'name', 'slug', 'order', 'is_active')
+    list_display = ('icon_preview', 'name', 'slug', 'is_active')
     list_display_links = ('name',)
-    list_editable = ('order', 'is_active')
+    list_editable = ('is_active',)
     list_filter = ('is_active',)
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ('name', 'slug')
@@ -87,13 +87,12 @@ class ProductAdmin(ImagePreviewMixin, UnfoldTranslationAdmin):
         'category',
         'package',
         'extra_filters_preview',
-        'order',
         'is_active',
     )
     readonly_fields = ('get_image_preview',)
     list_filter = ('brand', 'category', 'is_active', 'extra_filters')
     list_display_links = ('name',)
-    list_editable = ('order', 'is_active')
+    list_editable = ('is_active',)
     search_fields = ('name', 'package', 'brand__name', 'search_text')
     prepopulated_fields = {'slug': ('name', 'package')}
     autocomplete_fields = ('brand', 'category')
