@@ -1,6 +1,15 @@
 (function () {
   'use strict';
 
+  function applyDeferredCss() {
+    document.querySelectorAll('link[data-defer-css]').forEach(function (link) {
+      link.media = 'all';
+      link.removeAttribute('data-defer-css');
+    });
+  }
+
+  applyDeferredCss();
+
   function initBurger() {
     var burger = document.getElementById('burger');
     var nav = document.getElementById('mobile-nav');

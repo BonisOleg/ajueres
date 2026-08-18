@@ -270,7 +270,7 @@ class HeaderFooterCmsTests(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         content = response.content.decode()
-        self.assertIn('img/hero-samarkand.png', content)
+        self.assertIn('img/hero-samarkand.webp', content)
         self.assertIn('admin-image-preview', content)
 
     def test_home_uses_uploaded_hero_image(self):

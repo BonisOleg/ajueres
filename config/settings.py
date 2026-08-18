@@ -171,8 +171,8 @@ CONTENT_SECURITY_POLICY = {
     'DIRECTIVES': {
         'default-src': [SELF],
         'script-src': [SELF, NONCE],
-        'style-src': [SELF, UNSAFE_INLINE, 'https://fonts.googleapis.com'],
-        'font-src': [SELF, 'https://fonts.gstatic.com', 'data:'],
+        'style-src': [SELF, UNSAFE_INLINE],
+        'font-src': [SELF, 'data:'],
         'img-src': [SELF, 'data:', 'blob:'],
         'connect-src': [SELF],
         # Google Maps embed on contacts page.

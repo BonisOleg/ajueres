@@ -308,6 +308,19 @@ em {
   animation: aj-btn-pulse 2.8s ease-in-out infinite;
 }
 
+.btn--dark::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  background: rgba(255, 90, 54, 0.28);
+  transform: scale(0.96);
+  opacity: 0;
+  animation: aj-btn-pulse-ring 2.8s ease-in-out infinite;
+}
+
 .btn--dark:hover,
 .btn--dark:focus-visible {
   color: #fff;
@@ -321,6 +334,12 @@ em {
     0 20px 40px rgba(255, 90, 54, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.5),
     inset 0 -1px 0 rgba(0, 0, 0, 0.14);
+}
+
+.btn--dark:hover::before,
+.btn--dark:focus-visible::before {
+  animation: none;
+  opacity: 0;
 }
 
 .btn--glass {
@@ -402,19 +421,21 @@ em {
   0%,
   100% {
     transform: scale(1);
-    box-shadow:
-      0 14px 32px rgba(255, 90, 54, 0.34),
-      inset 0 1px 0 rgba(255, 255, 255, 0.42),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.16),
-      0 0 0 0 rgba(255, 90, 54, 0.28);
   }
   50% {
     transform: scale(1.04);
-    box-shadow:
-      0 18px 40px rgba(255, 90, 54, 0.42),
-      inset 0 1px 0 rgba(255, 255, 255, 0.48),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.14),
-      0 0 0 12px rgba(255, 90, 54, 0);
+  }
+}
+
+@keyframes aj-btn-pulse-ring {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(1.16);
   }
 }
 

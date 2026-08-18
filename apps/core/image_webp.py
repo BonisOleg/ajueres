@@ -9,6 +9,7 @@ from django.core.files.base import ContentFile
 from PIL import Image, UnidentifiedImageError
 
 WEBP_QUALITY = 82
+MAX_SIDE = 1920
 _SKIP_SUFFIXES = frozenset({'.webp', '.svg', '.pdf', '.eps', '.ai'})
 
 
@@ -59,6 +60,9 @@ def raster_to_webp_bytes(data: bytes) -> bytes | None:
         converted = image.convert('RGBA')
     else:
         converted = image.convert('RGB')
+
+    if max(converted.size) > MAX_SIDE:
+        converted.thumbnail((MAX_SIDE, MAX_SIDE), Image.Resampling.LANCZOS)
 
     buffer = BytesIO()
     converted.save(

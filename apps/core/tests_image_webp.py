@@ -50,6 +50,12 @@ class RasterToWebpTests(SimpleTestCase):
         self.assertTrue(content.name.endswith('.webp'))
         self.assertEqual(Image.open(content).format, 'WEBP')
 
+    def test_resizes_large_raster(self):
+        out = raster_to_webp_bytes(_png_bytes(size=(2400, 1200)))
+        image = Image.open(BytesIO(out))
+        self.assertEqual(image.format, 'WEBP')
+        self.assertEqual(image.size, (1920, 960))
+
     def test_skips_svg_name(self):
         raw = b'<svg xmlns="http://www.w3.org/2000/svg"></svg>'
         name, content = maybe_webp_upload('logo.svg', SimpleUploadedFile('logo.svg', raw))

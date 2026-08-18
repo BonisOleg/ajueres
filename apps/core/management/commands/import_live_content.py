@@ -35,6 +35,7 @@ from apps.core.import_content_data import (
     STATIC_BRAND_LOGOS_DIR,
     STATIC_RETAIL_LOGOS_DIR,
     STAT_ROWS,
+    resolve_logo_path,
 )
 from apps.core.models import (
     AboutSection,
@@ -369,10 +370,10 @@ class Command(BaseCommand):
             brand.short_description_uz = f'AJERES portfelidagi {name_uz} brendi'
             brand.short_description_en = f'{name_en} brand in the AJERES portfolio'
             if logo_file:
-                local = BRAND_LOGOS_DIR / logo_file
-                if not local.is_file():
-                    local = STATIC_BRAND_LOGOS_DIR / logo_file
-                if local.is_file():
+                local = resolve_logo_path(
+                    logo_file, BRAND_LOGOS_DIR, STATIC_BRAND_LOGOS_DIR
+                )
+                if local is not None:
                     ok = self._assign_local(brand.logo, local, logo_file)
                     if ok:
                         self.stdout.write(f'  logo {name}')
@@ -392,10 +393,10 @@ class Command(BaseCommand):
             partner.name_ru = name
             partner.order = order
             partner.is_active = True
-            local = RETAIL_LOGOS_DIR / logo_file
-            if not local.is_file():
-                local = STATIC_RETAIL_LOGOS_DIR / logo_file
-            if local.is_file():
+            local = resolve_logo_path(
+                logo_file, RETAIL_LOGOS_DIR, STATIC_RETAIL_LOGOS_DIR
+            )
+            if local is not None:
                 ok = self._assign_local(partner.logo, local, logo_file)
                 if ok:
                     self.stdout.write(f'  retail logo {name}')

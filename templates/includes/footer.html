@@ -3,11 +3,15 @@
   <div class="site-footer__skyline" aria-hidden="true">
     <img
       class="site-footer__skyline-img"
-      src="{% static 'img/footer-samarkand-silhouette.png' %}"
+      src="{% static 'img/footer-samarkand-silhouette-1440.webp' %}"
+      srcset="{% static 'img/footer-samarkand-silhouette-800.webp' %} 800w, {% static 'img/footer-samarkand-silhouette-1440.webp' %} 1440w"
+      sizes="(max-width: 959px) 96vw, min(52vw, 720px)"
       alt=""
-      width="1774"
-      height="887"
+      width="1440"
+      height="720"
       decoding="async"
+      loading="lazy"
+      fetchpriority="low"
     >
   </div>
   <div class="container">
@@ -15,14 +19,7 @@
       <div class="site-footer__col site-footer__col--brand">
         <a class="site-footer__brand" href="{% url 'home' %}">
           <span class="logo__dot" aria-hidden="true"></span>
-          <img
-            class="logo__img logo__img--footer"
-            src="{% static 'img/logo-ajeres.png' %}"
-            alt="AJERES"
-            width="180"
-            height="44"
-            decoding="async"
-          >
+          {% include "includes/logo_img.html" with extra_class="logo__img--footer" width=180 height=44 sizes="180px" %}
         </a>
         <p class="site-footer__text">{% block_text site_blocks "tagline" "Дистрибьютор продуктов питания в Республике Узбекистан" %}</p>
         <p class="site-footer__credit">

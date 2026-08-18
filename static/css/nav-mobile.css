@@ -93,7 +93,7 @@
   position: absolute;
   inset: 0;
   /* Менший zoom ніж cover — купол + портал + більше фасаду */
-  background: url("../img/hero-samarkand.png") 94% 48% / auto 58% no-repeat;
+  background: url("../img/hero-samarkand.webp") 94% 48% / auto 58% no-repeat;
   opacity: 0.28;
   -webkit-mask-image: linear-gradient(
     180deg,

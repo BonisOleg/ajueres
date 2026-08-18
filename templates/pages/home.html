@@ -6,9 +6,23 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
-<link rel="stylesheet" href="{% static 'css/home-2.css' %}">
-<link rel="stylesheet" href="{% static 'css/home-3.css' %}">
+{% include "includes/deferred_css.html" with href="css/home-2.css" %}
+{% include "includes/deferred_css.html" with href="css/home-3.css" %}
 <link rel="stylesheet" href="{% static 'css/home-stats.css' %}">
+{% block_image blocks "hero_image" as hero_img %}
+{% if hero_img %}
+<link rel="preload" as="image" href="{{ hero_img.url }}" fetchpriority="high">
+{% else %}
+<link
+  rel="preload"
+  as="image"
+  type="image/webp"
+  href="{% static 'img/hero-samarkand.webp' %}"
+  imagesrcset="{% static 'img/hero-samarkand-640.webp' %} 640w, {% static 'img/hero-samarkand.webp' %} 1024w"
+  imagesizes="100vw"
+  fetchpriority="high"
+>
+{% endif %}
 {% endblock %}
 
 {% block extra_js %}
@@ -19,15 +33,29 @@
 <section class="home-hero" {% section_style "home" "hero" %}>
   <div class="home-hero__bg" aria-hidden="true">
     {% block_image blocks "hero_image" as hero_img %}
+    {% if hero_img %}
     <img
       class="home-hero__img"
-      src="{% if hero_img %}{{ hero_img.url }}{% else %}{% static 'img/hero-samarkand.png' %}{% endif %}"
+      src="{{ hero_img.url }}"
       alt=""
       width="1024"
-      height="439"
+      height="576"
       decoding="async"
       fetchpriority="high"
     >
+    {% else %}
+    <img
+      class="home-hero__img"
+      src="{% static 'img/hero-samarkand.webp' %}"
+      srcset="{% static 'img/hero-samarkand-640.webp' %} 640w, {% static 'img/hero-samarkand.webp' %} 1024w"
+      sizes="100vw"
+      alt=""
+      width="1024"
+      height="576"
+      decoding="async"
+      fetchpriority="high"
+    >
+    {% endif %}
   </div>
   <div class="home-hero__stage">
     <div class="home-hero__copy reveal">
@@ -56,7 +84,7 @@
     <span class="hero-stats__trigger-core" aria-hidden="true">
       <img
         class="hero-stats__fingerprint"
-        src="{% static 'img/fingerprint-white.png' %}"
+        src="{% static 'img/fingerprint-white.webp' %}"
         alt=""
         width="26"
         height="26"

@@ -4,14 +4,7 @@
     <div class="site-header__capsule">
       <a class="logo" href="{% url 'home' %}">
         <span class="logo__dot" aria-hidden="true"></span>
-        <img
-          class="logo__img"
-          src="{% static 'img/logo-ajeres.png' %}"
-          alt="AJERES"
-          width="196"
-          height="48"
-          decoding="async"
-        >
+        {% include "includes/logo_img.html" with width=196 height=48 sizes="196px" %}
       </a>
 
       <nav class="nav-desktop" aria-label="{% trans 'Основная навигация' %}">
@@ -114,14 +107,7 @@
     <div class="nav-mobile__top">
       <a class="nav-mobile__brand" href="{% url 'home' %}">
         <span class="logo__dot" aria-hidden="true"></span>
-        <img
-          class="logo__img"
-          src="{% static 'img/logo-ajeres.png' %}"
-          alt="AJERES"
-          width="168"
-          height="41"
-          decoding="async"
-        >
+        {% include "includes/logo_img.html" with width=168 height=41 sizes="168px" %}
       </a>
       <button type="button" class="nav-mobile__close" id="nav-mobile-close" aria-label="{% trans 'Закрыть меню' %}">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>

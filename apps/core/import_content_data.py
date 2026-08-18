@@ -477,28 +477,28 @@ RETAIL_LOGOS_DIR = BRAND_LOGOS_DIR / 'buyers'
 PRODUCT_IMAGES_DIR = Path(__file__).resolve().parents[2] / 'content' / 'products'
 
 BRANDS_SPEC = [
-    ('sen-soy', 'Sen Soy', 'sensoy.jpg', 0, True),
-    ('paprichi', 'Папричи', 'paprichi.jpg', 1, True),
-    ('riceup', 'RICEUP', 'riceup.png', 2, True),
-    ('gaudo', 'GAUDO', 'gaudo.jpeg', 3, True),
-    ('krambals', 'KRAMBALS', 'krambals.jpg', 4, True),
-    ('yamchan', 'ЯМЧАН', 'yamchan.png', 5, True),
-    ('huligan', 'HULIGAN', 'huligan.png', 6, True),
+    ('sen-soy', 'Sen Soy', 'sensoy.webp', 0, True),
+    ('paprichi', 'Папричи', 'paprichi.webp', 1, True),
+    ('riceup', 'RICEUP', 'riceup.webp', 2, True),
+    ('gaudo', 'GAUDO', 'gaudo.webp', 3, True),
+    ('krambals', 'KRAMBALS', 'krambals.webp', 4, True),
+    ('yamchan', 'ЯМЧАН', 'yamchan.webp', 5, True),
+    ('huligan', 'HULIGAN', 'huligan.webp', 6, True),
     # Legacy brand; tea products removed from catalog.
     ('prince-of-chester', 'Prince of Chester', None, 7, False),
 ]
 
 # Homepage «Наши бренды» = retail buyers. images.png skipped (unknown name).
 RETAIL_PARTNERS_SPEC = [
-    ('uzum', 'Uzum', 'uzum.png', 0),
-    ('korzinka', 'korzinka.uz', 'korzinka.png', 1),
-    ('magnum', 'Magnum', 'magnum.png', 2),
-    ('assorti-market', 'Assorti Market', 'assorti-market.png', 3),
-    ('olma', 'Olma', 'olma.png', 4),
-    ('makro', 'Makro', 'makro.png', 5),
-    ('havas', 'HAVAS', 'havas.jpg', 6),
-    ('galmart', 'Galmart', 'galmart.png', 7),
-    ('carrefour', 'Carrefour', 'carrefour.png', 8),
+    ('uzum', 'Uzum', 'uzum.webp', 0),
+    ('korzinka', 'korzinka.uz', 'korzinka.webp', 1),
+    ('magnum', 'Magnum', 'magnum.webp', 2),
+    ('assorti-market', 'Assorti Market', 'assorti-market.webp', 3),
+    ('olma', 'Olma', 'olma.webp', 4),
+    ('makro', 'Makro', 'makro.webp', 5),
+    ('havas', 'HAVAS', 'havas.webp', 6),
+    ('galmart', 'Galmart', 'galmart.webp', 7),
+    ('carrefour', 'Carrefour', 'carrefour.webp', 8),
 ]
 
 STATIC_BRAND_LOGOS_DIR = Path(__file__).resolve().parents[2] / 'static' / 'img' / 'brands'
@@ -540,3 +540,26 @@ def _logo_lookup(spec_rows, folder: str, *, has_featured: bool) -> dict[str, str
 
 BRAND_LOGO_LOOKUP = _logo_lookup(BRANDS_SPEC, 'brands', has_featured=True)
 RETAIL_LOGO_LOOKUP = _logo_lookup(RETAIL_PARTNERS_SPEC, 'partners', has_featured=False)
+
+_LOGO_SUFFIXES = ('.webp', '.png', '.jpg', '.jpeg')
+
+
+def logo_filename_candidates(logo_file: str) -> list[str]:
+    if not logo_file:
+        return []
+    stem = Path(logo_file).stem
+    names = [logo_file]
+    for ext in _LOGO_SUFFIXES:
+        name = f'{stem}{ext}'
+        if name not in names:
+            names.append(name)
+    return names
+
+
+def resolve_logo_path(logo_file: str, *directories: Path) -> Path | None:
+    for directory in directories:
+        for name in logo_filename_candidates(logo_file):
+            path = directory / name
+            if path.is_file():
+                return path
+    return None

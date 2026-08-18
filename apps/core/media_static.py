@@ -16,11 +16,16 @@ def _safe_filename(filename: str) -> str:
     return name
 
 
-def redirect_partner_logo(request, filename: str):
+def _webp_static_name(filename: str) -> str:
     name = _safe_filename(filename)
+    return f'{Path(name).stem}.webp'
+
+
+def redirect_partner_logo(request, filename: str):
+    name = _webp_static_name(filename)
     return redirect(static(f'img/partners/{name}'))
 
 
 def redirect_brand_logo(request, filename: str):
-    name = _safe_filename(filename)
+    name = _webp_static_name(filename)
     return redirect(static(f'img/brands/{name}'))

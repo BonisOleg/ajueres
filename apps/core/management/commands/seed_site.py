@@ -30,6 +30,7 @@ from apps.core.import_content_data import (
     RETAIL_LOGOS_DIR,
     RETAIL_PARTNERS_SPEC,
     STAT_ROWS,
+    resolve_logo_path,
 )
 from apps.core.models import (
     AboutSection,
@@ -452,10 +453,9 @@ class Command(BaseCommand):
     def _logo_source(
         self, content_dir: Path, static_dir: Path, logo_file: str
     ) -> Path | None:
-        for directory in (content_dir, static_dir):
-            path = directory / logo_file
-            if path.is_file() and path.stat().st_size > 2000:
-                return path
+        path = resolve_logo_path(logo_file, content_dir, static_dir)
+        if path is not None and path.stat().st_size > 2000:
+            return path
         return None
 
     def _ensure_brand_logo(self, brand: Brand, logo_file: str | None, force: bool = False):
