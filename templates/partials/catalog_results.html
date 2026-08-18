@@ -46,10 +46,11 @@
           <ul class="product-group__badges">
             {% for item in group.badges %}
               {% filter_icon_url item as icon_url %}
+              {% filter_badge_tooltip item as tip %}
               <li>
                 <span
                   class="product-group__badge"
-                  data-tooltip="{{ item.name }}"
+                  data-tooltip="{{ tip }}"
                   aria-label="{{ item.name }}"
                   tabindex="0"
                 >

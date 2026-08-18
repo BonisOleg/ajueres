@@ -202,6 +202,51 @@ def filter_icon_url(product_filter):
     return ''
 
 
+# Forced line breaks so long badge tips fit inside the icon cell (mobile).
+_BADGE_TOOLTIP_LINES = {
+    'popped-never-fried': {
+        'ru': 'Открытые и\nникогда не\nжареные',
+        'en': 'Popped and\nnever fried',
+        'uz': 'Portlatilgan,\nqovurilmagan',
+    },
+    'popped-method': {
+        'ru': 'Взрывной способ\nприготовления',
+        'en': 'Popped,\nnot fried',
+    },
+    'no-msg': {
+        'ru': 'Без глутамата\nнатрия',
+    },
+    'less-fat-60': {
+        'ru': 'На 60% меньше\nжира',
+        'en': '60% less\nfat',
+    },
+    'natural-yeast': {
+        'ru': 'Собственные\nнатуральные\nдрожжи',
+    },
+    'slow-fermentation': {
+        'ru': 'Медленное\nброжение',
+    },
+}
+
+
+@register.simple_tag
+def filter_badge_tooltip(product_filter):
+    """Tooltip text with optional line breaks; stays within badge width."""
+    from django.utils.translation import get_language
+
+    slug = getattr(product_filter, 'slug', '') or ''
+    lang = (get_language() or 'ru')[:2]
+    lines = _BADGE_TOOLTIP_LINES.get(slug, {})
+    text = lines.get(lang) or lines.get('ru')
+    if text:
+        return text
+    for attr in (f'name_{lang}', 'name', 'name_ru'):
+        value = getattr(product_filter, attr, None)
+        if value:
+            return str(value)
+    return ''
+
+
 @register.simple_tag(takes_context=True)
 def catalog_filter_url(
     context,

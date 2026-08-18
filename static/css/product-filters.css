@@ -54,15 +54,17 @@
     box-shadow 0.22s ease;
 }
 
-/* Plain-text tooltip under the icon */
+/* Plain-text tooltip under the icon — clipped to badge width */
 .product-group__badge[data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: 50%;
+  left: 0;
+  right: 0;
   top: calc(100% + 6px);
   bottom: auto;
   z-index: 6;
-  max-width: 7.5rem;
+  width: 100%;
+  max-width: 100%;
   padding: 0;
   border-radius: 0;
   background: transparent;
@@ -70,14 +72,16 @@
   font-family: var(--font-sans, system-ui, sans-serif);
   font-size: 0.75rem;
   font-weight: 600;
-  line-height: 1.25;
+  line-height: 1.2;
   letter-spacing: 0.01em;
   text-align: center;
-  white-space: normal;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transform: translateX(-50%) translateY(-3px);
+  transform: translateY(-3px);
   transition:
     opacity 0.16s ease,
     transform 0.16s ease,
@@ -114,13 +118,13 @@
   .product-group__badge[data-tooltip]:hover::after {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 
   .product-group__badge[data-tooltip]:focus-visible::after {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 }
 
@@ -133,7 +137,7 @@
   .product-group__badge[data-tooltip].is-tooltip-open::after {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 }
 
@@ -174,11 +178,8 @@
   }
 
   .product-group__badge[data-tooltip]::after {
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     line-height: 1.2;
-    /* Wider so “Открытые и никогда не жареные” wraps in 3 lines, not 4 */
-    max-width: 7.75rem;
-    width: max-content;
     top: calc(100% + 4px);
   }
 }
