@@ -117,14 +117,17 @@ class LegalDocument(TimeStampedModel):
         'Реквизиты',
         blank=True,
         default=list,
-        help_text='Отдельные строки: подпись и значение. Пустую строку можно удалить.',
+        help_text='ИНН, расчётный счёт, банк и адрес — отдельные поля.',
     )
 
     @property
     def requisites_rows(self) -> list[dict[str, str]]:
+        from django.utils.translation import get_language
+
         from .requisites import visible_requisites_rows
 
-        return visible_requisites_rows(self.requisites)
+        lang = (get_language() or 'ru')[:2]
+        return visible_requisites_rows(self.requisites, lang)
 
     class Meta:
         verbose_name = 'Правовой документ'

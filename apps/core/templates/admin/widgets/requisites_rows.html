@@ -6,7 +6,17 @@
          {% include "django/forms/widgets/attrs.html" %}
          data-requisites-json>
   <div class="requisites-rows__list" data-requisites-list>
-    {% for row in widget.rows %}
+    {% for row in widget.standard_rows %}
+      <div class="requisites-rows__item requisites-rows__item--standard" data-requisites-row>
+        <div class="requisites-rows__name">{{ row.label }}</div>
+        <input type="hidden" value="{{ row.label }}" data-requisites-label>
+        <label class="requisites-rows__field">
+          <span>{% trans 'Значение' %}</span>
+          <input type="text" value="{{ row.value }}" data-requisites-value maxlength="240" autocomplete="off">
+        </label>
+      </div>
+    {% endfor %}
+    {% for row in widget.extra_rows %}
       <div class="requisites-rows__item" data-requisites-row>
         <label class="requisites-rows__field">
           <span>{% trans 'Подпись' %}</span>
@@ -23,7 +33,7 @@
     {% endfor %}
   </div>
   <button type="button" class="requisites-rows__add" data-requisites-add>
-    {% trans 'Добавить строку' %}
+    {% trans 'Дополнительная строка' %}
   </button>
   <template data-requisites-template>
     <div class="requisites-rows__item" data-requisites-row>

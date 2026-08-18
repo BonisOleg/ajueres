@@ -291,8 +291,8 @@ class LegalDocumentAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
             {
                 'fields': ('requisites',),
                 'description': (
-                    'Строки внизу публичной оферты: подпись и значение. '
-                    'Можно удалить строку или добавить новую.'
+                    'Поля как на сайте: ИНН, р/с, банк, адрес. '
+                    'Впишите значения справа. Дополнительную строку можно добавить ниже.'
                 ),
             },
         ),

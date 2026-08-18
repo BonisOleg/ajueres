@@ -1,4 +1,4 @@
-"""Unfold widget: one admin row per requisite (label, value, delete)."""
+"""Unfold widget: INN / account / bank / address plus optional extra rows."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import json
 
 from django import forms
 
-from .requisites import normalize_requisites
+from .requisites import display_requisites_rows, lang_from_field_name, normalize_requisites
 
 
 class RequisitesRowsWidget(forms.Widget):
@@ -21,9 +21,11 @@ class RequisitesRowsWidget(forms.Widget):
 
     def get_context(self, name, value, attrs):
         ctx = super().get_context(name, value, attrs)
-        rows = normalize_requisites(value)
-        ctx['widget']['rows'] = rows
-        ctx['widget']['json_value'] = self.format_value(value)
+        lang = lang_from_field_name(name)
+        rows = display_requisites_rows(value, lang)
+        ctx['widget']['standard_rows'] = rows[:4]
+        ctx['widget']['extra_rows'] = rows[4:]
+        ctx['widget']['json_value'] = json.dumps(rows, ensure_ascii=False)
         return ctx
 
     class Media:

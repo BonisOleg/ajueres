@@ -15,13 +15,26 @@
 
 .requisites-rows__item {
   display: grid;
-  grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(7rem, 9rem) minmax(0, 1fr) auto;
   gap: 8px 10px;
   align-items: end;
   padding: 10px;
   border: 1px solid var(--color-base-200, #e6dfd4);
   border-radius: 10px;
   background: var(--color-base-50, #faf8f4);
+}
+
+.requisites-rows__item--standard {
+  grid-template-columns: minmax(7rem, 9rem) minmax(0, 1fr);
+}
+
+.requisites-rows__name {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #1b2430;
 }
 
 .requisites-rows__field {
@@ -76,7 +89,8 @@
     max-width: none;
   }
 
-  .requisites-rows__item {
+  .requisites-rows__item,
+  .requisites-rows__item--standard {
     grid-template-columns: 1fr;
     align-items: stretch;
   }
