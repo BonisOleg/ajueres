@@ -105,8 +105,8 @@ PRODUCT_FILTERS = (
         'slug': 'natural-yeast',
         'order': 150,
         'name_ru': 'Собственные натуральные дрожжи',
-        'name_en': 'Natural yeast',
-        'name_uz': 'Tabiiy xamirturush',
+        'name_en': 'Own natural yeast',
+        'name_uz': 'O‘z tabiiy xamirturushi',
     },
     {
         'slug': 'slow-fermentation',

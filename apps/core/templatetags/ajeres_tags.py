@@ -212,12 +212,17 @@ _BADGE_TOOLTIP_LINES = {
     'popped-method': {
         'ru': 'Взрывной способ\nприготовления',
         'en': 'Popped,\nnot fried',
+        'uz': 'Portlatib\ntayyorlangan',
     },
     'natural-yeast': {
         'ru': 'Собственные натуральные\nдрожжи',
+        'en': 'Own natural\nyeast',
+        'uz': 'O‘z tabiiy\nxamirturushi',
     },
     'no-msg': {
         'ru': 'Без глутамата\nнатрия',
+        'en': 'No MSG',
+        'uz': 'Natriy\nglutamatsiz',
     },
 }
 
@@ -235,13 +240,15 @@ def filter_badge_tooltip(product_filter):
     slug = getattr(product_filter, 'slug', '') or ''
     lang = (get_language() or 'ru')[:2]
     lined = _BADGE_TOOLTIP_LINES.get(slug, {})
-    text = lined.get(lang) or lined.get('ru')
+    text = lined.get(lang)
     if text:
         return _tooltip_attr_value(text)
     for attr in (f'name_{lang}', 'name', 'name_ru'):
         value = getattr(product_filter, attr, None)
         if value:
             return ' '.join(str(value).split())
+    if lined.get('ru'):
+        return _tooltip_attr_value(lined['ru'])
     return ''
 
 
