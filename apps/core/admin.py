@@ -367,3 +367,7 @@ class CaseStudyAdmin(ReadableUnfoldFieldsMixin, UnfoldTranslationAdmin):
 
 
 register_site_content_section_admins()
+
+from .admin_recent_actions import register_recent_actions_admin  # noqa: E402
+
+register_recent_actions_admin()

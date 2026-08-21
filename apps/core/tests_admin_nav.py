@@ -25,6 +25,7 @@ def _group(navigation, title: str) -> dict:
 class NestedAdminNavTests(SimpleTestCase):
     def test_page_groups_exist(self):
         titles = _group_titles(build_navigation())
+        self.assertIn('Обзор', titles)
         self.assertIn('Главная', titles)
         self.assertIn('Каталог', titles)
         self.assertIn('О компании', titles)

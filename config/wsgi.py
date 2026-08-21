@@ -49,7 +49,8 @@ def _bootstrap_vercel() -> None:
         # Always re-seed: idempotent, fills missing stats (e.g. 4th orb).
         call_command('seed_site', verbosity=0)
     else:
-        # Managed Postgres: do not run full seed_site (it can overwrite settings).
+        # Managed Postgres: migrate schema, then ensure defaults (no full seed).
+        call_command('migrate', interactive=False, verbosity=0)
         ensure_default_superuser()
         from apps.catalog.product_filter_defaults import (
             ensure_product_filter_assignments,

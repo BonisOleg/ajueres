@@ -46,8 +46,19 @@ class CmsAdminTextareaWidget(AdminTextareaWidget):
 
 
 def file_preview_url(value) -> str:
+    """Return media URL only when the file is actually available."""
     if not value:
         return ''
+    name = getattr(value, 'name', None) or ''
+    if not name:
+        return ''
+    storage = getattr(value, 'storage', None)
+    if storage is not None:
+        try:
+            if not storage.exists(name):
+                return ''
+        except (OSError, ValueError):
+            return ''
     try:
         return value.url or ''
     except (AttributeError, ValueError):

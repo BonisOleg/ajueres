@@ -274,3 +274,4 @@ class CaseStudy(TimeStampedModel):
 
 # CMS proxy slots (must be imported with the model graph for migrations/admin).
 from .cms_proxy_models import SECTION_PROXY_MODELS as _SECTION_PROXY_MODELS  # noqa: E402,F401
+from .media_models import MediaBlob  # noqa: E402,F401

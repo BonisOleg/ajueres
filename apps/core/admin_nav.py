@@ -126,6 +126,17 @@ def _style_page_groups() -> list[dict]:
 def build_navigation(request=None):
     return [
         {
+            'title': 'Обзор',
+            'separator': False,
+            'items': [
+                {
+                    'title': 'Последние действия',
+                    'icon': 'history',
+                    'link': reverse_lazy('admin:recent_actions'),
+                },
+            ],
+        },
+        {
             'title': 'Настройки',
             'separator': False,
             'items': [

@@ -54,18 +54,34 @@ def _catalog_static_map() -> dict[str, str]:
     return _CATALOG_STATIC_MAP
 
 
+def _media_url_if_exists(field) -> str:
+    if not field:
+        return ''
+    name = getattr(field, 'name', None) or ''
+    if not name:
+        return ''
+    storage = getattr(field, 'storage', None)
+    if storage is not None:
+        try:
+            if not storage.exists(name):
+                return ''
+        except (OSError, ValueError):
+            return ''
+    try:
+        return field.url or ''
+    except (AttributeError, ValueError):
+        return ''
+
+
 @register.simple_tag
 def product_image_url(product):
-    """Prefer shipped static catalog images (Vercel-safe), else media."""
+    """Prefer uploaded media when the file exists; else shipped static."""
+    media_url = _media_url_if_exists(getattr(product, 'image', None))
+    if media_url:
+        return media_url
     static_name = _catalog_static_map().get(getattr(product, 'slug', '') or '')
     if static_name:
         return static(f'img/catalog/{static_name}')
-    image = getattr(product, 'image', None)
-    if image:
-        try:
-            return image.url
-        except ValueError:
-            return ''
     return ''
 
 
