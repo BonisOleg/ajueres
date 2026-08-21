@@ -195,6 +195,7 @@
   font-weight: 700;
   font-size: 1.15rem;
   letter-spacing: -0.02em;
+  color: #0b1f33;
 }
 
 .contacts-request .form-success p {
@@ -202,7 +203,7 @@
   max-width: 34ch;
   font-size: 0.875rem;
   line-height: 1.45;
-  color: var(--muted);
+  color: #3a4a5c;
 }
 
 .contacts-map {

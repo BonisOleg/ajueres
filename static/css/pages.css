@@ -440,6 +440,11 @@
 .form-success h3 {
   font-size: 1.25rem;
   margin-bottom: 8px;
+  color: #0b1f33;
+}
+
+.form-success p {
+  color: #3a4a5c;
 }
 
 .offer-list {
