@@ -33,13 +33,13 @@
   }
 
   .site-footer__text {
-    margin: 0;
+    margin: 0 0 20px;
     max-width: none;
     flex: 0 0 auto;
   }
 
   .site-footer__credit {
-    margin-top: 8px;
+    margin-top: 0;
   }
 
   .site-footer__copy {
