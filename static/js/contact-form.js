@@ -49,13 +49,30 @@
     }
   }
 
+  function isNameExtra(ch) {
+    return (
+      ch === ' ' ||
+      ch === '-' ||
+      ch === "'" ||
+      ch === '\u2019' ||
+      ch === '\u02BC' ||
+      ch === '`'
+    );
+  }
+
+  function sanitizeName(value) {
+    return String(value || '')
+      .replace(/[\u200B-\u200D\uFEFF]/g, '')
+      .trim();
+  }
+
   function isValidName(value) {
-    var name = String(value || '').trim();
+    var name = sanitizeName(value);
     if (name.length < 2) return false;
     var hasLetter = false;
     for (var i = 0; i < name.length; i += 1) {
       var ch = name.charAt(i);
-      if (ch === ' ' || ch === '-') continue;
+      if (isNameExtra(ch)) continue;
       if (/\d/.test(ch) || !isLetter(ch)) return false;
       hasLetter = true;
     }

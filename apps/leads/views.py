@@ -25,6 +25,7 @@ def _htmx_form_context(is_modal_form: bool) -> dict:
         return {
             'form_prefix': 'modal',
             'form_root_id': 'contact-modal-form-root',
+            'form_compact': True,
         }
     return {'form_compact': True}
 

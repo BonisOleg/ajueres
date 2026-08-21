@@ -29,8 +29,22 @@ _IS_BUILD_CMD = _is_management_command('collectstatic', 'check')
 DEBUG = os.environ.get('DEBUG', 'False').lower() in ('1', 'true', 'yes')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 if not SECRET_KEY:
-    # collectstatic on Vercel has no runtime secrets; Droplet still requires SECRET_KEY.
-    if DEBUG or IS_VERCEL or _IS_BUILD_CMD:
+    # collectstatic / local DEBUG: ephemeral key is fine.
+    # Vercel without dashboard env: MUST be stable across serverless
+    # instances, otherwise CSRF + sessions break (login/form look "stuck").
+    if IS_VERCEL and not _IS_BUILD_CMD:
+        import hashlib
+
+        _vercel_material = (
+            os.environ.get('VERCEL_DEPLOYMENT_ID')
+            or os.environ.get('VERCEL_URL')
+            or os.environ.get('VERCEL_GIT_COMMIT_SHA')
+            or 'ajeres-vercel-demo'
+        )
+        SECRET_KEY = 'ajeres-vercel-' + hashlib.sha256(
+            _vercel_material.encode('utf-8')
+        ).hexdigest()
+    elif DEBUG or _IS_BUILD_CMD:
         SECRET_KEY = get_random_secret_key()
     else:
         raise ImproperlyConfigured('SECRET_KEY environment variable is required')
@@ -237,6 +251,10 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+# Ephemeral /tmp SQLite on Vercel cannot share django_session across instances.
+if IS_VERCEL and not DATABASE_URL.startswith('postgres'):
+    SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},

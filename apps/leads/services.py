@@ -87,7 +87,7 @@ def _validate_fields(**raw: Any) -> dict[str, str]:
             _('Максимум 2000 символов.')
         )
 
-    name = (raw.get('name') or '').strip()
+    name = _NAME_STRIP_RE.sub('', (raw.get('name') or '').strip())
     if not _is_valid_name(name):
         errors.setdefault('name', []).append(
             _('Имя должно содержать только буквы и быть не короче 2 символов.')
@@ -119,12 +119,17 @@ def _validate_fields(**raw: Any) -> dict[str, str]:
     }
 
 
+_NAME_STRIP_RE = re.compile(r'[\u200b-\u200d\ufeff]')
+_NAME_EXTRA = set(" -'’ʼ`")
+
+
 def _is_valid_name(name: str) -> bool:
+    name = _NAME_STRIP_RE.sub('', (name or '').strip())
     if len(name) < 2:
         return False
     has_letter = False
     for ch in name:
-        if ch in ' -':
+        if ch in _NAME_EXTRA:
             continue
         if ch.isdigit() or not ch.isalpha():
             return False

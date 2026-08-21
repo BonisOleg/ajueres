@@ -52,6 +52,16 @@ class LeadsServicesTests(TestCase):
             )
         self.assertIn('name', ctx.exception.message_dict)
 
+    def test_name_allows_apostrophe_and_strips_zwsp(self):
+        result = submit_contact_inquiry(
+            purpose='Нужен прайс-лист',
+            name="О\u200b'Коннор",
+            phone='+998 (90) 123-45-67',
+            email='okonnor@example.com',
+        )
+        self.assertIsNotNone(result.inquiry)
+        self.assertEqual(result.inquiry.name, "О'Коннор")
+
     def test_phone_requires_twelve_digits(self):
         with self.assertRaises(ValidationError) as ctx:
             submit_contact_inquiry(
