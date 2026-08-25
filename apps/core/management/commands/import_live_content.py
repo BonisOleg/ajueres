@@ -443,24 +443,36 @@ class Command(BaseCommand):
             self.stdout.write(f'  product {product}')
 
     def _hero_image(self, force: bool):
+        """
+        Canonical homepage hero is static/img/hero-samarkand.webp.
+        Never fall back to product art (e.g. Sen Soy chili) — that used to
+        override the Samarkand fallback in templates via CMS hero_image.
+        """
         block, _ = SiteBlock.objects.get_or_create(
             page='home', key='hero_image', defaults={'text_html': ''}
         )
-        local = (
-            Path(__file__).resolve().parents[4]
-            / 'static'
-            / 'img'
-            / 'hero-illustration.png'
+        static_root = Path(__file__).resolve().parents[4] / 'static' / 'img'
+        candidates = (
+            static_root / 'hero-samarkand.webp',
+            static_root / 'hero-samarkand.png',
         )
-        if force or not block.image:
-            if local.is_file():
-                ok = self._save_raw_image_bytes(
-                    block.image, 'hero-illustration.png', local.read_bytes()
-                )
-            else:
-                ok = self._assign_file_raw(
-                    block.image, 'products/sensoy/chill.png', 'hero-chill.png'
-                )
+        local = next((p for p in candidates if p.is_file()), None)
+        if local is None:
+            self.stderr.write(
+                '  skip hero: static/img/hero-samarkand.webp missing'
+            )
+            return
+
+        current = (block.image.name or '').lower() if block.image else ''
+        is_wrong = any(
+            bad in current
+            for bad in ('chill', 'hero-illustration', 'sensoy', 'hero-chill')
+        )
+        if force or not block.image or is_wrong:
+            ok = self._save_raw_image_bytes(
+                block.image, 'hero-samarkand.webp', local.read_bytes()
+            )
             if ok:
                 block.save()
-                self.stdout.write('  hero image set')
+                invalidate_site_blocks_cache()
+                self.stdout.write(f'  hero image set from {local.name}')
