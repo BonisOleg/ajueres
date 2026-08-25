@@ -12,3 +12,8 @@ public/
 .mypy_cache/
 .pytest_cache/
 .tmp/
+_media_upload/
+ajeres_data.json
+*.rsa
+*.pem
+!deploy/**/*.pem
